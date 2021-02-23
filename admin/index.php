@@ -63,7 +63,7 @@
 
         //se não esta logado
         //mostrar tela do login
-        if ( !isset ( $_SESSION["bancotcc"]["id"] ) ){
+        if ( !isset ( $_SESSION["quanticshop"]["id"] ) ){
           //incluir o login
           include $pagina;
         } else {
@@ -197,7 +197,7 @@
               </a>
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-toggle="dropdown">
-                <img src="../fotos/<?=$_SESSION["bancotcc"]["Foto"];?>p.jpg" class="avatar img-fluid rounded mr-1" alt="<?=$_SESSION["bancotcc"]["Nome"];?>" /> <span class="text-dark"><?=$_SESSION["bancotcc"]["Nome"];?></span>
+                <img src="../fotos/<?=$_SESSION["quanticshop"]["foto"];?>p.jpg" class="avatar img-fluid rounded mr-1" alt="<?=$_SESSION["quanticshop"]["primeiro_nome"];?>" /> <span class="text-dark"><?=$_SESSION["quanticshop"]["primeiro_nome"];?></span>
               </a>
 							<div class="dropdown-menu dropdown-menu-right">
 

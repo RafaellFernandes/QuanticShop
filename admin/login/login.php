@@ -9,27 +9,27 @@
   //verificar se foi dado um POST
   if ( $_POST ) {
     //iniciar as variaveis
-    $Login = $Senha = "";
+    $login = $senha = "";
     //recuperar o login e a senha digitados
-    if ( isset ( $_POST["Login"] ) )
-      $Login = trim ( $_POST["Login"] );
+    if ( isset ( $_POST["login"] ) )
+      $login = trim ( $_POST["login"] );
     
-    if ( isset ( $_POST["Senha"] ) )
-      $Senha = trim ( $_POST["Senha"] );
+    if ( isset ( $_POST["senha"] ) )
+      $senha = trim ( $_POST["senha"] );
 
     //verificar se os campos estao em branco
-    if ( empty ( $Login ) )
+    if ( empty ( $login ) )
       $msg = '<p class="alert alert-danger">Preencha o campo Login</p>';
-    else if ( empty ( $Senha ) ) 
+    else if ( empty ( $senha ) ) 
       $msg = '<p class="alert alert-danger">Preencha o campo Senha</p>';
     else {
       //verificar se o login existe
-      $sql = "SELECT id, Nome, Login, Senha, Foto FROM usuario WHERE Login = ? LIMIT 1";
+      $sql = "SELECT id, primeiro_nome, sobrenome, login, senha, foto FROM usuario WHERE login = ? LIMIT 1";
       //apontar a conexao com o banco
       //preparar o sql para execução
       $consulta = $pdo->prepare($sql);
       //passar o parametro para o sql
-      $consulta->bindParam(1, $Login);
+      $consulta->bindParam(1, $login);
       //executar o sql
       $consulta->execute();
       //puxar os dados do resultado
@@ -39,19 +39,20 @@
       if ( empty ( $dados->id ) ) 
         $msg = '<p class="alert alert-danger">O usuário não existe!</p>';
       //verificar se a senha esta correta
-      else if ( !password_verify($Senha, $dados->Senha) )
+      else if ( !password_verify($senha, $dados->senha) )
         $msg = '<p class="alert alert-danger">Senha incorreta</p>';
       //se deu tudo certo
       else {
         //registrar este usuário na sessao
-        $_SESSION["bancotcc"] = 
+        $_SESSION["quanticshop"] = 
           array("id"  => $dados->id,
-                "Nome"=> $dados->Nome,
-                "Foto"=> $dados->Foto);
+                "primeiro_nome"=> $dados->primeiro_nome,
+                "sobrenome"=> $dados->sobrenome,
+                "foto"=> $dados->foto);
         //redirecionar para o home
         $msg = 'Deu certo!';
         //javascript para redirecionar
-        echo '<script>location.href="../admin/paginas/home";</script>';
+        echo '<script>location.href="admin/paginas/home";</script>';
         exit;
 
       }
@@ -82,12 +83,12 @@
 							<form class="user" name="login" method="post" data-parsley-validate>
 								<div class="mb-3">
 									<label class="form-label">Login</label>
-									<input class="form-control form-control-lg" id="login" type="text" name="Login" placeholder="Nome de Usuario" 
+									<input class="form-control form-control-lg" id="login" type="text" name="login" placeholder="Login de Acesso" 
                   required data-parsley-validate="Preencha o Login"/>
 								</div>
 								<div class="mb-3">
 									<label class="form-label">Senha</label>
-									<input class="form-control form-control-lg" type="password" name="Senha" id="senha" placeholder="Digite sua Senha" 
+									<input class="form-control form-control-lg" type="password" name="senha" id="senha" placeholder="Digite sua Senha" 
                   required data-parsley-validate="Preencha a Senha" />
 									<small>
                     <a href="pages-reset-password.html">Esqueceu a Senha?</a>
