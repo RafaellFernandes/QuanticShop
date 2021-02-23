@@ -1,6 +1,6 @@
 <?php
     //verificar se não está logado
-    if ( !isset ( $_SESSION["bancotcc"]["id"] ) ){
+    if ( !isset ( $_SESSION["quanticshop"]["id"] ) ){
         exit;
     }
 
@@ -14,8 +14,8 @@
 						<h5 class="card-title mb-0">Detalhes de Perfil</h5>
 					</div>
 					<div class="card-body text-center">
-						<img src="../fotos/<?=$_SESSION["bancotcc"]["Foto"];?>p.jpg" alt="<?=$_SESSION["bancotcc"]["Nome"];?>" class="img-fluid rounded-circle mb-2" width="128" height="128" />
-						<h5 class="card-title mb-0"><?=$_SESSION["bancotcc"]["Nome"];?></h5>
+						<img src="../fotos/<?=$_SESSION["quanticshop"]["foto"];?>p.jpg" alt="<?=$_SESSION["quanticshop"]["primeiro_nome"];?>" class="img-fluid rounded-circle mb-2" width="128" height="128" />
+						<h5 class="card-title mb-0"><?=$_SESSION["quanticshop"]["primeiro_nome"];?></h5>
 						<div class="text-muted mb-2">Lead Developer</div>
 						<div>
 							<a class="btn btn-primary btn-sm" href="#"><span data-feather="message-square"></span> Message</a>
@@ -25,8 +25,8 @@
 					<div class="card-body">
 						<h5 class="h6 card-title">Sobre</h5>
 						<ul class="list-unstyled mb-0">
-							<li class="mb-1"><span data-feather="home" class="feather-sm mr-1"></span> Mora Em <a href="#"><?=$_SESSION["bancotcc"]["Nome"];?> - <?=$_SESSION["bancotcc"]["Nome"];?></a></li>
-							<li class="mb-1"><span data-feather="map-pin" class="feather-sm mr-1"></span> Aniversário <a href="#"><?=$_SESSION["bancotcc"]["Nome"];?></a></li>
+							<li class="mb-1"><span data-feather="home" class="feather-sm mr-1"></span> Mora Em <a href="#"><?=$_SESSION["quanticshop"]["primeiro_nome"];?> - <?=$_SESSION["quanticshop"]["Primeiro_nome"];?></a></li>
+							<li class="mb-1"><span data-feather="map-pin" class="feather-sm mr-1"></span> Aniversário <a href="#"><?=$_SESSION["quanticshop"]["primeiro_nome"];?></a></li>
 						</ul>
 					</div>
 								

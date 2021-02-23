@@ -1,6 +1,6 @@
 <?php
 //verificar se nao esta logado
-if ( !isset ( $_SESSION["bancotcc"]["id"] ) ) {
+if ( !isset ( $_SESSION["quanticshop"]["id"] ) ) {
     exit;
 }
 
