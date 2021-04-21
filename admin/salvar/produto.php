@@ -1,5 +1,11 @@
 
 <?php
+// https://youtu.be/57bzZuvp6OQ -> Upload de "vários" arquivos e salvando no Banco de Dados (DE UMA SÓ VEZ) com PHP
+// https://youtu.be/TxY6loI4dHw -> Upload de Múltiplos arquivos (Salvando na Pasta) - ...continuação
+
+
+
+
   //verificar se não está logado
   if ( !isset ( $_SESSION["bancotcc"]["id"] ) ){
     exit;

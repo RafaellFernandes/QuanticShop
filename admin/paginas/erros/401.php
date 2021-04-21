@@ -2,6 +2,7 @@
   /*verificar se não está logado 
   if ( !isset ( $_SESSION["quanticshop"]["id"] ) ){
     exit;
+
   }*/
 ?>
 <!DOCTYPE html>
@@ -19,6 +20,7 @@
 </head>
 
 <body>
+<!-- Acesso nao autorizado, erro 401 - 401 Unauthorized -->
     <div id="layoutError">
         <div id="layoutError_content">
             <main>

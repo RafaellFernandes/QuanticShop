@@ -19,6 +19,7 @@
 </head>
 
 <body>
+<!-- Erro 500 - Erro de acesso ao sistema -->
     <div id="layoutError">
         <div id="layoutError_content">
             <main>

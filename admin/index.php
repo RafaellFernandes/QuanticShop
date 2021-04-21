@@ -246,7 +246,7 @@
             if ( file_exists($pagina) )
               include $pagina;
             else
-              include "paginas/404.php";
+              include "paginas/erros/404.php";
 
           ?>
         </div>
@@ -267,10 +267,10 @@
 									<a class="text-muted" href="#">Suporte</a>
 								</li>
 								<li class="list-inline-item">
-									<a class="text-muted" href="paginas/politicaPrivacidade">Privacidade</a>
+									<a class="text-muted" href="paginas/teste/politicaPrivacidade">Privacidade</a>
 								</li>
 								<li class="list-inline-item">
-									<a class="text-muted" href="paginas/termosCondicoes">Termos</a>
+									<a class="text-muted" href="paginas/teste/termosCondicoes">Termos</a>
 								</li>
 							</ul>
 						</div>

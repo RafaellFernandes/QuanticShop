@@ -1,4 +1,17 @@
 <?php
+
+/*Após isso, basta colocar esta condição so select.
+
+SELECT * FROM CLIENTES WHERE ATIVO = TRUE
+                                 OU
+SELECT * FROM CLIENTES WHERE ATIVO = 0
+
+Neste caso, a consulta retornará somente os clientes ativos.*/
+
+
+
+
+
   //verificar se não está logado
   if ( !isset ( $_SESSION["bancotcc"]["id"] ) ){
     exit;

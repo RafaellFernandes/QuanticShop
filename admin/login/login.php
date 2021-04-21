@@ -52,7 +52,7 @@
         //redirecionar para o home
         $msg = 'Deu certo!';
         //javascript para redirecionar
-        echo '<script>location.href="admin/paginas/home";</script>';
+        echo '<script>location.href="paginas/home";</script>';
         exit;
 
       }

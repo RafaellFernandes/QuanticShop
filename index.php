@@ -67,8 +67,6 @@
 <head>
 	<title>Quantic Shop - <?=$titulo;?></title>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<base href="http://<?=$_SERVER['SERVER_NAME']. ":$porta" . $_SERVER['SCRIPT_NAME']?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -132,7 +130,7 @@
 								<li><a href="Home">Home</a></li>
                 			<!-- <li><a href="#">vazio</a></li> -->
 								<li><a href="contact">Contato</a></li>								
-								<li><ul class="icon1 sub-icon1">
+								<li><ul class="icon1 sub-icon1 ">
 										<li><a href="#">Conta</a>
 											<ul class="list">
 												<div class="check_button dropdown-item"><a href="login">Login</a></div>
@@ -179,11 +177,13 @@
 										</h4>
 										<span class="actual">1 x $12.00</span>
 									</li>
+									
 									<div class="login_buttons">
 										<div class="check_button"><a href="checkout.html">Check out</a></div>
 										<div class="login_button"><a href="login.html">Login</a></div>
 										<div class="clear"></div>
 									</div>
+									
 									<div class="clear"></div>
 								</ul>
 							</li>

@@ -1,5 +1,6 @@
 <?php
   //verificar se não está logado
+  
   if ( !isset ( $_SESSION["quanticshop"]["id"] ) ){
     exit;
   }
@@ -9,11 +10,12 @@
 	error_reporting(E_ALL);
 	
   if ( !isset ( $id ) ) $id = "";
-  $Nome = $Email = $Login = $Senha = $cidade_id = $Foto = $cep = $nome_cidade = $estado = "";
+
+  $primeiro_nome = $sobrenome = $email = $login = $senha = $cidade_id = $foto = $cep = $cidade = $estado = $bairro = $complemento = $numero_resid = $endereco = "";
 
 if(!empty($id)){
     //selecionar dados
-    $sql = "SELECT u.id as idusuario ,u.*, c.* FROM usuario u INNER JOIN cidade c ON (c.id = u.cidade_id)
+    $sql = "SELECT u.id as idusuario, u.*, c.* FROM usuario u INNER JOIN cidade c ON (c.id = u.cidade_id)
             WHERE u.id = :id limit 1";
     $consulta = $pdo->prepare($sql);
     $consulta->bindParam(":id",$id);
@@ -26,16 +28,22 @@ if(!empty($id)){
         exit;
     }
     
-    $id            = $dados->idusuario;
-    $Nome          = $dados->Nome;
-    $Email         = $dados->Email;
-    $Login         = $dados->Login;
-    $Senha         = $dados->Senha;
-    $Foto          = $dados->Foto;
-	$cidade_id     = $dados->cidade_id;
-	$nome_cidade   = $dados->nome_cidade;
-	$estado        = $dados->estado;
-	$cep           = $dados->cep;
+    $id                     = $dados->idusuario;
+	$primeiro_nome          = $dados->primeiro_nome;
+    $sobrenome              = $dados->sobrenome;
+    $email                  = $dados->email;
+    $login                  = $dados->login;
+    $senha                  = $dados->senha;
+    $foto                   = $dados->foto;
+	$cidade_id              = $dados->cidade_id;
+	$cidade                 = $dados->cidade;
+	$estado                 = $dados->estado;
+	$cep                    = $dados->cep;
+	$complemento            = $dados->complemento;
+	$bairro                 = $dados->bairro;
+	$numero_resid           = $dados->numero_resid;
+	$endereco               = $dados->endereco;
+
     
 }
 ?>
@@ -55,44 +63,44 @@ if(!empty($id)){
 							<input type="text" name="id" id="id" class="form-control" readonly value="<?=$id;?>">
 						</div>
 						<div class="col-12 col-md-6">
-							<label for="Nome">* Primeiro Nome:</label>
-							<input type="text" name="Nome" id="Nome" class="form-control" required data-parsley-required-message="Preencha o nome" 
-							value="<?=$Nome;?>" placeholder="Digite seu Primeiro nome">
+							<label for="primeiro_nome">* Primeiro Nome:</label>
+							<input type="text" name="primeiro_nome" id="primeiro_nome" class="form-control" required data-parsley-required-message="Preencha o nome" 
+							value="<?=$primeiro_nome;?>" placeholder="Digite seu Primeiro nome">
 						</div>
 						<div class="col-12 col-md-6">
-							<label for="Nome">* Sobrenome:</label>
-							<input type="text" name="Nome" id="Nome" class="form-control" required data-parsley-required-message="Preencha o nome" 
-							value="<?=$Nome;?>" placeholder="Digite seu sobrenome completo">
+							<label for="sobrenome">* Sobrenome:</label>
+							<input type="text" name="sobrenome" id="sobrenome" class="form-control" required data-parsley-required-message="Preencha o nome" 
+							value="<?=$sobrenome;?>" placeholder="Digite seu sobrenome completo">
 						</div>
 						<div class="col-12 col-md-4">
-							<label for="Email">* E-mail:</label>
-							<input type="email" name="Email" id="Email" class="form-control" required data-parsley-required-message="Preencha o e-mail"  placeholder="email@exemplo.com.br"
-							data-parsley-type-message="Digite um e-mail válido" onblur="confirmarEmail(this.value)" value="<?=$Email;?>">
+							<label for="email">* E-mail:</label>
+							<input type="email" name="email" id="email" class="form-control" required data-parsley-required-message="Preencha o e-mail"  placeholder="email@exemplo.com.br"
+							data-parsley-type-message="Digite um e-mail válido" onblur="confirmarEmail(this.value)" value="<?=$email;?>">
 						</div>
 						<div class="col-12 col-md-4">
-							<label for="Login">* Login:</label>
-							<input type="text" name="Login" id="Login" class="form-control" required data-parsley-required-message="Preencha o Login" placeholder="Digite o Login de Acesso ao sistema" value="<?=$Login;?>">
+							<label for="login">* Login:</label>
+							<input type="text" name="login" id="login" class="form-control" required data-parsley-required-message="Preencha o Login" placeholder="Digite o Login de Acesso ao sistema" value="<?=$login;?>">
 						</div>
 						<div class="col-12 col-md-4">
-							<label for="Senha">* Senha:</label>
-							<input type="password" name="Senha" id="Senha" class="form-control" value="<?=$Senha?>">
+							<label for="senha">* Senha:</label>
+							<input type="password" name="senha" id="senha" class="form-control" value="<?=$senha?>">
 						</div>
 						<div class="col-12 col-md-6">
 							<label for="senha2">* Redigite a Senha:</label>
-							<input type="password" name="senha2" id="senha2" class="form-control" data-parsley-equalto="#Senha" data-parsley-trigger="keyup" data-parsley-error-message="Senha não confere" value="<?=$Senha?>">
+							<input type="password" name="senha2" id="senha2" class="form-control" data-parsley-equalto="#senha" data-parsley-trigger="keyup" data-parsley-error-message="Senha não confere" value="<?=$senha?>">
 						</div>
 						<div class="col-12 col-md-6">
-							<label for="Foto">* Foto (JPG):</label>
-							<input type="file" name="Foto" id="Foto" class="form-control">
-							<input type="hidden" name="Foto" value="<?=$Foto?>" class="form-control" >
+							<label for="foto">* Foto (JPG):</label>
+							<input type="file" name="foto" id="foto" class="form-control">
+							<input type="hidden" name="foto" value="<?=$foto?>" class="form-control" >
 								<?php 	
-									if( !empty($Foto)){
-										$Foto = "<img src='../fotos/".$Foto."p.jpg' alt='".$Nome."' width='150px'>";
+									if( !empty($foto)){
+										$foto = "<img src='../fotos/".$foto."p.jpg' alt='".$primeiro_nome."' width='150px'>";
 									} else{
-										$Foto = "";
+										$foto = "";
 									}
 								?>
-								<div><?php echo $Foto ;?></div>
+								<div><?php echo $foto ;?></div>
 						</div>
 						<div class="col-12 col-md-4">
 							<label for="cep">* CEP:</label>
@@ -105,12 +113,28 @@ if(!empty($id)){
 							value="<?=$cidade_id;?>">
 						</div>
 						<div class="col-12 col-md-4">
-							<label for="nome_cidade">Nome da Cidade:</label>
-							<input type="text" id="nome_cidade" class="form-control" value="<?=$cidade_id;?>" placeholder="ex: São Paulo">
+							<label for="cidade">Nome da Cidade:</label>
+							<input type="text" id="cidade" name="cidade" class="form-control" value="<?=$cidade;?>" placeholder="ex: São Paulo">
 						</div>
 						<div class="col-12 col-md-4">
 							<label for="estado">Estado:</label>
-							<input type="text" id="estado" class="form-control" readonly value="<?=$cidade_id;?>" placeholder="UF">
+							<input type="text" id="estado" name="estado" class="form-control"  value="<?=$cidade_id;?>" placeholder="UF">
+						</div> 	
+						<div class="col-12 col-md-4">
+							<label for="bairro">Bairro:</label>
+							<input type="text" id="bairro" name="bairro" class="form-control"  value="<?=$bairro;?>" placeholder="Bairro">
+						</div> 
+						<div class="col-12 col-md-4">
+							<label for="endereco">Endereço:</label>
+							<input type="text" id="endereco" name="endereco" class="form-control"  value="<?=$cidade_id;?>" placeholder="Endereço">
+						</div> 
+						<div class="col-12 col-md-4">
+							<label for="complemento">Complemento:</label>
+							<input type="text" id="complemento" name="complemento" class="form-control"  value="<?=$complemento;?>" placeholder="Complemento">
+						</div> 
+						<div class="col-12 col-md-4">
+							<label for="numero_resid">Numero de Residencia:</label>
+							<input type="text" id="numero_resid" name="numero_resid" class="form-control"  value="<?=$cidade_id;?>" placeholder="Numero Residencia">
 						</div> 
 					</div><br>
 					<button type="submit" class="btn btn-success margin">
@@ -152,8 +176,10 @@ if(!empty($id)){
         } else{
             //consultar o cep no viacep.com.br
             $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados){
-                $("#nome_cidade").val(dados.localidade);
+                $("#cidade").val(dados.localidade);
                 $("#estado").val(dados.uf);
+				$("#bairro").val(dados.bairro);
+				$("#endereco").val(dados.logradouro);
                 //buscar id da cidade
                 $.get("buscarCidade.php", {cidade: dados.localidade, estado: dados.uf}, function(dados){
                     if(dados != "Erro")
@@ -162,7 +188,7 @@ if(!empty($id)){
                         alert(dados);
                 })
                 //focar no complemento
-                $("#cep").focus();
+                $("#endereco").focus();
             })
         }
     })   
