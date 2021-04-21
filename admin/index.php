@@ -143,6 +143,19 @@
 							<li class="sidebar-item"><a class="sidebar-link" href="paginas/pages-sign-up">Cadastrar</a></li>
 						</ul>
 					</li>
+          <li class="sidebar-header">
+						Controle Estoque
+					</li>
+          <li class="sidebar-item">
+						<a data-target="#forms" data-toggle="collapse" class="sidebar-link collapsed">
+              <i class="align-middle" data-feather="check-circle"></i> <span class="align-middle">Bagulhos</span>
+            </a>
+						<ul id="forms" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+							<li class="sidebar-item"><a class="sidebar-link" href="#">Controle de Estoque</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="#">Outra Coisa</a></li>
+						</ul>
+					</li>
+
 
 					<li class="sidebar-header">
 						Ferramentas e Componentes
