@@ -18,7 +18,7 @@
         <!-- /Texts container -->
       </div>
       <div class="slide">
-        <video autoplay loop preload class="bg_video">
+        <video autoplay disableremoteplayback loop preload class="bg_video">
           <source src="images/galaxys21-videodisplay.webm" type="video/webm">
         </video>	
         <div class="slide_content">
