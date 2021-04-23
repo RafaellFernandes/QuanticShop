@@ -64,7 +64,7 @@
                                     $pessoaFJ           = $dados->pessoaFJ;
                                     $estado             = $dados->estado;
 
-                                    if ($pessoaFJ = "F") {
+                                    if ($pessoaFJ == "F") {
                                         echo '<tr>
                                             <td><img src="../fotos/'.$foto.'p.jpg" alt="'.$primeiro_nome.'" width="48" height="48" class="rounded-circle mr-2"></td>
                                             <td>'.$primeiro_nome.' '.$sobrenome.'</td>
@@ -105,10 +105,11 @@
                         </thead>
                         <tbody>
                             <?php
-                                $sql = "SELECT id, razaoSocial, cnpj, email, cidade, estado, foto, siteJ, telefone FROM cliente
-                                ORDER BY Nome";
+                                $sql = "SELECT id, razaoSocial, cnpj, email, cidade, estado, foto, telefone FROM cliente
+                                ORDER BY id";
                                 $consulta = $pdo->prepare($sql);
                                 $consulta->execute();
+
                                 while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
                                     //separar os dados
                                     $id 	            = $dados->id;
@@ -119,26 +120,29 @@
                                     $telefone 	        = $dados->telefone;
                                     $cidade 	        = $dados->cidade;
                                     $estado             = $dados->estado;
-                                    $siteJ              = $dados->siteJ;
+                                    //$siteJ              = $dados->siteJ;
 
-                                    echo '<tr>
-                                            <td><img src="../fotos/'.$Foto.'p.jpg" alt="'.$razaoSocial.'" width="48" height="48" class="rounded-circle mr-2"></td>
-                                            <td>'.$razaoSocial.'</td>
-                                            <td>'.$cnpj.'</td>
-                                            <td>'.$cidade.' - '.$estado.'</td>
-                                            <td>'.$email.'</td>
-                                            <td>'.$siteJ.'</td>
-                                            <td>'.$telefone.'</td>
-                                            <td class="table-action text-center">
-                                                <a href="cadastro/clienteJ/'.$id.'" alt="Editar" title="Editar">
-                                                    <i class="align-middle"  data-feather="edit-2"></i>
-                                                </a>
-                                                <a href="javascript:excluir('.$id.')" alt="Excluir" title="Excluir">
-                                                    <i class="align-middle" data-feather="trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr> ';
+                                    if ($pessoaFJ == "J") { 
+
+                                        echo '<tr>
+                                                <td><img src="../fotos/'.$Foto.'p.jpg" alt="'.$razaoSocial.'" width="48" height="48" class="rounded-circle mr-2"></td>
+                                                <td>'.$razaoSocial.'</td>
+                                                <td>'.$cnpj.'</td>
+                                                <td>'.$cidade.' - '.$estado.'</td>
+                                                <td>'.$email.'</td>
+                                                <td>'.$siteJ.'</td>
+                                                <td>'.$telefone.'</td>
+                                                <td class="table-action text-center">
+                                                    <a href="cadastro/clienteJ/'.$id.'" alt="Editar" title="Editar">
+                                                        <i class="align-middle"  data-feather="edit-2"></i>
+                                                    </a>
+                                                    <a href="javascript:excluir('.$id.')" alt="Excluir" title="Excluir">
+                                                        <i class="align-middle" data-feather="trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr> ';
                                     }
+                                }
                             ?>
                         </tbody>
                     </table>

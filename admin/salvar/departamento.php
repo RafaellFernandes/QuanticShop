@@ -1,6 +1,6 @@
 <?php
   //verificar se não está logado
-  if ( !isset ( $_SESSION["bancotcc"]["id"] ) ){
+  if ( !isset ( $_SESSION["quanticshop"]["id"] ) ){
     exit;
   }
 
@@ -8,7 +8,7 @@
   if ( $_POST ) {
 
   	//recuperar os dados do formulario
-  	$id = $NomeDept = "";
+  	$id = $nome_dept = "";
 
   	foreach ($_POST as $key => $value) {
   		//guardar as variaveis
@@ -17,7 +17,7 @@
   	}
 
   	//validar os campos - em branco
-  	if ( empty ( $NomeDept ) ) {
+  	if ( empty ( $nome_dept ) ) {
   		echo '<script>alert("Preencha o nome do Departamento");history.back();</script>';
   		exit;
   	}
@@ -25,11 +25,11 @@
 
   	//verificar se existe um cadastro com este tipo
   	$sql = "SELECT id FROM departamento
-  		WHERE NomeDept = ? AND id <> ? LIMIT 1";
+  		WHERE nome_dept = ? AND id <> ? LIMIT 1";
   	//usar o pdo / prepare para executar o sql
   	$consulta = $pdo->prepare($sql);
   	//passando o parametro
-  	$consulta->bindParam(1, $NomeDept);
+  	$consulta->bindParam(1, $nome_dept);
   	$consulta->bindParam(2, $id);
   	//executar o sql
   	$consulta->execute();
@@ -46,20 +46,20 @@
   	//se o id estiver preenchido - update
   	if ( empty ( $id ) ) {
   		//inserir os dados no banco
-  		$sql = "INSERT INTO departamento (NomeDept) VALUES( ? )";
+  		$sql = "INSERT INTO departamento (nome_dept) VALUES( ? )";
   		$consulta = $pdo->prepare($sql);
-  		$consulta->bindParam(1, $NomeDept);
+  		$consulta->bindParam(1, $nome_dept);
 
   	} else {
   		//atualizar os dados  	
-  		$sql = "UPDATE departamento SET NomeDept = ? WHERE id = ? LIMIT 1";	
+  		$sql = "UPDATE departamento SET nome_dept = ? WHERE id = ? LIMIT 1";	
   		$consulta = $pdo->prepare($sql);
-  		$consulta->bindParam(1, $NomeDept);
+  		$consulta->bindParam(1, $nome_dept);
   		$consulta->bindParam(2, $id);
   	}
   	//executar e verificar se deu certo
   	if ( $consulta->execute() ) {
-  		echo '<script>alert("Departamento Salvo com Sucesso");location.href="listar/departamento";</script>';
+  		echo '<script>alert("Departamento Salvo com Sucesso");location.href="listagem/departamento";</script>';
   	} else {
   		echo '<script>alert("Erro ao salvar");history.back();</script>';
   		exit;

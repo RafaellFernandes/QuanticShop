@@ -70,8 +70,17 @@
 				<p class="card-subtitle text-muted">Todos os Campos são Obrigatórios</p><br>
 					<div class="row">
 						<div class="mb-3 col-12 col-md-2">
-							<label for="pessoaFJ">Pessoa F/J</label>
-							<input type="text" name="pessoaFJ" id="pessoaFJ" class="form-control" value="<?=$pessoaFJ;?>" placeholder="F ou J">
+							<label for="pessoaFJ">Pessoa F/J </label><br>
+							<input type="radio" name="pessoaFJ" id="pessoaFJ" value="F" checked>
+							<label class="form-check-label" for="pessoaFJ">
+								 Fisica
+							</label> 
+							<input type="hidden" name="pessoaFJ" value="<?=$pessoaFJ?>">
+							<input type="radio" name="pessoaFJ" id="pessoaFJ" value="J">
+							<label class="form-check-label" for="pessoaFJ">
+								 Jurudica
+							</label>
+							<input type="hidden" name="pessoaFJ" value="<?=$pessoaFJ?>">
 						</div>	
 						<div class="mb-3 col-12 col-md-2" style="display: none;">
 							<label for="id">ID:</label>
@@ -97,7 +106,7 @@
 						</div>  -->
 						<div class="mb-3 col-12 col-md-4">
 							<label class="form-label" for="sexo">Gênero:</label>
-							<select id="sexo" class="form-control">
+							<select id="sexo[]" class="form-control">
 								<option>...</option>
 								<option name="sexo" id="sexo" class="form-control" value="<?=$sexo;?>">Mulher Cisgênero</option>
 								<option name="sexo" id="sexo" class="form-control" value="<?=$sexo;?>">Homem Cisgênero</option>

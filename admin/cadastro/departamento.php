@@ -6,7 +6,7 @@
     }
 
     //iniciar as variaveis
-    $NomeDept = "";
+    $nome_dept = "";
 
     //se nao existe o id
     if ( !isset ( $id ) ) $id = "";
@@ -24,7 +24,7 @@
 
         //separar os dados
         //$id 	    = $dados->id;
-        $NomeDept  	= $dados->NomeDept ;
+        $nome_dept  	= $dados->nome_dept ;
 	  
   }
   
@@ -49,9 +49,9 @@
 							<input type="text" name="id" id="id" class="form-control" readonly value="<?=$id;?>">
 						</div>
 						<div class="col-12 col-md-12">
-							<label for="NomeDept">Departamento:</label>
-							<input type="text" name="NomeDept" id="NomeDept" class="form-control" required data-parsley-required-message="Preencha este campo, por favor"
-							value="<?=$NomeDept;?>">
+							<label for="nome_dept">Departamento:</label>
+							<input type="text" name="nome_dept" id="nome_dept" class="form-control" required data-parsley-required-message="Preencha este campo, por favor"
+							value="<?=$nome_dept;?>">
 						</div> 
 					</div><br>
 					<button type="submit" class="btn btn-success margin">
