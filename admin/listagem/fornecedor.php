@@ -34,25 +34,25 @@
                     </thead>
                     <tbody>
                         <?php
-                            $sql = "SELECT * FROM fornecedor";
+                            $sql = "SELECT id, razaoSocial, cnpj, telefone, cidade, estado FROM fornecedor";
                             $consulta = $pdo->prepare($sql);
                             $consulta->execute();
 
                             while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
                                 //separar os dados
-                                $id         	  = $dados->id;
-                                $Nome 	          = $dados->Nome; 
-                                $cnpj             = $dados->cnpj;               
-                                $Telefone         = $dados->Telefone;
-                                $nome_cidade 	  = $dados->nome_cidade;
-                                $estado           = $dados->estado;
+                                $id         	          = $dados->id;
+                                $razaoSocial 	          = $dados->razaoSocial; 
+                                $cnpj                     = $dados->cnpj;               
+                                $telefone                 = $dados->telefone;
+                                $cidade 	              = $dados->cidade;
+                                $estado                   = $dados->estado;
                                                 
                                 //mostrar na tela
                                 echo '<tr>
-                                        <td>'.$Nome.'</td>
+                                        <td>'.$razaoSocial.'</td>
                                         <td>'.$cnpj.'</td>
-                                        <td>'.$Telefone.'</td>
-                                        <td>'.$nome_cidade.' - '.$estado.'</td>
+                                        <td>'.$telefone.'</td>
+                                        <td>'.$cidade.' - '.$estado.'</td>
                                         <td class="table-action text-center">
                                             <a href="cadastro/fornecedor/'.$id.'" alt="Editar" title="Editar">
                                                 <i class="align-middle"  data-feather="edit-2"></i>

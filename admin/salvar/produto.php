@@ -7,7 +7,7 @@
 
 
   //verificar se não está logado
-  if ( !isset ( $_SESSION["bancotcc"]["id"] ) ){
+  if ( !isset ( $_SESSION["quanticshop"]["id"] ) ){
     exit;
   }
 
@@ -22,7 +22,7 @@
     include "../admin/config/conexao.php";
 
     //recuperar variaveis
-    $id = $Nome = $ValorProduto = $Descricao = $qtd_estoque = $departamento_id = $Marca_id = $FotoProduto = "";
+    $id = $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto = $ativo = $departamento_id = $marca_id = "";
 
    
     

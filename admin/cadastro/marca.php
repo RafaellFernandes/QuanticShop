@@ -5,7 +5,7 @@
   }
 
   //iniciar as variaveis 
-  $Marca = "";
+  $nome_marca = "";
 
   //se nao existe o id
   if ( !isset ( $id ) ) $id = "";
@@ -22,7 +22,7 @@
 
   	//separar os dados
   	$id 	  = $dados->id;
-	$Marca    = $dados->Marca;
+	$nome_marca    = $dados->nome_marca;
 
   } 
 ?>
@@ -46,9 +46,9 @@
 							<input type="text" name="id" id="id" class="form-control" readonly value="<?=$id;?>">
 						</div>
 						<div class="col-12 col-md-12">
-							<label for="Marca">Nome</label>
-							<input type="text" name="Marca" id="Marca" class="form-control" required data-parsley-required-message="Preencha este campo, por favor"
-							value="<?=$Marca;?>">
+							<label for="nome_marca">Nome</label>
+							<input type="text" name="nome_marca" id="nome_marca" class="form-control" required data-parsley-required-message="Preencha este campo, por favor"
+							value="<?=$nome_marca;?>">
 						</div>
 					</div><br>
 					<button type="submit" class="btn btn-success margin" alt="Salvar" title="Salvar">

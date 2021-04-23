@@ -24,18 +24,18 @@
 					</thead>
 					<tbody>
 						<?php
-							$sql = "SELECT * FROM marca ORDER BY Marca";
+							$sql = "SELECT * FROM marca ORDER BY nome_marca";
 							$consulta = $pdo->prepare($sql);
 							$consulta->execute();
 
 							while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
 								//separar os dados
-								$id 	= $dados->id;
-								$Marca 	= $dados->Marca;
+								$id 	        = $dados->id;
+								$nome_marca 	= $dados->nome_marca;
 
 								//mostrar na tela
 								echo '<tr>
-										<td>'.$Marca.'</td>
+										<td>'.$nome_marca.'</td>
 										<td class="table-action text-center">
 											<a href="cadastro/marca/'.$id.'" alt="Editar" title="Editar">
 												<i class="align-middle"  data-feather="edit-2"></i>

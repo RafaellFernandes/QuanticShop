@@ -28,27 +28,28 @@
 					</thead>
 					<tbody>
 						<?php
-							$sql = "SELECT * FROM transportadora ORDER BY Nome";
+							$sql = "SELECT * FROM transportadora ORDER BY razaoSocial";
 							$consulta = $pdo->prepare($sql);
 							$consulta->execute();
 
 							while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
 								//separar os dados
-								$id 	        = $dados->id;
-								$Nome 	        = $dados->Nome;
-								$cnpj 	        = $dados->cnpj;
-								$Telefone 	    = $dados->Telefone;
-								$email          = $dados->email;
-								$nome_cidade 	= $dados->nome_cidade;
-								$estado         = $dados->estado;
+								$id 	             = $dados->id;
+								$razaoSocial		 = $dados->razaoSocial;
+								$cnpj 	             = $dados->cnpj;
+								$telefone 	         = $dados->telefone;
+								$email               = $dados->email;
+								$estado              = $dados->estado;
+								$cidade 	         = $dados->cidade;
+								
 
 								//mostrar na tela
 								echo '<tr>
-										<td>'.$Nome.'</td>
+										<td>'.$razaoSocial.'</td>
 										<td>'.$cnpj.'</td>
-										<td>'.$Telefone.'</td>
+										<td>'.$telefone.'</td>
 										<td>'.$email.'</td>
-										<td>'.$nome_cidade.' - '.$estado.'</td>
+										<td>'.$cidade.' - '.$estado.'</td>
 										<td class="table-action text-center">
 											<a href="cadastro/transportadora/'.$id.'" alt="Editar" title="Editar">
 												<i class="align-middle"  data-feather="edit-2"></i>		

@@ -78,7 +78,7 @@
 							<input type="hidden" name="pessoaFJ" value="<?=$pessoaFJ?>">
 							<input type="radio" name="pessoaFJ" id="pessoaFJ" value="J">
 							<label class="form-check-label" for="pessoaFJ">
-								 Jurudica
+								 Juridica
 							</label>
 							<input type="hidden" name="pessoaFJ" value="<?=$pessoaFJ?>">
 						</div>	

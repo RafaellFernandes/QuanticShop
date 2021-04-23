@@ -34,29 +34,29 @@
 					</thead>
 					<tbody>
 						<?php
-							$sql = "SELECT p.id, p.FotoProduto, p.Nome, p.ValorProduto, p.Marca_id, p.departamento_id, m.Marca marca from produto p 
-							INNER JOIN marca m ON (m.id = p.Marca_id) ORDER BY p.Nome";
+							$sql = "SELECT p.id, p.foto, p.nome_produto, p.valor_unitario, p.marca_id, p.departamento_id, m.nome_marca marca from produto p 
+							INNER JOIN marca m ON (m.id = p.marca_id) ORDER BY p.nome_produto";
 							$consulta = $pdo->prepare($sql);
 							$consulta->execute();
 
 							while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
 								//separar os dados
-								$id         	  = $dados->id;
-								$FotoProduto      = $dados->FotoProduto;
-								$Nome 	          = $dados->Nome;                
-								$Marca_id         = $dados->Marca_id;
-								$marca            = $dados->marca;
-								$departamento_id  = $dados->departamento_id;
-								$ValorProduto     = $dados->ValorProduto;
-								$ValorProduto     = number_format($ValorProduto,2, '.' , ',');	
-								$imagem = "../fotos/".$FotoProduto."p.jpg";
+								$id         	                = $dados->id;
+								$foto                           = $dados->foto;
+								$primeiro_nome 	                = $dados->primeiro_nome;                
+								$marca_id                       = $dados->marca_id;
+								$nome_marca                     = $dados->nome_marca;
+								$departamento_id                = $dados->departamento_id;
+								$valor_unitario                 = $dados->$valor_unitario;
+								$valor_unitario                 = number_format($valor_unitario,2, '.' , ',');	
+								$imagem                         = "../fotos/".$foto."p.jpg";
 												
 								//mostrar na tela
 								echo '<tr>	
-										<td><img src="'.$imagem.'" alt="'.$Nome.'"  width="48" height="48" class="rounded-circle mr-2"></td>
-										<td>'.$Nome.'</td>
-										<td>R$ '.$ValorProduto.'</td>
-										<td>'.$marca.'</td>
+										<td><img src="'.$imagem.'" alt="'.$primeiro_nome.'"  width="48" height="48" class="rounded-circle mr-2"></td>
+										<td>'.$primeiro_nome.'</td>
+										<td>R$ '.$valor_unitario.'</td>
+										<td>'.$nome_marca.'</td>
 										<td>'.$departamento_id.'</td>
 										<td>
 											<a href="cadastro/produto/'.$id.'" alt="Editar" title="Editar">
@@ -83,7 +83,7 @@
 		}
 	}
 
-    $(document).ready( function () {
+	$(document).ready( function () {
 		$('#tabela').DataTable({
 			language: {
 				"emptyTable":     "Nenhum registro",

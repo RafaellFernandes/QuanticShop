@@ -25,18 +25,18 @@
 					<tbody>
 						<?php
 							//buscar id de Departamento alfabeticamente
-							$sql = "SELECT * from departamento ORDER BY NomeDept";
+							$sql = "SELECT * from departamento ORDER BY nome_dept";
 							$consulta = $pdo->prepare($sql);
 							$consulta->execute();
 
 							while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
 								//separar os dados
 								$id 	    = $dados->id;
-								$NomeDept 	= $dados->NomeDept;
+								$nome_dept 	= $dados->nome_dept;
 													
 								//mostrar na tela
 								echo '<tr>
-										<td>'.$NomeDept.'</td>
+										<td>'.$nome_dept.'</td>
 										<td class="table-action text-center">
 											<a href="cadastro/departamento/'.$id.'" alt="Editar" title="Editar">
 												<i class="align-middle"  data-feather="edit-2"></i>

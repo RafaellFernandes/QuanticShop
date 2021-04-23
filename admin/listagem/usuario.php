@@ -35,22 +35,23 @@
 
                             while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
                                 //separar os dados
-                                $id             = $dados->id;
-                                $Nome       	= $dados->Nome;
-                                $Email          = $dados->Email;
-                                $Foto           = $dados->Foto;
-                                $Login          = $dados->Login;
-                                $nome_cidade 	= $dados->nome_cidade;
-                                $estado         = $dados->estado;
-                                $imagem         = "../fotos/".$Foto."p.jpg";
+                                $id                     = $dados->id;
+                                $primeiro_nome       	= $dados->primeiro_nome;
+                                $sobrenome              = $dados->sobrenome;
+                                $email                  = $dados->email;
+                                $foto                   = $dados->foto;
+                                $login                  = $dados->login;
+                                $cidade 	            = $dados->cidade;
+                                $estado                 = $dados->estado;
+                                $imagem                 = "../fotos/".$foto."p.jpg";
 
                                 //mostrar na tela
                                 echo '<tr>
-                                        <td><img src="'.$imagem.'" alt="'.$Nome.'" width="48" height="48" class="rounded-circle mr-2"></td>
-                                        <td>'.$Nome.'</td>
-                                        <td>'.$Email.'</td>
-                                        <td>'.$Login.'</td>
-                                        <td>'.$nome_cidade.' - '.$estado.'</td>
+                                        <td><img src="'.$imagem.'" alt="'.$primeiro_nome.'" width="48" height="48" class="rounded-circle mr-2"></td>
+                                        <td>'.$primeiro_nome.' '.$sobrenome.'</td>
+                                        <td>'.$email.'</td>
+                                        <td>'.$login.'</td>
+                                        <td>'.$cidade.' - '.$estado.'</td>
                                         <td class="table-action text-center">
                                             <a href="cadastro/usuario/'.$id.'" alt="Editar" title="Editar">
                                                 <i class="align-middle"  data-feather="edit-2"></i>

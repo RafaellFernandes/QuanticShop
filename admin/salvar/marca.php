@@ -1,6 +1,6 @@
 <?php
   //verificar se não está logado
-  if ( !isset ( $_SESSION["bancotcc"]["id"] ) ){
+  if ( !isset ( $_SESSION["quanticshop"]["id"] ) ){
     exit;
   }
 
@@ -11,7 +11,7 @@ if ( $_POST ) {
     include "../admin/config/conexao.php";
 	
   	//recuperar os dados do formulario
-  	$id = $marca = "";
+  	$id = $nome_marca = "";
 
   	foreach ($_POST as $key => $value) {
   		//guardar as variaveis
@@ -19,17 +19,17 @@ if ( $_POST ) {
   	}
 
   	//validar os campos - em branco
-  	if ( empty ( $Marca ) ) {
+  	if ( empty ( $nome_marca ) ) {
   		echo '<script>alert("Preencha a marca");history.back();</script>';
   		exit;
   	}
 
   	//verificar se existe um cadastro com este tipo
-  	$sql = "SELECT id FROM marca WHERE Marca = ? AND id <> ? LIMIT 1";
+  	$sql = "SELECT id FROM marca WHERE nome_marca = ? AND id <> ? LIMIT 1";
   	//usar o pdo / prepare para executar o sql
   	$consulta = $pdo->prepare($sql);
   	//passando o parametro
-  	$consulta->bindParam(1, $marca);
+  	$consulta->bindParam(1, $nome_marca);
   	$consulta->bindParam(2, $id);
   	//executar o sql
   	$consulta->execute();
@@ -49,23 +49,23 @@ if ( $_POST ) {
   	//se o id estiver preenchido - update
   	if ( empty ( $id ) ) {
   		//inserir os dados no banco
-  		$sql = "INSERT INTO marca (Marca) VALUES( :Marca )";
+  		$sql = "INSERT INTO marca (nome_marca) VALUES( :nome_marca )";
   		$consulta = $pdo->prepare($sql);
-		$consulta->bindParam(":Marca", $Marca);
+		$consulta->bindParam(":nome_marca", $nome_marca);
 
   	} else {
 		
   		//atualizar os dados  	
-  		$sql = "UPDATE marca SET Marca = :Marca WHERE id = :id";	
+  		$sql = "UPDATE marca SET nome_marca = :nome_marca WHERE id = :id";	
   		$consulta = $pdo->prepare($sql);
-		$consulta->bindParam(":Marca", $Marca);
+		$consulta->bindParam(":nome_marca", $nome_marca);
   		$consulta->bindParam(":id", $id);
   	}
     //executar e verificar se deu certo
 	if ( $consulta->execute() ) {
 		//gravar no banco 
 		$pdo->commit();
-		echo "<script>alert('Marca Salva com Sucesso!');location.href='listar/marca';</script>";
+		echo "<script>alert('Marca Salva com Sucesso!');location.href='listagem/marca';</script>";
 	}
 	//erro ao gravar
 	echo "<script>alert('Erro ao gravar no servidor');history.back();</script>";

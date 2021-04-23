@@ -61,7 +61,6 @@
           $sql = "INSERT INTO cliente (email, senha, cep, endereco, bairro, cidade_id, foto, telefone, celular, numero_resid, pessoaFJ, cidade, estado, nomeFantasia, razaoSocial, cnpj, inscricao_estadual, ativo) 
           VALUES (:email, :senha, :cep, :endereco, :bairro, :cidade_id, :foto, :telefone, :celular, :numero_resid, :pessoaFJ, :cidade, :estado, :nomeFantasia, :razaoSocial, :cnpj, :inscricao_estadual, :ativo) ";
           $consulta = $pdo->prepare($sql);
-         
           $consulta->bindParam(":email", $email);
           $consulta->bindParam(":senha", $senha);
           $consulta->bindParam(":cep", $cep);
