@@ -95,7 +95,8 @@
             </a>
 						<ul id="cad" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
 							<li class="sidebar-item"><a class="sidebar-link" href="cadastro/cidade">Cidade</a></li>
-              <li class="sidebar-item"><a class="sidebar-link" href="cadastro/cliente">Cliente</a></li>
+              <li class="sidebar-item"><a class="sidebar-link" href="cadastro/clienteF">Cliente Pessoa Fisica</a></li>
+              <li class="sidebar-item"><a class="sidebar-link" href="cadastro/clienteJ">Cliente Pessoa Juridica</a></li>
               <li class="sidebar-item"><a class="sidebar-link" href="cadastro/departamento">Departamentos</a></li>
               <li class="sidebar-item"><a class="sidebar-link" href="cadastro/fornecedor">Fornecedor</a></li>
               <li class="sidebar-item"><a class="sidebar-link" href="cadastro/marca">Marca</a></li>

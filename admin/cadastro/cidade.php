@@ -57,10 +57,10 @@ if ( !empty ( $id ) ) {
                         </div>
                     </div><br>
                     <button type="submit" class="btn btn-success margin">
-                        <!--<i class="fas fa-check"></i>--> Salvar Dados
+                        Salvar Dados
                     </button>   
                     <div class="float-right">
-                        <a href="listagem/cidade" class="btn btn-primary"><!--<i class="fas fa-bars"></i>-->Listar Registros</a> 
+                        <a href="listagem/cidade" class="btn btn-primary">Listar Registros</a> 
                     </div>  
                 </form>
             </div>

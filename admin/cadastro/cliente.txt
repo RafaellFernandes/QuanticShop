@@ -12,8 +12,9 @@
   
   if ( !isset ( $id ) ) $id = "";
 
-  $Nome = $cpf  = $DataNascimento = $Email = $Senha = $Cep = $Endereco = $Complemento = $Bairro = $cidade_id = 
-  $Foto = $Telefone = $Celular = $nome_cidade = $estado = $numeroCasa = $numeroApto = $sexo = "";
+  $primeiro_nome = $sobrenome = $cpf  = $data_nascimento = $email = $senha = $cep = $telefone = $celular = $foto = $sexo = 
+  $pessoaFJ = $nomeFantasia = $razaoSocial = $cnpj = $inscricao_estadual =  $estado = $cidade = $endereco = $bairro = 
+  $complemento = $numero_resid = $cidade_id = $ativo = "";
 
   if ( !empty ( $id ) ) {
 	  //selecionar os dados do cliente
@@ -30,27 +31,32 @@
 		  echo "<p class='alert alert-danger'>Cliente Não Existente</p>";
 	  }
 
-	  $id             = $dados->id;
-	  $Nome           = $dados->Nome;
-	  $DataNascimento = $dados->DataNascimento;
-	  $Endereco       = $dados->Endereco;
-	  $Bairro         = $dados->Bairro;
-	  $cidade_id      = $dados->cidade_id;
-	  $estado         = $dados->estado;
-	  $Senha          = $dados->Senha;
-	  $cpf            = $dados->cpf;
-	  $Email          = $dados->Email;
-	  $Cep            = $dados->Cep;
-	  $Complemento    = $dados->Complemento;
-	  $Foto           = $dados->Foto;
-	  $Telefone       = $dados->Telefone;
-	  $Celular        = $dados->Celular;
-	  $numeroCasa     = $dados->numeroCasa;
-	  $numeroApto     = $dados->numeroApto;
-	  $sexo           = $dados->sexo;
-	  $estado         = $dados->estado;
-	  $nome_cidade    = $dados->nome_cidade;
-
+	  $id                      = $dados->id;
+	  $primeiro_nome           = $dados->primeiro_nome;
+	  $sobrenome               = $dados->sobrenome;
+	  $cpf                     = $dados->cpf;
+	  $data_nascimento         = $dados->data_nascimento;
+	  $email                   = $dados->email;
+	  $senha                   = $dados->senha;
+	  $telefone                = $dados->telefone;
+	  $celular                 = $dados->celular;
+	  $foto                    = $dados->foto;
+	  $sexo                    = $dados->sexo;
+	  $pessoaFJ                = $dados->pessoaFJ;
+	  $nomeFantasia            = $dados->nomeFantasia;
+	  $razaoSocial             = $dados->razaoSocial;
+	  $cnpj                    = $dados->cnpj;
+	  $inscricao_estadual      = $dados->inscricao_estadual;
+	  $cep                     = $dados->cep;
+	  $estado                  = $dados->estado;
+	  $cidade                  = $dados->cidade;
+	  $endereco                = $dados->endereco;
+	  $bairro                  = $dados->bairro;
+	  $complemento             = $dados->complemento;
+	  $numero_resid            = $dados->numero_resid;
+	  $cidade_id               = $dados->cidade_id;
+	  $ativo                   = $dados->ativo;
+	  
 
   }
 ?>
@@ -58,13 +64,16 @@
 <div class="col-md-12">
 	<div class="card">
 		<div class="card-header">
+            <div class="float-right">
+				<a href="cadastro/clienteF" class="btn btn-primary">Cad. Pessoa Fisica</a> 
+			</div>
 			<h4>Cadastro</h5>
-			<h6 class="card-subtitle text-muted">Cliente | Pessoa Fisica ou Juridica</h6>
+			<h6 class="card-subtitle text-muted">Cliente | Pessoa Juridica</h6>
 		</div>
 		<fieldset class="mb-3">
 			<div class="row">
 				<label class="col-form-label col-sm-2 text-sm-right pt-sm-0">Cliente:</label>
-				<div class="col-sm-10">
+				<div class="col-sm-10" id="pessoaFJ" name="pessoaFJ" for="pessoaFJ">
 					<label class="form-check">
                   		<input name="optradio" type="radio" class="form-check-input" value="fisica" onclick="pessoa(this.value);">
                   		<span class="form-check-label">Pessoa Fisica</span>
@@ -85,14 +94,14 @@
 							<input type="text" name="id" id="id" class="form-control" readonly value="<?=$id;?>" placeholder="Automatico">
 						</div>
 						<div class="mb-3 col-12 col-md-6">
-							<label for="Nome">* Primeiro Nome:</label>
-							<input type="text" name="Nome" id="Nome" class="form-control" required data-parsley-required-message="Preencha o Primeiro Nome" 
-							value="<?=$Nome;?>" placeholder="Digite o Primeiro Nome">
+							<label for="primeiro_nome">* Primeiro Nome:</label>
+							<input type="text" name="primeiro_nome" id="primeiro_nome" class="form-control" required data-parsley-required-message="Preencha o Primeiro Nome" 
+							value="<?=$primeiro_nome;?>" placeholder="Digite o Primeiro Nome">
 						</div>
 						<div class="mb-3 col-12 col-md-6">
-							<label for="Nome">* Sobrenome:</label>
-							<input type="text" name="Nome" id="Nome" class="form-control" required data-parsley-required-message="Preencha o Sobrenome" 
-							value="<?=$Nome;?>" placeholder="Digite o Sobrenome">
+							<label for="sobrenome">* Sobrenome:</label>
+							<input type="text" name="sobrenome" id="sobrenome" class="form-control" required data-parsley-required-message="Preencha o Sobrenome" 
+							value="<?=$sobrenome;?>" placeholder="Digite o Sobrenome">
 						</div>
 						<div class="mb-3 col-12 col-md-4">
 							<label for="cpf">* CPF:</label>
@@ -118,81 +127,81 @@
               				</select>
 						</div>
 						<div class="mb-3 col-12 col-md-4">
-							<label for="DataNascimento">* Data de Nascimento:</label>
-							<input type="text" name="DataNascimento" id="DataNascimento" class="form-control" required data-parsley-required-message="Preencha a data de nascimento" 
-							placeholder="Ex: 11/12/1990" value="<?=$DataNascimento;?>">
+							<label for="data_nascimento">* Data de Nascimento:</label>
+							<input type="text" name="data_nascimento" id="data_nascimento" class="form-control" required data-parsley-required-message="Preencha a data de nascimento" 
+							placeholder="Ex: 11/12/1990" value="<?=$data_nascimento;?>">
 						</div>
 						<div class="mb-3 col-12 col-md-4">
-							<label for="Foto">* Foto </label>
-							<input type="file" name="Foto" id="Foto" class="form-control" >
-							<input type="hidden" name="Foto" value="<?=$Foto?>" class="form-control">
+							<label for="foto">* Foto </label>
+							<input type="file" name="foto" id="foto" class="form-control" >
+							<input type="hidden" name="foto" value="<?=$foto?>" class="form-control">
 								<?php  	
-									if( !empty($Foto)){
-										$Foto = "<img src='../fotos/".$Foto."p.jpg' alt='".$Nome."' width='150px'>";
+									if( !empty($foto)){
+										$foto = "<img src='../fotos/".$foto."p.jpg' alt='".$primeiro_nome."' width='150px'>";
 									} else{
-										$Foto = "";
+										$foto = "";
 									}
 								?>
-							<div><?php echo $Foto;?></div>
+							<div><?php echo $foto;?></div>
 						</div>
 						<div class="mb-3 col-12 col-md-4">
-							<label for="Telefone">Telefone:</label>
-							<input type="text" name="Telefone" id="Telefone" class="form-control" placeholder="Telefone com DDD" value="<?=$Telefone;?>">
+							<label for="telefone">Telefone:</label>
+							<input type="text" name="telefone" id="telefone" class="form-control" placeholder="Telefone com DDD" value="<?=$telefone;?>">
 						</div>
 						<div class="mb-3 col-12 col-md-4">
-							<label for="Celular">* Celular:</label>
-							<input type="text" name="Celular" id="Celular" class="form-control" placeholder="Celular com DDD"
-							value="<?=$Celular;?>" required data-parsley-required-message="Preencha o Celular">
+							<label for="celular">* Celular:</label>
+							<input type="text" name="celular" id="celular" class="form-control" placeholder="Celular com DDD"
+							value="<?=$celular;?>" required data-parsley-required-message="Preencha o Celular">
 						</div>
 						<div class="mb-3 col-12 col-md-4">
-							<label for="Email">* E-mail:</label>
-							<input type="email" name="Email" id="Email" class="form-control" required data-parsley-required-message="Preencha o e-mail" 
-							data-parsley-type-message="Digite um E-mail válido" placeholder="exemple@hotmail.com" value="<?=$Email;?>" onblur="confirmarEmail(this.value)">
+							<label for="email">* E-mail:</label>
+							<input type="email" name="email" id="email" class="form-control" required data-parsley-required-message="Preencha o e-mail" 
+							data-parsley-type-message="Digite um E-mail válido" placeholder="exemple@hotmail.com" value="<?=$email;?>" onblur="confirmarEmail(this.value)">
 						</div>
 						<div class="mb-3 col-12 col-md-4">
-							<label for="Senha">* Senha:</label>
-							<input type="password" name="Senha" id="Senha" class="form-control" value="<?=$Senha?>" placeholder="Digite sua Senha">
+							<label for="senha">* Senha:</label>
+							<input type="password" name="senha" id="senha" class="form-control" value="<?=$senha?>" placeholder="Digite sua Senha">
 						</div>
 						<div class="mb-3 col-12 col-md-4">
 							<label for="senha2">* Redigite a Senha:</label>
-							<input type="password" name="senha2" id="senha2" class="form-control"  data-parsley-equalto="#Senha" data-parsley-trigger="keyup" data-parsley-error-message="Senha não confere" value="<?=$Senha?>"
+							<input type="password" name="senha2" id="senha2" class="form-control"  data-parsley-equalto="#senha" data-parsley-trigger="keyup" data-parsley-error-message="Senha não confere" value="<?=$senha?>"
 							placeholder="Redigite sua Senha">
 						</div>
 						<div class="mb-3 col-12 col-md-3">
-							<label for="Cep">* CEP:</label>
-							<input type="text" name="Cep" id="Cep" class="form-control" required data-parsley-required-message="Preencha o CEP" value="<?=$Cep;?>" placeholder="Digite o CEP da Sua Cidade">
+							<label for="cep">* CEP:</label>
+							<input type="text" name="cep" id="cep" class="form-control" required data-parsley-required-message="Preencha o CEP" value="<?=$cep;?>" placeholder="Digite o CEP da Sua Cidade">
 						</div>
-						<div class="mb-3 col-12 col-md-2" style="display: none;">
+						<div class="mb-3 col-12 col-md-2" >
 							<label for="cidade_id">ID Cidade</label>
 							<input type="text" name="cidade_id" id="cidade_id" class="form-control" required data-parsley-required-message="Preencha a Cidade" readonly value="<?=$cidade_id;?>">
 						</div>
 						<div class="mb-3 col-12 col-md-3">
-							<label for="nome_cidade">* Cidade:</label>
-							<input type="text" id="nome_cidade" name="nome_cidade" class="form-control"	value="<?=$nome_cidade;?>" placeholder="Nome da Cidade">
+							<label for="cidade">* Cidade:</label>
+							<input type="text" id="cidade" name="cidade" class="form-control"	value="<?=$cidade;?>" placeholder="Nome da Cidade">
 						</div>
 						<div class="mb-3 col-12 col-md-2">
 							<label for="estado">* Estado:</label>
-							<input type="text" id="estado" name="estado" class="form-control" value="<?=$estado;?>" placeholder="UF" readonly>
+							<input type="text" id="estado" name="estado" class="form-control" value="<?=$estado;?>" placeholder="UF">
 						</div>
 						<div class="mb-3 col-12 col-md-4">
-							<label for="Endereco">* Endereço</label>
-							<input type="text" name="Endereco" id="Endereco" class="form-control" value="<?=$Endereco;?>" placeholder="Av. Gopouva, Alameda Yayá">
+							<label for="endereco">* Endereço</label>
+							<input type="text" name="endereco" id="endereco" class="form-control" value="<?=$endereco;?>" placeholder="Av. Gopouva, Alameda Yayá">
 						</div>
 						<div class="mb-3 col-12 col-md-5">
-							<label for="Bairro">* Bairro</label>
-							<input type="text" name="Bairro" id="Bairro" class="form-control" value="<?=$Bairro;?>" placeholder="Nome do bairro">
+							<label for="bairro">* Bairro</label>
+							<input type="text" name="bairro" id="bairro" class="form-control" value="<?=$bairro;?>" placeholder="Nome do bairro">
 						</div>
 						<div class="mb-3 col-12 col-md-3">
-							<label for="numeroCasa">* Numero Residência</label>
-							<input type="text" name="numeroCasa" id="numeroCasa" class="form-control" value="<?=$numeroCasa;?>" placeholder="Numero da casa">
+							<label for="numero_resid">* Numero Residência</label>
+							<input type="text" name="numero_resid" id="numero_resid" class="form-control" value="<?=$numero_resid;?>" placeholder="Numero da Residencia">
 						</div>
 						<div class="mb-3 col-12 col-md-4">
-							<label for="numeroApto">Apartamento</label>
-							<input type="text" name="numeroApto" id="numeroApto" class="form-control" value="<?=$numeroApto;?>" placeholder="Numero do Apto com andar e bloco">
+							<label for="complemento">Complemento</label>
+							<input type="text" name="complemento" id="complemento" class="form-control" value="<?=$complemento;?>">
 						</div>
-						<div class="mb-3 col-12 col-md-4">
-							<label for="Complemento">Complemento</label>
-							<input type="text" name="Complemento" id="Complemento" class="form-control" value="<?=$Complemento;?>">
+						<div class="mb-3 col-12 col-md-3">
+							<label for="ativo">Ativo</label>
+							<input type="text" name="ativo" id="ativo" class="form-control" value="<?=$ativo;?>" placeholder="ativo">
 						</div><br>
 					</div><br>
 					<button type="submit" class="btn btn-success margin">
@@ -210,66 +219,78 @@
 				<p class="card-subtitle text-muted">* Campos Obrigatórios</p><br>
 					<div class="row">	
 						<div class="mb-3 col-12 col-md-12">
-							<label for="Razaosocial">* Razão Social: </label>
-							<input type="text" class="form-control" id="Razaosocial" name="Razaosocial" required>
+							<label for="razaoSocial">* Razão Social: </label>
+							<input type="text" class="form-control" id="razaoSocial" name="razaoSocial" required>
 						</div>
 						<div class="mb-3 col-12 col-md-12">
-							<label for="Nomefantasia">* Nome Fantasia: </label>
-							<input type="text" class="form-control" id="Nomefantasia" required name="Nomefantasia">
+							<label for="nomeFantasia">* Nome Fantasia: </label>
+							<input type="text" class="form-control" id="nomeFantasia" required name="nomeFantasia">
 						</div>
 						<div class="mb-3 col-12 col-md-6">
 							<label for="cnpj">* Cnpj:</label>
-							<input type="text" name="cnpj" id="cnpj" class="form-control" value="<?=$cnpj;?>" onblur="validaCnpj(this.value)">
+							<input type="text" name="cnpj" id="cnpj" class="form-control" value="<?=$cnpj;?>" onblur="validaCNPJ(this.value)">
 						</div> 
 						<div class="mb-3 col-12 col-md-6">
-							<label for="ie">* Inscrição Estadual (IE): </label>
-							<input type="text" name="ie" id="ie" class="form-control" value="<?=$ie;?>">
+							<label for="inscricao_estadual">* Inscrição Estadual (IE): </label>
+							<input type="text" name="inscricao_estadual" id="inscricao_estadual" class="form-control" value="<?=$inscricao_estadual;?>">
 						</div> 
 						<div class="mb-3 col-12 col-md-6">
-							<label for="Telefone">* Telefone:</label>
-							<input type="text" name="Telefone" id="Telefone" class="form-control" placeholder="Telefone com DDD" value="<?=$Telefone;?>" require>
+							<label for="telefone">* Telefone:</label>
+							<input type="text" name="telefone" id="telefone" class="form-control" placeholder="Telefone com DDD" value="<?=$telefone;?>" require>
 						</div>
 						<div class="mb-3 col-12 col-md-6">
-							<label for="Celular">Celular:</label>
-							<input type="text" name="Celular" id="Celular" class="form-control" placeholder="Celular com DDD" value="<?=$Celular;?>">
+							<label for="celular">Celular:</label>
+							<input type="text" name="celular" id="celular" class="form-control" placeholder="Celular com DDD" value="<?=$celular;?>">
 						</div>
 						<div class="mb-3 col-12 col-md-4">
-							<label for="Email">* E-mail:</label>
-							<input type="email" name="Email" id="Email" class="form-control" required data-parsley-required-message="Preencha o e-mail" 
-							data-parsley-type-message="Digite um E-mail válido" placeholder="exemple@hotmail.com" value="<?=$Email;?>" onblur="confirmarEmail(this.value)">
+							<label for="email">* E-mail:</label>
+							<input type="email" name="email" id="email" class="form-control" required data-parsley-required-message="Preencha o e-mail" 
+							data-parsley-type-message="Digite um E-mail válido" placeholder="exemple@hotmail.com" value="<?=$email;?>" onblur="confirmarEmail(this.value)">
 						</div>
 						<div class="mb-3 col-12 col-md-4">
-							<label for="Senha">* Senha:</label>
-							<input type="password" name="Senha" id="Senha" class="form-control" value="<?=$Senha?>" placeholder="Digite sua Senha">
+							<label for="senha">* Senha:</label>
+							<input type="password" name="senha" id="senha" class="form-control" value="<?=$senha?>" placeholder="Digite sua Senha">
 						</div>
 						<div class="mb-3 col-12 col-md-4">
 							<label for="senha2">* Redigite a Senha:</label>
-							<input type="password" name="senha2" id="senha2" class="form-control"  data-parsley-equalto="#Senha" data-parsley-trigger="keyup" data-parsley-error-message="Senha não confere" value="<?=$Senha?>"
+							<input type="password" name="senha2" id="senha2" class="form-control"  data-parsley-equalto="#senha" data-parsley-trigger="keyup" data-parsley-error-message="Senha não confere" value="<?=$Senha?>"
 							placeholder="Redigite sua Senha">
 						</div>
 						<div class="mb-3 col-12 col-md-4">
-							<label for="Cep">* CEP:</label>
-							<input type="text" name="Cep" id="Cep" class="form-control" required data-parsley-required-message="Preencha o CEP" value="<?=$Cep;?>" placeholder="Digite o CEP da Sua Cidade">
+							<label for="cep">* CEP:</label>
+							<input type="text" name="cep" id="cep" class="form-control" required data-parsley-required-message="Preencha o CEP" value="<?=$cep;?>" placeholder="Digite o CEP da Sua Cidade">
 						</div>
 						<div class="mb-3 col-12 col-md-2" style="display: none;">
 							<label for="cidade_id">ID Cidade</label>
 							<input type="text" name="cidade_id" id="cidade_id" class="form-control" required data-parsley-required-message="Preencha a Cidade" readonly value="<?=$cidade_id;?>">
 						</div>
 						<div class="mb-3 col-12 col-md-4">
-							<label for="nome_cidade">* Cidade:</label>
-							<input type="text" id="nome_cidade" name="nome_cidade" class="form-control"	value="<?=$nome_cidade;?>" placeholder="Nome da Cidade">
+							<label for="cidade">* Cidade:</label>
+							<input type="text" id="cidade" name="cidade" class="form-control"	value="<?=$cidade;?>" placeholder="Nome da Cidade">
 						</div>
 						<div class="mb-3 col-12 col-md-2">
 							<label for="estado">* Estado:</label>
 							<input type="text" id="estado" name="estado" class="form-control" value="<?=$estado;?>" placeholder="UF" readonly>
 						</div>
 						<div class="mb-3 col-12 col-md-6">
-							<label for="Endereco">* Endereço</label>
-							<input type="text" name="Endereco" id="Endereco" class="form-control" value="<?=$Endereco;?>" placeholder="Av. Gopouva, Alameda Yayá">
+							<label for="endereco">* Endereço</label>
+							<input type="text" name="endereco" id="endereco" class="form-control" value="<?=$endereco;?>" placeholder="Av. Gopouva, Alameda Yayá">
 						</div>
 						<div class="mb-3 col-12 col-md-6">
-							<label for="Bairro">* Bairro</label>
-							<input type="text" name="Bairro" id="Bairro" class="form-control" value="<?=$Bairro;?>" placeholder="Nome do bairro">
+							<label for="bairro">* Bairro</label>
+							<input type="text" name="bairro" id="bairro" class="form-control" value="<?=$bairro;?>" placeholder="Nome do bairro">
+						</div>
+						<div class="mb-3 col-12 col-md-3">
+							<label for="numero_resid">* Numero Residência</label>
+							<input type="text" name="numero_resid" id="numero_resid" class="form-control" value="<?=$numero_resid;?>" placeholder="Numero da Residencia">
+						</div>
+						<div class="mb-3 col-12 col-md-4">
+							<label for="complemento">Complemento</label>
+							<input type="text" name="complemento" id="complemento" class="form-control" value="<?=$complemento;?>">
+						</div>
+						<div class="mb-3 col-12 col-md-3">
+							<label for="ativo">Ativo</label>
+							<input type="text" name="ativo" id="ativo" class="form-control" value="<?=$ativo;?>" placeholder="ativo">
 						</div><br>
 					</div><br>
 					<button type="submit" class="btn btn-success margin">
@@ -279,7 +300,7 @@
 						<a href="listagem/cliente" class="btn btn-primary"><!--<i class="fas fa-bars"></i>-->Listar Registros</a> 
 					</div>  
 					<!-- <button type="button" id="teste" class="btn btn-info margin">
-							<i class="fas fa-check"></i> teste
+							<i class="fas fa-check"></i> teste style="display: none;"
 					</button>  -->
 			</form>
 			<br><div class="clearfix"></div>
@@ -304,11 +325,11 @@
 <script type="text/javascript">
 
 	$(document).ready(function(){ 
-		$('#Cep').mask('00000-000');
+		$('#cep').mask('00000-000');
 		$('#cpf').mask('000.000.000-00');
-		$("#DataNascimento").mask("00/00/0000");
-		$("#Telefone").mask("(00) 0000-0000");
-		$("#Celular").mask("(00) 00000-0000");
+		$("#data_nascimento").mask("00/00/0000");
+		$("#telefone").mask("(00) 0000-0000");
+		$("#celular").mask("(00) 00000-0000");
 		$("#cnpj").mask("00.000.000/0000-00");
 
 		//mostra se o jquery esta funcionando ou nao
@@ -328,7 +349,7 @@
 		})
 	}
 
-	function validaCnpj(cnpj) {
+	function validaCNPJ(cnpj) {
 		$.get("validacao/validaCnpj.php", {cnpj:cnpj, id:<?=$id;?>}, function(dados){
 			if(dados != ""){
 				//mostrar erro retornado
@@ -339,18 +360,18 @@
 		})
 	}
 
-	function confirmarEmail(Email){
-		   $.get("validacao/verificaEmail.php", {Email:Email,id:<?=$id;?>}, function(dados){
+	function confirmarEmail(email){
+		   $.get("validacao/verificaEmail.php", {email:email,id:<?=$id;?>}, function(dados){
 			   if(dados != ""){
 				   alert(dados);
-				   $("#Email").val("");
+				   $("#email").val("");
 			   }
 		   }) 
 	}
 
-	$("#Cep").blur(function(){
+	$("#cep").blur(function(){
 		//pegar o cep
-        cep = $("#Cep").val();
+        cep = $("#cep").val();
         cep = cep.replace(/\D/g, '');
         //alert(cep);
 		//verificar se esta em branco
@@ -359,10 +380,10 @@
         } else {
             //consultar o cep no viacep.com.br
             $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados){
-				$("#nome_cidade").val(dados.localidade);
-                $("#Endereco").val(dados.logradouro);
+				$("#cidade").val(dados.localidade);
+                $("#endereco").val(dados.logradouro);
                 $("#estado").val(dados.uf);
-				$("#Bairro").val(dados.bairro);   
+				$("#bairro").val(dados.bairro);   
                 //buscar id da cidade  
                     $.get("buscarCidade.php", {cidade: dados.localidade, estado: dados.uf}, function(dados){
                         if(dados != "Erro")
@@ -371,7 +392,7 @@
                             alert(dados);	 
                     })
                     //focar no complemento
-                    $("#Bairro").focus();
+                    $("#bairro").focus();
             })
         }
     });	

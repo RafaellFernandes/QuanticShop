@@ -2,7 +2,7 @@
     session_start();
 
     //verificar se esta ou nao logado
-    if ( !isset ( $_SESSION["bancotcc"]["id"] ) ){
+    if ( !isset ( $_SESSION["quanticshop"]["id"] ) ){
         exit;
     }
 
