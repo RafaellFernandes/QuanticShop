@@ -20,11 +20,6 @@ if(!empty($id)){
     
     $dados = $consulta->fetch(PDO::FETCH_OBJ);
     
-    if(empty($dados->id)){
-        echo "<p class='alert alert-danger'> O Fornecedor não existe! </p>";
-        exit;
-    }
-    
     $id                  = $dados->id;
     $nomeFantasia        = $dados->nomeFantasia;
 	$razaoSocial         = $dados->razaoSocial;
@@ -42,6 +37,10 @@ if(!empty($id)){
 	$numero_resid        = $dados->numero_resid;
 	$ativo           	 = $dados->ativo;
    
+	if(empty($dados->id)){
+        echo "<p class='alert alert-danger'> O Fornecedor não existe! </p>";
+        exit;
+    }
 }
 ?>
 <div class="container-fluid p-0">
@@ -53,7 +52,7 @@ if(!empty($id)){
 			</div>
 			<div class="card-body">
 				<form name="formCadastro" method="post" action="salvar/fornecedor" data-parsley-validate enctype="multipart/form-data">
-					<p> Todos os Campos São Obrigatórios </p>
+					<p> Todos os Campos São Obrigatórios. </p>
 					<div class="row">
 						<div class="col-12 col-md-2" style="display: none;">
 							<label for="id">ID:</label>

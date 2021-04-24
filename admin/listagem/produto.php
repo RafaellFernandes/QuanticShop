@@ -34,8 +34,9 @@
 					</thead>
 					<tbody>
 						<?php
-							$sql = "SELECT p.id, p.foto, p.nome_produto, p.valor_unitario, p.marca_id, p.departamento_id, m.nome_marca marca from produto p 
-							INNER JOIN marca m ON (m.id = p.marca_id) ORDER BY p.nome_produto";
+							$sql = "SELECT p.*, m.nome_marca, d.nome_dept  FROM produto p 
+							 	LEFT JOIN departamento d on (d.id = p.departamento_id)
+                				LEFT JOIN marca m on(m.id = p.marca_id) ORDER BY p.id";
 							$consulta = $pdo->prepare($sql);
 							$consulta->execute();
 
@@ -43,21 +44,22 @@
 								//separar os dados
 								$id         	                = $dados->id;
 								$foto                           = $dados->foto;
-								$primeiro_nome 	                = $dados->primeiro_nome;                
+								$nome_produto 	                = $dados->nome_produto;                
 								$marca_id                       = $dados->marca_id;
 								$nome_marca                     = $dados->nome_marca;
 								$departamento_id                = $dados->departamento_id;
-								$valor_unitario                 = $dados->$valor_unitario;
+								$nome_dept                      = $dados->nome_dept;
+								$valor_unitario                 = $dados->valor_unitario;
 								$valor_unitario                 = number_format($valor_unitario,2, '.' , ',');	
 								$imagem                         = "../fotos/".$foto."p.jpg";
 												
 								//mostrar na tela
 								echo '<tr>	
-										<td><img src="'.$imagem.'" alt="'.$primeiro_nome.'"  width="48" height="48" class="rounded-circle mr-2"></td>
-										<td>'.$primeiro_nome.'</td>
+										<td><img src="'.$imagem.'" alt="'.$nome_produto.'"  width="48" height="48" class="rounded-circle mr-2"></td>
+										<td>'.$nome_produto.'</td>
 										<td>R$ '.$valor_unitario.'</td>
 										<td>'.$nome_marca.'</td>
-										<td>'.$departamento_id.'</td>
+										<td>'.$nome_dept.'</td>
 										<td>
 											<a href="cadastro/produto/'.$id.'" alt="Editar" title="Editar">
 												<i class="align-middle"  data-feather="edit-2"></i>				

@@ -56,41 +56,41 @@ if(!empty($id)){
             </div>
             <div class="card-body">
 				<form name="formCadastro" method="post" action="salvar/usuario" data-parsley-validate enctype="multipart/form-data">
-					<p>* Campos Obrigatórios</p>
+					<p>Todos os Campos são Obrigatórios.</p>
 					<div class="row">
 						<div class="col-12 col-md-1" style="display: none;">
 							<label for="id">ID</label>
 							<input type="text" name="id" id="id" class="form-control" readonly value="<?=$id;?>">
 						</div>
 						<div class="col-12 col-md-6">
-							<label for="primeiro_nome">* Primeiro Nome:</label>
+							<label for="primeiro_nome">Primeiro Nome:</label>
 							<input type="text" name="primeiro_nome" id="primeiro_nome" class="form-control" required data-parsley-required-message="Preencha o nome" 
 							value="<?=$primeiro_nome;?>" placeholder="Digite seu Primeiro nome">
 						</div>
 						<div class="col-12 col-md-6">
-							<label for="sobrenome">* Sobrenome:</label>
+							<label for="sobrenome">Sobrenome:</label>
 							<input type="text" name="sobrenome" id="sobrenome" class="form-control" required data-parsley-required-message="Preencha o nome" 
 							value="<?=$sobrenome;?>" placeholder="Digite seu sobrenome completo">
 						</div>
-						<div class="col-12 col-md-4">
-							<label for="email">* E-mail:</label>
+						<div class="col-12 col-md-4 mt-2">
+							<label for="email">E-mail:</label>
 							<input type="email" name="email" id="email" class="form-control" required data-parsley-required-message="Preencha o e-mail"  placeholder="email@exemplo.com.br"
 							data-parsley-type-message="Digite um e-mail válido" onblur="confirmarEmail(this.value)" value="<?=$email;?>">
 						</div>
-						<div class="col-12 col-md-4">
-							<label for="login">* Login:</label>
+						<div class="col-12 col-md-4 mt-2">
+							<label for="login">Login:</label>
 							<input type="text" name="login" id="login" class="form-control" required data-parsley-required-message="Preencha o Login" placeholder="Digite o Login de Acesso ao sistema" value="<?=$login;?>">
 						</div>
-						<div class="col-12 col-md-4">
-							<label for="senha">* Senha:</label>
+						<div class="col-12 col-md-4 mt-2">
+							<label for="senha">Senha:</label>
 							<input type="password" name="senha" id="senha" class="form-control" value="<?=$senha?>">
 						</div>
-						<div class="col-12 col-md-6">
-							<label for="senha2">* Redigite a Senha:</label>
+						<div class="col-12 col-md-4 mt-2">
+							<label for="senha2">Redigite a Senha:</label>
 							<input type="password" name="senha2" id="senha2" class="form-control" data-parsley-equalto="#senha" data-parsley-trigger="keyup" data-parsley-error-message="Senha não confere" value="<?=$senha?>">
 						</div>
-						<div class="col-12 col-md-6">
-							<label for="foto">* Foto (JPG):</label>
+						<div class="col-12 col-md-4 mt-2">
+							<label for="foto">Foto (JPG):</label>
 							<input type="file" name="foto" id="foto" class="form-control">
 							<input type="hidden" name="foto" value="<?=$foto?>" class="form-control" >
 								<?php 	
@@ -102,37 +102,37 @@ if(!empty($id)){
 								?>
 								<div><?php echo $foto ;?></div>
 						</div>
-						<div class="col-12 col-md-4">
-							<label for="cep">* CEP:</label>
+						<div class="col-12 col-md-4  mt-2">
+							<label for="cep">CEP:</label>
 							<input type="text" name="cep" id="cep" class="form-control" required data-parsley-required-message="Preencha o CEP"
 							value="<?=$cep;?>" placeholder="Código Postal">
 						</div>
-						<div class="col-12 col-md-2" style="display: none;">
+						<div class="col-12 col-md-2 mt-2" style="display: none;">
 							<label for="cidade_id">ID Cidade</label>
 							<input type="text" name="cidade_id" id="cidade_id" class="form-control" required data-parsley-required-message="Preencha a Cidade" readonly
 							value="<?=$cidade_id;?>">
 						</div>
-						<div class="col-12 col-md-4">
+						<div class="col-12 col-md-4 mt-2">
 							<label for="cidade">Nome da Cidade:</label>
 							<input type="text" id="cidade" name="cidade" class="form-control" value="<?=$cidade;?>" placeholder="ex: São Paulo">
 						</div>
-						<div class="col-12 col-md-4">
+						<div class="col-12 col-md-4 mt-2">
 							<label for="estado">Estado:</label>
 							<input type="text" id="estado" name="estado" class="form-control"  value="<?=$cidade_id;?>" placeholder="UF">
 						</div> 	
-						<div class="col-12 col-md-4">
+						<div class="col-12 col-md-4 mt-2">
 							<label for="bairro">Bairro:</label>
 							<input type="text" id="bairro" name="bairro" class="form-control"  value="<?=$bairro;?>" placeholder="Bairro">
 						</div> 
-						<div class="col-12 col-md-4">
+						<div class="col-12 col-md-4 mt-2">
 							<label for="endereco">Endereço:</label>
 							<input type="text" id="endereco" name="endereco" class="form-control"  value="<?=$cidade_id;?>" placeholder="Endereço">
 						</div> 
-						<div class="col-12 col-md-4">
+						<div class="col-12 col-md-4  mt-2">
 							<label for="complemento">Complemento:</label>
 							<input type="text" id="complemento" name="complemento" class="form-control"  value="<?=$complemento;?>" placeholder="Complemento">
 						</div> 
-						<div class="col-12 col-md-4">
+						<div class="col-12 col-md-4 mt-2">
 							<label for="numero_resid">Numero de Residencia:</label>
 							<input type="text" id="numero_resid" name="numero_resid" class="form-control"  value="<?=$cidade_id;?>" placeholder="Numero Residencia">
 						</div> 

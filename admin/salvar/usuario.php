@@ -112,7 +112,7 @@
                 //a capa deve estar vazia e ID nao estiver vazio
                 //gravar no banco 
                 $pdo->commit();
-                echo "<script>alert('Usuario salvo com Sucesso!');location.href='listar/usuario';</script>";
+                echo "<script>alert('Usuario salvo com Sucesso!');location.href='listagem/usuario';</script>";
 
             }
             //veririfcar tipo imagem
@@ -129,7 +129,7 @@
 
                 //gravar no banco - se tudo deu certo
                 $pdo->commit();
-                echo "<script>alert('Usuario salvo com Sucesso!');location.href='listar/usuario';</script>";
+                echo "<script>alert('Usuario salvo com Sucesso!');location.href='listagem/usuario';</script>";
             }
 
             //erro ao gravar

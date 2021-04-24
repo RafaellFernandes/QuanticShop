@@ -38,11 +38,15 @@
 										</div>
 										<div class="card">
 											<div class="card-body">
-												<h5 class="card-title mb-4">Visitors</h5>
-												<h1 class="mt-1 mb-3">14.212</h1>
+												<h5 class="card-title mb-4">TCC</h5>
+												<h3 class="mt-1 mb-3"><?php 
+													$date = strtotime("June 14, 2021 7:00 PM"); $remaining = $date - time(); 
+													$days_remaining = floor($remaining / 86400); $hours_remaining = floor(($remaining % 86400) / 3600); echo "Faltam $days_remaining Dias e $hours_remaining Horas Restantes";  
+													
+													?></h3>
 												<div class="mb-1">
-													<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25% </span>
-													<span class="text-muted">Since last week</span>
+													<!-- <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25% </span> -->
+													<span class=" text-warning "><?php $rem = strtotime('2021-06-14 19:00:00') - time(); $day = floor($rem / 86400); $hr = floor(($rem % 86400) / 3600); $min = floor(($rem % 3600) / 60); $sec = ($rem % 60); if($day) echo "$day Days "; if($hr) echo "$hr Hours "; if($min) echo "$min Minutes "; if($sec) echo "$sec Seconds "; echo "Remaining...";?></span>
 												</div>
 											</div>
 										</div>
