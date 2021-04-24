@@ -8,7 +8,7 @@
 	}
 
 	//selecionar departamento
-	$sql = "SELECT nomeDept FROM departamento 
+	$sql = "SELECT nome_dept FROM departamento 
 		WHERE id = ? LIMIT 1";
 	//executar o sql
 	$consulta = $pdo->prepare($sql);
@@ -17,17 +17,17 @@
 	$linha = $consulta->fetch(PDO::FETCH_ASSOC);
 	
 	//separar os campos de resultado
-	$nomeDept = $linha["nomeDept"];
+	$nome_dept = $linha["nome_dept"];
 
 	//mostrar o nome do Departamento na tela
-	echo "<h1>$nomeDept</h1>";	
+	echo "<h1>$nome_dept</h1>";	
 ?>
 
 <div class="row">
 	<?php
 		//selecionar os produtos daquele departamento
-		$sql = "SELECT id, Nome, ValorProduto, 
-			FotoProduto
+		$sql = "SELECT id, nome_produto, valor_unitario, 
+			foto
             FROM produto";
             
 		//executar o sql
@@ -39,16 +39,16 @@
 
 			//separar os campos
 			$id              	= $linha["id"];
-			$Nome               = $linha["Nome"];
-			$ValorProduto     	= $linha["ValorProduto"];
-			$FotoProduto    	= $linha["FotoProduto"]."p.jpg";
+			$nome_produto       = $linha["nome_produto"];
+			$valor_unitario     = $linha["valor_unitario"];
+			$foto    	        = $linha["foto"]."p.jpg";
 
 			$ValorProduto = number_format($ValorProduto,2,",",".");
 
 			echo "<div class='col-4 mt-3 text-center'>
-					<img src='fotos/$FotoProduto' class='w-100 '>
-					<p>$Nome</p>
-					<p class='valor'>R$ $ValorProduto</p>
+					<img src='fotos/$foto' class='w-100 '>
+					<p>$nome_produto</p>
+					<p class='valor'>R$ $valor_unitario</p>
 					<a href='produto/$id' class='btn btn-danger'>Detalhes</a>
 				</div>";
 		}

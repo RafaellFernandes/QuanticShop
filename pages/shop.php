@@ -9,7 +9,7 @@
 					<div class="col-md-3 text-center">
 						<?php
 							//selecionar 1 produto aleatorios
-							$sql = "SELECT id, Nome, ValorProduto, FotoProduto FROM produto ORDER BY rand() LIMIT 4";
+							$sql = "SELECT id, nome_produto, valor_unitario, foto FROM produto ORDER BY rand() LIMIT 4";
 							$consulta = $pdo->prepare($sql);
 							$consulta->execute();
 
@@ -17,9 +17,9 @@
 
 								//recuperar as variaveis
 								$id 	            = $linha["id"];
-								$Nome               = $linha["Nome"];
-								$ValorProduto      	= $linha["ValorProduto"];
-								$FotoProduto     	= $linha["FotoProduto"] ."p.jpg";
+								$nome_produto       = $linha["nome_produto"];
+								$valor_unitario     = $linha["valor_unitario"];
+								$foto            	= $linha["foto"] ."p.jpg";
 
 								//formatar o valor
 								$ValorProduto = number_format($ValorProduto, 2, ",", ".");

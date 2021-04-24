@@ -1,7 +1,7 @@
 <?php
 
 //verificar se nao esta logado
-if ( !isset ( $_SESSION["bancotcc"]["id"] ) ) {
+if ( !isset ( $_SESSION["quanticshop"]["id"] ) ) {
     exit;
 }
 
@@ -11,18 +11,18 @@ if ( !isset ( $_SESSION["bancotcc"]["id"] ) ) {
 
 	if ( $op == "add" ) {
 
-		$sql = "SELECT id, Nome, ValorProduto FROM produto WHERE id = ? LIMIT 1";
+		$sql = "SELECT id, nome_produto, valor_unitario FROM produto WHERE id = ? LIMIT 1";
 		$consulta = $pdo->prepare($sql);
 		$consulta->bindParam(1, $produto, PDO::PARAM_INT);
 		$consulta->execute();
 		$linha 	  = $consulta->fetch(PDO::FETCH_OBJ);
 
 		if ( isset ( $linha->id ) ) { 
-			$id 	       = 	$linha->id;
-			$Nome          =	$linha->Nome;
-			$ValorProduto  =	$linha->ValorProduto;
+			$id 	        = 	$linha->id;
+			$nome_produto   =	$linha->nome_produto;
+			$valor_unitario =	$linha->valor_unitario;
 
-			$_SESSION["carrinho"][$id] = array("id"=>$id, "Nome"=>$Nome, "ValorProduto"=>$ValorProduto, "quantidade"=>1);
+			$_SESSION["carrinho"][$id] = array("id"=>$id, "nome_produto"=>$nome_produto, "valor_unitario"=>$valor_unitario, "quantidade"=>1);
 		}
 
 	} else if ( $op == "quantidade" ) {
@@ -65,21 +65,21 @@ if ( !isset ( $_SESSION["bancotcc"]["id"] ) ) {
 
 			foreach ( $_SESSION["carrinho"] as $c ) {
 				
-				$id 		  = $c["id"];
-				$Nome   	  =	$c["Nome"];
-				$ValorProduto =	$c["ValorProduto"];
-				$quantidade   =	$c["quantidade"];
+				$id 		    = $c["id"];
+				$nome_produto   = $c["nome_produto"];
+				$valor_unitario = $c["valor_unitario"];
+				$quantidade     = $c["quantidade"];
 
-				$total = $ValorProduto * $quantidade;
+				$total = $valor_unitario * $quantidade;
 
 				$geral = $total + $geral;
 
-				$ValorProduto = number_format($ValorProduto,2,",",".");
+				$valor_unitario = number_format($valor_unitario,2,",",".");
 				$total = number_format($total,2,",",".");
 
 				echo "<tr>
-					<td>$Nome</td>
-					<td>$ValorProduto</td>
+					<td>$nome_produto</td>
+					<td>$valor_unitario</td>
 					<td>
 						<input type='text' value='$quantidade' onblur='adicionaQuantidade($id, this.value)' class='form-control'>
 					</td>
