@@ -11,7 +11,7 @@ if ( !isset ($id) ) {
 }
 
 //verificar se existe algum vinculo com produto
-$sql = "SELECT * FROM produto WHERE Marca_id = ? LIMIT 1";
+$sql = "SELECT * FROM produto WHERE marca_id = ? LIMIT 1";
 $consulta = $pdo->prepare($sql);
 $consulta->bindParam(1, $id);
 $consulta->execute();

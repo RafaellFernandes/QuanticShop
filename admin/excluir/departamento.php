@@ -11,7 +11,7 @@
   }
 
    //verificar se existe um departamento cadastrado 
-   $sql = "SELECT id FROM departamento WHERE NomeDept = ? LIMIT 1";
+   $sql = "SELECT id FROM departamento WHERE nome_dept = ? LIMIT 1";
    //prepare sql para executar
    $consulta = $pdo->prepare($sql);
    //passar o id do parametro
