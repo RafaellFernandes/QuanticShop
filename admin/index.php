@@ -121,67 +121,54 @@
               <li class="sidebar-item"><a class="sidebar-link" href="listagem/usuario">Usuario</a></li>
 						</ul>
 					</li>
-
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="paginas/pages-invoice">
-              <i class="align-middle" data-feather="credit-card"></i> <span class="align-middle">Invoice</span>
-            </a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="paginas/pages-blank">
-              <i class="align-middle" data-feather="book"></i> <span class="align-middle">Pagina em Branco</span>
-            </a>
-					</li>
-
-					<li class="sidebar-item">
-						<a href="#auth" data-toggle="collapse" class="sidebar-link collapsed">
-              <i class="align-middle" data-feather="users"></i> <span class="align-middle">Autenticação</span>
-            </a>
-						<ul id="auth" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
-							<li class="sidebar-item"><a class="sidebar-link" href="paginas/pages-sign-in">Entrar</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="paginas/pages-sign-up">Cadastrar</a></li>
-						</ul>
-					</li>
-          <li class="sidebar-header">
-						Controle Estoque
-					</li>
+          <li class="sidebar-header">Controle Estoque</li>
           <li class="sidebar-item">
 						<a data-target="#forms" data-toggle="collapse" class="sidebar-link collapsed">
               <i class="align-middle" data-feather="check-circle"></i> <span class="align-middle">Controle</span>
             </a>
 						<ul id="forms" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
 							<li class="sidebar-item"><a class="sidebar-link" href="controleEstoque/estoque">Controle de Estoque</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="#">Outra Coisa</a></li>
+							
 						</ul>
 					</li>
-
-					<li class="sidebar-header">
-						Ferramentas e Componentes
-					</li>
-	
-					<li class="sidebar-item">
-						<a data-target="#forms" data-toggle="collapse" class="sidebar-link collapsed">
-              <i class="align-middle" data-feather="check-circle"></i> <span class="align-middle">Formulários</span>
+          <li class="sidebar-header">Relatórios e Etc</li>
+          <li class="sidebar-item">
+						<a data-target="#rel" data-toggle="collapse" class="sidebar-link collapsed">
+              <i class="align-middle" data-feather="check-circle"></i> <span class="align-middle">Relatório</span>
             </a>
-						<ul id="forms" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
-							<li class="sidebar-item"><a class="sidebar-link" href="paginas/forms-layouts">Form Layouts</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="paginas/forms-basic-inputs">Basic Inputs</a></li>
+						<ul id="rel" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+							<li class="sidebar-item"><a class="sidebar-link" href="#">Relatório 1</a></li>
+              <li class="sidebar-item"><a class="sidebar-link" href="#">Relatório 2</a></li>
+              <li class="sidebar-item"><a class="sidebar-link" href="#">Relatório 3</a></li>
+              <li class="sidebar-item"><a class="sidebar-link" href="#">Relatório 4</a></li>
+              <li class="sidebar-item"><a class="sidebar-link" href="#">Relatório 5</a></li>
+              <li class="sidebar-item"><a class="sidebar-link" href="#">Relatório 6</a></li>
+							
 						</ul>
 					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="paginas/tables-bootstrap">
-              <i class="align-middle" data-feather="list"></i> <span class="align-middle">Tabelas</span>
+        <!-- ----------------------------------------------------------------------------------------------------- -->
+        <li class="sidebar-header">Outras Paginas</li>
+          <li class="sidebar-item dropdown">
+						<a href="#other" data-toggle="collapse" class="sidebar-link collapsed"  aria-expanded="false">
+              <i class="align-middle" data-feather="book"></i> <span class="align-middle">Outros</span>
             </a>
-					</li>
+            <ul id="other" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+              <li class="sidebar-item"><a class="sidebar-link" href="paginas/pages-invoice">Invoice</a></li>
+              <li class="sidebar-item"><a class="sidebar-link" href="paginas/pages-blank">Pagina em Branco</a></li>
 
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="paginas/maps-google">
-              <i class="align-middle" data-feather="map"></i> <span class="align-middle">Mapas</span>
-            </a>
-					</li>
+              <li class="sidebar-header"><i class="align-middle" data-feather="users"></i> <span class="align-middle">Autenticação</span></li>
+              <li class="sidebar-item"><a class="sidebar-link" href="paginas/pages-sign-in">Entrar</a></li>
+              <li class="sidebar-item"><a class="sidebar-link" href="paginas/pages-sign-up">Cadastrar</a></li>
+
+              <li class="sidebar-header"><i class="align-middle" data-feather="users"></i> <span class="align-middle">Ferramentas e Componentes</span></li>
+              <li class="sidebar-item"><a class="sidebar-link" href="paginas/forms-layouts">Form Layouts</a></li>
+              <li class="sidebar-item"><a class="sidebar-link" href="paginas/forms-basic-inputs">Basic Inputs</a></li>
+              <li class="sidebar-item"><a class="sidebar-link" href="paginas/tables-bootstrap">Tabelas</a></li>
+              <li class="sidebar-item"><a class="sidebar-link" href="paginas/maps-google">Mapas</a></li>
+            </ul>
+          </li>
+	  	<!-- ------------------------------------------------------------------------------------------------------------------------- -->
+          
 				</ul>
 			</div>
 		</nav>
@@ -280,10 +267,10 @@
 									<a class="text-muted" href="#">Suporte</a>
 								</li>
 								<li class="list-inline-item">
-									<a class="text-muted" href="paginas/teste/politicaPrivacidade">Privacidade</a>
+									<a class="text-muted" href="paginas/politicaPrivacidade">Privacidade</a>
 								</li>
 								<li class="list-inline-item">
-									<a class="text-muted" href="paginas/teste/termosCondicoes">Termos</a>
+									<a class="text-muted" href="paginas/termosCondicoes">Termos</a>
 								</li>
 							</ul>
 						</div>
@@ -296,7 +283,7 @@
   
 
 <?php
-	//continuação do meu codigo php
+	//continuação do codigo php
   }
 
 ?>

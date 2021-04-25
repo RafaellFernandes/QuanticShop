@@ -1,60 +1,148 @@
-<?php
-  /**
-  * Requires the "PHP Email Form" library
-  * The "PHP Email Form" library is available only in the pro version of the template
-  * The library should be uploaded to: vendor/php-email-form/php-email-form.php
-  * For more info and help: https://bootstrapmade.com/php-email-form/
-  */
-
-  // Replace contact@example.com with your real receiving email address
-//   $receiving_email_address = 'raphaelldff@gmail.com';
-
-//   if( file_exists($php_email_form = 'vendor/php-email-form/php-email-form.php' )) {
-//     include( $php_email_form );
-//   } else {
-//     die( 'Unable to load the "PHP Email Form" Library!');
-//   }
-
-  // $contact = new PHP_Email_Form;
-//   $contact->ajax = true;
-  
-//   $contact->to = $receiving_email_address;
-//   $contact->from_name = $_POST['name'];
-//   $contact->from_email = $_POST['email'];
-//   $contact->subject = $_POST['subject'];
-
-  // Uncomment below code if you want to use SMTP to send emails. You need to enter your correct SMTP credentials
-  /*
-  $contact->smtp = array(
-    'host' => 'example.com',
-    'username' => 'example',
-    'password' => 'pass',
-    'port' => '587'
-  );
-  */
-
-//   $contact->add_message( $_POST['name'], 'From');
-//   $contact->add_message( $_POST['email'], 'Email');
-//   $contact->add_message( $_POST['message'], 'Message', 10);
-
-//   echo $contact->send();
-?>
 <div class="main">
       <div class="shop_top">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-7">
-				  <div class="map">
-					<!-- <iframe width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.co.in/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Lighthouse+Point,+FL,+United+States&amp;aq=4&amp;oq=light&amp;sll=26.275636,-80.087265&amp;sspn=0.04941,0.104628&amp;ie=UTF8&amp;hq=&amp;hnear=Lighthouse+Point,+Broward,+Florida,+United+States&amp;t=m&amp;z=14&amp;ll=26.275636,-80.087265&amp;output=embed"></iframe><br><small><a href="https://maps.google.co.in/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Lighthouse+Point,+FL,+United+States&amp;aq=4&amp;oq=light&amp;sll=26.275636,-80.087265&amp;sspn=0.04941,0.104628&amp;ie=UTF8&amp;hq=&amp;hnear=Lighthouse+Point,+Broward,+Florida,+United+States&amp;t=m&amp;z=14&amp;ll=26.275636,-80.087265" style="color:#666;text-align:left;font-size:12px"></a></small> -->
-					<iframe width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d941.0891126288909!2d-46.65617173325659!3d-23.561526878517917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xe904f6a669744da1!2sMuseu%20de%20Arte%20de%20S%C3%A3o%20Paulo%20Assis%20Chateaubriand!5e0!3m2!1spt-BR!2sbr!4v1612384217484!5m2!1spt-BR!2sbr" ></iframe>
-					</div>
-				</div>
+			
+
+
+			<DIV align=center>
+<CENTER>
+<TABLE id=AutoNumber1 style="BORDER-COLLAPSE: collapse" borderColor=#111111 
+height=424 cellSpacing=0 cellPadding=0 width=507 border=1>
+  <TBODY>
+  <TR>
+    <TD width=507 bgColor=#000000 height=18>
+      <P style="MARGIN-TOP: 0px; MARGIN-BOTTOM: 0px" align=center><b><font face="Verdana" color="#ffffff" size="2">Formulário
+      de Contato</font></b></P></TD></TR>
+  <TR>
+    <TD align=justify width=507 height=402>
+      <P style="MARGIN-TOP: 0px; MARGIN-BOTTOM: 0px" align="center"><FONT face=Verdana 
+      size=1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <B><FONT color=#ff0000>Preencha 
+      corretamente o formulário a baixo:</FONT></B></FONT></P>
+      <P style="MARGIN-TOP: 0px; MARGIN-BOTTOM: 0px"><FONT face=Verdana 
+      size=1></FONT>&nbsp;</P>
+      <P style="MARGIN-TOP: 0px; MARGIN-BOTTOM: 0px" align=center>
+      <FORM style="MARGIN: 0px; WORD-SPACING: 0px" name=form action=enviar.php
+      method=post>
+      <DIV align=center>
+      <CENTER>
+      <TABLE id=AutoNumber1 style="BORDER-COLLAPSE: collapse" 
+      borderColor=#111111 height=200 cellSpacing=0 cellPadding=0 width=328 
+      border=0>
+        <TBODY>
+        <TR>
+          <TD width=35 height=10>
+          </TD>
+          <TD width=287 height=10 align="center">
+            <P style="MARGIN-TOP: 0px; MARGIN-BOTTOM: 0px"><font face="Verdana" size="1"><b>Nome:</b></font></P></TD></TR>
+        <tr>
+          <TD width=35 height=12>
+          </TD>
+          <TD width=287 height=12 align="center">
+            <SPAN 
+            class=box-header><font face="Verdana" size="1"><b><INPUT class=frm 
+            onblur="this.className='frm'; displayText('&nbsp;');" 
+            onfocus="this.className='frm-on'; displayText('&nbsp;Digite seu Nome');" 
+            maxLength=60 size=25 name=nome></b></font></SPAN></TD>
+        </tr>
+        <tr>
+          <TD width=35 height=13>
+          </TD>
+          <TD width=287 height=13 align="center">
+            <SPAN 
+            class=box-header><font face="Verdana" size="1"><b>E-mail:</b></font></SPAN></TD>
+        </tr>
+        <TR>
+          <TD width=35 height=13>
+          </TD>
+          <TD width=287 height=13 align="center">
+            <P style="MARGIN-TOP: 0px; MARGIN-BOTTOM: 0px"><SPAN 
+            class=box-header><font face="Verdana" size="1"><b><INPUT class=frm 
+            onblur="this.className='frm'; displayText('&nbsp;');" 
+            onfocus="this.className='frm-on'; displayText('&nbsp;Digite seu e-mail, ex: user@user.com.br');" 
+            maxLength=100 size=25 name=email></b></font></SPAN></P></TD></TR>
+        <tr>
+          <TD width=35 height=12>
+          </TD>
+          <TD width=287 height=12 align="center">
+            <SPAN 
+            class=box-header><font face="Verdana" size="1"><b>Assunto:</b></font></SPAN></TD>
+        </tr>
+        <TR>
+          <TD width=35 height=18>
+          </TD>
+          <TD width=287 height=18 align="center">
+            <P style="MARGIN-TOP: 0px; MARGIN-BOTTOM: 0px"><SPAN 
+            class=box-header><font face="Verdana" size="1"><b><INPUT class=frm 
+            onblur="this.className='frm'; displayText('&nbsp;');" 
+            onfocus="this.className='frm-on'; displayText('&nbsp;Digite seu assunto');" 
+            maxLength=60 size=25 name=assunto></b></font></SPAN></P></TD></TR>
+        <tr>
+          <TD width=35 height=7>
+          </TD>
+          <TD width=287 height=7 align="center">
+            <SPAN 
+            class=box-header><font face="Verdana" size="1"><b>Mensagem:</b></font></SPAN></TD>
+        </tr>
+        <TR>
+          <TD width=35 height=34>
+          </TD>
+          <TD width=287 height=34 align="center">
+            <P style="MARGIN-TOP: 0px; MARGIN-BOTTOM: 0px"><FONT face=Verdana 
+            size=1><br><textarea class=frm 
+            onblur="this.className='frm'; displayText('&nbsp;');" 
+            onfocus="this.className='frm-on'; displayText('&nbsp;Digite sua mensagem');" 
+            name=mensagem rows="4" cols="25"></textarea></FONT></P></TD></TR>
+        <TR>
+          <TD width=35 height=9>
+            <P style="MARGIN-TOP: 0px; MARGIN-BOTTOM: 0px">&nbsp;</P></TD>
+          <TD width=287 height=9>
+            <P style="MARGIN-TOP: 0px; MARGIN-BOTTOM: 0px"><FONT face=Verdana 
+            size=1></FONT>&nbsp;</P></TD></TR>
+        <TR>
+          <TD width=328 colSpan=2 height=73>
+            <P style="MARGIN-TOP: 0px; MARGIN-BOTTOM: 0px" align=center><SPAN 
+            class=box-header>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <INPUT class=frm onmouseover="this.className='frm-on';" onmouseout="this.className='frm';" type=submit value=Enviar></SPAN><FONT 
+            face=Verdana> </FONT><SPAN class=box-header><INPUT class=frm onmouseover="this.className='frm-on';" onmouseout="this.className='frm';" type=reset value=Limpar></SPAN>
+            <P style="MARGIN-TOP: 0px; MARGIN-BOTTOM: 0px" align=center><SPAN 
+            class=box-header><FONT style="FONT-SIZE: 3pt" 
+            face=Verdana></FONT></SPAN>&nbsp;
+            <P style="MARGIN-TOP: 0px; MARGIN-BOTTOM: 0px" align=center>
+            <DIV class=frm-on 
+      id=displayArea>&nbsp;</DIV></TD></TR>
+        <tr>
+          <TD width=328 colSpan=2 height=11>
+            <p align="center"><font face="Verdana" size="1">.: Desenvolvido por <a href="mailto:raphaelldff@gmail.com">Halan
+            S. Batista</a> :: Versão 2.0 :.</font></TD>
+        </tr>
+        </TBODY></TABLE></CENTER></DIV></FORM></TD></TR></TBODY></TABLE></CENTER></DIV>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 				<div class="col-md-5">
-					<p class="m_8">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat</p>
+					<p class="m_8">Contato</p>
 					<div class="address">
 				                <p>AV Paulista, 1578,</p>
-						   		<p>01310-200 São Paulo</p>
-						   		<p>BR</p>
+						   		<p>01310-200 São Paulo - Brazil</p>
+						   		
 				   		<p>Telefone: (00) 222 666 444</p>
 				 	 	<p>Email: <span>suporte.qs@quanticshop.com.br</span></p>
 				   		<p>Siga-nos: <span>Facebook</span>, <span>Twitter</span></p>
@@ -63,7 +151,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12 contact">
-				  <form method="post" action="contact-post.html">
+				  <form method="post" action="mail/enviar">
 					<div class="to">
                      	<input type="text" class="text" value="Nome" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Nome';}">
 					 	<input type="text" class="text" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}">
