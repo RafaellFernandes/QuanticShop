@@ -201,7 +201,6 @@
               </a>
 							<div class="dropdown-menu dropdown-menu-right">
 
-								<a class="dropdown-item" href="paginas/pages-profile"><i class="align-middle mr-1" data-feather="user"></i> Perfil</a>
                 <a class="dropdown-item" href="#"><i class="align-middle mr-1" data-feather="pie-chart"></i> Analytics</a>
                 
                 <div class="dropdown-divider"></div>
@@ -210,7 +209,7 @@
                
                 <div class="dropdown-divider"></div>
                 
-								<a class="dropdown-item"  href="login/sair.php?token='.md5(session_id()).'">Log out</a>
+								<a class="dropdown-item"  href="login/sair.php?token='.md5(session_id()).'"><i class="align-middle mr-1" data-feather="log-out"></i>Log out</a>
 							</div>
 						</li>
 					</ul>
