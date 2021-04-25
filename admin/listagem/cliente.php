@@ -32,6 +32,7 @@
                     </div>
                 </fieldset>
 
+                <!-- Listagem de Pessoa Fisica -->
                 <div id="fisica" style="display:none;">
                     <table class="table table-bordered table-hover table-striped" id="tabela">
                         <thead>
@@ -88,24 +89,25 @@
                         </tbody>
                     </table>
                 </div>
+                 <!-- Fim da Listagem de Pessoa Fisica -->
 
+                <!-- Listagem de Pessoa Juridica -->
                 <div id="juridica" style="display:none;">
-                    <table class="table table-bordered table-hover table-striped" id="tabela">
+                    <table class="table table-bordered table-hover table-striped" id="tabela2">
                         <thead>
                             <tr>
-                                <th>Foto</th>
                                 <th>Razão Social</th>
                                 <th>CNPJ</th>
                                 <th>Cidade</th>
                                 <th>Email</th>
-                                <th>Site</th>
+                                <!-- <th>Site</th> -->
                                 <th>Telefone</th>
                                 <th>Ações</th> 
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                                $sql = "SELECT id, razaoSocial, cnpj, email, cidade, estado, foto, telefone FROM cliente
+                                $sql = "SELECT id, razaoSocial, cnpj, email, cidade, estado, pessoaFJ, telefone FROM cliente
                                 ORDER BY id";
                                 $consulta = $pdo->prepare($sql);
                                 $consulta->execute();
@@ -113,24 +115,24 @@
                                 while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
                                     //separar os dados
                                     $id 	            = $dados->id;
-                                    $foto           	= $dados->foto;
+                                    $pessoaFJ           = $dados->pessoaFJ;
                                     $razaoSocial 	    = $dados->razaoSocial;
                                     $cnpj           	= $dados->cnpj;
                                     $email 	            = $dados->email;
                                     $telefone 	        = $dados->telefone;
                                     $cidade 	        = $dados->cidade;
                                     $estado             = $dados->estado;
-                                    //$siteJ              = $dados->siteJ;
+                                    // $siteJ              = $dados->siteJ;
 
                                     if ($pessoaFJ == "J") { 
 
                                         echo '<tr>
-                                                <td><img src="../fotos/'.$Foto.'p.jpg" alt="'.$razaoSocial.'" width="48" height="48" class="rounded-circle mr-2"></td>
+                                               
                                                 <td>'.$razaoSocial.'</td>
                                                 <td>'.$cnpj.'</td>
                                                 <td>'.$cidade.' - '.$estado.'</td>
                                                 <td>'.$email.'</td>
-                                                <td>'.$siteJ.'</td>
+                                                
                                                 <td>'.$telefone.'</td>
                                                 <td class="table-action text-center">
                                                     <a href="cadastro/clienteJ/'.$id.'" alt="Editar" title="Editar">
@@ -141,27 +143,17 @@
                                                     </a>
                                                 </td>
                                             </tr> ';
-                                    }
+                                    };
                                 }
                             ?>
                         </tbody>
                     </table>
                 </div>
+                <!-- Fim da Listagem de Pessoa Juridica -->
             </div>
         </div>
     </div>
 </div>
-<script>
-    function pessoa(tipo){
-      	if(tipo=="fisica"){
-      		document.getElementById("fisica").style.display = "inline";
-      		document.getElementById("juridica").style.display = "none";
-      	}else if(tipo=="juridica"){
-      		document.getElementById("fisica").style.display = "none";
-      		document.getElementById("juridica").style.display = "inline";
-      	}
-    }
-</script>
 <script type="text/javascript">
     function excluir(id){
         if ( confirm("deseja realmente excluir este registro?") ){
@@ -169,7 +161,7 @@
         }
     }
 
-    //adicionar o dataTable 
+    //adicionar o dataTable1 Para a Lista de Pessoa Fisica 
     $(document).ready(function(){
         $('#tabela').DataTable({
             "language": {
@@ -189,4 +181,36 @@
             }
         } );
     })
+
+    //adicionar o dataTable2 para a Lista de Pessoas Juridicas
+    $(document).ready(function(){
+        $('#tabela2').DataTable({
+            "language": {
+                "lengthMenu": "Mostrando _MENU_ Registros por Pagina",
+                "zeroRecords": "Nenhum Registro Encontrado",
+                "info": "Mostrando Paginas de  _PAGE_ de _PAGES_",
+                "infoEmpty": "No records available",
+                "infoFiltered": "(filtered from _MAX_ total records)",
+                "search": "Procurar:",
+                "zeroRecords":  "Nenhum registro encontrado",
+                "paginate": {
+                        "first":      "Primeiro",
+                        "last":       "Último",
+                        "next":       "Próximo",
+                        "previous":   "Anterior"
+                }
+            }
+        } );
+    })
+</script>
+<script>
+    function pessoa(tipo){
+      	if(tipo=="fisica"){
+      		document.getElementById("fisica").style.display = "inline";
+      		document.getElementById("juridica").style.display = "none";
+      	}else if(tipo=="juridica"){
+      		document.getElementById("fisica").style.display = "none";
+      		document.getElementById("juridica").style.display = "inline";
+      	}
+    }
 </script>

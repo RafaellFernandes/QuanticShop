@@ -14,11 +14,12 @@
     include "../admin/config/conexao.php";
 
   	//recuperar os dados do formulario
-    $id = $email = $senha = $cep = $telefone = $celular = $foto = $pessoaFJ = $nomeFantasia = $razaoSocial =
-    $cnpj = $inscricao_estadual =  $estado = $cidade = $endereco = $bairro = $numero_resid = $cidade_id = $ativo = "";
+    $id = $email = $senha = $cep = $telefone = $celular = $pessoaFJ = $nomeFantasia = $razaoSocial =
+    $cnpj = $inscricao_estadual = $estado = $cidade = $endereco = $bairro = $numero_resid = $cidade_id = $ativo = $siteJ = $complemento = $genero_id = "";
       
-      //print_r($_POST);
-      //print_r($_FILES);
+      var_dump($_POST);
+      print_r($_POST);
+      print_r($_FILES);
       
   	foreach ($_POST as $key => $value) {
   	//guardar as variaveis
@@ -46,20 +47,18 @@
         echo "<script>alert('Preencha a Senha!');history.back();</script>";
     } else if( empty($cep) ){
       echo "<script>alert('Digite o Cep!');history.back();</script>";
-  }
+    }
 
     //iniciar uma transacao
     $pdo->beginTransaction();
-    
-    $arquivo = time()."-".$_SESSION["quanticshop"]["id"];
          
       if(empty($id)){
           
           //$Senha = password_hash($Senha, PASSWORD_DEFAULT);
           $senha = password_hash($senha, PASSWORD_BCRYPT);
           //inserir se o id estiver em branco
-          $sql = "INSERT INTO cliente (email, senha, cep, endereco, bairro, cidade_id, foto, telefone, celular, numero_resid, pessoaFJ, cidade, estado, nomeFantasia, razaoSocial, cnpj, inscricao_estadual, ativo) 
-          VALUES (:email, :senha, :cep, :endereco, :bairro, :cidade_id, :foto, :telefone, :celular, :numero_resid, :pessoaFJ, :cidade, :estado, :nomeFantasia, :razaoSocial, :cnpj, :inscricao_estadual, :ativo) ";
+          $sql = "INSERT INTO cliente (email, senha, cep, endereco, bairro, cidade_id, telefone, celular, numero_resid, pessoaFJ, cidade, estado, nomeFantasia, razaoSocial, cnpj, inscricao_estadual, ativo, siteJ, complemento, genero_id) 
+          VALUES (:email, :senha, :cep, :endereco, :bairro, :cidade_id, :telefone, :celular, :numero_resid, :pessoaFJ, :cidade, :estado, :nomeFantasia, :razaoSocial, :cnpj, :inscricao_estadual, :ativo, :siteJ, :complemento, :genero_id)";
           $consulta = $pdo->prepare($sql);
           $consulta->bindParam(":email", $email);
           $consulta->bindParam(":senha", $senha);
@@ -67,7 +66,6 @@
           $consulta->bindParam(":endereco", $endereco);
           $consulta->bindParam(":bairro", $bairro);
           $consulta->bindParam(":cidade_id", $cidade_id);
-          $consulta->bindParam(":foto", $arquivo);
           $consulta->bindParam(":telefone", $telefone);
           $consulta->bindParam(":celular", $celular);
           $consulta->bindParam(":numero_resid", $numero_resid);
@@ -79,29 +77,28 @@
           $consulta->bindParam(":cnpj", $cnpj);
           $consulta->bindParam(":inscricao_estadual", $inscricao_estadual);
           $consulta->bindParam(":ativo", $ativo);
+          $consulta->bindParam(":siteJ", $siteJ);
+          $consulta->bindParam(":complemento", $complemento);
+          $consulta->bindParam(":genero_id", $genero_id);
         
           
           
       } else {
           //update se o id estiver preenchido
-          //qual arquivo sera gravado
-            if(!empty( $_FILES["foto"]["name"])){
-                $foto = $arquivo;
-            }
                     
           $sql = "UPDATE cliente SET email = :email, senha = :senha, cep = :cep, endereco = :endereco, complemento = :complemento,
-         bairro = :bairro, cidade_id = :cidade_id, foto = :foto, telefone = :telefone, celular = :celular, 
+         bairro = :bairro, cidade_id = :cidade_id, telefone = :telefone, celular = :celular, 
             numero_resid = :numero_resid, pessoaFJ = :pessoaFJ, cidade = :cidade, estado = :estado, nomeFantasia = :nomeFantasia,
-            razaoSocial = :razaoSocial, cnpj = :cnpj, inscricao_estadual = :inscricao_estadual, ativo = :ativo WHERE id = :id";
-          $consulta = $pdo->prepare($sql);
+            razaoSocial = :razaoSocial, cnpj = :cnpj, inscricao_estadual = :inscricao_estadual, ativo = :ativo,
+             siteJ = :siteJ, complemento = :complemento, genero_id = :genero_id WHERE id = :id";
 
+          $consulta = $pdo->prepare($sql);
           $consulta->bindParam(":email", $email);
           $consulta->bindParam(":senha", $senha);
           $consulta->bindParam(":cep", $cep);
           $consulta->bindParam(":endereco", $endereco);
           $consulta->bindParam(":bairro", $bairro);
           $consulta->bindParam(":cidade_id", $cidade_id);
-          $consulta->bindParam(":foto", $arquivo);
           $consulta->bindParam(":telefone", $telefone);
           $consulta->bindParam(":celular", $celular);
           $consulta->bindParam(":numero_resid", $numero_resid);
@@ -113,35 +110,17 @@
           $consulta->bindParam(":cnpj", $cnpj);
           $consulta->bindParam(":inscricao_estadual", $inscricao_estadual);
           $consulta->bindParam(":ativo", $ativo);
+          $consulta->bindParam(":siteJ", $siteJ);
+          $consulta->bindParam(":complemento", $complemento);
+          $consulta->bindParam(":genero_id", $genero_id);
           $consulta->bindParam(":id", $id);
           
       }
       //executar e verificar se deu certo
         if ( $consulta->execute() ) {
-                //verificar se o arquivo nao está sendo enviado 
-            if( empty($_FILES["foto"]["type"]) and (!empty($id)) ){
-                //a capa deve estar vazia e ID nao estiver vazio
                 //gravar no banco 
                 $pdo->commit();
                 echo "<script>alert('Cliente Salvo com Sucesso!');location.href='listagem/cliente';</script>";
-
-            }
-            //veririfcar tipo imagem
-            if($_FILES["foto"]["type"]  !=  "image/jpeg"){
-                echo "<script>alert('Seleciona uma imagem Jpeg');history.back();</script>";
-                exit;
-            }
-            if ( move_uploaded_file($_FILES["foto"]["tmp_name"], "../fotos/".$_FILES["foto"]["name"])){
-
-                $pastaFotos = "../fotos/";
-                $nome = $arquivo;
-                $imagem = $_FILES["foto"]["name"];
-                redimensionarImagem($pastaFotos,$imagem,$nome);
-
-                //gravar no banco - se tudo deu certo
-                $pdo->commit();
-                echo "<script>alert('Cliente Salvo com Sucesso!');location.href='listagem/cliente';</script>";
-            }
 
             //erro ao gravar
             echo "<script>alert('Erro ao gravar no servidor');history.back();</script>";
@@ -150,4 +129,4 @@
             echo '<script>alert("Erro ao salvar");history.back();</script>';
             exit;
         }
-  }
+   }

@@ -12,8 +12,8 @@
   
   if ( !isset ( $id ) ) $id = "";
 
-   $email = $senha = $cep = $telefone = $celular = $foto = $pessoaFJ = $nomeFantasia = $razaoSocial = $cnpj = $inscricao_estadual =  $estado = $cidade = $endereco = $bairro = 
-   $numero_resid = $cidade_id = $ativo = $siteJ = "";
+   $email = $senha = $cep = $telefone = $celular = $pessoaFJ = $nomeFantasia = $razaoSocial = $cnpj = $inscricao_estadual =  $estado = $cidade = $endereco = $bairro = 
+   $numero_resid = $cidade_id = $ativo = $siteJ = $complemento =  $genero_id = "";
 
   if ( !empty ( $id ) ) {
 	  //selecionar os dados do cliente
@@ -34,8 +34,6 @@
 	  $senha                   = $dados->senha;
 	  $telefone                = $dados->telefone;
 	  $celular                 = $dados->celular;
-	  $foto                    = $dados->foto;
-	  $sexo                    = $dados->sexo;
 	  $pessoaFJ                = $dados->pessoaFJ;
 	  $nomeFantasia            = $dados->nomeFantasia;
 	  $razaoSocial             = $dados->razaoSocial;
@@ -46,11 +44,12 @@
 	  $cidade                  = $dados->cidade;
 	  $endereco                = $dados->endereco;
 	  $bairro                  = $dados->bairro;
-	  //$complemento             = $dados->complemento;
+	  $complemento             = $dados->complemento;
 	  $numero_resid            = $dados->numero_resid;
 	  $cidade_id               = $dados->cidade_id;
       $siteJ                   = $dados->siteJ;
 	  $ativo                   = $dados->ativo;
+	  $genero_id               = $dados->genero_id;
 	  
 
   }
@@ -74,8 +73,8 @@
 							<input type="text" name="id" id="id" class="form-control" readonly value="<?=$id;?>" placeholder="Automatico">
 						</div>
                         <div class="mb-3 col-12 col-md-2">
-							<label for="pessoaFJ">Pessoa F/J</label>
-							<input type="text" name="pessoaFJ" id="pessoaFJ" class="form-control" value="<?=$pessoaFJ;?>" placeholder="F ou J">
+							<label for="pessoaFJ">pessoaF/J:</label>
+							<input type="text" name="pessoaFJ" id="pessoaFJ" class="form-control"  value="<?=$pessoaFJ;?>" placeholder="F ou J">
 						</div>
                         <div class="mb-3 col-12 col-md-10">
 							<label for="razaoSocial">Razão Social: </label>
@@ -86,18 +85,23 @@
 							<input type="text" class="form-control" id="nomeFantasia" required name="nomeFantasia">
 						</div>
                         
-						<div class="mb-3 col-12 col-md-4 mt-2">
-							<label for="foto">Foto: </label>
-							<input type="file" name="foto" id="foto" class="form-control" >
-							<input type="hidden" name="foto" value="<?=$foto?>" class="form-control">
-								<?php  
-									if( !empty($foto)){
-										$foto = "<img src='../fotos/".$foto."p.jpg' alt='".$primeiro_nome."' width='150px'>";
-									} else{
-										$foto = "<img src='img/default.jpg' width='150px'>";
-									}
-								?>
-							<div><?php echo $foto;?></div>
+						<div class="mb-3 col-12 col-md-4">
+							<label class="form-label" for="genero_id">Gênero:</label>
+							<select name="genero_id" id="genero_id" class="form-control" required data-parsley-required-message="selecione uma opção">
+                                <option value="<?=$genero_id;?>">Selecione o Gênero</option>
+                                    <?php
+                                        $sql = "SELECT * FROM genero ORDER BY id";
+                                        $consulta = $pdo->prepare($sql);
+                                        $consulta->execute();
+
+                                        while ($d = $consulta->fetch(PDO::FETCH_OBJ) ) {
+                                        //separar os dados
+                                            $id   = $d->id;
+                                            $genero = $d->genero;
+                                            echo '<option value="'.$id.'">'.$genero.'</option>';
+                                        }                    
+                                    ?>
+                            </select>
 						</div>
 
 						<div class="mb-3 col-12 col-md-4 mt-2">
@@ -163,12 +167,12 @@
 							<label for="numero_resid">Numero:</label>
 							<input type="text" name="numero_resid" id="numero_resid" class="form-control" value="<?=$numero_resid;?>" placeholder="Numero da Residencia">
 						</div>
-						<!-- <div class="mb-3 col-12 col-md-3">
+						 <div class="mb-3 col-12 col-md-3 mt-2">
 							<label for="complemento">Complemento:</label>
-							<input type="text" name="complemento" id="complemento" class="form-control" value="<?//=$complemento;?>">  style="display: none;"
-						</div> -->
-						<div class="mb-3 col-12 col-md-3 mt-2">
-							<label for="ativo">Ativo:</label>
+							<input type="text" name="complemento" id="complemento" class="form-control" value="<?=$complemento;?>">
+						</div> 
+						<div class="mb-3 col-12 col-md-2 mt-2">
+							<label for="ativo">Ativo</label>
 							<input type="text" name="ativo" id="ativo" class="form-control" value="<?=$ativo;?>" placeholder="S ou N">
 						</div><br>
 					</div><br>
@@ -194,7 +198,6 @@
 
 	$(document).ready(function(){ 
 		$('#cep').mask('00000-000');
-		$('#cpf').mask('000.000.000-00');
 		$("#telefone").mask("(00) 0000-0000");
 		$("#celular").mask("(00) 00000-0000");
 		$("#cnpj").mask("00.000.000/0000-00");

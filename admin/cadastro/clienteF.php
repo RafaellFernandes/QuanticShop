@@ -12,8 +12,8 @@
   
   if ( !isset ( $id ) ) $id = "";
 
-  $primeiro_nome = $sobrenome = $cpf = $data_nascimento = $email = $senha = $cep = $telefone = $celular = $foto = $sexo = 
-  $pessoaFJ =  $estado = $cidade = $endereco = $bairro = $complemento = $numero_resid = $cidade_id = $ativo = "";
+  $primeiro_nome = $sobrenome = $cpf = $data_nascimento = $email = $senha = $cep = $telefone = $celular = $foto =
+  $pessoaFJ =  $estado = $cidade = $endereco = $bairro = $complemento = $numero_resid = $cidade_id = $ativo = $genero_id = "";
 
   if ( !empty ( $id ) ) {
 	  //selecionar os dados do cliente
@@ -40,7 +40,6 @@
 	  $telefone                = $dados->telefone;
 	  $celular                 = $dados->celular;
 	  $foto                    = $dados->foto;
-	  $sexo                    = $dados->sexo;
 	  $pessoaFJ                = $dados->pessoaFJ;
 	  $cep                     = $dados->cep;
 	  $estado                  = $dados->estado;
@@ -51,7 +50,7 @@
 	  $numero_resid            = $dados->numero_resid;
 	  $cidade_id               = $dados->cidade_id;
 	  $ativo                   = $dados->ativo;
-	  
+	  $genero_id               = $dados->genero_id;
 
   }
 ?>
@@ -69,29 +68,20 @@
 			<form name="formCadastro" method="post" action="salvar/clienteF" data-parsley-validate enctype="multipart/form-data"><!---->
 				<p class="card-subtitle text-muted">Todos os Campos são Obrigatórios</p><br>
 					<div class="row">
-						<div class="mb-3 col-12 col-md-2">
-							<label for="pessoaFJ">Pessoa F/J </label><br>
-							<input type="radio" name="pessoaFJ" id="pessoaFJ" value="F" checked>
-							<label class="form-check-label" for="pessoaFJ">
-								 Fisica
-							</label> 
-							<input type="hidden" name="pessoaFJ" value="<?=$pessoaFJ?>">
-							<input type="radio" name="pessoaFJ" id="pessoaFJ" value="J">
-							<label class="form-check-label" for="pessoaFJ">
-								 Juridica
-							</label>
-							<input type="hidden" name="pessoaFJ" value="<?=$pessoaFJ?>">
-						</div>	
+						<div class="mb-3 col-12 col-md-2 mt-2">
+							<label for="pessoaFJ">pessoaFJ:</label>
+							<input type="text" name="pessoaFJ" id="pessoaFJ" class="form-control"  value="<?=$pessoaFJ;?>" placeholder="F ou J">
+						</div>
 						<div class="mb-3 col-12 col-md-2" style="display: none;">
 							<label for="id">ID:</label>
 							<input type="text" name="id" id="id" class="form-control" readonly value="<?=$id;?>" placeholder="Automatico">
 						</div>
-						<div class="mb-3 col-12 col-md-5">
+						<div class="mb-3 col-12 col-md-5 mt-2">
 							<label for="primeiro_nome">Primeiro Nome:</label>
 							<input type="text" name="primeiro_nome" id="primeiro_nome" class="form-control" required data-parsley-required-message="Preencha o Primeiro Nome" 
 							value="<?=$primeiro_nome;?>" placeholder="Digite o Primeiro Nome">
 						</div>
-						<div class="mb-3 col-12 col-md-5">
+						<div class="mb-3 col-12 col-md-5 mt-2">
 							<label for="sobrenome">Sobrenome:</label>
 							<input type="text" name="sobrenome" id="sobrenome" class="form-control" required data-parsley-required-message="Preencha o Sobrenome" 
 							value="<?=$sobrenome;?>" placeholder="Digite o Sobrenome">
@@ -100,28 +90,27 @@
 							<label for="cpf">CPF:</label>
 							<input type="text" name="cpf" id="cpf" class="form-control" required data-parsley-required-message="Preencha o cpf" value="<?=$cpf;?>" onblur="verificarCpf(this.value)" placeholder="Digite seu CPF">
 						</div>	
-						<!-- <div class="col-12 col-md-4">
-							<label for="sexo">Gênero:</label>
-							<input type="text" name="sexo" id="sexo" class="form-control" value="<?//=$sexo;?>" placeholder="Gênero">
-						</div>  -->
 						<div class="mb-3 col-12 col-md-4">
-							<label class="form-label" for="sexo">Gênero:</label>
-							<select id="sexo[]" class="form-control">
-								<option>...</option>
-								<option name="sexo" id="sexo" class="form-control" value="<?=$sexo;?>">Mulher Cisgênero</option>
-								<option name="sexo" id="sexo" class="form-control" value="<?=$sexo;?>">Homem Cisgênero</option>
-								<option name="sexo" id="sexo" class="form-control" value="<?=$sexo;?>">Mulher transgênero</option>
-								<option name="sexo" id="sexo" class="form-control" value="<?=$sexo;?>">Homem transgênero</option>
-								<option name="sexo" id="sexo" class="form-control" value="<?=$sexo;?>">Travesti</option>
-								<option name="sexo" id="sexo" class="form-control" value="<?=$sexo;?>">Gender Fluid</option>
-								<option name="sexo" id="sexo" class="form-control" value="<?=$sexo;?>">Não-Binário</option>
-								<option name="sexo" id="sexo" class="form-control" value="<?=$sexo;?>">Prefiro não dizer</option>
-								<option name="sexo" id="sexo" class="form-control" value="<?=$sexo;?>">Outro</option>
-              				</select>
+							<label class="form-label" for="genero_id">Gênero:</label>
+							<select name="genero_id" id="genero_id" class="form-control" required data-parsley-required-message="selecione uma opção">
+                                <option value="<?=$genero_id;?>">Selecione o Gênero</option>
+                                    <?php
+                                        $sql = "SELECT * FROM genero ORDER BY id";
+                                        $consulta = $pdo->prepare($sql);
+                                        $consulta->execute();
+
+                                        while ($d = $consulta->fetch(PDO::FETCH_OBJ) ) {
+                                        //separar os dados
+                                            $id   = $d->id;
+                                            $genero = $d->genero;
+                                            echo '<option value="'.$id.'">'.$genero.'</option>';
+                                        }                    
+                                    ?>
+                            </select>
 						</div>
 						<div class="mb-3 col-12 col-md-4 mt-2">
 							<label for="data_nascimento">Data de Nascimento:</label>
-							<input type="date" name="data_nascimento" id="data_nascimento" class="form-control" required data-parsley-required-message="Preencha a data de nascimento" 
+							<input type="text" name="data_nascimento" id="data_nascimento" class="form-control" required data-parsley-required-message="Preencha a data de nascimento" 
 							placeholder="Ex: 11/12/1990" value="<?=$data_nascimento;?>">
 						</div>
 						<div class="mb-3 col-12 col-md-4 mt-2">
@@ -164,7 +153,7 @@
 							<label for="cep">CEP:</label>
 							<input type="text" name="cep" id="cep" class="form-control" required data-parsley-required-message="Preencha o CEP" value="<?=$cep;?>" placeholder="Digite o CEP da Sua Cidade">
 						</div>
-						<div class="mb-3 col-12 col-md-2 mt-2"  style="display: none;" >
+						<div class="mb-3 col-12 col-md-2 mt-2"  >
 							<label for="cidade_id">ID Cidade</label>
 							<input type="text" name="cidade_id" id="cidade_id" class="form-control" required data-parsley-required-message="Preencha a Cidade" readonly value="<?=$cidade_id;?>">
 						</div>

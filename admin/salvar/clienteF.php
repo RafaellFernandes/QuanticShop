@@ -14,8 +14,8 @@
     include "../admin/config/conexao.php";
 
   	//recuperar os dados do formulario
-    $id = $primeiro_nome = $sobrenome = $cpf  = $data_nascimento = $email = $senha = $cep = $telefone = $celular = $foto = $sexo = 
-    $pessoaFJ = $estado = $cidade = $endereco = $bairro = $complemento = $numero_resid = $cidade_id = $ativo = "";
+    $id = $primeiro_nome = $sobrenome = $cpf  = $data_nascimento = $email = $senha = $cep = $telefone = $celular = $foto = 
+    $pessoaFJ = $estado = $cidade = $endereco = $bairro = $complemento = $numero_resid = $cidade_id = $ativo = $genero_id = "";
       
       //print_r($_POST);
       //print_r($_FILES);
@@ -60,8 +60,8 @@
           //$Senha = password_hash($Senha, PASSWORD_DEFAULT);
           $senha = password_hash($senha, PASSWORD_BCRYPT);
           //inserir se o id estiver em branco
-          $sql = "INSERT INTO cliente (primeiro_nome, sobrenome, cpf, data_nascimento, email, senha, cep, endereco, complemento, bairro, cidade_id, foto, telefone, celular, numero_resid, pessoaFJ, sexo, cidade, estado, ativo) 
-          VALUES (:primeiro_nome, :sobrenome, :cpf, :data_nascimento, :email, :senha, :cep, :endereco, :complemento, :bairro, :cidade_id, :foto, :telefone, :celular, :numero_resid, :pessoaFJ, :sexo, :cidade, :estado, :ativo) ";
+          $sql = "INSERT INTO cliente (primeiro_nome, sobrenome, cpf, data_nascimento, email, senha, cep, endereco, complemento, bairro, cidade_id, foto, telefone, celular, numero_resid, pessoaFJ, cidade, estado, ativo, genero_id) 
+          VALUES (:primeiro_nome, :sobrenome, :cpf, :data_nascimento, :email, :senha, :cep, :endereco, :complemento, :bairro, :cidade_id, :foto, :telefone, :celular, :numero_resid, :pessoaFJ, :cidade, :estado, :ativo, :genero_id) ";
           $consulta = $pdo->prepare($sql);
           $consulta->bindParam(":primeiro_nome", $primeiro_nome);
           $consulta->bindParam(":sobrenome", $sobrenome);
@@ -79,10 +79,10 @@
           $consulta->bindParam(":celular", $celular);
           $consulta->bindParam(":numero_resid", $numero_resid);
           $consulta->bindParam(":pessoaFJ", $pessoaFJ);
-          $consulta->bindParam(":sexo", $sexo);
           $consulta->bindParam(":cidade", $cidade);
           $consulta->bindParam(":estado", $estado);
           $consulta->bindParam(":ativo", $ativo);
+          $consulta->bindParam(":genero_id", $genero_id);
         
           
           
@@ -95,8 +95,8 @@
                     
           $sql = "UPDATE cliente SET primeiro_nome = :primeiro_nome, sobrenome = :sobrenome, cpf = :cpf, data_nascimento = :data_nascimento,
            email = :email, senha = :senha, cep = :cep, endereco = :endereco, complemento = :complemento, bairro = :bairro, cidade_id = :cidade_id, foto = :foto, 
-           telefone = :telefone, celular = :celular,numero_resid = :numero_resid, pessoaFJ = :pessoaFJ, sexo = :sexo,
-            cidade = :cidade, estado = :estado, ativo = :ativo WHERE id = :id";
+           telefone = :telefone, celular = :celular,numero_resid = :numero_resid, pessoaFJ = :pessoaFJ,
+            cidade = :cidade, estado = :estado, ativo = :ativo, genero_id = :genero_id WHERE id = :id";
           $consulta = $pdo->prepare($sql);
           $consulta->bindParam(":primeiro_nome", $primeiro_nome);
           $consulta->bindParam(":sobrenome", $sobrenome);
@@ -114,10 +114,10 @@
           $consulta->bindParam(":celular", $celular);
           $consulta->bindParam(":numero_resid", $numero_resid);
           $consulta->bindParam(":pessoaFJ", $pessoaFJ);
-          $consulta->bindParam(":sexo", $sexo);
           $consulta->bindParam(":cidade", $cidade);
           $consulta->bindParam(":estado", $estado);
           $consulta->bindParam(":ativo", $ativo);
+          $consulta->bindParam(":genero_id", $genero_id);
           $consulta->bindParam(":id", $id);
           
       }
