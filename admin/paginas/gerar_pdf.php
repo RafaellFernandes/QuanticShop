@@ -36,7 +36,7 @@
 	use Dompdf\Dompdf;
 
 	// include autoloader
-	require_once("../pdf/autoload.inc.php");
+	require_once("../");
 
 	//Criando a Instancia
 	$dompdf = new DOMPDF();
