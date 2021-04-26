@@ -10,35 +10,35 @@
 			<div class="card">
 				<div class="card-header">
 					<div class="float-right">
-						<a href="cadastro/cidade" class="btn btn-info">Relatório</a>
+						<a href="javascript:window.print()" class="btn btn-primary">Imprimir</a>
+                        <a href="cadastro/cidade" class="btn btn-danger">Salvar PDF</a>
 					</div>
-					<h4>Lista</h4>
+					<h4>Relatório</h4>
 					<h6 class="card-subtitle text-muted">Financeiro</h6>
 				</div>
 				<table class="table table-bordered table-hover table-striped" id="tabela">
 					<thead>
 						<tr>
 							<th>Cidade</th>
-							<th>Estado</th>
 							<th>Ações</th>
 						</tr>
 					</thead>
 					<tbody><br>
 						<?php
-							//buscar as cidades alfabeticamente
-							$sql = "SELECT * FROM cidade ORDER BY cidade";
+							//buscar as marcas alfabeticamente
+							$sql = "SELECT * FROM marca ORDER BY id";
 							$consulta = $pdo->prepare($sql);
 							$consulta->execute();
 
 							while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
 								//separar os dados
 								$id 		= $dados->id;
-								$cidade 	= $dados->cidade;
-								$estado 	= $dados->estado;
+								$nome_marca 	= $dados->nome_marca;
+							
 								//mostrar na tela
 								echo '<tr>
-										<td>'.$cidade.'</td>
-										<td>'.$estado.'</td>
+										<td>'.$nome_marca.'</td>
+										
 										<td class="table-action text-center" >
 											<a href="cadastro/cidade/'.$id.'" alt="Editar" title="Editar">
 												<i class="align-middle"  data-feather="edit-2"></i>
