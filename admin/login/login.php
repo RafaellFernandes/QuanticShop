@@ -69,7 +69,7 @@
 		<div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
 			<div class="d-table-cell align-middle">
 				<div class="text-center mt-4">
-					<h1 class="h2">Bem Vindo de Volta</h1>
+					<h1 class="h2">Seja Bem Vindo</h1>
 					<p class="lead">Entre na sua Conta para Continuar</p>
 				</div>
 				<div class="card">
