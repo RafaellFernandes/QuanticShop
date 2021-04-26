@@ -137,12 +137,11 @@
               <i class="align-middle" data-feather="check-circle"></i> <span class="align-middle">Relatório</span>
             </a>
 						<ul id="rel" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
-							<li class="sidebar-item"><a class="sidebar-link" href="#">Relatório 1</a></li>
-              <li class="sidebar-item"><a class="sidebar-link" href="#">Relatório 2</a></li>
-              <li class="sidebar-item"><a class="sidebar-link" href="#">Relatório 3</a></li>
-              <li class="sidebar-item"><a class="sidebar-link" href="#">Relatório 4</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/controle">Controle</a></li>
+              <li class="sidebar-item"><a class="sidebar-link" href="relatorios/financeiro">Financeiro</a></li>
+              <li class="sidebar-item"><a class="sidebar-link" href="relatorios/venda">Venda</a></li>
+              <li class="sidebar-item"><a class="sidebar-link" href="relatorios/produtoEstoque">Produto Estoque</a></li>
               <li class="sidebar-item"><a class="sidebar-link" href="#">Relatório 5</a></li>
-              <li class="sidebar-item"><a class="sidebar-link" href="#">Relatório 6</a></li>
 							
 						</ul>
 					</li>
