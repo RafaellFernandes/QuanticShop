@@ -11,7 +11,7 @@ ini_set('display_startup_errors',1);
 error_reporting(E_ALL);
 
 //verificar se existem dados no POST
-if ( $POST ) {
+if ( $_POST ) {
 
     include "../admin/validacao/functions.php";
     include "../admin/config/conexao.php";
@@ -53,7 +53,7 @@ if ( $POST ) {
         $consulta->bindParam(":estoque_minimo", $estoque_minimo);
         $consulta->bindParam(":produto_id", $produto_id);
         
-        } 
+    } else { 
     
         $sql = "UPDATE estoque SET qtd_produto = :qtd_produto, valor = :valor, data_atualizacao = :data_atualizacao, estoque_minimo = :estoque_minimo, produto_id = :produto_id WHERE id = :id ";
         $consulta = $pdo->prepare($sql);
@@ -73,4 +73,4 @@ if ( $POST ) {
     echo "<script>alert('Erro ao Salvar!');history.back();</script>";
     exit;
 }
-
+}
