@@ -9,7 +9,7 @@
 
   	//iniciar as variaveis
 	  $nomeFantasia = $razaoSocial = $cnpj = $cep = $endereco = $cidade_id = $telefone = $cidade = $estado = $email = $inscricaoEstadual = 
-	  $celular = $bairro = $numero_resid = $ativo = "";
+	  $celular = $bairro = $numero_resid = $ativo = $complemento = $siteTransp = "";
   
 	//verificar se existe um id
 	if( !empty ( $id ) ) {
@@ -41,6 +41,8 @@
 	$bairro         	 = $dados->bairro;
 	$numero_resid        = $dados->numero_resid;
 	$ativo           	 = $dados->ativo;
+	$complemento         = $dados->complemento;
+	$siteTransp          = $dados->siteTransp;
 
 	if( empty ( $dados->id ) ) {
 	    echo "<p class='alert alert-danger'> A Transportadora não existe! </p>";
@@ -102,6 +104,11 @@
 							<input type="email" name="email" id="email" class="form-control" required data-parsley-required-message="Preencha o E-mail"  placeholder="email@exemplo.com.br"
 							onblur="confirmarEmail(this.value)" value="<?=$email;?>">
 						</div>
+						<div class="mb-3 col-12 col-md-4 mt-2">
+							<label for="siteTransp">Site:</label>
+							<input type="text" name="siteTransp" id="siteTransp" class="form-control" required data-parsley-required-message="Preencha o site" 
+							 placeholder="www.exemplo.com" value="<?=$siteTransp;?>">
+						</div>
 						<div class="col-12 col-md-4 mt-2">
 							<label for="cep">CEP:</label>
 							<input type="text" name="cep" id="cep" class="form-control" required data-parsley-required-message="Preencha o CEP" 
@@ -131,6 +138,10 @@
 						<div class="mb-3 col-12 col-md-6 mt-2">
 							<label for="numero_resid">Numero:</label>
 							<input type="text" name="numero_resid" id="numero_resid" class="form-control" value="<?=$numero_resid;?>" placeholder="Número">
+						</div>
+						<div class="mb-3 col-12 col-md-3 mt-2">
+							<label for="complemento">Complemento</label>
+							<input type="text" name="complemento" id="complemento" class="form-control" value="<?=$complemento;?>" placeholder="Casa ou Apto.">
 						</div>
 						
 					</div><br>

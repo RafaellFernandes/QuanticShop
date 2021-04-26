@@ -16,7 +16,7 @@
 
   	//recuperar os dados do formulario
   	$id = $nomeFantasia = $razaoSocial = $cnpj = $cep = $endereco = $cidade_id = $telefone = $cidade = $estado = $email = $inscricaoEstadual = 
-      $celular = $bairro = $numero_resid = $ativo = "";
+      $celular = $bairro = $numero_resid = $ativo = $complemento = $siteFornecedor = "";
       
       //print_r($_POST);
       //print_r($_FILES);
@@ -46,8 +46,8 @@
       if(empty($id)){
           
           //inserir se o id estiver em branco
-          $sql = "INSERT INTO fornecedor (nomeFantasia, razaoSocial, cnpj, inscricaoEstadual, telefone, celular, email, endereco, cep, cidade_id, cidade, estado, bairro, numero_resid, ativo) 
-          VALUES(:nomeFantasia, :razaoSocial, :cnpj, :inscricaoEstadual, :telefone, :celular, :email, :endereco, :cep, :cidade_id, :cidade, :estado, :bairro, :numero_resid, :ativo)";
+          $sql = "INSERT INTO fornecedor (nomeFantasia, razaoSocial, cnpj, inscricaoEstadual, telefone, celular, email, endereco, cep, cidade_id, cidade, estado, bairro, numero_resid, ativo, complemento, siteFornecedor) 
+          VALUES(:nomeFantasia, :razaoSocial, :cnpj, :inscricaoEstadual, :telefone, :celular, :email, :endereco, :cep, :cidade_id, :cidade, :estado, :bairro, :numero_resid, :ativo, :complemento, :siteFornecedor)";
           $consulta = $pdo->prepare($sql);
           $consulta->bindParam(":nomeFantasia", $nomeFantasia);
           $consulta->bindParam(":razaoSocial", $razaoSocial);
@@ -64,13 +64,15 @@
           $consulta->bindParam(":bairro", $bairro);
           $consulta->bindParam(":numero_resid", $numero_resid);
           $consulta->bindParam(":ativo", $ativo);
+          $consulta->bindParam(":complemento", $complemento);
+          $consulta->bindParam(":siteFornecedor", $siteFornecedor);
           
       } else {
           //update se o id estiver preenchido
           //qual arquivo sera gravado
                     
           $sql = "UPDATE fornecedor SET nomeFantasia = :nomeFantasia, razaoSocial = :razaoSocial, cnpj = :cnpj, telefone = :telefone, celular = :celular, email = :email, cep = :cep,
-           endereco = :endereco, cidade_id = :cidade_id, cidade = :cidade, estado = :estado, bairro = :bairro, numero_resid = :numero_resid, ativo = :ativo WHERE id = :id ";
+           endereco = :endereco, cidade_id = :cidade_id, cidade = :cidade, estado = :estado, bairro = :bairro, numero_resid = :numero_resid, ativo = :ativo, complemento = :complemento, siteFornecedor = :siteFornecedor WHERE id = :id ";
           $consulta = $pdo->prepare($sql);
           $consulta->bindParam(":nomeFantasia", $nomeFantasia);
           $consulta->bindParam(":razaoSocial", $razaoSocial);
@@ -87,6 +89,8 @@
           $consulta->bindParam(":bairro", $bairro);
           $consulta->bindParam(":numero_resid", $numero_resid);
           $consulta->bindParam(":ativo", $ativo);
+          $consulta->bindParam(":complemento", $complemento);
+          $consulta->bindParam(":siteFornecedor", $siteFornecedor);
           $consulta->bindParam(":id",$id);
           
       }

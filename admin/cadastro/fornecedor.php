@@ -7,7 +7,7 @@
   if ( !isset ( $id ) ) $id = "";
 
   $nomeFantasia = $razaoSocial = $cnpj = $cep = $endereco = $cidade_id = $telefone = $cidade = $estado = $email = $inscricaoEstadual = 
-  $celular = $bairro = $numero_resid = $ativo = "";
+  $celular = $bairro = $numero_resid = $ativo = $complemento = $siteFornecedor = "";
 
 if(!empty($id)){
     //selecionar dados
@@ -36,6 +36,8 @@ if(!empty($id)){
 	$bairro         	 = $dados->bairro;
 	$numero_resid        = $dados->numero_resid;
 	$ativo           	 = $dados->ativo;
+	$complemento         = $dados->complemento;
+	$siteFornecedor      = $dados->siteFornecedor;
    
 	if(empty($dados->id)){
         echo "<p class='alert alert-danger'> O Fornecedor não existe! </p>";
@@ -97,6 +99,11 @@ if(!empty($id)){
 							<input type="email" name="email" id="email" class="form-control" required data-parsley-required-message="Preencha o E-mail"  placeholder="email@exemplo.com.br"
 							onblur="confirmarEmail(this.value)" value="<?=$email;?>">
 						</div>
+						<div class="mb-3 col-12 col-md-4 mt-2">
+							<label for="siteFornecedor">Site:</label>
+							<input type="text" name="siteFornecedor" id="siteFornecedor" class="form-control" required data-parsley-required-message="Preencha o site" 
+							 placeholder="www.exemplo.com" value="<?=$siteFornecedor;?>">
+						</div>
 						<div class="col-12 col-md-4 mt-2">
 							<label for="cep">CEP:</label>
 							<input type="text" name="cep" id="cep" class="form-control" required data-parsley-required-message="Preencha o CEP" 
@@ -123,10 +130,10 @@ if(!empty($id)){
 							<label for="bairro">Bairro:</label>
 							<input type="text" name="bairro" id="bairro" class="form-control" value="<?=$bairro;?>" placeholder="Nome do Bairro">
 						</div>
-						<!-- <div class="mb-3 col-12 col-md-3 mt-2">
+						 <div class="mb-3 col-12 col-md-3 mt-2">
 							<label for="complemento">Complemento</label>
-							<input type="text" name="complemento" id="complemento" class="form-control" value="<?//=$complemento;?>" placeholder="Número">
-						</div> -->
+							<input type="text" name="complemento" id="complemento" class="form-control" value="<?=$complemento;?>" placeholder="Complemento">
+						</div>
 						<div class="mb-3 col-12 col-md-6 mt-2">
 							<label for="numero_resid">Numero:</label>
 							<input type="text" name="numero_resid" id="numero_resid" class="form-control" value="<?=$numero_resid;?>" placeholder="Número">
