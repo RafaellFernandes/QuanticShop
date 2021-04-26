@@ -58,16 +58,16 @@ $qtd_produto = $valor = $data_atualizacao = $estoque_minimo = $produto_id = $nom
                         <div class="col-12 col-md-4">
                             <label for="produto_id">ID Produto</label>
                             <select name="produto_id" id="produto_id" class="form-control" required data-parsley-required-message="selecione uma opção">
-                                <option value="<?=$produto_id;?>"><?=$nome_produto;?></option>
+                                <option value="<?=$produto_id;?>"></option>
                                     <?php
-                                        $sql = "SELECT * FROM departamento ORDER BY nome_dept";
+                                        $sql = "SELECT * FROM produto ORDER BY nome_produto";
                                         $consulta = $pdo->prepare($sql);
                                         $consulta->execute();
 
                                         while ($d = $consulta->fetch(PDO::FETCH_OBJ) ) {
                                         //separar os dados
                                             $id   = $d->id;
-                                            $nome_produto = $d->nome_dept;
+                                            $nome_produto = $d->nome_produto;
                                             echo '<option value="'.$id.'">'.$nome_produto.'</option>';
                                         }                    
                                     ?>
