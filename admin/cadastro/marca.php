@@ -51,12 +51,19 @@
 							value="<?=$nome_marca;?>">
 						</div>
 					</div><br>
-					<button type="submit" class="btn btn-success margin" alt="Salvar" title="Salvar">
-						<!--<i class="fas fa-check"></i>--> Salvar Dados
-					</button>
-					<div class="float-right">
-						<a href="listagem/marca" class="btn btn-primary">Listar Registros</a>
-					</div>
+
+					<div class="row g-2">
+                        <div class="col-sm-4 mt-4">
+							<button type="submit" class="btn btn-success margin" alt="Salvar" title="Salvar">
+								Salvar Dados
+							</button>
+                        </div>
+                        <div class="col-sm">
+                            <div class="float-right mt-3 ">
+                                <a href="listagem/marca" class="btn btn-primary">Listar Registros</a> 
+                            </div> 
+                        </div>
+                    </div>
 				</form>
 			</div>
 		</div>

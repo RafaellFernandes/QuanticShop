@@ -30,6 +30,7 @@ if ( !empty ( $id ) ) {
 }
 //***********************************************
 ?>
+
 <div class="container-fluid p-0">
     <div class="col-md-12">
         <div class="card">
@@ -56,12 +57,18 @@ if ( !empty ( $id ) ) {
                             value="<?=$estado;?>" placeholder="UF">
                         </div>
                     </div><br>
-                    <button type="submit" class="btn btn-success margin">
-                        Salvar Dados
-                    </button>   
-                    <div class="float-right">
-                        <a href="listagem/cidade" class="btn btn-primary">Listar Registros</a> 
-                    </div>  
+                    <div class="row g-2">
+                        <div class="col-sm-4 mt-4">
+                            <button type="submit" class="btn btn-success margin">
+                                <!--<i class="fas fa-check"></i>--> Salvar Dados
+                            </button>
+                        </div>
+                        <div class="col-sm">
+                            <div class="float-right mt-3 ">
+                                <a href="listagem/cidade" class="btn btn-primary"><!--<i class="fas fa-bars"></i>-->Listar Registros</a> 
+                            </div> 
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

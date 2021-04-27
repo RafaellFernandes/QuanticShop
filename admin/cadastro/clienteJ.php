@@ -176,12 +176,18 @@
 							<input type="text" name="ativo" id="ativo" class="form-control" value="<?=$ativo;?>" placeholder="S ou N">
 						</div><br>
 					</div><br>
-					<button type="submit" class="btn btn-success margin">
-						Salvar Dados
-					</button>
-					<div class="float-right">
-						<a href="listagem/cliente" class="btn btn-primary">Listar Registros</a> 
-					</div>  
+					<div class="row g-2">
+                        <div class="col-sm-4 mt-4">
+							<button type="submit" class="btn btn-success margin">
+								Salvar Dados
+							</button>
+                        </div>
+                        <div class="col-sm">
+                            <div class="float-right mt-3 ">
+                                <a href="listagem/cliente" class="btn btn-primary">Listar Registros</a> 
+                            </div> 
+                        </div>
+                    </div>
 					<!-- <button type="button" id="teste" class="btn btn-info margin">
 							<i class="fas fa-check"></i> teste style="display: none;"
 					</button>  -->						

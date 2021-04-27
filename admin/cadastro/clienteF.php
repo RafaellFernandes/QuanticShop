@@ -58,7 +58,7 @@
 <div class="col-md-12">
 	<div class="card">
 		<div class="card-header">
-			<div class="float-right">
+			<div class="mb-2">
 				<a href="cadastro/clienteJ" class="btn btn-primary">Cad. Pessoa Juridica</a> 
 			</div>
 			<h4>Cadastro</h5>
@@ -187,12 +187,18 @@
 						</div>
 						<br>
 					</div><br>
-					<button type="submit" class="btn btn-success margin">
-						<!--<i class="fas fa-check"></i>--> Salvar Dados
-					</button>
-					<div class="float-right">
-						<a href="listagem/cliente" class="btn btn-primary"><!--<i class="fas fa-bars"></i>-->Listar Registros</a> 
-					</div>  
+					<div class="row g-2">
+                        <div class="col-sm-4 mt-4">
+							<button type="submit" class="btn btn-success margin">
+								Salvar Dados
+							</button>
+                        </div>
+                        <div class="col-sm">
+                            <div class="float-right mt-3 ">
+                                <a href="listagem/cliente" class="btn btn-primary">Listar Registros</a> 
+                            </div> 
+                        </div>
+                    </div>
 					<!-- <button type="button" id="teste" class="btn btn-info margin">
 							<i class="fas fa-check"></i> teste
 					</button>  -->

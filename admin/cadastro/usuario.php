@@ -137,12 +137,18 @@ if(!empty($id)){
 							<input type="text" id="numero_resid" name="numero_resid" class="form-control"  value="<?=$cidade_id;?>" placeholder="Numero Residencia">
 						</div> 
 					</div><br>
-					<button type="submit" class="btn btn-success margin">
-						<!--<i class="fas fa-check"></i>--> Salvar Dados
-					</button>
-					<div class="float-right">
-                        <a href="listagem/usuario" class="btn btn-primary"><!--<i class="fas fa-bars"></i>-->Listar Registros</a> 
-                    </div>  
+					<div class="row g-2">
+                        <div class="col-sm-4 mt-4">
+							<button type="submit" class="btn btn-success margin">
+								Salvar Dados
+							</button>
+                        </div>
+                        <div class="col-sm">
+                            <div class="float-right mt-3 ">
+                                <a href="listagem/usuario" class="btn btn-primary">Listar Registros</a> 
+                            </div> 
+                        </div>
+                    </div>
 				</form>
 			</div>
 		</div>
