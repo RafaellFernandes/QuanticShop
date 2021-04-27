@@ -47,12 +47,12 @@
                                 $nome_produto        = $dados->nome_produto;
                                 $valor_unitario      = $dados->valor_unitario;
                                 $valor_unitario      = number_format($valor_unitario,2, '.' , ',');
-                               // $qtd_produto         = $dados->qtd_produto;
-                                //$produto_id          = $dados->produto_id;
-								$marca_id 	         = $dados->marca_id;
-                               // $nome_marca          = $dados->nome_marca;
+                                // $qtd_produto      = $dados->qtd_produto;
+                                //$produto_id        = $dados->produto_id;
+							 	$marca_id 	         = $dados->marca_id;
+                                // $nome_marca       = $dados->nome_marca;
                                 $departamento_id     = $dados->departamento_id;
-                                //$nome_dept           = $dados->nome_dept;
+                                //$nome_dept         = $dados->nome_dept;
                                
 							
 								//mostrar na tela

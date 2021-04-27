@@ -23,7 +23,7 @@
 					 	<input type="text" class="text" name="assunto" id="assunto">
 					</div>
 					<div class="text">
-	                   <textarea name="obs" cols="50" rows="10" id="obs" >Mensagem:</textarea>
+	                   <textarea name="obs" cols="50" rows="10" id="obs" >Mensagem</textarea>
 	                   <div class="form-submit">
 			           <input name="submit" type="submit" id="submit" value="Enviar"><br>
 			           </div>
