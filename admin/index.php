@@ -27,7 +27,7 @@
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
 	<meta charset="utf-8">
@@ -66,8 +66,8 @@
 		<nav id="sidebar" class="sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" href="index.html">
-          <span class="align-middle">AdminKit</span>
-        </a>
+					<span class="align-middle">Quantic Shop</span>
+				</a>
 
 				<ul class="sidebar-nav">
 					<li class="sidebar-header">
@@ -75,59 +75,106 @@
 					</li>
 
 					<li class="sidebar-item active">
-						<a class="sidebar-link" href="index.html">
+						<a class="sidebar-link" href="paginas/home">
 						  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
 						</a>
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-profile.html">
-						  <i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
+						<a class="sidebar-link" href="login/perfil">
+						  <i class="align-middle" data-feather="user"></i> <span class="align-middle">Perfil</span>
 						</a>
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-settings.html">
-						  <i class="align-middle" data-feather="settings"></i> <span class="align-middle">Settings</span>
+						<a class="sidebar-link" href="login/configuracoes">
+						  <i class="align-middle" data-feather="settings"></i> <span class="align-middle">Configurações</span>
 						</a>
 					</li>
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="pages-invoice.html">
-						  <i class="align-middle" data-feather="credit-card"></i> <span class="align-middle">Invoice</span>
+						  <i class="align-middle" data-feather="credit-card"></i> <span class="align-middle">Fatura</span>
 						</a>
 					</li>
 
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-blank.html">
-						  <i class="align-middle" data-feather="book"></i> <span class="align-middle">Blank</span>
-						</a>
+					<li class="sidebar-header">
+						Gerenciamento
 					</li>
 
 					<li class="sidebar-item">
-						<a href="#auth" data-bs-toggle="collapse" class="sidebar-link collapsed">
-						  <i class="align-middle" data-feather="users"></i> <span class="align-middle">Auth</span>
+						<a href="#cadlist" data-bs-toggle="collapse" class="sidebar-link collapsed">
+						  <i class="align-middle" data-feather="file-text"></i> <span class="align-middle">Cadastro</span>
 						</a>
-						<ul id="auth" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
-							<li class="sidebar-item"><a class="sidebar-link" href="pages-sign-in.html">Sign In</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="pages-sign-up.html">Sign Up</a></li>
+						<ul id="cadlist" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
+							<li class="sidebar-item"><a class="sidebar-link" href="cadastro/cidade">Cidade</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="cadastro/clienteF">Cliente Pessoa Fisica</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="cadastro/clienteJ">Cliente Pessoa Juridica</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="cadastro/departamento">Departamentos</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="cadastro/fornecedor">Fornecedor</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="cadastro/marca">Marca</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="cadastro/produto">Produto</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="cadastro/transportadora">Transportadora</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="cadastro/usuario">Usuario</a></li>
+						</ul>
+					</li>
+
+					<li class="sidebar-item">
+						<a href="#cadlist1" data-bs-toggle="collapse" class="sidebar-link collapsed">
+						  <i class="align-middle" data-feather="list"></i> <span class="align-middle">Listagem</span>
+						</a>
+						<ul id="cadlist1" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
+							<li class="sidebar-item"><a class="sidebar-link" href="listagem/cidade">Cidade</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="listagem/cliente">Cliente</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="listagem/departamento">Departamentos</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="listagem/fornecedor">Fornecedor</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="listagem/marca">Marca</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="listagem/produto">Produto</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="listagem/transportadora">Transportadora</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="listagem/usuario">Usuario</a></li>
+						</ul>
+					</li>
+
+					<li class="sidebar-item">
+						<a href="#cadlist2" data-bs-toggle="collapse" class="sidebar-link collapsed">
+						  <i class="align-middle" data-feather="user-x"></i> <span class="align-middle">Inativados</span>
+						</a>
+						<ul id="cadlist2" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
+							<li class="sidebar-item"><a class="sidebar-link" href="#">NULL</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="#">NULL</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="#">NULL</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="#">NULL</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="#">NULL</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="#">NULL</a></li>
 						</ul>
 					</li>
 
 					<li class="sidebar-header">
-						Tools & Components
+						Controle
 					</li>
 					<li class="sidebar-item">
 						<a data-bs-target="#ui" data-bs-toggle="collapse" class="sidebar-link collapsed">
-						  <i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">UI Elements</span>
+						  <i class="align-middle" data-feather="server"></i> <span class="align-middle">Estoque</span>
 						</a>
 						<ul id="ui" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
-							<li class="sidebar-item"><a class="sidebar-link" href="ui-alerts.html">Alerts</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="ui-buttons.html">Buttons</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="ui-cards.html">Cards</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="ui-general.html">General</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="ui-grid.html">Grid</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="ui-typography.html">Typography</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="controleEstoque/estoque">Controle de Estoque</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="">null</a></li>
+						</ul>
+					</li>
+
+					<li class="sidebar-header">
+						Relatórios e Etc
+					</li>
+					<li class="sidebar-item">
+						<a data-bs-target="#ui2" data-bs-toggle="collapse" class="sidebar-link collapsed">
+						  <i class="align-middle" data-feather="file"></i> <span class="align-middle">Relatórios</span>
+						</a>
+						<ul id="ui2" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
+							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/controle">Controle</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/financeiro">Financeiro</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/venda">Venda</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/produtoEstoque">Produto Estoque</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="#">Relatório 5</a></li>
 						</ul>
 					</li>
 
@@ -139,23 +186,7 @@
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="forms-basic-inputs.html">
-              <i class="align-middle" data-feather="check-circle"></i> <span class="align-middle">Forms</span>
-            </a>
-					</li>
-
-					<li class="sidebar-header">
-						Plugins & Addons
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="charts-chartjs.html">
-							<i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Charts</span>
-						</a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="maps-google.html">
-							<i class="align-middle" data-feather="map"></i> <span class="align-middle">Maps</span>
+							<i class="align-middle" data-feather="check-circle"></i> <span class="align-middle">Forms</span>
 						</a>
 					</li>
 				</ul>
@@ -200,8 +231,7 @@
 								<img src="../fotos/<?=$_SESSION["quanticshop"]["foto"];?>p.jpg" class="avatar img-fluid rounded me-1" alt="<?=$_SESSION["quanticshop"]["primeiro_nome"];?>" /> <span class="text-dark"><?=$_SESSION["quanticshop"]["primeiro_nome"];?></span>
 							</a>
 							<div class="dropdown-menu dropdown-menu-end">
-								<a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
-								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
+								<a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Perfil</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="login/configuracoes"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
 								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
@@ -254,22 +284,22 @@
 					<div class="row text-muted">
 						<div class="col-6 text-start">
 							<p class="mb-0">
-								<a href="../home" class="text-muted"><strong>Quantic Shop</strong></a> &copy;
+								<a href="../home" class="text-muted" ><strong>Quantic Shop</strong></a> &copy;
 							</p>
 						</div>
 						<div class="col-6 text-end">
 							<ul class="list-inline">
 								<li class="list-inline-item">
-									<a class="text-muted" href="#">Support</a>
+									<a class="text-muted" href="#">Suporte</a>
 								</li>
 								<li class="list-inline-item">
 									<a class="text-muted" href="#">Help Center</a>
 								</li>
 								<li class="list-inline-item">
-									<a class="text-muted" href="paginas/politicaPrivacidade">Privacy</a>
+									<a class="text-muted" href="paginas/politicaPrivacidade">Privacidade</a>
 								</li>
 								<li class="list-inline-item">
-									<a class="text-muted" href="paginas/termosCondicoes">Terms</a>
+									<a class="text-muted" href="paginas/termosCondicoes">Termos</a>
 								</li>
 							</ul>
 						</div>

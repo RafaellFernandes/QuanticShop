@@ -7,24 +7,11 @@
 ?>
 	<div class="row mb-2 mb-xl-3">
 		<div class="col-auto d-none d-sm-block">
-			<h3><strong>Analytics</strong> Dashboard</h3>
+			<h3>Painel de <strong>Análise</strong></h3>
 		</div>
 	</div>
-	<div class="container-fluid p-0">
-						
-
-						<div class="col-auto ms-auto text-end mt-n1">
-							<nav aria-label="breadcrumb">
-								<ol class="breadcrumb bg-transparent p-0 mt-1 mb-0">
-									<li class="breadcrumb-item"><a href="#">AdminKit</a></li>
-									<li class="breadcrumb-item"><a href="#">Dashboards</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Analytics</li>
-								</ol>
-							</nav>
-						</div>
-					</div>
 					<div class="row">
-						<div class="col-xl-6 col-xxl-5 d-flex">
+						<div class="col-xl-12 col-xxl-5 d-flex">
 							<div class="w-100">
 								<div class="row">
 									<div class="col-sm-6">
@@ -32,36 +19,36 @@
 										<div class="card">
 											<div class="card-body">
 												<h5 class="card-title mb-4">TCC</h5>
-												<h3 class="mt-1 mb-3">
+												<h2 class="mt-1 mb-3">
 													<?php 
 														$date = strtotime("June 14, 2021 7:00 PM"); $remaining = $date - time(); 
 														$days_remaining = floor($remaining / 86400); $hours_remaining = floor(($remaining % 86400) / 3600); echo "Faltam $days_remaining Dias e $hours_remaining Horas Restantes";  
 													?>
-															</h3>
+															</h2>
 												<div class="mb-1">
 													<!-- <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25% </span> -->
-													<span class=" text-warning "><?php $rem = strtotime('2021-06-14 19:00:00') - time(); $day = floor($rem / 86400); $hr = floor(($rem % 86400) / 3600); $min = floor(($rem % 3600) / 60); $sec = ($rem % 60); if($day) echo "$day Days "; if($hr) echo "$hr Hours "; if($min) echo "$min Minutes "; if($sec) echo "$sec Seconds "; echo "Remaining...";?></span>
+													<span class=" text-primary "> <i class="mdi mdi-arrow-bottom-right"></i><?php $rem = strtotime('2021-06-14 19:00:00') - time(); $day = floor($rem / 86400); $hr = floor(($rem % 86400) / 3600); $min = floor(($rem % 3600) / 60); $sec = ($rem % 60); if($day) echo "$day Dias "; if($hr) echo "$hr Horas "; if($min) echo "$min Minutos "; if($sec) echo "$sec Segundos "; echo "Restantes...";?></span>
 												</div>
 											</div>
 										</div>
 
 										<div class="card">
 											<div class="card-body">
-												<h5 class="card-title mb-4">Sales</h5>
+												<h5 class="card-title mb-4">Vendas</h5>
 												<h1 class="mt-1 mb-3">2.382</h1>
 												<div class="mb-1">
 													<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
-													<span class="text-muted">Since last week</span>
+													<span class="text-muted"> desde a semana passada</span>
 												</div>
 											</div>
 										</div>
 										<div class="card">
 											<div class="card-body">
-												<h5 class="card-title mb-4">Visitors</h5>
+												<h5 class="card-title mb-4">Visitantes</h5>
 												<h1 class="mt-1 mb-3">14.212</h1>
 												<div class="mb-1">
 													<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25% </span>
-													<span class="text-muted">Since last week</span>
+													<span class="text-muted"> desde a semana passada</span>
 												</div>
 											</div>
 										</div>
@@ -69,21 +56,31 @@
 									<div class="col-sm-6">
 										<div class="card">
 											<div class="card-body">
-												<h5 class="card-title mb-4">Earnings</h5>
+												<h5 class="card-title mb-4">Ganhos</h5>
 												<h1 class="mt-1 mb-3">$21.300</h1>
 												<div class="mb-1">
 													<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>
-													<span class="text-muted">Since last week</span>
+													<span class="text-muted"> desde a semana passada</span>
 												</div>
 											</div>
 										</div>
 										<div class="card">
 											<div class="card-body">
-												<h5 class="card-title mb-4">Orders</h5>
+												<h5 class="card-title mb-4">Pedidos</h5>
 												<h1 class="mt-1 mb-3">64</h1>
 												<div class="mb-1">
 													<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -2.25% </span>
-													<span class="text-muted">Since last week</span>
+													<span class="text-muted"> desde a semana passada</span>
+												</div>
+											</div>
+										</div>
+										<div class="card">
+											<div class="card-body">
+												<h5 class="card-title mb-4">Empty</h5>
+												<h1 class="mt-1 mb-3">00</h1>
+												<div class="mb-1">
+													<span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i> 00.00% </span>
+													<span class="text-muted"> desde a semana passada</span>
 												</div>
 											</div>
 										</div>
@@ -92,11 +89,11 @@
 							</div>
 						</div>
 
-						<div class="col-xl-6 col-xxl-7">
+						<div class="col-xl-12 col-xxl-7">
 							<div class="card flex-fill w-100">
 								<div class="card-header">
 
-									<h5 class="card-title mb-0">Recent Movement</h5>
+									<h5 class="card-title mb-0">Movimento Recente</h5>
 								</div>
 								<div class="card-body py-3">
 									<div class="chart chart-sm">
@@ -112,7 +109,7 @@
 							<div class="card flex-fill w-100">
 								<div class="card-header">
 
-									<h5 class="card-title mb-0">Browser Usage</h5>
+									<h5 class="card-title mb-0">Uso do navegador</h5>
 								</div>
 								<div class="card-body d-flex">
 									<div class="align-self-center w-100">
@@ -157,7 +154,7 @@
 							<div class="card flex-fill">
 								<div class="card-header">
 
-									<h5 class="card-title mb-0">Calendar</h5>
+									<h5 class="card-title mb-0">Calendario</h5>
 								</div>
 								<div class="card-body d-flex">
 									<div class="align-self-center w-100">
@@ -175,7 +172,7 @@
 							<div class="card flex-fill">
 								<div class="card-header">
 
-									<h5 class="card-title mb-0">Latest Projects</h5>
+									<h5 class="card-title mb-0">Ultimos Projetos</h5>
 								</div>
 								<table class="table table-hover my-0">
 									<thead>
