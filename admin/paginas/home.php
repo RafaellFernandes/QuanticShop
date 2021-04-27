@@ -5,81 +5,107 @@
     }
 
 ?>
-<div class="container-fluid p-0">
 	<div class="row mb-2 mb-xl-3">
 		<div class="col-auto d-none d-sm-block">
 			<h3><strong>Analytics</strong> Dashboard</h3>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-xl-6 col-xxl-5 d-flex">
-			<div class="w-100">
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="card">
-							<div class="card-body">
-								<h5 class="card-title mb-4">Sales</h5>
-								<h1 class="mt-1 mb-3">2.382</h1>
-								<div class="mb-1">
-									<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
-									<span class="text-muted">Since last week</span>
+	<div class="container-fluid p-0">
+						
+
+						<div class="col-auto ms-auto text-end mt-n1">
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb bg-transparent p-0 mt-1 mb-0">
+									<li class="breadcrumb-item"><a href="#">AdminKit</a></li>
+									<li class="breadcrumb-item"><a href="#">Dashboards</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Analytics</li>
+								</ol>
+							</nav>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xl-6 col-xxl-5 d-flex">
+							<div class="w-100">
+								<div class="row">
+									<div class="col-sm-6">
+										
+										<div class="card">
+											<div class="card-body">
+												<h5 class="card-title mb-4">TCC</h5>
+												<h3 class="mt-1 mb-3">
+													<?php 
+														$date = strtotime("June 14, 2021 7:00 PM"); $remaining = $date - time(); 
+														$days_remaining = floor($remaining / 86400); $hours_remaining = floor(($remaining % 86400) / 3600); echo "Faltam $days_remaining Dias e $hours_remaining Horas Restantes";  
+													?>
+															</h3>
+												<div class="mb-1">
+													<!-- <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25% </span> -->
+													<span class=" text-warning "><?php $rem = strtotime('2021-06-14 19:00:00') - time(); $day = floor($rem / 86400); $hr = floor(($rem % 86400) / 3600); $min = floor(($rem % 3600) / 60); $sec = ($rem % 60); if($day) echo "$day Days "; if($hr) echo "$hr Hours "; if($min) echo "$min Minutes "; if($sec) echo "$sec Seconds "; echo "Remaining...";?></span>
+												</div>
+											</div>
+										</div>
+
+										<div class="card">
+											<div class="card-body">
+												<h5 class="card-title mb-4">Sales</h5>
+												<h1 class="mt-1 mb-3">2.382</h1>
+												<div class="mb-1">
+													<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
+													<span class="text-muted">Since last week</span>
+												</div>
+											</div>
+										</div>
+										<div class="card">
+											<div class="card-body">
+												<h5 class="card-title mb-4">Visitors</h5>
+												<h1 class="mt-1 mb-3">14.212</h1>
+												<div class="mb-1">
+													<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25% </span>
+													<span class="text-muted">Since last week</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="card">
+											<div class="card-body">
+												<h5 class="card-title mb-4">Earnings</h5>
+												<h1 class="mt-1 mb-3">$21.300</h1>
+												<div class="mb-1">
+													<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>
+													<span class="text-muted">Since last week</span>
+												</div>
+											</div>
+										</div>
+										<div class="card">
+											<div class="card-body">
+												<h5 class="card-title mb-4">Orders</h5>
+												<h1 class="mt-1 mb-3">64</h1>
+												<div class="mb-1">
+													<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -2.25% </span>
+													<span class="text-muted">Since last week</span>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
-						<div class="card">
-							<div class="card-body">
-								<h5 class="card-title mb-4">TCC</h5>
-								<h3 class="mt-1 mb-3">
-									<?php 
-										$date = strtotime("June 14, 2021 7:00 PM"); $remaining = $date - time(); 
-										$days_remaining = floor($remaining / 86400); $hours_remaining = floor(($remaining % 86400) / 3600); echo "Faltam $days_remaining Dias e $hours_remaining Horas Restantes";  
-									?>
-								</h3>
-								<div class="mb-1">
-									<!-- <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25% </span> -->
-									<span class=" text-warning "><?php $rem = strtotime('2021-06-14 19:00:00') - time(); $day = floor($rem / 86400); $hr = floor(($rem % 86400) / 3600); $min = floor(($rem % 3600) / 60); $sec = ($rem % 60); if($day) echo "$day Days "; if($hr) echo "$hr Hours "; if($min) echo "$min Minutes "; if($sec) echo "$sec Seconds "; echo "Remaining...";?></span>
+
+						<div class="col-xl-6 col-xxl-7">
+							<div class="card flex-fill w-100">
+								<div class="card-header">
+
+									<h5 class="card-title mb-0">Recent Movement</h5>
+								</div>
+								<div class="card-body py-3">
+									<div class="chart chart-sm">
+										<canvas id="chartjs-dashboard-line"></canvas>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col-sm-6">
-						<div class="card">
-							<div class="card-body">
-								<h5 class="card-title mb-4">Earnings</h5>
-								<h1 class="mt-1 mb-3">$21.300</h1>
-								<div class="mb-1">
-									<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>
-									<span class="text-muted">Since last week</span>
-								</div>
-							</div>
-						</div>
-						<div class="card">
-							<div class="card-body">
-								<h5 class="card-title mb-4">Orders</h5>
-								<h1 class="mt-1 mb-3">64</h1>
-								<div class="mb-1">
-									<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -2.25% </span>
-									<span class="text-muted">Since last week</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-xl-6 col-xxl-7">
-			<div class="card flex-fill w-100">
-				<div class="card-header">
-					<h5 class="card-title mb-0">Recent Movement</h5>
-				</div>
-				<div class="card-body py-3">
-					<div class="chart chart-sm">
-						<canvas id="chartjs-dashboard-line"></canvas>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
 					<div class="row">
 						<div class="col-12 col-md-6 col-xxl-3 d-flex order-2 order-xxl-3">
@@ -100,15 +126,15 @@
 											<tbody>
 												<tr>
 													<td>Chrome</td>
-													<td class="text-right">4306</td>
+													<td class="text-end">4306</td>
 												</tr>
 												<tr>
 													<td>Firefox</td>
-													<td class="text-right">3801</td>
+													<td class="text-end">3801</td>
 												</tr>
 												<tr>
 													<td>IE</td>
-													<td class="text-right">1689</td>
+													<td class="text-end">1689</td>
 												</tr>
 											</tbody>
 										</table>
@@ -164,57 +190,57 @@
 									<tbody>
 										<tr>
 											<td>Project Apollo</td>
-											<td class="d-none d-xl-table-cell">01/01/2020</td>
-											<td class="d-none d-xl-table-cell">31/06/2020</td>
+											<td class="d-none d-xl-table-cell">01/01/2021</td>
+											<td class="d-none d-xl-table-cell">31/06/2021</td>
 											<td><span class="badge bg-success">Done</span></td>
 											<td class="d-none d-md-table-cell">Vanessa Tucker</td>
 										</tr>
 										<tr>
 											<td>Project Fireball</td>
-											<td class="d-none d-xl-table-cell">01/01/2020</td>
-											<td class="d-none d-xl-table-cell">31/06/2020</td>
+											<td class="d-none d-xl-table-cell">01/01/2021</td>
+											<td class="d-none d-xl-table-cell">31/06/2021</td>
 											<td><span class="badge bg-danger">Cancelled</span></td>
 											<td class="d-none d-md-table-cell">William Harris</td>
 										</tr>
 										<tr>
 											<td>Project Hades</td>
-											<td class="d-none d-xl-table-cell">01/01/2020</td>
-											<td class="d-none d-xl-table-cell">31/06/2020</td>
+											<td class="d-none d-xl-table-cell">01/01/2021</td>
+											<td class="d-none d-xl-table-cell">31/06/2021</td>
 											<td><span class="badge bg-success">Done</span></td>
 											<td class="d-none d-md-table-cell">Sharon Lessman</td>
 										</tr>
 										<tr>
 											<td>Project Nitro</td>
-											<td class="d-none d-xl-table-cell">01/01/2020</td>
-											<td class="d-none d-xl-table-cell">31/06/2020</td>
+											<td class="d-none d-xl-table-cell">01/01/2021</td>
+											<td class="d-none d-xl-table-cell">31/06/2021</td>
 											<td><span class="badge bg-warning">In progress</span></td>
 											<td class="d-none d-md-table-cell">Vanessa Tucker</td>
 										</tr>
 										<tr>
 											<td>Project Phoenix</td>
-											<td class="d-none d-xl-table-cell">01/01/2020</td>
-											<td class="d-none d-xl-table-cell">31/06/2020</td>
+											<td class="d-none d-xl-table-cell">01/01/2021</td>
+											<td class="d-none d-xl-table-cell">31/06/2021</td>
 											<td><span class="badge bg-success">Done</span></td>
 											<td class="d-none d-md-table-cell">William Harris</td>
 										</tr>
 										<tr>
 											<td>Project X</td>
-											<td class="d-none d-xl-table-cell">01/01/2020</td>
-											<td class="d-none d-xl-table-cell">31/06/2020</td>
+											<td class="d-none d-xl-table-cell">01/01/2021</td>
+											<td class="d-none d-xl-table-cell">31/06/2021</td>
 											<td><span class="badge bg-success">Done</span></td>
 											<td class="d-none d-md-table-cell">Sharon Lessman</td>
 										</tr>
 										<tr>
 											<td>Project Romeo</td>
-											<td class="d-none d-xl-table-cell">01/01/2020</td>
-											<td class="d-none d-xl-table-cell">31/06/2020</td>
+											<td class="d-none d-xl-table-cell">01/01/2021</td>
+											<td class="d-none d-xl-table-cell">31/06/2021</td>
 											<td><span class="badge bg-success">Done</span></td>
 											<td class="d-none d-md-table-cell">Christina Mason</td>
 										</tr>
 										<tr>
 											<td>Project Wombat</td>
-											<td class="d-none d-xl-table-cell">01/01/2020</td>
-											<td class="d-none d-xl-table-cell">31/06/2020</td>
+											<td class="d-none d-xl-table-cell">01/01/2021</td>
+											<td class="d-none d-xl-table-cell">31/06/2021</td>
 											<td><span class="badge bg-warning">In progress</span></td>
 											<td class="d-none d-md-table-cell">William Harris</td>
 										</tr>
@@ -236,3 +262,4 @@
 							</div>
 						</div>
 					</div>
+				

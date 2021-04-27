@@ -14,7 +14,7 @@
 	$senha = "";
 
 	//nome do banco de dados
-	$banco = "bancotcc";
+	$banco = "quanticshop";
 
 	try {
 		//criar uma conexao com PDO
