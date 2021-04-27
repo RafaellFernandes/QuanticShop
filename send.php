@@ -6,6 +6,7 @@ use PHPMailer\PHPMailer\Exception;
 
 include_once './connection.php';
 require './lib/vendor/autoload.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -43,7 +44,7 @@ require './lib/vendor/autoload.php';
                     $mail->Port = 2525;
 
                     //Enviar e-mail para o cliente
-                    $mail->setFrom('atendimento@celke.com.br', 'Atendimento');
+                    $mail->setFrom('sac@quanticshop.com.br', 'Atendimento');
                     $mail->addAddress($data['email'], $data['name']);
 
                     $mail->isHTML(true);
