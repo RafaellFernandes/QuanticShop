@@ -1,15 +1,16 @@
 .bodyLogin {
     font-family: "Open Sans", sans-serif;
-    background: url("../img/background/Endless-Constellation.svg") top center;
+    background: url("../img/background/backgroundSite07.jpg") top center;
 }
 
-/* body {
-    font-family: "Open Sans", sans-serif;
-    background: url("../img/background/backgroundSite07.jpg") top center;
-} */
-
 .fonte {
-    color: black;
+    color: rgb(255, 255, 255);
+    font-family: "Open Sans", sans-serif;
+    
+
+}
+.fonte1 {
+    color: rgb(0, 0, 0);
     font-family: "Open Sans", sans-serif;
     
 

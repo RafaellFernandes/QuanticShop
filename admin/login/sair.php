@@ -4,10 +4,12 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
-      <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-      <link href="../assets/css/app.css" rel="stylesheet">
+      <!-- <link href="../assets/css/nucleo-icons.css" rel="stylesheet" /> -->
+      <link href="../assets/styleLogin.css" rel="stylesheet">
+      <link href="../static/css/app.css" rel="stylesheet">
+     
    </head>
-   <body> 
+   <body class="bodyLogin"> 
       <div class="container d-flex flex-column">
          <div class="row vh-100">
             <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">

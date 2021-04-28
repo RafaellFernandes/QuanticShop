@@ -50,6 +50,7 @@
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 	<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+	<link href="./assets/styleLogin.css" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/862f0da969.js" crossorigin="anonymous"></script>
 	
 </head>

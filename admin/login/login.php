@@ -64,30 +64,31 @@
     }
   }
 ?>
-<div class="container d-flex flex-column">
+<!-- <link href="../assets/styleLogin.css" rel="stylesheet"> -->
+<div class="container d-flex flex-column fonte">
 	<div class="row vh-100">
 		<div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
 			<div class="d-table-cell align-middle">
 				<div class="text-center mt-4">
-					<h1 class="h2">Seja Bem Vindo</h1>
+					<h1 class="h2 fonte">Seja Bem Vindo</h1>
 					<p class="lead">Entre na sua Conta para Continuar</p>
 				</div>
 				<div class="card">
 					<div class="card-body">
 						<div class="m-sm-4">
 							<div class="text-center">
-                <p class="lead">Quantic Shop System</p>
+                <p class="lead fonte1">Sistema Quantic</p>
 								<img src="img/enter.png" alt="Entre" class="img-fluid " width="70" height="70" />
                 <?=$msg;?>
 							</div>
 							<form class="user" name="login" method="post" data-parsley-validate>
 								<div class="mb-3">
-									<label class="form-label">Login</label>
+									<label class="form-label fonte1">Login</label>
 									<input class="form-control form-control-lg" id="login" type="text" name="login" placeholder="Login de Acesso" 
                   required data-parsley-validate="Preencha o Login"/>
 								</div>
 								<div class="mb-3">
-									<label class="form-label">Senha</label>
+									<label class="form-label fonte1">Senha</label>
 									<input class="form-control form-control-lg" type="password" name="senha" id="senha" placeholder="Digite sua Senha" 
                   required data-parsley-validate="Preencha a Senha" />
 									<small>
@@ -97,7 +98,7 @@
 								<div>
 									<label class="form-check" for="lembrar">
                     <input class="form-check-input" type="checkbox" value="lembrar"  id="lembrar" name="lembrar" checked>
-                    <span class="form-check-label">
+                    <span class="form-check-label fonte1">
                       Lembrar meu Login
                     </span>
                   </label>
