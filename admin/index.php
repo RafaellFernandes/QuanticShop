@@ -121,7 +121,7 @@
 							<li class="sidebar-item"><a class="sidebar-link" href="cadastro/departamento">Departamentos</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="cadastro/fornecedor">Fornecedor</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="cadastro/marca">Marca</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="cadastro/produto">Produto</a></li>
+							
 							<li class="sidebar-item"><a class="sidebar-link" href="cadastro/transportadora">Transportadora</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="cadastro/usuario">Usuario</a></li>
 						</ul>
@@ -137,7 +137,7 @@
 							<li class="sidebar-item"><a class="sidebar-link" href="listagem/departamento">Departamentos</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="listagem/fornecedor">Fornecedor</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="listagem/marca">Marca</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="listagem/produto">Produto</a></li>
+							
 							<li class="sidebar-item"><a class="sidebar-link" href="listagem/transportadora">Transportadora</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="listagem/usuario">Usuario</a></li>
 						</ul>
@@ -158,14 +158,35 @@
 					</li>
 
 					<li class="sidebar-header">
-						Controle
+						Controle de Processos
 					</li>
 					<li class="sidebar-item">
 						<a data-bs-target="#ui" data-bs-toggle="collapse" class="sidebar-link collapsed">
-						  <i class="align-middle" data-feather="server"></i> <span class="align-middle">Estoque</span>
+						  <i class="align-middle" data-feather="shopping-bag"></i> <span class="align-middle">Compra</span>
 						</a>
 						<ul id="ui" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
+							<li class="sidebar-item"><a class="sidebar-link" href="./processoCompra/produtoCompra">Entrada de Produto</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="">Lista Produtos</a></li>
+							
+						</ul>
+					</li>
+					<li class="sidebar-item">
+						<a data-bs-target="#ui1" data-bs-toggle="collapse" class="sidebar-link collapsed">
+						  <i class="align-middle" data-feather="server"></i> <span class="align-middle">Estocagem</span>
+						</a>
+						<ul id="ui1" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
 							<li class="sidebar-item"><a class="sidebar-link" href="controleEstoque/estoque">Controle de Estoque</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="cadastro/produto">Produto Loja</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="listagem/produto">Lista Produto Loja</a></li>
+							<!-- <li class="sidebar-item"><a class="sidebar-link" href="">null</a></li> -->
+						</ul>
+					</li>
+					<li class="sidebar-item">
+						<a data-bs-target="#ui2" data-bs-toggle="collapse" class="sidebar-link collapsed">
+						  <i class="align-middle" data-feather="shopping-cart"></i> <span class="align-middle">Venda</span>
+						</a>
+						<ul id="ui2" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
+							<li class="sidebar-item"><a class="sidebar-link" href="">null</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="">null</a></li>
 						</ul>
 					</li>
