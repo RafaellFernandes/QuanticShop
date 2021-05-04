@@ -152,7 +152,7 @@
 							</button>
                         </div>
                         <div class="col-sm">
-                            <div class="float-right mt-3 ">
+                            <div class="float-end mt-3 ">
                                 <a href="listagem/transportadora" class="btn btn-primary">Listar Registros</a> 
                             </div> 
                         </div>

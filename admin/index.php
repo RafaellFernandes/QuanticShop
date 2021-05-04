@@ -166,7 +166,7 @@
 						</a>
 						<ul id="ui" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
 							<li class="sidebar-item"><a class="sidebar-link" href="./processoCompra/produtoCompra">Entrada de Produto</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="">Lista Produtos</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="./processoCompra/listaProduto">Lista Produtos</a></li>
 							
 						</ul>
 					</li>

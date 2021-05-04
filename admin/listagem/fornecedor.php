@@ -16,7 +16,7 @@
 		<div class="col-12 col-xl-12">
 			<div class="card">
 				<div class="card-header">
-					<div class="float-right">
+					<div class="float-end">
 						<a href="cadastro/fornecedor" class="btn btn-info">Cadastrar Novo</a>
 					</div>
 					<h4>Lista</h4>

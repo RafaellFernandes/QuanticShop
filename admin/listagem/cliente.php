@@ -9,14 +9,14 @@
 		<div class="col-12 col-xl-12">
 			<div class="card">
 				<div class="card-header">
-					<div class="float-right">
+					<div class="float-end">
 						<a href="cadastro/clienteJ" class="btn btn-primary">Cad. Pessoa Juridica</a>
                         <a href="cadastro/clienteF" class="btn btn-primary">Cad. Pessoa Fisica</a>
 					</div>
 					<h4>Lista</h4>
 					<h6 class="card-subtitle text-muted">Clientes | Pessoas Fisicas e/ou Juridicas</h6>
 				</div>
-                <fieldset class="mb-3">
+                <fieldset class="mb-3 ml-3">
                     <div class="row">
                         <label class="col-form-label col-sm-2 text-sm-right pt-sm-0">Cliente:</label>
                         <div class="col-sm-10">

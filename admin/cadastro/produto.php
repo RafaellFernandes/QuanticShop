@@ -61,12 +61,13 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-header">
+                <div class="float-end">
+					<a href="cadastro/marca" class="btn btn-primary">Cadastrar Marca</a> 
+					<a href="cadastro/departamento" class="btn btn-primary">Cadastrar Departamento</a>
+				</div>
 				<h4>Cadastro</h4>
 				<h6 class="card-subtitle text-muted">Produto</h6>
-				<div class="float-right">
-					<a href="cadastro/marca" class="btn btn-info">Cadastrar Marca</a> 
-					<a href="cadastro/departamento" class="btn btn-info">Cadastrar Departamento</a>
-				</div>
+				
 			</div>
 			<div class="card-body">
                 <form method="post" name="formCadastro"  action="salvar/produto" data_parsley_validate enctype="multipart/form-data">
@@ -76,14 +77,14 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
                             <label for="id">ID</label>
                             <input type="text" name="id" id="id" readonly class="form-control" value="<?=$id;?>">
                         </div>
-                        <div class="col-12 col-md-10">
+                        <div class="col-12 col-md-9">
                             <label for="nome_produto">Nome do Produto</label>
                             <input type="text" name="nome_produto" id="nome_produto" class="form-control" require data-parsley-required-message="Por favor, preencha este campo" 
                             value="<?=$nome_produto;?>" placeholder="Nome do Produto">
                         </div>
-                        <div class="col-12 col-md-2">
+                        <div class="col-12 col-md-3">
                             <label for="codigo">Codigo</label>
-                            <input type="text" name="codigo" id="codigo" readonly class="form-control" value="<?=$codigo;?>" placeholder="Gerado Automaticamente">
+                            <input type="text" name="codigo" id="codigo" class="form-control" value="<?=$codigo;?>" placeholder="Código do Produto">
                         </div>
                         <div class="col-12 col-md-4 mt-2">
                             <label for="marca_id">Marca</label>
@@ -137,7 +138,7 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
                                 $r = 'required data-parsley-required-message="Selecione uma foto"';     
                                 if(!empty($id)) $r = '';
                             ?>
-                            <label for="foto">Fotos do Produto (.jpg)</label>
+                            <label for="foto">Foto(s) do Produto (.jpg)</label>
                             <input type="file" name="foto" id="foto" class="form-control" accept=".jpg"<?=$r;?> multiple>
                             <input type="hidden" name="foto" value="<?=$foto;?>" class="form-control" multiple >     
                                 <?php

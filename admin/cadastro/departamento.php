@@ -33,12 +33,13 @@
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-header">
+                <div class="float-end">
+					<a href="cadastro/marca" class="btn btn-primary">Cadastrar Marca</a> 
+					<a href="cadastro/produto" class="btn btn-primary">Cadastrar Produto</a>
+				</div>
 				<h4>Cadastro</h4>
 				<h6 class="card-subtitle text-muted">Departamento</h6>
-				<div class="float-right">
-					<a href="cadastro/marca" class="btn btn-info">Cadastrar Marca</a> 
-					<a href="cadastro/produto" class="btn btn-info">Cadastrar Produto</a>
-				</div>
+				
 			</div>
 			<div class="card-body">
 				<form name="formCadastro" method="post" action="salvar/departamento" data-parsley-validate enctype="multipart/form-data">
@@ -61,7 +62,7 @@
 							</button>
                         </div>
                         <div class="col-sm">
-                            <div class="float-right mt-3 ">
+                            <div class="float-end mt-3 ">
                                 <a href="listagem/departamento" class="btn btn-primary">Listar Registros</a> 
                             </div> 
                         </div>

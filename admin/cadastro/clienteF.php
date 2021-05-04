@@ -58,7 +58,7 @@
 <div class="col-md-12">
 	<div class="card">
 		<div class="card-header">
-			<div class="mb-2">
+			<div class="mb-2 float-end">
 				<a href="cadastro/clienteJ" class="btn btn-primary">Cad. Pessoa Juridica</a> 
 			</div>
 			<h4>Cadastro</h5>
@@ -194,7 +194,7 @@
 							</button>
                         </div>
                         <div class="col-sm">
-                            <div class="float-right mt-3 ">
+                            <div class="float-end mt-3 ">
                                 <a href="listagem/cliente" class="btn btn-primary">Listar Registros</a> 
                             </div> 
                         </div>
