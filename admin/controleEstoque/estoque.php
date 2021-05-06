@@ -12,7 +12,7 @@
 //se nao existe o id
 if ( !isset ( $id ) ) $id = "";
 //iniciar as variaveis
-$qtd_produto = $valor = $data_atualizacao = $estoque_minimo = $produto_id = $nome_produto = "";
+$qtd_produto = $valor_bruto = $data_atualizacao = $estoque_minimo = $produto_id = $nome_produto = "";
 
   //verificar se existe um id
   if ( !empty ( $id ) ) {
@@ -30,8 +30,8 @@ $qtd_produto = $valor = $data_atualizacao = $estoque_minimo = $produto_id = $nom
   	//separar os dados
     $id         	  = $dados->id;
     $qtd_produto 	  = $dados->qtd_produto; 
-    $valor            = $dados->valor;
-    $valor            = number_format($valor,2,",",".");
+    $valor_bruto      = $dados->valor_bruto;
+    $valor_bruto      = number_format($valor_bruto,2,",",".");
     $data_atualizacao = $dados->data_atualizacao;
     $estoque_minimo   = $dados->estoque_minimo;
     $produto_id       = $dados->produto_id;
@@ -48,7 +48,7 @@ $qtd_produto = $valor = $data_atualizacao = $estoque_minimo = $produto_id = $nom
 				<h6 class="card-subtitle text-muted">Controle de Estoque</h6>
 			</div>
 			<div class="card-body">
-                <form method="post" name="formCadastro"  action="controleEstoque/salvarEstoque" data_parsley_validate enctype="multipart/form-data">
+                <form method="post" name="formCadastro"  action="salvar/estoque" data_parsley_validate enctype="multipart </form-data">
                     <p> Todos os campos são obrigatórios </p>
                     <div class="row">
                         <div class="col-12 col-md-2"  style="display: none;">
@@ -80,8 +80,8 @@ $qtd_produto = $valor = $data_atualizacao = $estoque_minimo = $produto_id = $nom
                         </div>
 
                         <div class="col-12 col-md-4">
-                            <label for="valor">Valor</label>
-                            <input type="text" name="valor" id="valor" required data-parsley-required-message="Preencha este campo" class="form-control" value="<?=$valor;?>" placeholder="R$ 0,00">
+                            <label for="valor_bruto">Valor</label>
+                            <input type="text" name="valor_bruto" id="valor_bruto" required data-parsley-required-message="Preencha este campo" class="form-control" value="<?=$valor_bruto;?>" placeholder="R$ 0,00">
                         </div>
 
                         <!-- <div class="col-12 col-md-4 mt-3">
@@ -121,7 +121,7 @@ $qtd_produto = $valor = $data_atualizacao = $estoque_minimo = $produto_id = $nom
     </div>
 </div>
 
-<script>$("#valor").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});</script>
+<script>$("#valor_bruto").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});</script>
 <script type="text/javascript">
     $(document).ready(function() {
         $("#qtd_estoque").mask("999999");

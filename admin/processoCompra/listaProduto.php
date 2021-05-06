@@ -35,10 +35,10 @@
                                     FROM produto p, marca m, estoque e, fornecedor f
                                     WHERE p.marca_id = m.id AND p.estoque_id = e.id AND p.fornecedor_id = f.id";
 
-// $sql = "SELECT p.*,d.*,m.* FROM produto p
-// left join departamento d on (d.id = p.departamento_id)
-// left join marca m on(m.id = p.marca_id)
-// WHERE p.id = :id LIMIT 1";
+							// $sql = "SELECT p.*,d.*,m.* FROM produto p
+							// left join departamento d on (d.id = p.departamento_id)
+							// left join marca m on(m.id = p.marca_id)
+							// WHERE p.id = :id LIMIT 1";
 
                             $consulta = $pdo->prepare($sql);
                             $consulta->bindParam(":id", $id);
