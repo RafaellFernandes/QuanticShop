@@ -21,13 +21,13 @@
 												<h5 class="card-title mb-4">TCC</h5>
 												<h2 class="mt-1 mb-3">
 													<?php 
-														$date = strtotime("June 14, 2021 7:00 PM"); $remaining = $date - time(); 
+														$date = strtotime("June 24, 2021 7:00 PM"); $remaining = $date - time(); 
 														$days_remaining = floor($remaining / 86400); $hours_remaining = floor(($remaining % 86400) / 3600); echo "Faltam $days_remaining Dias e $hours_remaining Horas Restantes";  
 													?>
 															</h2>
 												<div class="mb-1">
 													<!-- <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25% </span> -->
-													<span class=" text-primary "> <i class="mdi mdi-arrow-bottom-right"></i><?php $rem = strtotime('2021-06-14 19:00:00') - time(); $day = floor($rem / 86400); $hr = floor(($rem % 86400) / 3600); $min = floor(($rem % 3600) / 60); $sec = ($rem % 60); if($day) echo "$day Dias "; if($hr) echo "$hr Horas "; if($min) echo "$min Minutos "; if($sec) echo "$sec Segundos "; echo "Restantes...";?></span>
+													<span class=" text-primary "> <i class="mdi mdi-arrow-bottom-right"></i><?php $rem = strtotime('2021-06-24 19:00:00') - time(); $day = floor($rem / 86400); $hr = floor(($rem % 86400) / 3600); $min = floor(($rem % 3600) / 60); $sec = ($rem % 60); if($day) echo "$day Dias "; if($hr) echo "$hr Horas "; if($min) echo "$min Minutos "; if($sec) echo "$sec Segundos "; echo "Restantes...";?></span>
 												</div>
 											</div>
 										</div>
