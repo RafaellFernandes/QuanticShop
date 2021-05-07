@@ -106,22 +106,18 @@ $produto_id = $fornecedor_id = $lote = $valor_unitario = $data_cadastro = $nome_
                             class="form-control" value="<?=$valor_unitario;?>" placeholder="R$ 0,00">
                         </div> 
                         <div class="col-12 col-md-4 mt-2">
-                           
-                                <label for="data_cadastro">Data Cadastro</label>
-                                    
-                                <div class="input-group date" data-date-format="dd/mm/yyyy">
+                            <label for="data_cadastro">Data Cadastro</label>   
+                            <div class="input-group date" data-date-format="dd/mm/yyyy">
                                 <input  type="text" class="form-control" name="data_cadastro" id="data_cadastro" require data-parsley-required-message="Por favor, preencha este campo" placeholder="dd/mm/yyyy" value="<?=$data_cadastro;?>">
-                        
-                                </div>
                             </div>
-                    
-                    <div class="row g-2">
-                        <div class="col-sm-4 mt-4">
-                            <button type="submit" class="btn btn-success margin mt-3">
-                                Salvar Dados
-                            </button>
-                        </div>
-                            </div> 
+                        </div>  
+                        <div class="row g-2">
+                            <div class="col-sm-4 mt-4">
+                                <button type="submit" class="btn btn-success margin mt-3">
+                                    Salvar Dados
+                                </button>
+                            </div>
+                        </div> 
                         </div>
                     </div>
                 </form>
