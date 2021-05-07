@@ -1,31 +1,31 @@
 <?php
-  //verificar se não está logado
-  if ( !isset ( $_SESSION["quanticshop"]["id"] ) ){
-    exit;
-  }
-  //mostrar erros
-	// ini_set('display_errors',1);
-	// ini_set('display_startup_erros',1);
-    // error_reporting(E_ALL);
+    //verificar se não está logado
+    if ( !isset ( $_SESSION["quanticshop"]["id"] ) ){
+        exit;
+    }
+     //mostrar erros
+    ini_set('display_errors',1);
+	ini_set('display_startup_erros',1);
+    error_reporting(E_ALL);
     
 
-//se nao existe o id
-if ( !isset ( $id ) ) $id = "";
+    //se nao existe o id
+    if ( !isset ( $id ) ) $id = "";
 
-//iniciar as variaveis
-$produto_id = $fornecedor_id = $lote = $valor_unitario = $data_cadastro = $nome_produto = "";
+    //iniciar as variaveis
+    $produto_id = $fornecedor_id = $lote = $valor_unitario = $data_cadastro = $nome_produto = "";
 
-  //verificar se existe um id
-  if ( !empty ( $id ) ) {
+    //verificar se existe um id
+    if ( !empty ( $id ) ) {
 
     include "../admin/validacao/functions.php";
    
-  	//selecionar os dados do banco para poder editar
-      $sql="SELECT c.*,p.* FROM item_compra c, 
-      produto p WHERE p.id = c.produto_id";
-      $consulta = $pdo->prepare($sql);
-      $consulta->bindParam(":id", $id);
-      $consulta->execute();
+    //selecionar os dados do banco para poder editar
+    $sql="SELECT c.*,p.* FROM item_compra c, produto p WHERE p.id = c.produto_id";
+
+    $consulta = $pdo->prepare($sql);
+    $consulta->bindParam(":id", $id);
+    $consulta->execute();
       
   	$dados  = $consulta->fetch(PDO::FETCH_OBJ);
 
@@ -39,17 +39,12 @@ $produto_id = $fornecedor_id = $lote = $valor_unitario = $data_cadastro = $nome_
     $fornecedor_id            = $dados->fornecedor_id;
     $razaoSocial              = $dados->razaoSocial;
     $lote                     = $dados->lote;
+
   }
 
 ?>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+<script src="assets/mask/jquery.mask.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
                         
@@ -57,13 +52,8 @@ $produto_id = $fornecedor_id = $lote = $valor_unitario = $data_cadastro = $nome_
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-header">
-                <div class="float-end">
-					<a href="cadastro/marca" class="btn btn-primary">Cadastrar Marca</a> 
-					<a href="cadastro/departamento" class="btn btn-primary">Cadastrar Departamento</a>
-				</div>
 				<h4>Cadastro</h4>
 				<h6 class="card-subtitle text-muted">Produto</h6>
-				
 			</div>
 			<div class="card-body">
                 <form method="post" name="formCadastro"  action="processoCompra/listaProduto" data_parsley_validate enctype="multipart/form-data">
@@ -75,13 +65,12 @@ $produto_id = $fornecedor_id = $lote = $valor_unitario = $data_cadastro = $nome_
                         </div>
                         <div class="col-12 col-md-4 mt-2">
                             <label for="nome_produto">Nome do Produto</label>
-                            <input type="text" name="nome_produto" id="nome_produto" class="form-control" value="<?=$nome_produto;?>" placeholder="nome do produto">
+                            <input type="text" name="nome_produto" id="nome_produto" class="form-control" value="<?=$nome_produto;?>" placeholder="Nome do produto">
                         </div>
                         <div class="col-12 col-md-4 mt-2">
                             <label for="lote">Lote</label>
                             <input type="text" name="lote" id="lote" class="form-control" value="<?=$lote;?>" placeholder="Nº Lote">
                         </div>
-                       
                         <div class="col-12 col-md-4 mt-2">
                             <label for="forncedor_id">Fornecedor</label>
                             <select name="fornecedor_id" id="fornecedor_id" class="form-control" required data-parsley-required-message="Selecione um Fornecedor">
@@ -105,12 +94,11 @@ $produto_id = $fornecedor_id = $lote = $valor_unitario = $data_cadastro = $nome_
                             <input type="text" name="valor_unitario" id="valor_unitario" required data-parsley-required-message="Preencha este campo" 
                             class="form-control" value="<?=$valor_unitario;?>" placeholder="R$ 0,00">
                         </div> 
-                        <div class="col-12 col-md-4 mt-2">
-                            <label for="data_cadastro">Data Cadastro</label>   
-                            <div class="input-group date" data-date-format="dd/mm/yyyy">
-                                <input  type="text" class="form-control" name="data_cadastro" id="data_cadastro" require data-parsley-required-message="Por favor, preencha este campo" placeholder="dd/mm/yyyy" value="<?=$data_cadastro;?>">
-                            </div>
-                        </div>  
+                        <div class="mb-3 col-12 col-md-4 mt-2">
+							<label for="data_cadastro">Data de Nascimento:</label>
+							<input type="text" name="data_cadastro" id="data_cadastro" class="form-control" required data-parsley-required-message="Preencha a data de Cadastro" 
+							placeholder="Ex: 11/12/1990" value="<?=$data_cadastro;?>">
+						</div> 
                         <div class="row g-2">
                             <div class="col-sm-4 mt-4">
                                 <button type="submit" class="btn btn-success margin mt-3">
@@ -118,7 +106,6 @@ $produto_id = $fornecedor_id = $lote = $valor_unitario = $data_cadastro = $nome_
                                 </button>
                             </div>
                         </div> 
-                        </div>
                     </div>
                 </form>
             </div>
@@ -127,8 +114,10 @@ $produto_id = $fornecedor_id = $lote = $valor_unitario = $data_cadastro = $nome_
 </div>
 
 <script>$("#valor_unitario").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});</script>
-<script src='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.min.js'></script>
-<script>
- $('.input-group.date').datepicker({format: "dd/mm/yyyy"});
+<script type="text/javascript">
+$(document).ready(function(){ 
+	$("#data_cadastro").mask("00/00/0000");
+	});
 </script>
+
 
