@@ -20,20 +20,18 @@
 						<tr>
 							<th>ID Fornecedor</th>
 							<th>Nome Produto</th>
-							<th>Marca</th>
-							<th>DT Cadastro</th>
-                            <th>Quantidade Estoque</th>
-							<th>Valor Bruto</th>
-							<th>Cod Produto</th>
+							<th>data_cadastro</th>
+							<th>Valor unitario</th>
+							<th>Lote</th>
 						</tr>
 					</thead>
 					<tbody><br>
 						<?php
 							//buscar as marcas alfabeticamente
                             // $sql = "SELECT p.*, f.razaoSocial FROM produto p INNER JOIN fornecedor f ON (f.id = p.fornecedor_id) WHERE p.id = :id ";
-                            $sql = "SELECT p.*, m.*, e.*, f.* 
-                                    FROM produto p, marca m, estoque e, fornecedor f
-                                    WHERE p.marca_id = m.id AND p.estoque_id = e.id AND p.fornecedor_id = f.id";
+                            $sql = "SELECT id, fornecedor_id, produto_id, data_cadastro, lote, valor_unitario FROM item_compra";
+                            $consulta = $pdo->prepare($sql);
+                            $consulta->execute();
 
 							// $sql = "SELECT p.*,d.*,m.* FROM produto p
 							// left join departamento d on (d.id = p.departamento_id)
@@ -49,25 +47,28 @@
 								$id 		         = $dados->id;
                                 $fornecedor_id 		 = $dados->fornecedor_id;
                                 $razaoSocial 		 = $dados->razaoSocial;
+								$produto_id			 = $produto_id;
                                 $nome_produto        = $dados->nome_produto;
-                                $marca_id 	         = $dados->marca_id;
-                                $nome_marca          = $dados->nome_marca;
                                 $data_cadastro       = $dados->data_cadastro;
-                                $qtd_produto         = $dados->qtd_produto;
-                                $valor_bruto         = $dados->valor_bruto;
-                                $valor_bruto         = number_format($valor_bruto,2, '.' , ',');
-                                $codigo              = $dados->codigo;
+                                $valor_unitario      = $dados->valor_unitario;
+                                $valor_unitario      = number_format($valor_unitario,2, '.' , ',');
+                                $lote                = $dados->lote;
                          
 								//mostrar na tela
 								echo '<tr>
-                                        <td>'.$fornecedor_id.' - '.$razaoSocial.'</td>
-										<td>'.$nome_produto.'</td>
-                                        <td>'.$marca_id.' - '.$nome_marca.' </td>
-										<td>'.$data_cadastro.'</td>
-										<td>'.$qtd_produto.'</td>
-                                        <td>R$ '.$valor_bruto.'</td>
-                                        <td>'.$codigo.'</td>
-									</tr>';
+								<td>'.$fornecedor_id.' - ' .$razaoSocial.'</td>
+								<td>'.$produto_id.'</td>
+								<td>'.$data_cadastro.'</td>
+								<td>'.$valor_unitario.'</td>
+								<td class="table-action text-center">
+									<a href="cadastro/fornecedor/'.$id.'" alt="Editar" title="Editar">
+										<i class="align-middle"  data-feather="edit-2"></i>
+									</a>
+									<a href="javascript:excluir('.$id.')" alt="Excluir" title="Excluir">
+										<i class="align-middle" data-feather="trash"></i>
+									</a>
+								</td>
+							</tr>';
 								}
 						?>
 					</tbody>

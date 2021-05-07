@@ -17,7 +17,7 @@ if ( $_POST ) {
     include "../admin/config/conexao.php";
 
     //recuperar dados do formulario
-    $id = $produto_id = $fornecedor_id = $lote = $valor_unitario = $data_cadastro = $qtd_produto = "";
+    $id = $produto_id = $fornecedor_id = $lote = $valor_unitario = $data_cadastro = "";
 
     foreach ($_POST as $key => $value) {
         $$key = trim ( $value );
@@ -26,8 +26,6 @@ if ( $_POST ) {
     //verificar se as variaveis estao vazias
      if( empty($produto_id) ){
         echo "<script>alert('Preencha o nome do produto!');history.back();</script>";
-    }else if( empty($qtd_produto) ){
-        echo "<script>alert('Preencha a Quantidade de produtos!');history.back();</script>";
     } else if( empty($valor_unitario) ){
         echo "<script>alert('Preencha o Valor!');history.back();</script>";
     } else if( empty($data_cadastro) ){
@@ -46,10 +44,9 @@ if ( $_POST ) {
 
     if(empty($id)){
 
-        $sql = "INSERT INTO item_compra(qtd_produto, valor_unitario, data_cadastro, lote, fornecedor_id, produto_id)
-        VALUES (:qtd_produto, :valor_unitario, :data_cadastro, :lote, :fornecedor_id, :produto_id)";
+        $sql = "INSERT INTO item_compra(valor_unitario, data_cadastro, lote, fornecedor_id, produto_id)
+        VALUES (:valor_unitario, :data_cadastro, :lote, :fornecedor_id, :produto_id)";
         $consulta = $pdo->prepare($sql);
-        $consulta->bindParam(':qtd_produto', $qtd_produto);
         $consulta->bindParam(':valor_unitario', $valor_unitario);
         $consulta->bindParam(':data_cadastro', $data_cadastro);
         $consulta->bindParam(':lote', $lote);
@@ -58,9 +55,8 @@ if ( $_POST ) {
        
     } else { 
     
-        $sql = "UPDATE item_compra SET qtd_produto = :qtd_produto, valor_unitario = :valor_unitario, data_cadastro = :data_cadastro, lote = :lote, fornecedor_id = :fornecedor_id, produto_id = :produto_id WHERE id = :id ";
+        $sql = "UPDATE item_compra SET valor_unitario = :valor_unitario, data_cadastro = :data_cadastro, lote = :lote, fornecedor_id = :fornecedor_id, produto_id = :produto_id WHERE id = :id ";
         $consulta = $pdo->prepare($sql);
-        $consulta->bindParam(':qtd_produto', $qtd_produto);
         $consulta->bindParam(':valor_unitario', $valor_unitario);
         $consulta->bindParam(':data_cadastro', $data_cadastro);
         $consulta->bindParam(':lote', $lote);
@@ -72,7 +68,7 @@ if ( $_POST ) {
 //executar e verificar se deu certo
    if ( $consulta->execute() ) {
       $pdo->commit();
-      echo "<script>alert('Salvo com sucesso!');location.href='listar/produto';</script>";
+      echo "<script>alert('Salvo com sucesso!');location.href='processoCompra/listaProduto';</script>";
    } else {
     echo "<script>alert('Erro ao Salvar!');history.back();</script>";
     exit;

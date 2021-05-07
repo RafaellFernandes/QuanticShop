@@ -13,7 +13,7 @@
 if ( !isset ( $id ) ) $id = "";
 
 //iniciar as variaveis
-$produto_id = $fornecedor_id = $lote = $valor_unitario = $data_cadastro = $qtd_produto = "";
+$produto_id = $fornecedor_id = $lote = $valor_unitario = $data_cadastro = $nome_produto = "";
 
   //verificar se existe um id
   if ( !empty ( $id ) ) {
@@ -21,7 +21,8 @@ $produto_id = $fornecedor_id = $lote = $valor_unitario = $data_cadastro = $qtd_p
     include "../admin/validacao/functions.php";
    
   	//selecionar os dados do banco para poder editar
-      $sql = "SELECT * FROM item_compra WHERE id = :id LIMIT 1";
+      $sql="SELECT c.*,p.* FROM item_compra c, 
+      produto p WHERE p.id = c.produto_id";
       $consulta = $pdo->prepare($sql);
       $consulta->bindParam(":id", $id);
       $consulta->execute();
@@ -65,26 +66,26 @@ $produto_id = $fornecedor_id = $lote = $valor_unitario = $data_cadastro = $qtd_p
 				
 			</div>
 			<div class="card-body">
-                <form method="post" name="formCadastro"  action="processoCompra/salvarProdutoCompra" data_parsley_validate enctype="multipart/form-data">
+                <form method="post" name="formCadastro"  action="processoCompra/listaProduto" data_parsley_validate enctype="multipart/form-data">
                     <p> Todos os campos são obrigatórios </p>
                     <div class="row">
                         <div class="col-12 col-md-2"  style="display: none;">
                             <label for="id">ID</label>
                             <input type="text" name="id" id="id" readonly class="form-control" value="<?=$id;?>">
                         </div>
-                        <div class="col-12 col-md-9">
-                            <label for="produto_id">Nome do Produto</label>
-                            <input type="text" name="produto_id" id="produto_id" class="form-control" require data-parsley-required-message="Por favor, preencha este campo" 
-                            value="<?=$produto_id;?>" placeholder="Nome do Produto">
-                        </div>
-                        <div class="col-12 col-md-3">
-                            <label for="lote">Lote</label>
-                            <input type="text" name="lote" id="codigo" class="form-control" value="<?=$lote;?>" placeholder="Nº Lote">
+                        <div class="col-12 col-md-4 mt-2">
+                            <label for="nome_produto">Nome do Produto</label>
+                            <input type="text" name="nome_produto" id="nome_produto" class="form-control" value="<?=$nome_produto;?>" placeholder="nome do produto">
                         </div>
                         <div class="col-12 col-md-4 mt-2">
-                            <label for="forncedor_id">Departamento</label>
-                            <select name="fornecedor_id" id="fornecedor_id" class="form-control" required data-parsley-required-message="Selecione um Departamento">
-                                <option value="<?=$fornecedor_id;?>">Selecione o Departamento</option>
+                            <label for="lote">Lote</label>
+                            <input type="text" name="lote" id="lote" class="form-control" value="<?=$lote;?>" placeholder="Nº Lote">
+                        </div>
+                       
+                        <div class="col-12 col-md-4 mt-2">
+                            <label for="forncedor_id">Fornecedor</label>
+                            <select name="fornecedor_id" id="fornecedor_id" class="form-control" required data-parsley-required-message="Selecione um Fornecedor">
+                                <option value="<?=$fornecedor_id;?>">Selecione o Fornecedor</option>
                                     <?php
                                         $sql = "SELECT id, razaoSocial FROM fornecedor ORDER BY razaoSocial";
                                         $consulta = $pdo->prepare($sql);
@@ -105,18 +106,14 @@ $produto_id = $fornecedor_id = $lote = $valor_unitario = $data_cadastro = $qtd_p
                             class="form-control" value="<?=$valor_unitario;?>" placeholder="R$ 0,00">
                         </div> 
                         <div class="col-12 col-md-4 mt-2">
-                            <div class="form-group">
+                           
                                 <label for="data_cadastro">Data Cadastro</label>
-                                <!-- Datepicker as text field -->         
+                                    
                                 <div class="input-group date" data-date-format="dd/mm/yyyy">
                                 <input  type="text" class="form-control" name="data_cadastro" id="data_cadastro" require data-parsley-required-message="Por favor, preencha este campo" placeholder="dd/mm/yyyy" value="<?=$data_cadastro;?>">
-                                <div class="input-group-addon" >
-                                    <span class="glyphicon glyphicon-th"></span>
-                                </div>
+                        
                                 </div>
                             </div>
-                        </div>
-                    </div>
                     
                     <div class="row g-2">
                         <div class="col-sm-4 mt-4">
