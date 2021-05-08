@@ -20,26 +20,28 @@
 						<tr>
 							<th>ID Fornecedor</th>
 							<th>Nome Produto</th>
-							<th>data_cadastro</th>
+							<th>data cadastro</th>
 							<th>Valor unitario</th>
-							<th>Lote</th>
+							<th>Quantidade</th>
+							<th>Ações</th>
 						</tr>
 					</thead>
-					<tbody><br>
+					<tbody>
 						<?php
 							//buscar as marcas alfabeticamente
-                            // $sql = "SELECT p.*, f.razaoSocial FROM produto p INNER JOIN fornecedor f ON (f.id = p.fornecedor_id) WHERE p.id = :id ";
-                            $sql = "SELECT id, fornecedor_id, produto_id, data_cadastro, lote, valor_unitario FROM item_compra";
-                            $consulta = $pdo->prepare($sql);
-                            $consulta->execute();
-
+                            // $sql = "SELECT c.id, c.fornecedor_id, p.nome_produto, c.produto_id, c.lote, c.valor_unitario,
+						    // c.data_cadastro FROM item_compra c, produto p LEFT JOIN produto p ON (c.produto_id = p.id)";
+  							
+							$sql = "SELECT c.*, f.razaoSocial, p.nome_produto  FROM item_compra c
+							 	LEFT JOIN fornecedor f on (f.id = c.fornecedor_id)
+                				LEFT JOIN produto p on(p.id = c.produto_id) ORDER BY c.id";
+  
 							// $sql = "SELECT p.*,d.*,m.* FROM produto p
 							// left join departamento d on (d.id = p.departamento_id)
 							// left join marca m on(m.id = p.marca_id)
 							// WHERE p.id = :id LIMIT 1";
 
                             $consulta = $pdo->prepare($sql);
-                            $consulta->bindParam(":id", $id);
 							$consulta->execute();
 
 							while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
@@ -47,29 +49,31 @@
 								$id 		         = $dados->id;
                                 $fornecedor_id 		 = $dados->fornecedor_id;
                                 $razaoSocial 		 = $dados->razaoSocial;
-								$produto_id			 = $produto_id;
+								$produto_id			 = $dados->produto_id;
                                 $nome_produto        = $dados->nome_produto;
                                 $data_cadastro       = $dados->data_cadastro;
                                 $valor_unitario      = $dados->valor_unitario;
                                 $valor_unitario      = number_format($valor_unitario,2, '.' , ',');
                                 $lote                = $dados->lote;
+								$qtd_produto         = $dados->qtd_produto;
                          
 								//mostrar na tela
 								echo '<tr>
-								<td>'.$fornecedor_id.' - ' .$razaoSocial.'</td>
+								<td>'.$fornecedor_id.' - '.$razaoSocial.'</td>
 								<td>'.$produto_id.'</td>
 								<td>'.$data_cadastro.'</td>
 								<td>'.$valor_unitario.'</td>
+								<td>'.$qtd_produto.'</td>
 								<td class="table-action text-center">
-									<a href="cadastro/fornecedor/'.$id.'" alt="Editar" title="Editar">
-										<i class="align-middle"  data-feather="edit-2"></i>
-									</a>
-									<a href="javascript:excluir('.$id.')" alt="Excluir" title="Excluir">
-										<i class="align-middle" data-feather="trash"></i>
-									</a>
-								</td>
-							</tr>';
-								}
+								<a href="processoCompra/produtoCompra/'.$id.'" alt="Editar" title="Editar">
+									<i class="align-middle"  data-feather="edit-2"></i>
+								</a>
+								<a href="javascript:excluir('.$id.')" alt="Excluir" title="Excluir">
+									<i class="align-middle" data-feather="trash"></i>
+								</a>
+							</td>
+						</tr>';
+				}
 						?>
 					</tbody>
 				</table>
@@ -84,7 +88,7 @@
 		//perguntar - função confirm
 		if ( confirm ( "Deseja mesmo excluir?" ) ) {
 			//direcionar para a exclusao
-			location.href="excluir/cidade/"+id;
+			location.href="processoCompra/produtoCompra/"+id;
 		}
 	}
 </script>

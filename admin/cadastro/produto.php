@@ -130,7 +130,7 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
                          <div class="col-12 col-md-2 mt-2">
                             <label for="ativo">Produto Ativo</label>
                             <input type="text" name="ativo" id="ativo" required data-parsley-required-message="Preencha este campo" 
-                            class="form-control" value="<?=$ativo;?>" placeholder="S ou N">
+                            class="form-control" value="<?=$ativo;?>" placeholder="">
                         </div> 
                         <div class="col-12 col-md-10 mt-2">
                             <?php 

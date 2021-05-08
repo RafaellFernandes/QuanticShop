@@ -122,7 +122,7 @@
 							<li class="sidebar-item"><a class="sidebar-link" href="cadastro/departamento">Departamentos</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="cadastro/fornecedor">Fornecedor</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="cadastro/marca">Marca</a></li>
-							
+							<li class="sidebad-item"><a class="sidebar-link" href="cadastro/produto">Produto</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="cadastro/transportadora">Transportadora</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="cadastro/usuario">Usuario</a></li>
 						</ul>
@@ -138,7 +138,7 @@
 							<li class="sidebar-item"><a class="sidebar-link" href="listagem/departamento">Departamentos</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="listagem/fornecedor">Fornecedor</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="listagem/marca">Marca</a></li>
-							
+							<li class="sidebar-item"><a class="sidebar-link" href="listagem/produto">Lista Produto Loja</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="listagem/transportadora">Transportadora</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="listagem/usuario">Usuario</a></li>
 						</ul>
@@ -149,12 +149,12 @@
 						  <i class="align-middle" data-feather="user-x"></i> <span class="align-middle">Inativados</span>
 						</a>
 						<ul id="cadlist2" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
-							<li class="sidebar-item"><a class="sidebar-link" href="#">NULL</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="#">NULL</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="#">NULL</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="#">NULL</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="#">NULL</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="#">NULL</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="inativos/marca">Marca</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="inativos/fornecedor">Fornecedor</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="inativos/produto">Produto</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="inativos/fornecedor">Fornecedor</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="inativos/fornecedor">Fornecedor</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="inativos/fornecedor">Fornecedor</a></li>
 						</ul>
 					</li>
 
@@ -166,8 +166,8 @@
 						  <i class="align-middle" data-feather="shopping-bag"></i> <span class="align-middle">Compra</span>
 						</a>
 						<ul id="ui" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
-							<li class="sidebar-item"><a class="sidebar-link" href="./processoCompra/produtoCompra">Entrada de Produto</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="./processoCompra/listaProduto">Lista Produtos</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="./processoCompra/produtoCompra">Cadastro</a></li>
+							
 							
 						</ul>
 					</li>
@@ -176,8 +176,8 @@
 						  <i class="align-middle" data-feather="server"></i> <span class="align-middle">Estocagem</span>
 						</a>
 						<ul id="ui1" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
-							<li class="sidebar-item"><a class="sidebar-link" href="controleEstoque/estoque">Controle de Estoque</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="cadastro/produto">Produto Loja</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="controleEstoque/estoque"></a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="./processoCompra/listaProduto">Lista Cadastro</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="listagem/produto">Lista Produto Loja</a></li>
 							<!-- <li class="sidebar-item"><a class="sidebar-link" href="">null</a></li> -->
 						</ul>

@@ -41,8 +41,11 @@
         echo "<script>alert('Selecione a Marca do produto');history.back();</script>";
     } else if( empty($descricao) ){
         echo "<script>alert('Preencha a Descrição');history.back();</script>";
+    } else if( empty($espec_tecnica) ){
+        echo "<script>alert('Preencha a especificação tecnica');history.back();</script>";
+    }  else if( empty($ativo) ){
+        echo "<script>alert('Preencha o ativo');history.back();</script>";   
     }
-    
     //iniciar uma transacao
     
     $pdo->beginTransaction();
