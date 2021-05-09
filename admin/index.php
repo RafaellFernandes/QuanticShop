@@ -152,9 +152,9 @@
 							<li class="sidebar-item"><a class="sidebar-link" href="inativos/marca">Marca</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="inativos/fornecedor">Fornecedor</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="inativos/produto">Produto</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="inativos/fornecedor">Fornecedor</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="inativos/fornecedor">Fornecedor</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="inativos/fornecedor">Fornecedor</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="inativos/cliente">Cliente</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="inativos/transportadora">Transportadora</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="inativos/usuario">Usuario</a></li>
 						</ul>
 					</li>
 
@@ -176,8 +176,7 @@
 						  <i class="align-middle" data-feather="server"></i> <span class="align-middle">Estocagem</span>
 						</a>
 						<ul id="ui1" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
-							<li class="sidebar-item"><a class="sidebar-link" href="controleEstoque/estoque"></a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="./processoCompra/listaProduto">Lista Cadastro</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="./processoCompra/listaProduto">Lista Estoque</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="listagem/produto">Lista Produto Loja</a></li>
 							<!-- <li class="sidebar-item"><a class="sidebar-link" href="">null</a></li> -->
 						</ul>

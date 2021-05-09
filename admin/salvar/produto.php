@@ -56,6 +56,7 @@
     
     if(empty($id)){
         //inserir
+       
         $sql= "INSERT INTO produto (nome_produto, codigo,  valor_unitario, descricao, espec_tecnica, foto,  departamento_id, marca_id, ativo) 
         values(:nome_produto, :codigo, :valor_unitario, :descricao, :espec_tecnica, :foto, :departamento_id, :marca_id, :ativo)";
         $consulta = $pdo->prepare($sql);
@@ -89,7 +90,7 @@
         $consulta->bindParam(':departamento_id',$departamento_id);
         $consulta->bindParam(':marca_id',$marca_id); 
         $consulta->bindParam(':id',$id);
-    }
+}
     
     if($consulta->execute()){
         //verificar se o arquivo nao está sendo enviado 
