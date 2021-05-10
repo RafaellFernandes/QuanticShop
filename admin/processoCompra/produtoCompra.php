@@ -58,7 +58,7 @@
 				<a href="processoCompra/listaProduto" class="btn btn-primary">Listagem</a> 
 		   </div>
 				<h4>Cadastro</h4>
-				<h6 class="card-subtitle text-muted">Produto</h6>
+				<h6 class="card-subtitle text-muted">Produto Entrada</h6>
 			</div>
 			<div class="card-body">
                 <form method="post" name="formCadastro"  action="processoCompra/salvarProdutoCompra" data_parsley_validate enctype="multipart/form-data">
@@ -122,6 +122,15 @@
                             <label for="qtd_produto">Quantidade em Estoque</label>
                             <input type="number" name="qtd_produto" id="qtd_produto" class="form-control" value="<?=$qtd_produto;?>" placeholder="">
                         </div>
+                        <div class="col-12 col-md-2 mt-2">
+                        <label for="ativo">Ativo</label>
+                        <select name="ativo" id="ativo" class="form-control" 
+                        required data-parsley-required-message="Selecione uma opção">
+                            <option value="">Selecione</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+					    </select>
+                        </div>
                         <div class="row g-2">
                             <div class="col-sm-4 mt-4">
                                 <button type="submit" class="btn btn-success margin mt-3">
@@ -143,4 +152,9 @@ $(document).ready(function(){
 	});
 </script>
 
+<script type="text/javascript">
+$(document).ready(function(){ 
+	$("#ativo").val("<?=$ativo?>");
+	});
+</script>
 

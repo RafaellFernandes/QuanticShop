@@ -70,10 +70,10 @@
     </div>
  </div>
 <script>
-    function excluir(id){
-        if (confirm("Deseja mesmo excluir? ")) {
-            //ir para exclusao
-            location.href="excluir/usuario/"+id;
+   function inativar(id){
+        if (confirm("Deseja mesmo inativar? ")) {
+            //ir para inativação
+            location.href="inativos/usuario/"+id;
         }
     }
     
