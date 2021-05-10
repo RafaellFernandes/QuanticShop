@@ -19,7 +19,7 @@
 					<thead>
 						<tr>
 							<th>ID Fornecedor</th>
-							<th>Nome Produto</th>
+							<th>ID produto</th>
 							<th>data cadastro</th>
 							<th>Valor unitario</th>
 							<th>Quantidade</th>
@@ -59,7 +59,7 @@
                          
 								//mostrar na tela
 								echo '<tr>
-								<td>'.$fornecedor_id.' - '.$razaoSocial.'</td>
+								<td>'.$fornecedor_id.'</td>
 								<td>'.$produto_id.'</td>
 								<td>'.$data_cadastro.'</td>
 								<td>'.$valor_unitario.'</td>

@@ -123,8 +123,8 @@
                             <input type="number" name="qtd_produto" id="qtd_produto" class="form-control" value="<?=$qtd_produto;?>" placeholder="">
                         </div>
                         <div class="col-12 col-md-2 mt-2">
-                        <label for="ativo">Ativo</label>
-                        <select name="ativo" id="ativo" class="form-control" 
+                        <label for="status">Status</label>
+                        <select name="status" id="status" class="form-control" 
                         required data-parsley-required-message="Selecione uma opção">
                             <option value="">Selecione</option>
                             <option value="0">0</option>
@@ -154,7 +154,7 @@ $(document).ready(function(){
 
 <script type="text/javascript">
 $(document).ready(function(){ 
-	$("#ativo").val("<?=$ativo?>");
+	$("#status").val("<?=$status?>");
 	});
 </script>
 
