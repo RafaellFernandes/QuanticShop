@@ -12,7 +12,7 @@
 //se nao existe o id
 if ( !isset ( $id ) ) $id = "";
 //iniciar as variaveis
-$qtd_produto = $valor_bruto = $data_atualizacao = $estoque_minimo = $produto_id = $nome_produto = "";
+$produto_id = $qtd_estoque = "";
 
   //verificar se existe um id
   if ( !empty ( $id ) ) {
@@ -29,13 +29,8 @@ $qtd_produto = $valor_bruto = $data_atualizacao = $estoque_minimo = $produto_id 
 
   	//separar os dados
     $id         	  = $dados->id;
-    $qtd_produto 	  = $dados->qtd_produto; 
-    $valor_bruto      = $dados->valor_bruto;
-    $valor_bruto      = number_format($valor_bruto,2,",",".");
-    $data_atualizacao = $dados->data_atualizacao;
-    $estoque_minimo   = $dados->estoque_minimo;
+    $qtd_estoque 	  = $dados->qtd_estoque; 
     $produto_id       = $dados->produto_id;
-    $nome_produto     = $dados->nome_produto;
   }
 
 ?>
@@ -48,14 +43,14 @@ $qtd_produto = $valor_bruto = $data_atualizacao = $estoque_minimo = $produto_id 
 				<h6 class="card-subtitle text-muted">Controle de Estoque</h6>
 			</div>
 			<div class="card-body">
-                <form method="post" name="formCadastro"  action="salvar/estoque" data_parsley_validate enctype="multipart </form-data">
+                <form method="post" name="formCadastro"  action="controleEstoque/salvarEstoque" data_parsley_validate enctype="multipart </form-data">
                     <p> Todos os campos são obrigatórios </p>
                     <div class="row">
                         <div class="col-12 col-md-2"  style="display: none;">
                             <label for="id">ID</label>
                             <input type="text" name="id" id="id" readonly class="form-control" value="<?=$id;?>">
                         </div>
-                        <div class="col-12 col-md-4">
+                        <div class="col-12 col-md-8">
                             <label for="produto_id">ID Produto</label>
                             <select name="produto_id" id="produto_id" class="form-control" required data-parsley-required-message="selecione uma opção">
                                 <option value="<?=$produto_id;?>"></option>
@@ -75,46 +70,17 @@ $qtd_produto = $valor_bruto = $data_atualizacao = $estoque_minimo = $produto_id 
                         </div>
 
                         <div class="col-12 col-md-4">
-                            <label for="qtd_produto">Quantidade em Estoque</label>
-                            <input type="text" name="qtd_produto" id="qtd_produto" required data-parsley-required-message="Preencha este campo" class="form-control" value="<?=$qtd_produto;?>">
+                            <label for="qtd_estoque">Quantidade em Estoque</label>
+                            <input type="number" name="qtd_estoque" id="qtd_estoque" required data-parsley-required-message="Preencha este campo" class="form-control" value="<?=$qtd_estoque;?>">
                         </div>
 
-                        <div class="col-12 col-md-4">
-                            <label for="valor_bruto">Valor</label>
-                            <input type="text" name="valor_bruto" id="valor_bruto" required data-parsley-required-message="Preencha este campo" class="form-control" value="<?=$valor_bruto;?>" placeholder="R$ 0,00">
-                        </div>
-
-                        <!-- <div class="col-12 col-md-4 mt-3">
-                            <label for="data_atualizacao">Data de Atualização</label>
-                            <input type="text" name="data_atualizacao" id="data_atualizacao" class="form-control" require data-parsley-required-message="Por favor, preencha este campo" 
-                            value="<?//=$data_atualizacao;?>">
-                        </div> -->
-                       
-                        <div class="col-12 col-md-4 mt-3">
-                            <div class="form-group">
-                                <label for="data_atualizacao">Data de Atualização</label>
-                                <!-- Datepicker as text field -->         
-                                <div class="input-group date" data-date-format="dd/mm/yyyy">
-                                <input  type="text" class="form-control" name="data_atualizacao" id="data_atualizacao" require data-parsley-required-message="Por favor, preencha este campo" placeholder="dd/mm/yyyy" value="<?=$data_atualizacao;?>">
-                                <div class="input-group-addon" >
-                                    <span class="glyphicon glyphicon-th"></span>
-                                </div>
-                                </div>
+                        <div class="row g-2">
+                            <div class="col-sm-4 mt-4">
+                                <button type="submit" class="btn btn-success margin mt-3">
+                                    Salvar Dados
+                                </button>
                             </div>
-                        </div>
-
-                        <div class="col-12 col-md-4 mt-3">
-                            <label for="estoque_minimo">Estoque Minimo</label>
-                            <input type="text" name="estoque_minimo" id="estoque_minimo" required data-parsley-required-message="Preencha este campo" class="form-control border border-danger" value="<?=$estoque_minimo;?>">
-                        </div>
-                        
-                    </div>
-                    <button type="submit" class="btn btn-success margin mt-3">
-                        Salvar Dados
-                    </button>
-                    <div class="float-right">
-                        <a href="listagem/produto" class="btn btn-primary mt-3">Listar Registro</a>
-                    </div>
+                        </div> 
                 </form>
             </div>
         </div>

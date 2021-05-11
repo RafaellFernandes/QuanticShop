@@ -17,7 +17,7 @@ if ( $_POST ) {
     include "../admin/config/conexao.php";
 
     //recuperar dados do formulario
-    $id = $produto_id = $fornecedor_id = $lote = $valor_unitario = $data_cadastro = $qtd_produto= "";
+    $id = $produto_id = $fornecedor_id = $lote = $valor_unitario = $data_cadastro = "";
 
     foreach ($_POST as $key => $value) {
         $$key = trim ( $value );
@@ -34,8 +34,6 @@ if ( $_POST ) {
         echo "<script>alert('Preencha o fornecedor!');history.back();</script>";
     } else if( empty($lote) ){
         echo "<script>alert('Preencha o lote');history.back();</script>";
-    } else if( empty($qtd_produto) ){
-        echo "<script>alert('Preencha a quantidade de produtos');history.back();</script>";
 
     }    
 
@@ -56,8 +54,7 @@ if ( $_POST ) {
         $consulta->bindParam(':lote', $lote);
         $consulta->bindParam(':fornecedor_id', $fornecedor_id);
         $consulta->bindParam(':produto_id', $produto_id);
-        $consulta->bindParam(':qtd_produto', $qtd_produto);
-       
+  
     } else { 
     
         $sql = "UPDATE item_compra SET valor_unitario = :valor_unitario, data_cadastro = :data_cadastro, lote = :lote, 
@@ -68,7 +65,6 @@ if ( $_POST ) {
         $consulta->bindParam(':lote', $lote);
         $consulta->bindParam(':fornecedor_id', $fornecedor_id);
         $consulta->bindParam(':produto_id', $produto_id);
-        $consulta->bindParam(':qtd_produto', $qtd_produto);
         $consulta->bindParam(":id", $id);
     }
 

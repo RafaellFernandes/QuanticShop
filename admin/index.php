@@ -138,7 +138,7 @@
 							<li class="sidebar-item"><a class="sidebar-link" href="listagem/departamento">Departamentos</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="listagem/fornecedor">Fornecedor</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="listagem/marca">Marca</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="listagem/produto">Lista Produto Loja</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="listagem/produto">Produto</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="listagem/transportadora">Transportadora</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="listagem/usuario">Usuario</a></li>
 						</ul>
@@ -167,8 +167,8 @@
 						</a>
 						<ul id="ui" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
 							<li class="sidebar-item"><a class="sidebar-link" href="./processoCompra/produtoCompra">Cadastro</a></li>
-							
-							
+							<li class="sidebar-item"><a class="sidebar-link" href="./processoCompra/listaProduto">Lista Entrada</a></li>
+								
 						</ul>
 					</li>
 					<li class="sidebar-item">
@@ -176,8 +176,9 @@
 						  <i class="align-middle" data-feather="server"></i> <span class="align-middle">Estocagem</span>
 						</a>
 						<ul id="ui1" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
-							<li class="sidebar-item"><a class="sidebar-link" href="./processoCompra/listaProduto">Lista Estoque</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="listagem/produto">Lista Produto Loja</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="./controleEstoque/estoque">Estoque</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="./controleEstoque/listaEstoque">Lista Estoque</a></li>
+							
 							<!-- <li class="sidebar-item"><a class="sidebar-link" href="">null</a></li> -->
 						</ul>
 					</li>

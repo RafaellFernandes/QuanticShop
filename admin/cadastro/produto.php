@@ -122,11 +122,7 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
                                     ?>
                             </select>
                         </div>
-                        <div class="col-12 col-md-4 mt-2">
-                            <label for="valor_unitario">Valor Unitário</label>
-                            <input type="text" name="valor_unitario" id="valor_unitario" required data-parsley-required-message="Preencha este campo" 
-                            class="form-control" value="<?=$valor_unitario;?>" placeholder="R$ 0,00">
-                        </div> 
+                        
                         <div class="col-12 col-md-2 mt-2">
                         <label for="ativo">Ativo</label>
                         <select name="ativo" id="ativo" class="form-control" 

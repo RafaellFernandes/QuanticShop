@@ -22,7 +22,6 @@
 							<th>ID produto</th>
 							<th>data cadastro</th>
 							<th>Valor unitario</th>
-							<th>Quantidade</th>
 							<th>Ações</th>
 						</tr>
 					</thead>
@@ -55,7 +54,7 @@
                                 $valor_unitario      = $dados->valor_unitario;
                                 $valor_unitario      = number_format($valor_unitario,2, '.' , ',');
                                 $lote                = $dados->lote;
-								$qtd_produto         = $dados->qtd_produto;
+						
                          
 								//mostrar na tela
 								echo '<tr>
@@ -63,7 +62,6 @@
 								<td>'.$produto_id.'</td>
 								<td>'.$data_cadastro.'</td>
 								<td>'.$valor_unitario.'</td>
-								<td>'.$qtd_produto.'</td>
 								<td class="table-action text-center">
 								<a href="processoCompra/produtoCompra/'.$id.'" alt="Editar" title="Editar">
 									<i class="align-middle"  data-feather="edit-2"></i>

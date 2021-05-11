@@ -3,6 +3,8 @@
     if ( !isset ( $_SESSION["quanticshop"]["id"] ) ){
         exit;
     }
+
+
      //mostrar erros
     ini_set('display_errors',1);
 	ini_set('display_startup_erros',1);
@@ -13,7 +15,7 @@
     if ( !isset ( $id ) ) $id = "";
 
     //iniciar as variaveis
-    $produto_id = $fornecedor_id = $lote = $valor_unitario = $data_cadastro = $qtd_produto = "";
+    $produto_id = $fornecedor_id = $lote = $valor_unitario = $data_cadastro = $qtd_produto = $venda_unitaria = $custo_unitario = "";
 
     //verificar se existe um id
     if ( !empty ( $id ) ) {
@@ -34,14 +36,15 @@
     $id         	          = $dados->id;
     $nome_produto 	          = $dados->nome_produto; 
     $produto_id               = $dados->produto_id;
-    $valor_unitario           = $dados->valor_unitario;
-    $valor_unitario           = number_format($valor_unitario,2,",",".");
+    $custo_unitario           = $dados->custo_unitario;
+    $custo_unitario           = number_format($custo_unitario,2,",",".");
+    $venda_unitaria           = $dados->venda_unitaria;
+    $venda_unitaria           = number_format($venda_unitaria,2,",",".");
     $data_cadastro            = $dados->data_cadastro;
     $fornecedor_id            = $dados->fornecedor_id;
     $razaoSocial              = $dados->razaoSocial;
     $lote                     = $dados->lote;
-    $qtd_produto              = $dados->qtd_produto;
-
+        
   }
 
 ?>
@@ -108,20 +111,29 @@
                                     ?>
                             </select>
                         </div>
-                        <div class="col-12 col-md-4 mt-2">
-                            <label for="valor_unitario">Valor Unitário</label>
-                            <input type="text" name="valor_unitario" id="valor_unitario" required data-parsley-required-message="Preencha este campo" 
-                            class="form-control" value="<?=$valor_unitario;?>" placeholder="R$ 0,00">
-                        </div> 
+
+                        <div type="text" class="col-12 col-md-4 mt-2 ">
+                        <label >Valor de Custo:</label>
+                        <input type="number" name="custo_unitario" class="form-control number_format" required data-parsley-required-message="Preencha este campo" 
+                            class="form-control" value="<?=$custo_unitario;?>" placeholder="R$ 0,00">
+                        </div>         
+                     </div>
+                    <div type="text" class="col-12 col-md-4 mt-2">
+                        <label >Margem(%):</label>
+                        <input type="number" name="porcentagem_lucro" class="form-control"  > 
+                    </div> 
+                    <div type="text" class="col-12 col-md-4 mt-2">
+                        <label >Valor de Venda:</label>
+                        <input type="number"  name="venda_unitaria" class="form-control" required data-parsley-required-message="Preencha este campo" 
+                        class="form-control" value="<?=$venda_unitaria;?>" placeholder="R$ 0,00">>           
+                    </div>
+                       </div>
                         <div class="mb-3 col-12 col-md-4 mt-2">
-							<label for="data_cadastro">Data de Nascimento:</label>
+							<label for="data_cadastro">Data de cadastro:</label>
 							<input type="text" name="data_cadastro" id="data_cadastro" class="form-control" required data-parsley-required-message="Preencha a data de Cadastro" 
 							placeholder="Ex: 11/12/1990" value="<?=$data_cadastro;?>">
 						</div> 
-                        <div class="col-12 col-md-4 mt-2">
-                            <label for="qtd_produto">Quantidade em Estoque</label>
-                            <input type="number" name="qtd_produto" id="qtd_produto" class="form-control" value="<?=$qtd_produto;?>" placeholder="">
-                        </div>
+                        
                         <div class="col-12 col-md-2 mt-2">
                         <label for="status">Status</label>
                         <select name="status" id="status" class="form-control" 
@@ -158,3 +170,8 @@ $(document).ready(function(){
 	});
 </script>
 
+<script>
+function calculaValor(valorCusto, percentualLucro){
+   return (valorCusto + (valorCusto * (percentualLucro / 100)));
+}
+</script>
