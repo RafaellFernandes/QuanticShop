@@ -36,7 +36,7 @@
       $dados = $consulta->fetch(PDO::FETCH_OBJ);
 
       //verificar se existe usuario
-      if ($nivelAcesso_id = 1){
+      if ($nivelAcesso_id == 1){
         //registrar este usuário na sessao
         $_SESSION["quanticshop"] = 
         array("id"  => $dados->id,
@@ -55,7 +55,7 @@
       else if ( !password_verify($senha, $dados->senha) )
         $msg = '<p class="alert alert-danger">Senha incorreta</p>';
       //se deu tudo certo
-      else if ($nivelAcesso_id = 2) {
+      else if ($nivelAcesso_id == 2) {
         //$msg = '<p class="alert alert-danger">Area Restrita!</p>';
         echo '<script>alert("Area Restrita!");history.back();</script>';
       }
