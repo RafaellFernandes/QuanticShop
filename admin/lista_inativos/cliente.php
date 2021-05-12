@@ -9,25 +9,25 @@
 		<div class="col-12 col-xl-12">
 			<div class="card">
 				<div class="card-header">
-					<div class="float-end">
-						<a href="cadastro/clienteJ" class="btn btn-primary">Cad. Pessoa Juridica</a>
-                        <a href="cadastro/clienteF" class="btn btn-primary">Cad. Pessoa Fisica</a>
+                    <div class="float-end">
+						<a href="listagem/cliente" class="btn btn-primary">Lista de Clientes Ativos</a>
 					</div>
-					<h4>Lista</h4>
-					<h6 class="card-subtitle text-muted">Clientes | Pessoas Fisicas e/ou Juridicas</h6>
+					<h4>LISTA</h4>
+					<h6 style="color: red;"><strong>Clientes Inativos| Pessoas Fisicas e/ou Juridicas</strong></h6>
 				</div>
-                <fieldset class="mb-3 ml-3">
-                    <div class="row">
-                        <label class="col-form-label col-sm-2 text-sm-right pt-sm-0">Cliente:</label>
-                        <div class="col-sm-10">
-                            <label class="form-check">
-                                <input name="optradio" type="radio" class="form-check-input" value="fisica" onclick="pessoa(this.value);">
-                                <span class="form-check-label">Pessoa Fisica</span>
-                            </label>
-                            <label class="form-check">
-                                <input name="optradio" type="radio" class="form-check-input" value="juridica" onclick="pessoa(this.value);">
-                                <span class="form-check-label">Pessoa Juridica</span>
-                            </label>
+                <fieldset>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <label class="form-check">
+                                    <input name="optradio" type="radio" class="form-check-input" value="fisica" onclick="pessoa(this.value);">
+                                    <span class="form-check-label">Pessoa Fisica</span>
+                                </label>
+                                <label class="form-check">
+                                    <input name="optradio" type="radio" class="form-check-input" value="juridica" onclick="pessoa(this.value);">
+                                    <span class="form-check-label">Pessoa Juridica</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </fieldset>
@@ -48,7 +48,7 @@
                         </thead>
                         <tbody>
                             <?php
-                                $sql = "SELECT id, primeiro_nome, sobrenome, cpf, date_format(data_nascimento, '%d/%m/%Y') data_nascimento, pessoaFJ, email, cidade, estado, foto, celular FROM cliente
+                                $sql = "SELECT id, primeiro_nome, sobrenome, cpf, date_format(data_nascimento, '%d/%m/%Y') data_nascimento, ativo, pessoaFJ, email, cidade, estado, foto, celular FROM cliente
                                 ORDER BY primeiro_nome";
                                 $consulta = $pdo->prepare($sql);
                                 $consulta->execute();
@@ -66,8 +66,7 @@
                                     $estado             = $dados->estado;
                                     $ativo              = $dados->ativo;
 
-                                    if ($pessoaFJ == "F") {
-                                    if ( $ativo == "0" ) {
+                                    if ($pessoaFJ == "F" and $ativo == "0") {
                                         echo '<tr>
                                             <td><img src="../fotos/'.$foto.'p.jpg" alt="'.$primeiro_nome.'" width="48" height="48" class="rounded-circle mr-2"></td>
                                             <td>'.$primeiro_nome.' '.$sobrenome.'</td>
@@ -84,7 +83,6 @@
                                                 </a>
                                             </td>
                                         </tr> ';
-                                    }
                                     };
                                     
                                 }
@@ -96,7 +94,7 @@
 
                 <!-- Listagem de Pessoa Juridica -->
                 <div id="juridica" style="display:none;">
-                    <table class="table table-bordered table-hover table-striped" id="tabela2">
+                    <table class="table table-bordered table-hover table-striped" id="tabela1">
                         <thead>
                             <tr>
                                 <th>Razão Social</th>
@@ -110,7 +108,7 @@
                         </thead>
                         <tbody>
                             <?php
-                                $sql = "SELECT id, razaoSocial, cnpj, email, cidade, estado, pessoaFJ, telefone FROM cliente
+                                $sql = "SELECT id, razaoSocial, cnpj, email, cidade, estado, pessoaFJ, telefone, ativo  FROM cliente
                                 ORDER BY id";
                                 $consulta = $pdo->prepare($sql);
                                 $consulta->execute();
@@ -128,8 +126,8 @@
                                     $ativo              = $dados->ativo;
                                     // $siteJ              = $dados->siteJ;
 
-                                    if ($pessoaFJ == "J") { 
-                                    if ( $ativo == "0" ) {
+                                    if ($pessoaFJ == "J" and $ativo == "0" ) { 
+
                                         echo '<tr>
                                                
                                                 <td>'.$razaoSocial.'</td>
@@ -147,7 +145,6 @@
                                                     </a>
                                                 </td>
                                             </tr> ';
-                                        }
                                     };
                                 }
                             ?>
@@ -189,7 +186,7 @@
 
     //adicionar o dataTable2 para a Lista de Pessoas Juridicas
     $(document).ready(function(){
-        $('#tabela2').DataTable({
+        $('#tabela1').DataTable({
             "language": {
                 "lengthMenu": "Mostrando _MENU_ Registros por Pagina",
                 "zeroRecords": "Nenhum Registro Encontrado",

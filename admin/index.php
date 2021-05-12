@@ -35,7 +35,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="Site Feito para o TCC">
 	<meta name="author" content="Rafael e Juliana">
-	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link rel="shortcut icon" href="static/img/icons/icon-48x48.png" />
@@ -149,12 +148,12 @@
 						  <i class="align-middle" data-feather="user-x"></i> <span class="align-middle">Inativados</span>
 						</a>
 						<ul id="cadlist2" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
-							<li class="sidebar-item"><a class="sidebar-link" href="inativos/marca">Marca</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="inativos/fornecedor">Fornecedor</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="inativos/produto">Produto</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="inativos/cliente">Cliente</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="inativos/transportadora">Transportadora</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="inativos/usuario">Usuario</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="lista_inativos/marca">Marca</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="lista_inativos/fornecedor">Fornecedor</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="lista_inativos/produto">Produto</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="lista_inativos/cliente">Cliente</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="lista_inativos/transportadora">Transportadora</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="lista_inativos/usuario">Usuario</a></li>
 						</ul>
 					</li>
 
@@ -166,18 +165,18 @@
 						  <i class="align-middle" data-feather="shopping-bag"></i> <span class="align-middle">Compra</span>
 						</a>
 						<ul id="ui" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
-							<li class="sidebar-item"><a class="sidebar-link" href="./processoCompra/produtoCompra">Cadastro</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="./processoCompra/listaProduto">Lista Entrada</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="processoCompra/produtoCompra">Cadastro</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="processoCompra/listaProduto">Lista Entrada</a></li>
 								
 						</ul>
 					</li>
 					<li class="sidebar-item">
 						<a data-bs-target="#ui1" data-bs-toggle="collapse" class="sidebar-link collapsed">
-						  <i class="align-middle" data-feather="server"></i> <span class="align-middle">Estocagem</span>
+						  <i class="align-middle" data-feather="server"></i> <span class="align-middle">Estoque</span>
 						</a>
 						<ul id="ui1" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
-							<li class="sidebar-item"><a class="sidebar-link" href="./controleEstoque/estoque">Estoque</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="./controleEstoque/listaEstoque">Lista Estoque</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="controleEstoque/estoque">Controle Estoque</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="controleEstoque/listaEstoque">Lista Estoque</a></li>
 							
 							<!-- <li class="sidebar-item"><a class="sidebar-link" href="">null</a></li> -->
 						</ul>
@@ -187,8 +186,8 @@
 						  <i class="align-middle" data-feather="shopping-cart"></i> <span class="align-middle">Venda</span>
 						</a>
 						<ul id="ui2" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
-						<li class="sidebar-item"><a class="sidebar-link" href="./venda/vendaProduto">Venda</a></li>
-						<li class="sidebar-item"><a class="sidebar-link" href="./controleEstoque/listaEstoque">Lista Estoque</a></li>
+						<li class="sidebar-item"><a class="sidebar-link" href="venda/vendaProduto">Venda</a></li>
+						<li class="sidebar-item"><a class="sidebar-link" href="controleEstoque/listaEstoque">Lista Estoque</a></li>
 						</ul>
 					</li>
 

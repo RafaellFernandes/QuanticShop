@@ -13,21 +13,22 @@
 						<a href="cadastro/clienteJ" class="btn btn-primary">Cad. Pessoa Juridica</a>
                         <a href="cadastro/clienteF" class="btn btn-primary">Cad. Pessoa Fisica</a>
 					</div>
-					<h4>Lista</h4>
-					<h6 class="card-subtitle text-muted">Clientes | Pessoas Fisicas e/ou Juridicas</h6>
+					<h4>LISTA</h4>
+					<h6 style="color: green;"><strong>Clientes | Pessoas Fisicas e/ou Juridicas</strong></h6>
 				</div>
-                <fieldset class="mb-3 ml-3">
-                    <div class="row">
-                        <label class="col-form-label col-sm-2 text-sm-right pt-sm-0">Cliente:</label>
-                        <div class="col-sm-10">
-                            <label class="form-check">
-                                <input name="optradio" type="radio" class="form-check-input" value="fisica" onclick="pessoa(this.value);">
-                                <span class="form-check-label">Pessoa Fisica</span>
-                            </label>
-                            <label class="form-check">
-                                <input name="optradio" type="radio" class="form-check-input" value="juridica" onclick="pessoa(this.value);">
-                                <span class="form-check-label">Pessoa Juridica</span>
-                            </label>
+                <fieldset>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-10 ">
+                                <label class="form-check">
+                                    <input name="optradio" type="radio" class="form-check-input" value="fisica" onclick="pessoa(this.value);">
+                                    <span class="form-check-label">Pessoa Fisica</span>
+                                </label>
+                                <label class="form-check">
+                                    <input name="optradio" type="radio" class="form-check-input" value="juridica" onclick="pessoa(this.value);">
+                                    <span class="form-check-label">Pessoa Juridica</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </fieldset>
@@ -48,7 +49,7 @@
                         </thead>
                         <tbody>
                             <?php
-                                $sql = "SELECT id, primeiro_nome, sobrenome, cpf, date_format(data_nascimento, '%d/%m/%Y') data_nascimento, pessoaFJ, email, cidade, estado, foto, celular FROM cliente
+                                $sql = "SELECT id, primeiro_nome, sobrenome, cpf, date_format(data_nascimento, '%d/%m/%Y') data_nascimento, pessoaFJ, email, cidade, estado, foto, celular, ativo FROM cliente
                                 ORDER BY primeiro_nome";
                                 $consulta = $pdo->prepare($sql);
                                 $consulta->execute();
@@ -64,8 +65,9 @@
                                     $cidade      	    = $dados->cidade;
                                     $pessoaFJ           = $dados->pessoaFJ;
                                     $estado             = $dados->estado;
+                                    $ativo              = $dados->ativo;
 
-                                    if ($pessoaFJ == "F") {
+                                    if ($pessoaFJ == "F" and $ativo == "1") {
                                         echo '<tr>
                                             <td><img src="../fotos/'.$foto.'p.jpg" alt="'.$primeiro_nome.'" width="48" height="48" class="rounded-circle mr-2"></td>
                                             <td>'.$primeiro_nome.' '.$sobrenome.'</td>
@@ -100,14 +102,14 @@
                                 <th>CNPJ</th>
                                 <th>Cidade</th>
                                 <th>Email</th>
-                                <!-- <th>Site</th> -->
+                                <th>Site</th>
                                 <th>Telefone</th>
                                 <th>Ações</th> 
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                                $sql = "SELECT id, razaoSocial, cnpj, email, cidade, estado, pessoaFJ, telefone FROM cliente
+                                $sql = "SELECT id, razaoSocial, cnpj, email, cidade, estado, pessoaFJ, telefone, siteJ, ativo FROM cliente
                                 ORDER BY id";
                                 $consulta = $pdo->prepare($sql);
                                 $consulta->execute();
@@ -122,17 +124,17 @@
                                     $telefone 	        = $dados->telefone;
                                     $cidade 	        = $dados->cidade;
                                     $estado             = $dados->estado;
-                                    // $siteJ              = $dados->siteJ;
+                                    $siteJ              = $dados->siteJ;
+                                    $ativo              = $dados->ativo;
 
-                                    if ($pessoaFJ == "J") { 
+                                    if ($pessoaFJ == "J" and $ativo == "1") { 
 
                                         echo '<tr>
-                                               
                                                 <td>'.$razaoSocial.'</td>
                                                 <td>'.$cnpj.'</td>
                                                 <td>'.$cidade.' - '.$estado.'</td>
                                                 <td>'.$email.'</td>
-                                                
+                                                <td>'.$siteJ.'</td>
                                                 <td>'.$telefone.'</td>
                                                 <td class="table-action text-center">
                                                     <a href="cadastro/clienteJ/'.$id.'" alt="Editar" title="Editar">
