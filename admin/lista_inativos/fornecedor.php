@@ -17,10 +17,10 @@
 			<div class="card">
 				<div class="card-header">
 					<div class="float-end">
-						<a href="cadastro/fornecedor" class="btn btn-info">Cadastrar Novo</a>
+						<a href="listagem/fornecedor" class="btn btn-primary">Lista de Fornecedores Ativos</a>
 					</div>
-					<h4>Lista</h4>
-					<h6 class="card-subtitle text-muted">Fornecedores</h6>
+					<h4>LISTA</h4>
+					<h6 style="color: red;"><strong>Fornecedores Inativos</strong></h6>
 				</div>
 				<table class="table table-bordered table-hover table-striped " id="tabela">
                     <thead>
@@ -28,13 +28,14 @@
                             <th>Nome</th>
                             <th>CNPJ</th>
                             <th>Telefone</th>
+                            <th>Site e Email</th>
                             <th>Cidade</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                            $sql = "SELECT id, razaoSocial, cnpj, telefone, cidade, estado, ativo FROM fornecedor";
+                            $sql = "SELECT id, razaoSocial, cnpj, telefone, cidade, estado, siteFornecedor, email, ativo FROM fornecedor";
                             $consulta = $pdo->prepare($sql);
                             $consulta->execute();
 
@@ -47,25 +48,25 @@
                                 $cidade 	              = $dados->cidade;
                                 $estado                   = $dados->estado;
                                 $ativo                    = $dados->ativo;
+                                $siteFornecedor           = $dados->siteFornecedor;
+                                $email                    = $dados->email;
                                                 
                                 //mostrar na tela
                                 if ( $ativo == "0" ) {
-                                echo '<tr>
-                                        <td>'.$razaoSocial.'</td>
-                                        <td>'.$cnpj.'</td>
-                                        <td>'.$telefone.'</td>
-                                        <td>'.$cidade.' - '.$estado.'</td>
-                                        <td class="table-action text-center">
-                                            <a href="cadastro/fornecedor/'.$id.'" alt="Editar" title="Editar">
-                                                <i class="align-middle"  data-feather="edit-2"></i>
-                                            </a>
-                                            <a href="javascript:excluir('.$id.')" alt="Excluir" title="Excluir">
-                                                <i class="align-middle" data-feather="trash"></i>
-                                            </a>
-                                        </td>
-                                    </tr>';
-                                
-                                }
+                                    echo '<tr>
+                                            <td>'.$razaoSocial.'</td>
+                                            <td>'.$cnpj.'</td>
+                                            <td>'.$telefone.'</td>
+                                            <td>'.$siteFornecedor.'<br>'.$email.'</td>
+                                            <td>'.$cidade.' - '.$estado.'</td>
+                                            <td class="table-action text-center">
+                                                <a href="cadastro/fornecedor/'.$id.'" alt="Editar" title="Editar">
+                                                    <i class="align-middle"  data-feather="edit-2"></i>
+                                                </a>
+                                            </td>
+                                        </tr>';
+                                    
+                                    }
                             }
                         ?>
                     </tbody>
@@ -75,13 +76,6 @@
     </div>
 </div>
 <script>
-    function excluir(id){
-        if (confirm("Deseja mesmo excluir? ")) {
-            //ir para exclusao
-            location.href="excluir/fornecedor/"+id;
-        }
-    }
-
     $(document).ready( function () {
         $('#tabela').DataTable({
             language: {

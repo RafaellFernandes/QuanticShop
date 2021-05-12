@@ -17,10 +17,10 @@
 			<div class="card">
 				<div class="card-header">
 					<div class="float-end">
-						<a href="cadastro/fornecedor" class="btn btn-info">Cadastrar Novo</a>
+						<a href="cadastro/fornecedor" class="btn btn-primary">Cadastrar Novo</a>
 					</div>
-					<h4>Lista</h4>
-					<h6 class="card-subtitle text-muted">Fornecedores</h6>
+					<h4>LISTA</h4>
+					<h6 style="color: green;"><strong>Fornecedores Ativos</strong></h6>
 				</div>
 				<table class="table table-bordered table-hover table-striped " id="tabela">
                     <thead>
@@ -28,13 +28,14 @@
                             <th>Nome</th>
                             <th>CNPJ</th>
                             <th>Telefone</th>
+                            <th>Site e Email</th>
                             <th>Cidade</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                            $sql = "SELECT id, razaoSocial, cnpj, telefone, cidade, estado FROM fornecedor";
+                            $sql = "SELECT id, razaoSocial, cnpj, telefone, siteFornecedor, ativo, email, cidade, estado FROM fornecedor";
                             $consulta = $pdo->prepare($sql);
                             $consulta->execute();
 
@@ -46,22 +47,28 @@
                                 $telefone                 = $dados->telefone;
                                 $cidade 	              = $dados->cidade;
                                 $estado                   = $dados->estado;
-                                                
+                                $siteFornecedor           = $dados->siteFornecedor;
+                                $email                    = $dados->email;
+                                $ativo                    = $dados->ativo;
+                                              
                                 //mostrar na tela
-                                echo '<tr>
-                                        <td>'.$razaoSocial.'</td>
-                                        <td>'.$cnpj.'</td>
-                                        <td>'.$telefone.'</td>
-                                        <td>'.$cidade.' - '.$estado.'</td>
-                                        <td class="table-action text-center">
-                                            <a href="cadastro/fornecedor/'.$id.'" alt="Editar" title="Editar">
-                                                <i class="align-middle"  data-feather="edit-2"></i>
-                                            </a>
-                                            <a href="javascript:excluir('.$id.')" alt="Excluir" title="Excluir">
-                                                <i class="align-middle" data-feather="trash"></i>
-                                            </a>
-                                        </td>
-                                    </tr>';
+                                if ( $ativo == "1" ) {
+                                    echo '<tr>
+                                            <td>'.$razaoSocial.'</td>
+                                            <td>'.$cnpj.'</td>
+                                            <td>'.$telefone.'</td>
+                                            <td>'.$siteFornecedor.'<br>'.$email.'</td>
+                                            <td>'.$cidade.' - '.$estado.'</td>
+                                            <td class="table-action text-center">
+                                                <a href="cadastro/fornecedor/'.$id.'" alt="Editar" title="Editar">
+                                                    <i class="align-middle"  data-feather="edit-2"></i>
+                                                </a>
+                                                <a href="javascript:excluir('.$id.')" alt="Excluir" title="Excluir">
+                                                    <i class="align-middle" data-feather="trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>';
+                                }
                             }
                         ?>
                     </tbody>

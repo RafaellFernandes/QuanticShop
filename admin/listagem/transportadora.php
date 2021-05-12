@@ -10,10 +10,10 @@
 			<div class="card">
 				<div class="card-header">
 					<div class="float-end">
-						<a href="cadastro/transportadora" class="btn btn-info">Cadastrar Novo</a>
+						<a href="cadastro/transportadora" class="btn btn-primary">Cadastrar Novo</a>
 					</div>
-					<h4>Lista</h4>
-					<h6 class="card-subtitle text-muted">Transportadoras</h6>
+					<h4>LISTA</h4>
+					<h6 style="color: green;"><strong>Transportadoras Ativas</strong></h6>
 				</div>
 				<table class="table table-bordered table-hover table-striped " id="tabela">
 					<thead>
@@ -21,7 +21,7 @@
 							<th>Transportadora</th>
 							<th>CNPJ</th>
 							<th>Telefone</th>
-							<th>Email</th>
+							<th>Email e Site</th>
 							<th>Cidade</th>
 							<th>Ações</th>
 						</tr>
@@ -41,24 +41,28 @@
 								$email               = $dados->email;
 								$estado              = $dados->estado;
 								$cidade 	         = $dados->cidade;
+								$ativo 				 = $dados->ativo;
+								$siteTransp 		 = $dados->siteTransp;
 								
 
 								//mostrar na tela
-								echo '<tr>
-										<td>'.$razaoSocial.'</td>
-										<td>'.$cnpj.'</td>
-										<td>'.$telefone.'</td>
-										<td>'.$email.'</td>
-										<td>'.$cidade.' - '.$estado.'</td>
-										<td class="table-action text-center">
-											<a href="cadastro/transportadora/'.$id.'" alt="Editar" title="Editar">
-												<i class="align-middle"  data-feather="edit-2"></i>		
-											</a>
-											<a href="javascript:excluir('.$id.')" alt="Excluir" title="Excluir">
-												<i class="align-middle" data-feather="trash"></i>			
-											</a>
-										</td>
-									</tr>';
+								if ($ativo == "1") {
+									echo '<tr>
+											<td>'.$razaoSocial.'</td>
+											<td>'.$cnpj.'</td>
+											<td>'.$telefone.'</td>
+											<td>'.$email.'<br>'.$siteTransp.'</td>
+											<td>'.$cidade.' - '.$estado.'</td>
+											<td class="table-action text-center">
+												<a href="cadastro/transportadora/'.$id.'" alt="Editar" title="Editar">
+													<i class="align-middle"  data-feather="edit-2"></i>		
+												</a>
+												<a href="javascript:excluir('.$id.')" alt="Excluir" title="Excluir">
+													<i class="align-middle" data-feather="trash"></i>			
+												</a>
+											</td>
+										</tr>';
+								}
 							}
 						?>
 					</tbody>

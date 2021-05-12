@@ -44,14 +44,20 @@
 
 	<link href="static/css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
 	<script src="assets/mask/jquery.mask.js"></script>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+  	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+  
 	<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-	<link href="assets/styleLogin.css" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/862f0da969.js" crossorigin="anonymous"></script>
+
+	<link href="assets/styleLogin.css" rel="stylesheet">
 	
 </head>
 
@@ -148,10 +154,11 @@
 						  <i class="align-middle" data-feather="user-x"></i> <span class="align-middle">Inativados</span>
 						</a>
 						<ul id="cadlist2" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
-							<li class="sidebar-item"><a class="sidebar-link" href="lista_inativos/marca">Marca</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="lista_inativos/fornecedor">Fornecedor</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="lista_inativos/produto">Produto</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="lista_inativos/cliente">Cliente</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="lista_inativos/departamento">Departamento</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="lista_inativos/fornecedor">Fornecedor</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="lista_inativos/marca">Marca</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="lista_inativos/produto">Produto</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="lista_inativos/transportadora">Transportadora</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="lista_inativos/usuario">Usuario</a></li>
 						</ul>

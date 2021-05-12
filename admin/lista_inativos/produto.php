@@ -16,10 +16,10 @@
 			<div class="card">
 				<div class="card-header">
 					<div class="float-end">
-						<a href="cadastro/produto" class="btn btn-info">Cadastrar Novo</a>
+						<a href="listagem/produto" class="btn btn-primary">Produtos Ativos</a>
 					</div>
-					<h4>Lista</h4>
-					<h6 class="card-subtitle text-muted">Produtos</h6>
+					<h4>LISTA</h4>
+					<h6 style="color: red;"><strong>Produtos Inativados</strong></h6>
 				</div>
 				<table class="table table-bordered table-hover table-striped" id="tabela">
 					<thead>
@@ -34,9 +34,12 @@
 					</thead>
 					<tbody>
 						<?php
-							$sql = "SELECT p.*, m.nome_marca, d.nome_dept  FROM produto p 
-							 	LEFT JOIN departamento d on (d.id = p.departamento_id)
-                				LEFT JOIN marca m on(m.id = p.marca_id) ORDER BY p.id";
+							$sql = "SELECT p.*, m.*, d.* 
+									FROM produto p 
+							 		LEFT JOIN departamento d ON (d.id = p.departamento_id)
+                					LEFT JOIN marca m ON(m.id = p.marca_id) 
+									ORDER BY p.id";
+
 							$consulta = $pdo->prepare($sql);
 							$consulta->execute();
 
@@ -56,21 +59,18 @@
 												
 								//mostrar na tela
                                 if ( $ativo == "0" ) {
-								echo '<tr>	
-										<td><img src="'.$imagem.'" alt="'.$nome_produto.'"  width="48" height="48" class="rounded-circle mr-2"></td>
-										<td>'.$nome_produto.'</td>
-										<td>R$ '.$valor_unitario.'</td>
-										<td>'.$nome_marca.'</td>
-										<td>'.$nome_dept.'</td>
-										<td>
-											<a href="cadastro/produto/'.$id.'" alt="Editar" title="Editar">
-												<i class="align-middle"  data-feather="edit-2"></i>				
-											</a>
-											<a href="javascript:excluir('.$id.')" alt="Excluir" title="Excluir">
-												<i class="align-middle" data-feather="trash"></i>					
-											</a>
-										</td>
-									</tr>';
+									echo '<tr>	
+											<td><img src="'.$imagem.'" alt="'.$nome_produto.'"  width="48" height="48" class="rounded-circle mr-2"></td>
+											<td>'.$nome_produto.'</td>
+											<td>R$ '.$valor_unitario.'</td>
+											<td>'.$nome_marca.'</td>
+											<td>'.$nome_dept.'</td>
+											<td class="table-action text-center">
+												<a href="cadastro/produto/'.$id.'" alt="Editar" title="Editar">
+													<i class="align-middle"  data-feather="edit-2"></i>				
+												</a>
+											</td>
+										</tr>';
                                 }
 							}
 						?>
@@ -81,13 +81,6 @@
 	</div>
 </div>
 <script>
-   function inativar(id){
-        if (confirm("Deseja mesmo inativar? ")) {
-            //ir para inativação
-            location.href="inativos/usuario/"+id;
-        }
-    }
-
 	$(document).ready( function () {
 		$('#tabela').DataTable({
 			language: {

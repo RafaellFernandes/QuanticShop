@@ -10,10 +10,10 @@
 			<div class="card">
 				<div class="card-header">
 					<div class="float-end">
-						<a href="cadastro/usuario" class="btn btn-info">Cadastrar Novo</a>
+						<a href="listagem/usuario" class="btn btn-primary">Usuários Ativos</a>
 					</div>
-					<h3>Lista</h3>
-					<h5 class="card-subtitle text-muted">Usuários</h5>
+					<h3>LISTA</h3>
+					<h5 style="color: red;"><strong>Usuários Inativos</strong></h5>
 				</div>
 				<table class="table table-bordered table-hover table-striped" id="tabela">
                     <thead>
@@ -29,7 +29,7 @@
                     <tbody>
                         <?php
                             //buscar os usuarios
-                            $sql = "SELECT * FROM usuario where Ativo = 'S'";
+                            $sql = "SELECT * FROM usuario";
                             $consulta = $pdo->prepare($sql);
                             $consulta->execute();
 
@@ -44,27 +44,24 @@
                                 $cidade 	            = $dados->cidade;
                                 $estado                 = $dados->estado;
                                 $imagem                 = "../fotos/".$foto."p.jpg";
+                                $ativo                  = $dados->ativo;
 
                                 //mostrar na tela
                                 if ( $ativo == "0" ) {
-                                echo '<tr>
-                                        <td><img src="'.$imagem.'" alt="'.$primeiro_nome.'" width="48" height="48" class="rounded-circle mr-2"></td>
-                                        <td>'.$primeiro_nome.' '.$sobrenome.'</td>
-                                        <td>'.$email.'</td>
-                                        <td>'.$login.'</td>
-                                        <td>'.$cidade.' - '.$estado.'</td>
-                                        <td class="table-action text-center">
-                                            <a href="cadastro/usuario/'.$id.'" alt="Editar" title="Editar">
-                                                <i class="align-middle"  data-feather="edit-2"></i>
-                                            </a>
-                                            <a href="javascript:excluir('.$id.')" alt="Excluir" title="Excluir">
-                                                <i class="align-middle" data-feather="trash"></i>
-                                            </a>
-                                        </td>
-                                    </tr>';
-                                    
+                                    echo '<tr>
+                                            <td><img src="'.$imagem.'" alt="'.$primeiro_nome.'" width="48" height="48" class="rounded-circle mr-2"></td>
+                                            <td>'.$primeiro_nome.' '.$sobrenome.'</td>
+                                            <td>'.$email.'</td>
+                                            <td>'.$login.'</td>
+                                            <td>'.$cidade.' - '.$estado.'</td>
+                                            <td class="table-action text-center">
+                                                <a href="cadastro/usuario/'.$id.'" alt="Editar" title="Editar">
+                                                    <i class="align-middle"  data-feather="edit-2"></i>
+                                                </a>
+                                            </td>
+                                        </tr>';
+                                }
                             }
-                        }
                         ?>
                     </tbody>
                 </table>
@@ -72,14 +69,7 @@
         </div>
     </div>
  </div>
-<script>
-    function excluir(id){
-        if (confirm("Deseja mesmo excluir? ")) {
-            //ir para exclusao
-            location.href="excluir/usuario/"+id;
-        }
-    }
-    
+<script>    
     $(document).ready( function () {
         $('#tabela').DataTable({
             language: {

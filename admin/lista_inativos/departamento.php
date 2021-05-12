@@ -10,10 +10,10 @@
 			<div class="card">
 				<div class="card-header">
 					<div class="float-end">
-						<a href="cadastro/departamento" class="btn btn-info">Cadastrar Novo</a>
+						<a href="listagem/departamento" class="btn btn-primary">Departamentos Ativos</a>
 					</div>
-					<h4>Lista</h4>
-					<h6 class="card-subtitle text-muted">Departamentos</h6>
+					<h4>LISTA</h4>
+					<h6 style="color: red;"><strong>Departamentos Inativos </strong></h6>
 				</div>
 				<table class="table table-bordered table-hover table-striped " id="tabela">
 					<thead>
@@ -33,19 +33,19 @@
 								//separar os dados
 								$id 	    = $dados->id;
 								$nome_dept 	= $dados->nome_dept;
+                                $ativo      = $dados->ativo;
 													
 								//mostrar na tela
-								echo '<tr>
-										<td>'.$nome_dept.'</td>
-										<td class="table-action text-center">
-											<a href="cadastro/departamento/'.$id.'" alt="Editar" title="Editar">
-												<i class="align-middle"  data-feather="edit-2"></i>
-											</a>
-											<a href="javascript:excluir('.$id.')" alt="Excluir" title="Excluir">
-												<i class="align-middle" data-feather="trash"></i>
-											</a>
-										</td>
-									</tr>';
+                                if ($ativo == "0"){ 
+                                    echo '<tr>
+                                            <td>'.$nome_dept.'</td>
+                                            <td class="table-action text-center">
+                                                <a href="cadastro/departamento/'.$id.'" alt="Editar" title="Editar">
+                                                    <i class="align-middle"  data-feather="edit-2"></i>
+                                                </a>
+                                            </td>
+                                        </tr>';
+                                }
 							}
 						?>
 					</tbody>
@@ -55,15 +55,6 @@
 	</div>
 </div>
 <script>
-	//funcao para perguntar se deseja excluir
-	//se sim direcionar para o endereco de exclusão
-	function excluir( id ) {
-		//perguntar - função confirm
-		if ( confirm ( "Deseja mesmo excluir?" ) ) {
-			//direcionar para a exclusao
-			location.href="excluir/departamento/"+id;
-		}
-	}
 
 	//adicionar o dataTable 
 	$(document).ready(function(){
