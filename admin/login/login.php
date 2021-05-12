@@ -24,7 +24,7 @@
       $msg = '<p class="alert alert-danger">Preencha o campo Senha</p>';
     else {
       //verificar se o login existe
-      $sql = "SELECT id, primeiro_nome, sobrenome, login, senha, foto FROM usuario WHERE login = ? LIMIT 1";
+      $sql = "SELECT id, primeiro_nome, sobrenome, login, senha, foto, nivelAcesso_id FROM usuario WHERE login = ? AND nivelAcesso_id = 1 LIMIT 1";
       //apontar a conexao com o banco
       //preparar o sql para execução
       $consulta = $pdo->prepare($sql);
@@ -36,26 +36,31 @@
       $dados = $consulta->fetch(PDO::FETCH_OBJ);
 
       //verificar se existe usuario
-      if ( empty ( $dados->id ) ) 
-        $msg = '<p class="alert alert-danger">O usuário não existe!</p>';
-      //verificar se a senha esta correta
-      else if ( !password_verify($senha, $dados->senha) )
-        $msg = '<p class="alert alert-danger">Senha incorreta</p>';
-      //se deu tudo certo
-      else {
+      if ($nivelAcesso_id == 1){
         //registrar este usuário na sessao
         $_SESSION["quanticshop"] = 
-          array("id"  => $dados->id,
-                "primeiro_nome"=> $dados->primeiro_nome,
-                "sobrenome"=> $dados->sobrenome,
-                "foto"=> $dados->foto);
+        array("id"  => $dados->id,
+              "primeiro_nome"=> $dados->primeiro_nome,
+              "sobrenome"=> $dados->sobrenome,
+              "nivelAcesso_id"=> $dados->nivelAcesso_id,
+              "foto"=> $dados->foto);
         //redirecionar para o home
         $msg = 'Deu certo!';
         //javascript para redirecionar
         echo '<script>location.href="paginas/home";</script>';
         exit;
-
+      } else if ( empty ( $dados->id ) ) 
+        $msg = '<p class="alert alert-danger">O usuário não existe!</p>';
+      //verificar se a senha esta correta
+      else if ( !password_verify($senha, $dados->senha) )
+        $msg = '<p class="alert alert-danger">Senha incorreta</p>';
+      //se deu tudo certo
+      else if ($nivelAcesso_id == 2) {
+        //$msg = '<p class="alert alert-danger">Area Restrita!</p>';
+        echo '<script>alert("Area Restrita!");history.back();</script>';
       }
+       
+    
 
  //mostrar erros
  ini_set('display_errors',1);
