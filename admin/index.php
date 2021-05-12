@@ -187,8 +187,8 @@
 						  <i class="align-middle" data-feather="shopping-cart"></i> <span class="align-middle">Venda</span>
 						</a>
 						<ul id="ui2" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
-							<li class="sidebar-item"><a class="sidebar-link" href="">null</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="">null</a></li>
+						<li class="sidebar-item"><a class="sidebar-link" href="./venda/vendaProduto">Venda</a></li>
+						<li class="sidebar-item"><a class="sidebar-link" href="./controleEstoque/listaEstoque">Lista Estoque</a></li>
 						</ul>
 					</li>
 

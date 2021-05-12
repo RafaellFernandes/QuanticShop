@@ -59,8 +59,8 @@
            <div class="float-end">
 				<a href="processoCompra/listaProduto" class="btn btn-primary">Listagem</a> 
 		   </div>
-				<h4>Cadastro</h4>
-				<h6 class="card-subtitle text-muted">Produto Entrada</h6>
+				<h4>Venda</h4>
+				<h6 class="card-subtitle text-muted">Produto Saida</h6>
 			</div>
 			<div class="card-body">
                 <form method="post" name="formCadastro"  action="processoCompra/salvarProdutoCompra" data_parsley_validate enctype="multipart/form-data">
@@ -88,13 +88,10 @@
                                     ?>
                             </select>
                         </div>
+                       
                         <div class="col-12 col-md-4 mt-2">
-                            <label for="lote">Lote</label>
-                            <input type="text" name="lote" id="lote" class="form-control" value="<?=$lote;?>" placeholder="Nº Lote">
-                        </div>
-                        <div class="col-12 col-md-4 mt-2">
-                            <label for="forncedor_id">Fornecedor</label>
-                            <select name="fornecedor_id" id="fornecedor_id" class="form-control" required data-parsley-required-message="Selecione um Fornecedor">
+                            <label for="usuario_id">Fornecedor</label>
+                            <select name="usuario_id" id="usuario_id" class="form-control" required data-parsley-required-message="Selecione um Fornecedor">
                                 <option value="<?=$fornecedor_id;?>">Selecione o Fornecedor</option>
                                     <?php
                                         $sql = "SELECT id, razaoSocial FROM fornecedor ORDER BY razaoSocial";
@@ -119,8 +116,7 @@
                       
                         <div type="text" class="col-12 col-md-4 mt-2">
                             <label >Margem(%):</label>
-                            <input type="number" name="porcentagem_lucro" class="form-control"  required data-parsley-required-message="Preencha este campo" 
-                            class="form-control" value="<?=$porcentagem_lucro;?>" placeholder="%">
+                            <input type="number" name="porcentagem_lucro" class="form-control"> 
                         </div> 
                         <div type="text" class="col-12 col-md-4 mt-2">
                             <label >Valor de Venda:</label>
@@ -167,4 +163,3 @@ $(document).ready(function(){
 	$("#status").val("<?=$status?>");
 	});
 </script>
-
