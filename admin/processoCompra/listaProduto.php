@@ -21,7 +21,7 @@
 							<th>ID Fornecedor</th>
 							<th>ID produto</th>
 							<th>data cadastro</th>
-							<th>Valor unitario</th>
+							<th>Valor Venda</th>
 							<th>Ações</th>
 						</tr>
 					</thead>
@@ -51,8 +51,8 @@
 								$produto_id			 = $dados->produto_id;
                                 $nome_produto        = $dados->nome_produto;
                                 $data_cadastro       = $dados->data_cadastro;
-                                $valor_unitario      = $dados->valor_unitario;
-                                $valor_unitario      = number_format($valor_unitario,2, '.' , ',');
+                                $venda_unitaria      = $dados->venda_unitaria;
+                                $venda_unitaria      = number_format($venda_unitaria,2, '.' , ',');
                                 $lote                = $dados->lote;
 						
                          
@@ -61,7 +61,7 @@
 								<td>'.$fornecedor_id.'</td>
 								<td>'.$produto_id.'</td>
 								<td>'.$data_cadastro.'</td>
-								<td>'.$valor_unitario.'</td>
+								<td>'.$venda_unitaria.'</td>
 								<td class="table-action text-center">
 								<a href="processoCompra/produtoCompra/'.$id.'" alt="Editar" title="Editar">
 									<i class="align-middle"  data-feather="edit-2"></i>
