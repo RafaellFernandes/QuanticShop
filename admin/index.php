@@ -202,15 +202,15 @@
 						Relatórios e Etc
 					</li>
 					<li class="sidebar-item">
-						<a data-bs-target="#ui2" data-bs-toggle="collapse" class="sidebar-link collapsed">
+						<a data-bs-target="#ui3" data-bs-toggle="collapse" class="sidebar-link collapsed">
 						  <i class="align-middle" data-feather="file"></i> <span class="align-middle">Relatórios</span>
 						</a>
-						<ul id="ui2" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
-							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/controle">Controle</a></li>
+						<ul id="ui3" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
+							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/clientesAtivos">Clientes Ativos</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/financeiro">Financeiro</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/venda">Venda</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/produtoEstoque">Produto Estoque</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="#">Relatório 5</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/fornecedorMarca">Fornecedores com Marca Mais Vendida</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/produtoMaisVendido">Produto Mais Vendido</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/produtoMenosVendido">Produto Menos Vendido</a></li>
 						</ul>
 					</li>
 
