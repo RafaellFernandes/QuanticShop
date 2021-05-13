@@ -19,7 +19,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'f0add14f6912eb3ab7df77b50b978efe388038af',
+    'reference' => '4638205790cd00c6c9e16aae630602d07bb360ca',
     'name' => '__root__',
   ),
   'versions' => 
@@ -31,7 +31,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'f0add14f6912eb3ab7df77b50b978efe388038af',
+      'reference' => '4638205790cd00c6c9e16aae630602d07bb360ca',
     ),
     'mpdf/mpdf' => 
     array (
@@ -57,12 +57,12 @@ private static $installed = array (
     ),
     'paragonie/random_compat' => 
     array (
-      'pretty_version' => 'v9.99.99',
-      'version' => '9.99.99.0',
+      'pretty_version' => 'v9.99.100',
+      'version' => '9.99.100.0',
       'aliases' => 
       array (
       ),
-      'reference' => '84b4dfb120c6f9b4ff7b3685f9b8f1aa365a0c95',
+      'reference' => '996434e5492cb4c3edcb9168db6fbb1359ef965a',
     ),
     'psr/log' => 
     array (
