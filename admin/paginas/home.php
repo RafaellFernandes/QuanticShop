@@ -15,7 +15,7 @@
 							<div class="w-100">
 								<div class="row">
 									<div class="col-sm-6">
-										
+									<!-- <a class="btn btn-danger" target="_blank" href="testepdf.php">pdf</a> -->
 										<div class="card">
 											<div class="card-body">
 												<h5 class="card-title mb-4">TCC</h5>

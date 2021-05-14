@@ -1,0 +1,42 @@
+
+body {
+    font-family: 'Open Sans';
+}
+table {
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+thead {
+    vertical-align: bottom;
+    text-align: center;
+    font-weight: bold;
+}
+th {
+    background-color: rgba(112, 112, 112, 0.349);
+    text-align: center;
+    padding-left: 0.35em;
+    padding-right: 0.35em;
+    padding-top: 0.35em;
+    padding-bottom: 0.35em;
+    vertical-align: top;
+    border: 2px solid black;
+}
+td {
+    width: auto;
+    height: auto;
+    text-align: left;
+    padding-left: 0.35em;
+    padding-right: 0.35em;
+    padding-top: 0.35em;
+    padding-bottom: 0.35em;
+    vertical-align: top;
+    border: 2px solid gray;
+}
+
+h2,p {
+    text-align: center;
+}
+
+.nome{
+   width: 20%;
+}
