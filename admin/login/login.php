@@ -9,7 +9,7 @@
   //verificar se foi dado um POST
   if ( $_POST ) {
     //iniciar as variaveis
-    $login = $senha = "";
+    $login = $senha = $cidade = $estado ="";
     //recuperar o login e a senha digitados
     if ( isset ( $_POST["login"] ) )
       $login = trim ( $_POST["login"] );
@@ -24,7 +24,7 @@
       $msg = '<p class="alert alert-danger">Preencha o campo Senha</p>';
     else {
       //verificar se o login existe
-      $sql = "SELECT id, primeiro_nome, sobrenome, login, senha, foto, nivelAcesso_id FROM usuario WHERE login = ? AND nivelAcesso_id = '1' LIMIT 1";
+      $sql = "SELECT * FROM usuario WHERE login = ? AND nivelAcesso_id = '1' LIMIT 1";
       //apontar a conexao com o banco
       //preparar o sql para execução
       $consulta = $pdo->prepare($sql);
@@ -50,6 +50,8 @@
           array("id"  => $dados->id,
                 "primeiro_nome"=> $dados->primeiro_nome,
                 "sobrenome"=> $dados->sobrenome,
+                "cidade"=> $dados->cidade,
+                "estado"=> $dados->estado,
                 "foto"=> $dados->foto);
         //redirecionar para o home
         $msg = 'Deu certo!';
