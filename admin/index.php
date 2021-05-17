@@ -213,18 +213,6 @@
 							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/produtoMenosVendido">Produto Menos Vendido</a></li>
 						</ul>
 					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="icons-feather.html">
-						  <i class="align-middle" data-feather="coffee"></i> <span class="align-middle">Icons</span>
-						</a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="forms-basic-inputs.html">
-							<i class="align-middle" data-feather="check-circle"></i> <span class="align-middle">Forms</span>
-						</a>
-					</li>
 				</ul>
 
 				<div class="sidebar-cta">
@@ -267,10 +255,9 @@
 								<img src="../fotos/<?=$_SESSION["quanticshop"]["foto"];?>p.jpg" class="avatar img-fluid rounded me-1" alt="<?=$_SESSION["quanticshop"]["primeiro_nome"];?>" /> <span class="text-dark"><?=$_SESSION["quanticshop"]["primeiro_nome"];?></span>
 							</a>
 							<div class="dropdown-menu dropdown-menu-end">
-								<a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Perfil</a>
+								<a class="dropdown-item" href="login/perfil"><i class="align-middle me-1" data-feather="user"></i> Perfil</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="login/configuracoes"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
-								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
+								<a class="dropdown-item" href="login/configuracoes"><i class="align-middle me-1" data-feather="settings"></i>Configurações</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="login/sair.php?token='.md5(session_id()).'"><i class="align-middle mr-1" data-feather="log-out"></i> Log out</a>
 							</div>
@@ -325,12 +312,6 @@
 						</div>
 						<div class="col-6 text-end">
 							<ul class="list-inline">
-								<li class="list-inline-item">
-									<a class="text-muted" href="#">Suporte</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="#">Help Center</a>
-								</li>
 								<li class="list-inline-item">
 									<a class="text-muted" href="paginas/politicaPrivacidade">Privacidade</a>
 								</li>

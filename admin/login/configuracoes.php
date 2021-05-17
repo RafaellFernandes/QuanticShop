@@ -7,28 +7,13 @@
 					<h5 class="card-title mb-0"><strong>Configurações de Perfil</strong></h5>
 				</div>
 				<div class="list-group list-group-flush" role="tablist">
-					<a class="list-group-item list-group-item-action active" data-toggle="list" href="#account" role="tab">
+					<a class="list-group-item list-group-item-action active" data-toggle="list" href="#conta" role="tab">
           				Conta
         			</a>
-					<a class="list-group-item list-group-item-action" data-toggle="list" href="#password" role="tab">
+					<a class="list-group-item list-group-item-action" data-toggle="list" href="#senha" role="tab">
           				Senha
         			</a>
-					<a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
-          				Privacidade e Segurança
-        			</a>
-					<a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
-						Notificações de Email
-					</a>
-					<a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
-          				Notificações Web 
-        			</a>
-					<a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
-          				Widgets
-        			</a>
-					<a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
-          				Your data
-        			</a>
-					<a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
+					<a class="list-group-item list-group-item-action" data-toggle="list" href="#inativar" role="tab">
           				Deletar Conta
         			</a>
 				</div>
@@ -36,7 +21,7 @@
 		</div>
 		<div class="col-md-9 col-xl-10">
 			<div class="tab-content">
-				<div class="tab-pane fade show active" id="account" role="tabpanel">
+				<div class="tab-pane fade show active" id="conta" role="tabpanel">
 					<div class="card">
 						<div class="card-header">
 							<h5 class="card-title mb-0">Informações</h5>
@@ -115,7 +100,31 @@
 					</div>
 				</div>
 
-				<div class="tab-pane fade" id="password" role="tabpanel">
+				<div class="tab-pane fade" id="#senha" role="tabpanel">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">Senha</h5>
+							<form>
+								<div class="mb-3">
+									<label class="form-label" for="inputPasswordCurrent">Current password</label>
+									<input type="password" class="form-control" id="inputPasswordCurrent">
+									<small><a href="#">Esqueceu Sua Senha?</a></small>
+								</div>
+								<div class="mb-3">
+									<label class="form-label" for="inputPasswordNew">Nova Senha</label>
+									<input type="password" class="form-control" id="inputPasswordNew">
+								</div>
+								<div class="mb-3">
+									<label class="form-label" for="inputPasswordNew2">Repita a Nova Senha</label>
+									<input type="password" class="form-control" id="inputPasswordNew2">
+								</div>
+								<button type="submit" class="btn btn-primary">Salvar Mudanças</button>
+							</form>
+						</div>
+					</div>
+				</div>
+
+				<div class="tab-pane fade" id="inativar" role="tabpanel">
 					<div class="card">
 						<div class="card-body">
 							<h5 class="card-title">Senha</h5>

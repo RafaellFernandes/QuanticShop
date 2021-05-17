@@ -10,7 +10,7 @@
 			<div class="card">
 				<div class="card-header">
 					<div class="float-end">
-						<a href="gerarPdf/clientesAtivos" class="btn btn-danger">Gerar PDF</a>
+						<a class="btn btn-danger" target="_blank" href="relatorioClienteAtivo.php">Gerar PDF</a>
 					</div>
 					<h4>RELATÓRIO</h4>
 					<h6 style="color: blue;"><strong>Clientes Ativos</strong></h6>

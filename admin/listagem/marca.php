@@ -61,7 +61,7 @@
 
 		if (confirm("Deseja mesmo excluir? ")) {
 			//ir para exclusao
-			location.href="excluir/marca/"+id;
+			location.href="excluir/inativarMarca/"+id;
 		}
 	}
 	

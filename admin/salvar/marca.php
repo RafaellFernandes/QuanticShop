@@ -11,7 +11,7 @@ if ( $_POST ) {
     include "../admin/config/conexao.php";
 	
   	//recuperar os dados do formulario
-  	$id = $nome_marca = "";
+  	$id = $nome_marca = $ativo = "";
 
   	foreach ($_POST as $key => $value) {
   		//guardar as variaveis
@@ -49,16 +49,18 @@ if ( $_POST ) {
   	//se o id estiver preenchido - update
   	if ( empty ( $id ) ) {
   		//inserir os dados no banco
-  		$sql = "INSERT INTO marca (nome_marca) VALUES( :nome_marca )";
+  		$sql = "INSERT INTO marca (nome_marca, ativo) VALUES (:nome_marca, :ativo )";
   		$consulta = $pdo->prepare($sql);
 		$consulta->bindParam(":nome_marca", $nome_marca);
+		$consulta->bindParam(":ativo", $ativo);
 
   	} else {
 		
   		//atualizar os dados  	
-  		$sql = "UPDATE marca SET nome_marca = :nome_marca WHERE id = :id";	
+  		$sql = "UPDATE marca SET nome_marca = :nome_marca, ativo = :ativo WHERE id = :id";	
   		$consulta = $pdo->prepare($sql);
 		$consulta->bindParam(":nome_marca", $nome_marca);
+		$consulta->bindParam(":ativo", $ativo);
   		$consulta->bindParam(":id", $id);
   	}
     //executar e verificar se deu certo
