@@ -1,30 +1,33 @@
 <style>
+	
 </style>
-
 <div class="main">
 	<ul class="nav nav-pills bg-dark ">
 		<li class="nav-item mt-3 mb-3">
 			<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" style="color: white;">Compre por:</a>
 		</li>
 		<li class="nav-item dropdown mt-3 mb-3">
-			<a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"> Por Departamento</a>
+		<a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Departamento</a>
 			<ul class="dropdown-menu">
-				<li><a class="dropdown-item" href="computadores">Computadores</a></li>
-				<li><a class="dropdown-item" href="eletrodomesticos">Eletrodomésticos</a></li>
-				<li><a class="dropdown-item" href="eletronicos">Eletrônicos</a></li>
-				<li><a class="dropdown-item" href="eletroportateis">Eletroportáteis</a></li>
-				<li><a class="dropdown-item" href="gamer">Gamer</a></li>
-				<li><a class="dropdown-item" href="hardware">Hardware</a></li>
-				<li><a class="dropdown-item" href="impressora">Impressora</a></li>
-				<li><a class="dropdown-item" href="notebooks">Notebooks</a></li>
-				<li><a class="dropdown-item" href="perifericos">Periféricos</a></li>
-				<li><a class="dropdown-item" href="redeinternet">Rede e Internet</a></li>
-				<li><a class="dropdown-item" href="smartHome">Smart Home</a></li>
-				<li><a class="dropdown-item" href="smartphone">Smartphones</a></li>
+				<select name="departamento_id" id="departamento_id" class="form-control" required data-parsley-required-message="selecione uma opção">
+                    <option value="<?=$departamento_id;?>">Selecione o dept</option>
+                        <?php
+                            $sql = "SELECT * FROM departamento ORDER BY id";
+                            $consulta = $pdo->prepare($sql);
+                            $consulta->execute();
+
+                            while ($d = $consulta->fetch(PDO::FETCH_OBJ) ) {
+                                //separar os dados
+                                $id   = $d->id;
+                                $nome_dept = $d->nome_dept;
+                                echo '<option value="'.$id.'">'.$nome_dept.'</option>';
+                            }                    
+                        ?>
+                </select>
 			</ul>
 		</li>
 		<li class="nav-item dropdown mt-3 mb-3">
-			<a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"> Por Marca</a>
+			<a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Marca</a>
 			<ul class="dropdown-menu">
 				<select name="marca_id" id="marca_id" class="form-control" required data-parsley-required-message="selecione uma opção">
                     <option value="<?=$marca_id;?>">Selecione a Marca</option>
@@ -43,14 +46,8 @@
                 </select>
 			</ul>
 		</li>
-		<li class="nav-item mt-3 mb-3">
-			<a class="nav-link" href="#">Link</a>
-		</li>
+		
 	</ul>
-
-
-
-
 
 	<div class="content-top">
 		<h2>Produtos em Destaque</h2>
