@@ -42,7 +42,7 @@
                                 $cnpj                        = $dados->cnpj;
 								$razaoSocial                 = $dados->razaoSocial;
                                 $email                       = $dados->email;
-                                $siteJ                       = $dados->siteJ;
+                                $siteClienteJuridico         = $dados->siteClienteJuridico;
 							 	$telefone 	                 = $dados->telefone;
                                 $celular                     = $dados->celular;
 								$cidade_id                   = $dados->cidade_id;
@@ -56,7 +56,7 @@
 										<td>'.$id.'</td>
 										<td>'.$primeiro_nome.''.$sobrenome.'<br>'.$razaoSocial.'</td>
 										<td>'.$cpf.'<br>'.$cnpj.'</td>
-										<td>'.$email.'<br>'.$siteJ.'</td>
+										<td>'.$email.'<br>'.$siteClienteJuridico.'</td>
 										<td>'.$telefone.'<br>'.$celular.'</td>
 										<td>'.$cidade_id.'-  '.$cidade.'-'.$estado.'</td>
 									</tr>';
