@@ -24,27 +24,42 @@
 		$pagina = $p[0];
 	}
 
-	//verificar qual pagina ira carregar
-	if ( $pagina == "sobre" )
-		$titulo = "Sobre Nós";
+//verificar qual pagina ira carregar
+	switch ($pagina) {
+		case $pagina == "sobre" :
+			# code...
+			$titulo = "Sobre Nós";
+			break;
+			
+		case $pagina == "contact" :
+				# code...
+			$titulo = "Entre em Contato";
+			break;
 
-	else if ( $pagina == "contact" )
-		$titulo = "Entre em Contato";
+		case $pagina == "login"  :
+			# code...
+			$titulo = "Login";
+			break;	
 
-	else if ( $pagina == "login" )
-		$titulo = "Login";
+		case $pagina == "configuracoesConta" :
+			# code...
+			$titulo = "Configuração de Conta";
+			break;
 
-	else if ( $pagina == "configuracoesConta" )
-		$titulo = "Configuração de Conta";
-	
-	else if ( $pagina == "register" )
-		$titulo = "Registre-se";
+		case $pagina == "register" :
+			# code...
+			$titulo = "Registre-se";
+			break;	
 
-	else if ( $pagina == "shop" )
-		$titulo = "Shop";
+		case  $pagina == "shop" :
+			$titulo = "Shop";
+			break;
 
-	else
-		$titulo = "Página Inicial";
+		default:
+			# code...
+			$titulo = "Página Inicial";
+			break;
+		}
 
 	$porta = $_SERVER["SERVER_PORT"];
 ?>
@@ -109,23 +124,23 @@
 						<div class="menu">
 							<a class="toggleMenu" href="home"><img src="vendor/images/nav.png" alt="Menu" /></a>
 							<ul class="nav" id="nav">
-								<li><a href="shop">Shop</a></li>
-								<li><a href="Home">Home</a></li>
-								<li><a href="sobre">Sobre</a></li>
-								<li><a href="contact">Contato</a></li>	
+								<li><a href="pages/shop">Shop</a></li>
+								<li><a href="pages/home">Home</a></li>
+								<li><a href="pages/sobre">Sobre</a></li>
+								<li><a href="pages/contact">Contato</a></li>	
 								
 								<?php
 									if(!isset($_SESSION["quanticshop"]["id"])){
 										echo 	'<li><ul class="icon1 sub-icon1 ">
-													<li><a href="login">Login</a></li>
+													<li><a href="login/login">Login</a></li>
 												</ul></li>';
 									}else{
 										echo '<li><ul class="icon1 sub-icon1 ">
 										<li><a href="#">Conta</a>
 											<ul class="list">
-												<div class="check_button dropdown-item"><a href="perfil">Perfil</a></div>
-												<div class="check_button dropdown-item"><a href="sair?token='.SHA1(session_id()).'">Sair</a></div>
-												<div class="check_button dropdown-item"><a href="configuracoesConta">Configurações de Conta</a></div>             
+												<div class="check_button dropdown-item"><a href="login/perfil">Perfil</a></div>
+												<div class="check_button dropdown-item"><a href="login/sair?token='.SHA1(session_id()).'">Sair</a></div>
+												<div class="check_button dropdown-item"><a href="login/configuracoesConta">Configurações de Conta</a></div>             
 											</ul>
 										</li>
 									</ul></li>';
@@ -171,14 +186,42 @@
 	</div>
   	<main>
 		<?php
-			//configurar a pagina que ira ser incluida
-			$pagina = "pages/".$pagina.".php";
-			//verificar se a página existe
-			if ( file_exists($pagina) ) {
-				include $pagina;
-			} else {
-				include "pages/error/404.php";
+			//adicionar a programação para abrir a página desejada
+			$pagina = "pages/home.php";
+			//verificar se o parametro existe
+			if ( isset ( $_GET["parametro"])){
+				//recuperar o parametro
+				$p = trim ( $_GET["parametro"] );
+				//separar por /
+				$p = explode("/", $p);
+				$pasta 		= $p[0];
+				$arquivo  = $p[1];
+				//configurar nome do arquivo
+				$pagina = "$pasta/$arquivo.php";
+				//verificar se o id ou o 3 item existe
+				if ( isset ( $p[2] ) )
+					$id = $p[2];
 			}
+			//verificar se a pagina existe
+			if ( file_exists($pagina) ){
+				// echo $pagina;
+				include $pagina;
+
+			}else{
+				include "error/404.php";
+			}	
+
+
+
+
+			// configurar a pagina que ira ser incluida
+			// $pagina = "pages/".$pagina.".php";
+			// //verificar se a página existe
+			// if ( file_exists($pagina) ) {
+			// 	include $pagina;
+			// } else {
+			// 	include "pages/error/404.php";
+			// }
 		?>
   	</main>
 	<div class="footer">
@@ -187,12 +230,12 @@
 				<div class="col-md-3">
 					<ul class="footer_box">
 						<h4>Produtos</h4>
-						<li><a href="smartphone">Smartphones</a></li>
-						<li><a href="notebooks">Notebooks</a></li>
-						<li><a href="hardware">Hardwares</a></li>
-						<li><a href="gamer">Gamer</a></li>
-						<li><a href="smartHome">Smart Home</a></li>
-						<li><a href="computadores">Computadores</a></li>
+						<li><a href="departamento/smartphone">Smartphones</a></li>
+						<li><a href="departamento/notebooks">Notebooks</a></li>
+						<li><a href="departamento/hardware">Hardwares</a></li>
+						<li><a href="departamento/gamer">Gamer</a></li>
+						<li><a href="departamento/smartHome">Smart Home</a></li>
+						<li><a href="departamento/computadores">Computadores</a></li>
 					</ul>
 				</div>
 				<div class="col-md-3">
@@ -205,10 +248,10 @@
 				<div class="col-md-3">
 					<ul class="footer_box">
 						<h4>Suporte ao Cliente</h4>
-						<li><a href="contact">Contate-Nos</a></li>
-						<li><a href="politicaDevolucao">Politica de Devolução</a></li>
-						<li><a href="politicaPrivacidade">Politica de Privacidade</a></li>
-						<li><a href="termosCondicoes">Termos e Condições</a></li>
+						<li><a href="politicas/contact">Contate-Nos</a></li>
+						<li><a href="politicas/politicaDevolucao">Politica de Devolução</a></li>
+						<li><a href="politicas/politicaPrivacidade">Politica de Privacidade</a></li>
+						<li><a href="politicas/termosCondicoes">Termos e Condições</a></li>
 					</ul>
 				</div>
 				<div class="col-md-3">
@@ -234,6 +277,6 @@
    			</div>
 		</div>
   	</div>  
-	  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
