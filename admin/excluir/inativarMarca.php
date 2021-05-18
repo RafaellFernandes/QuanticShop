@@ -1,41 +1,42 @@
-<?php 
-
-//verificar se nao esta logado
-if ( !isset ( $_SESSION["quanticshop"]["id"] ) ) {
+<?php
+  //verificar se não está logado
+  if ( !isset ( $_SESSION["quanticshop"]["id"] ) ){
     exit;
-}
+  }
 
-//se nao existe o id
-if ( !isset ($id) ) {
-    echo '<script>alert("Erro ao Realizar Requisição");history.back();</script>';
-    exit;
-}
+  //verificar se existem dados no POST
+  if ( $_POST ) {
 
-$id = $nome_marca = $ativo = "";
+  	//recuperar os dados do formulario
+  	$id = $nome_marca = $ativo = "";
 
-//verificar se existe algum vinculo com produto
-$sql = "SELECT * FROM produto WHERE marca_id = ? LIMIT 1";
-$consulta = $pdo->prepare($sql);
-$consulta->bindParam(1, $id);
-$consulta->execute();
-$dados = $consulta->fetch(PDO::FETCH_OBJ);
+  	foreach ($_POST as $key => $value) {
+  		//guardar as variaveis
+  		$$key = trim ( $value );
+  		//$id
+  	}
 
-if (!empty($dados->$id)) {
-    echo '<script>alert("Não é possível excluir este registro, Pois existe um Produto relacionado com esta Marca.");history.back();</script>';
-    exit;
-}
+  	//validar os campos - em branco
+  	if ( empty ( $nome_marca ) ) {
+  		echo '<script>alert("Preencha o nome da Marca");history.back();</script>';
+  		exit;
+  	}
+  	
+  	//se o id estiver em branco - insert
+  	//se o id estiver preenchido - update
+  	if ( !empty ( $id )){
+  		//atualizar os dados  	
+  		$sql = "UPDATE marca SET DEFAULT VALUE ativo = '0' WHERE id = ? LIMIT 1";	
+  		$consulta = $pdo->prepare($sql);
+  		$consulta->bindParam(1, $ativo);
+		$consulta->bindParam(2, $id);
 
-//excluir a marca
-$sql = "UPDATE ativo FROM marca SET ativo = '$ativo' WHERE id = ? LIMIT 1";
-$verificar = $pdo->prepare($sql);
-$verificar->bindParam(1, $id);
-//verificar se executou
-if (!$verificar->execute()) {
-    $erro = $verificar->errorInfo();
-    echo '<script>alert("Erro ao excluir!");history.back();</script>';
-    exit;
-}
-
-echo "<script>location.href='listar/marca';</script>";
-
-?>
+    } else {
+        $erro = $verificar->errorInfo();
+        echo '<script>alert("Erro ao excluir!");history.back();</script>';
+        exit;
+       
+    }
+       
+        echo "<script>location.href='listagem/marca';</script>";
+    }
