@@ -1,7 +1,7 @@
 <?php
+session_start();
 
 require_once __DIR__ . '/vendor/autoload.php';
-// include ("config/conexao.php");
 $mpdf = new \Mpdf\Mpdf();
 
 
@@ -16,7 +16,7 @@ function selectAllPessoa(){
             FROM produto p 
             INNER JOIN departamento d ON (d.id = p.departamento_id)
             INNER JOIN marca m ON (m.id = p.marca_id)
-            WHERE pativo LIKE '1%'
+            WHERE p.ativo = 1
             ORDER BY p.vezesVendido DESC ";
 
     $resultado = $banco->query($sql);
@@ -34,13 +34,13 @@ $grupo = selectAllPessoa();
 $stylesheet = file_get_contents('stylepdf.css');
 date_default_timezone_set('America/Sao_Paulo');
 
-$nome = $_SESSION['quanticshop']['id'];
+$nome = $_SESSION['quanticshop']['primeiro_nome'];
 // $nome =  $_SERVER['HTTP_USER_AGENT'];
 
 $html = "
 <h2>Relatório de Produtos Mais Vendidos</h2>
 <p>Data de Emissão: ". date('d/m/Y H:i:s')."</p>
-<p>Nome: ". $nome ."</p><hr/>
+<p>Gerado Por: ". $nome ."</p><hr/>
     <div>
         <table>
             <thead>
