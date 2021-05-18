@@ -1,6 +1,6 @@
 <?php
 	//include "config/conexao.php";
-	$link = new mysqli("localhost","root","","bancotcc");
+	$link = new mysqli("localhost","root","","quanticshop");
 	
 	$pesquisar = $_POST['buscar'];
 	//$result_produto = "SELECT * FROM produto WHERE Nome LIKE '%$pesquisar%' LIMIT 1";

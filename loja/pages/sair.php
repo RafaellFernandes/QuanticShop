@@ -10,7 +10,7 @@
 					<div class="button11">
                   <?php 
                   
-                      session_start();
+                      SESSION_START();
                       $token = SHA1(session_id());
                       if(isset($_GET['token']) && $_GET['token'] === $token) {
                          // limpe tudo que for necessário na saída.

@@ -12,7 +12,7 @@
   
   if ( !isset ( $id ) ) $id = "";
 
-  $primeiro_nome = $sobrenome = $cpf = $data_nascimento = $email = $senha = $cep = $telefone = $celular = $foto =
+  $primeiro_nome = $sobrenome = $cpf = $data_nascimento = $email = $senha = $cep = $telefone = $celular =
   $pessoaFJ =  $estado = $cidade = $endereco = $bairro = $complemento = $numero_resid = $cidade_id = $ativo = $genero_id = "";
 
   if ( !empty ( $id ) ) {
@@ -39,7 +39,6 @@
 	  $senha                   = $dados->senha;
 	  $telefone                = $dados->telefone;
 	  $celular                 = $dados->celular;
-	  $foto                    = $dados->foto;
 	  $pessoaFJ                = $dados->pessoaFJ;
 	  $cep                     = $dados->cep;
 	  $estado                  = $dados->estado;
@@ -136,20 +135,6 @@
                       <input type="text" name="celular" id="celular" class="form-control" placeholder="Celular com DDD"
                       value="<?=$celular;?>" required data-parsley-required-message="Preencha o Celular">
                     </div>
-
-                    <div>
-						<span>FOTO<label for="foto"></label></span>
-						<input type="file" name="foto" id="foto" class="form-control" > 
-						<input type="hidden" name="foto" value="<?=$foto?>" class="form-control">
-							<?php  	
-								if( !empty($foto)){
-									$foto = "<img src='../fotos/".$foto."p.jpg' alt='".$primeiro_nome."' width='150px'>";
-								} else{
-									$foto = "";
-								}
-							?>
-                      	<div><?php echo $foto;?></div>
-					</div>
 
                     <div class="clear"> </div>
 

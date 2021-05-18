@@ -25,7 +25,7 @@
     else {
      
       //verificar se o email existe
-      $sql = "SELECT id, primeiro_nome, sobrenome, nomeFantasia, email, senha, foto, cpf, cnpj, nivelAcesso_id FROM cliente WHERE email = ? LIMIT 1";
+      $sql = "SELECT id, primeiro_nome, sobrenome, nomeFantasia, email, senha, cpf, cnpj, nivelAcesso FROM cliente WHERE email = ? LIMIT 1";
       //apontar a conexao com o banco
       //preparar o sql para execução
       $consulta = $pdo->prepare($sql);
@@ -51,9 +51,8 @@
                 "sobrenome"=> $dados->sobrenome,
                 "nomeFantasia"=> $dados->nomeFantasia,
                 "email"=> $dados->email,
-                "foto"=> $dados->foto,
                 "cpf"=> $dados->cpf,
-                "nivelAcesso_id"=> $dados->nivelAcesso_id,
+                "nivelAcesso"=> $dados->nivelAcesso,
                 "cnpj"=> $dados->cnpj);
         //redirecionar para o home
         $msg = 'Deu certo!';

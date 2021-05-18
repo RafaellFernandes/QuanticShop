@@ -98,7 +98,7 @@
 
 		$imagem_gerada = $pastaFotos.$nome."g.jpg";
 		$path = $imagem;
-		$imagem_orig = ImageCreateFromJPG($path);
+		$imagem_orig = ImageCreateFromJPEG($path);
 		$pontoX = ImagesX($imagem_orig);
 		$pontoY = ImagesY($imagem_orig);
 		$imagem_fin = ImageCreateTrueColor($largura, $altura);

@@ -24,7 +24,7 @@
       $msg = '<p class="alert alert-danger">Preencha o campo Senha</p>';
     else {
       //verificar se o login existe
-      $sql = "SELECT * FROM usuario WHERE login = ? AND nivelAcesso_id = '1' LIMIT 1";
+      $sql = "SELECT * FROM usuario WHERE login = ? AND nivelAcesso = '1' LIMIT 1";
       //apontar a conexao com o banco
       //preparar o sql para execução
       $consulta = $pdo->prepare($sql);
