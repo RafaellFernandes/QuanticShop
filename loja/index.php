@@ -119,15 +119,17 @@
 			 	<div class="col-md-12">
 				 	<div class="header-left">
 						<div class="logo">
-							<a href="home"><img src="vendor/images/saturno.png" style="width: 70px; " alt="Quantic Shop - Home"/></a>
+							<a href="vendor/home"><img src="vendor/images/saturno.png" style="width: 70px; " alt="Quantic Shop - Home"/></a>
 						</div>
 						<div class="menu">
 							<a class="toggleMenu" href="home"><img src="vendor/images/nav.png" alt="Menu" /></a>
 							<ul class="nav" id="nav">
-								<li><a href="pages/shop">Shop</a></li>
 								<li><a href="pages/home">Home</a></li>
+								<li><a href="pages/shop">Shop</a></li>
 								<li><a href="pages/sobre">Sobre</a></li>
 								<li><a href="pages/contact">Contato</a></li>	
+								<li><a href="pages/carrinho"><i class="fa fa-cart-plus" aria-hidden="true"></i>Carrinho</a></li>
+									
 								
 								<?php
 									if(!isset($_SESSION["quanticshop"]["id"])){
@@ -147,33 +149,18 @@
 									}
 								?>
 							</ul>
+							
+							
 							<script type="text/javascript" src="vendor/js/responsive-nav.js"></script>
 				    	</div>							
 	    		  		<div class="clear"></div>
-	    	  		</div>
-	        		<div class="header_right">
-						<!-- start search-->
-						<div class="search-box">
-							<div id="sb-search" class="sb-search">
-								<form>
-									<input class="sb-search-input" placeholder="Pesquisar..." type="search" name="busca" action="index.php"
-									 id="search">
-									<input class="sb-search-submit" type="submit" value="">
-									<span class="sb-icon-search"> </span>
-								</form>
-							</div>
-						</div>
+	    	  	    	</div>
+						<div class="header_right">
+							<!-- start search-->
+							</a>
+						</li>
+						</ul>
 						
-						<!----search-scripts---->
-						<script src="vendor/js/classie.js"></script>
-						<script src="vendor/js/uisearch.js"></script>
-						<script>
-							new UISearch( document.getElementById( 'sb-search' ) );
-						</script>
-						<!----//search-scripts---->
-						<li><a href="carrinho">Carrinho</a></li>	
-								
-									
 									<div class="clear"></div>
 								</ul>
 							</li>
@@ -264,8 +251,9 @@
 							</form>
 						</div>
 						<ul class="social">	
-							<li class="twitter"><a href="#"><span> </span></a></li>
-							<li class="instagram"><a href="#"><span> </span></a></li>								  				
+							<li class="twitter"><a href="https://twitter.com/"><span> </span></a></li>
+							<li class="instagram"><a href="https://www.instagram.com/"><span> </span></a></li>	
+							<li class="facebook"><a href="https://www.instagram.com/"><span> </span></a></li>								  				
 						</ul>   					
 					</ul>
 				</div>
@@ -277,6 +265,6 @@
    			</div>
 		</div>
   	</div>  
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+	< src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></>
 </body>
 </html>
