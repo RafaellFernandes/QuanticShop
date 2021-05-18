@@ -35,8 +35,6 @@
         echo "<script>alert('Preencha o Nome do Produto');history.back();</script>";
     } else if( empty($departamento_id) ){
         echo "<script>alert('Selecione o Departamento');history.back();</script>";
-    }  else if( empty($valor_unitario) ){
-        echo "<script>alert('Preencha o valor do Produto');history.back();</script>";
     } else if( empty($marca_id) ){
         echo "<script>alert('Selecione a Marca do produto');history.back();</script>";
     } else if( empty($descricao) ){
@@ -57,12 +55,11 @@
     if(empty($id)){
         //inserir
        
-        $sql= "INSERT INTO produto (nome_produto, codigo,  valor_unitario, descricao, espec_tecnica, foto,  departamento_id, marca_id, ativo) 
-        values(:nome_produto, :codigo, :valor_unitario, :descricao, :espec_tecnica, :foto, :departamento_id, :marca_id, :ativo)";
+        $sql= "INSERT INTO produto (nome_produto, codigo, descricao, espec_tecnica, foto,  departamento_id, marca_id, ativo) 
+        values(:nome_produto, :codigo, :descricao, :espec_tecnica, :foto, :departamento_id, :marca_id, :ativo)";
         $consulta = $pdo->prepare($sql);
         $consulta->bindParam(':nome_produto',$nome_produto);
         $consulta->bindParam(':codigo',$codigo);
-        $consulta->bindParam(':valor_unitario',$valor_unitario);
         $consulta->bindParam(':descricao',$descricao);
         $consulta->bindParam(':espec_tecnica',$espec_tecnica);
         $consulta->bindParam(':foto',$arquivo);
@@ -76,13 +73,12 @@
             $foto = $arquivo;
         }
         //update
-        $sql= "UPDATE produto SET nome_produto = :nome_produto, codigo = :codigo, valor_unitario = :valor_unitario, 
+        $sql= "UPDATE produto SET nome_produto = :nome_produto, codigo = :codigo,  
         descricao = :descricao, espec_tecnica = :espec_tecnica, foto = :foto, ativo = :ativo, departamento_id = :departamento_id,
         marca_id = :marca_id WHERE id = :id";
         $consulta = $pdo->prepare($sql);
         $consulta->bindParam(':nome_produto',$nome_produto);
         $consulta->bindParam(':codigo',$codigo);
-        $consulta->bindParam(':valor_unitario',$valor_unitario);
         $consulta->bindParam(':descricao',$descricao);
         $consulta->bindParam(':espec_tecnica',$espec_tecnica);
         $consulta->bindParam(':foto',$arquivo);
