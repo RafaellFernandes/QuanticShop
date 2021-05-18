@@ -58,6 +58,7 @@
 	<script src="https://kit.fontawesome.com/862f0da969.js" crossorigin="anonymous"></script>
 
 	<link href="assets/styleLogin.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
 	
 </head>
 
@@ -222,10 +223,11 @@
 							Fazer Logout
 						</div>
 						<div class="d-grid">
-						<a class="btn btn-primary" href="login/sair.php?token='.md5(session_id()).'"><i class="align-middle mr-1" data-feather="log-out"></i> Log out</a>
+							<a class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#sair"><i class="align-middle mr-1" data-feather="log-out"></i> Log out</a>
 						</div>
 					</div>
 				</div>
+				
 			</div>
 		</nav>
 
@@ -259,7 +261,7 @@
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="login/configuracoes"><i class="align-middle me-1" data-feather="settings"></i>Configurações</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="login/sair.php?token='.md5(session_id()).'"><i class="align-middle mr-1" data-feather="log-out"></i> Log out</a>
+								<a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#sair"><i class="align-middle mr-1" data-feather="log-out"></i> Log out</a>
 							</div>
 						</li>
 					</ul>
@@ -323,6 +325,24 @@
 					</div>
 				</div>
 			</footer>
+		</div>
+	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="sair" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Quantic Shop</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					Deseja Fazer o Logout?
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-bs-dismiss="modal">Voltar</button>
+					<a  class="btn btn-danger" href="login/sair.php?token='.md5(session_id()).'">Sair</a>
+				</div>
+			</div>
 		</div>
 	</div>
 	<?php
