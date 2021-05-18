@@ -29,9 +29,9 @@
                             <div class="text-center mt-4">
                                 <h1 class="display-1">500</h1>
                                 <p class="lead">Internal Server Error</p>
-                                <a href="../admin/paginas/home">
+                                <!-- <a href="../admin/paginas/home">
                                     <i class="fas fa-arrow-left mr-1"></i> Retornar ao Dashboard
-                                </a>
+                                </a> -->
                             </div>
                         </div>
                     </div>
