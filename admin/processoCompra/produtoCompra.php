@@ -127,11 +127,13 @@
                             <input type="number" id="venda_unitario" name="venda_unitaria" class="form-control" required data-parsley-required-message="Preencha este campo" 
                             class="form-control" value="<?=$venda_unitaria;?>" placeholder="R$ 0,00">         
                         </div>
-                        <div class="mb-3 col-12 col-md-4 mt-2">
-							<label for="data_cadastro">Data de cadastro:</label>
-							<input type="text" name="data_cadastro" id="data_cadastro" class="form-control" required data-parsley-required-message="Preencha a data de Cadastro" 
-							placeholder="Ex: 11/12/1990" value="<?=$data_cadastro;?>">
-                        </div>
+                        <div class="col-12 col-md-4">
+                                    <label for="data_cadastro">Data</label>
+                                    <input type="date" name="data_cadastro"
+                                    id="data_cadastro" class="form-control"
+                                    required data-parsley-required-message="Preencha a data"
+                                    value="<?=$data_cadastro?>">
+                               </div>
                         <div class="col-12 col-md-2 mt-2">
                         <label for="status">Status</label>
                         <select name="status" id="status" class="form-control" 
