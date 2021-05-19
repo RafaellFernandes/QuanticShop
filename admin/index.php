@@ -57,7 +57,7 @@
 	<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/862f0da969.js" crossorigin="anonymous"></script>
 
-	<link href="assets/styleLogin.css" rel="stylesheet">
+	<link href="login/styleLogin.css" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
 	
 </head>
@@ -108,7 +108,7 @@
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-invoice.html">
+						<a class="sidebar-link" href="paginas/pages-invoice">
 						  <i class="align-middle" data-feather="credit-card"></i> <span class="align-middle">Fatura</span>
 						</a>
 					</li>

@@ -1,6 +1,9 @@
 .bodyLogin {
     font-family: "Open Sans", sans-serif;
-    background: url("../img/background/backgroundSite07.jpg") top center;
+    /* background: url("../img/background/backgroundSite07.jpg") top center; */
+    background: #222e3c;
+    
+
 }
 
 .fonte {

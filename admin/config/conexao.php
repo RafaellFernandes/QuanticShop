@@ -18,8 +18,9 @@
 
 	} catch (PDOException $erro) {
 		//mensagem de erro
-		$msg = $erro->getMessage();
-		echo "<p>Erro ao conectar no banco de dados: $msg </p>";
+		// $msg = $erro->getMessage();
+		include 'paginas/erros/500.php';
+		// echo "<p>Erro ao conectar no banco de dados: $msg </p>";
 
     }
 

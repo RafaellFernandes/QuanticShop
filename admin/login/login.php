@@ -68,8 +68,8 @@
     }
   }
 ?>
-<!-- <link href="../assets/styleLogin.css" rel="stylesheet"> -->
-<div class="container d-flex flex-column fonte">
+<!-- <link href="styleLogin.css" rel="stylesheet"> -->
+<div class="container d-flex flex-column fonte mb-5">
 	<div class="row vh-100">
 		<div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
 			<div class="d-table-cell align-middle">
@@ -77,7 +77,7 @@
 					<h1 class="h2 fonte">Seja Bem Vindo</h1>
 					<p class="lead">Entre na sua Conta para Continuar</p>
 				</div>
-				<div class="card">
+				<div class="card mb-5">
 					<div class="card-body">
 						<div class="m-sm-4">
 							<div class="text-center">
