@@ -59,6 +59,8 @@
 
 	<link href="login/styleLogin.css" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	
 </head>
 
@@ -80,7 +82,7 @@
     ?>
 		<nav id="sidebar" class="sidebar">
 			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="index.html">
+				<a class="sidebar-brand" href="index.html" style="text-decoration: none;">
 					<span class="align-middle">Quantic Shop</span>
 				</a>
 
@@ -249,8 +251,8 @@
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
 						<li class="nav-item dropdown">
-							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
-								<i class="align-middle" data-feather="settings"></i>
+							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none " href="#" data-bs-toggle="dropdown">
+							<i class="fas fa-cog"></i>
 							</a>
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">

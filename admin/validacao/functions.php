@@ -23,15 +23,26 @@
 	    // Faz o calculo para validar o CPF
 	    for ($t = 9; $t < 11; $t++) {
 	        for ($d = 0, $c = 0; $c < $t; $c++) {
+
 	            $d += $cpf[$c] * (($t + 1) - $c);
 	        }
 	        $d = ((10 * $d) % 11) % 10;
+
 	        if ($cpf[$c] != $d) {
-	            return "CPF inválido";
+	            return "CPF inválido 2";
 	        }
 	    }
 	    return true;
 	}
+
+
+	function validarSenha($senha) {
+		if (!preg_match(("/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/i"),$senha)) {
+			return "A senha deve conter 8 caracteres, sendo um caracter especial e um número";
+		}
+		return;
+	}
+
 
 	function validaCNPJ($cnpj) {
 	    $cnpj = preg_replace('/[^0-9]/', '', (string) $cnpj);
@@ -45,7 +56,7 @@
 	        $j = ($j == 2) ? 9 : $j - 1;
 	    }
 	    $resto = $soma % 11;
-	    if ($cnpj[12] != ($resto < 2 ? 0 : 11 - $resto))
+	    if ($cnpj."12" != ($resto < 2 ? 0 : 11 - $resto))
 	        return "CNPJ inválido";
 	    // Valida segundo dígito verificador
 	    for ($i = 0, $j = 6, $soma = 0; $i < 13; $i++)
@@ -57,73 +68,6 @@
 	    return $cnpj[13] == ($resto < 2 ? 0 : 11 - $resto);
 	}
 
-	/*
-    
-    BIBLIOTECA GDLib
-		Função para redimensionar imagens JPG
-		Irá criar 3 imagens: 
-		- G Largura de 800px 
-		- M Largura de 640px
-		- P Largura de 250px
-		A altura será proporcional a altura para que a imagem não fique deslocada
-
-		Parâmetros: arquivo da imagem (Ex.: fotos/imagem.jpg), novo nome para renomear (Ex.: 12345)
-	*/
-
-	function redimensionarImagem($pastaFotos,$imagem,$nome)	{
-
-		$imagem = $pastaFotos.$imagem;
-		
-		list($largura1, $altura1) = getimagesize($imagem);
-
-		$largura = 1000;
-		$percent = ($largura/$largura1);
-		$altura = $altura1 * $percent;
-
-		$imagem_gerada = $pastaFotos.$nome."g.jpg";
-		$path = $imagem;
-		$imagem_orig = ImageCreateFromJPG($path);
-		$pontoX = ImagesX($imagem_orig);
-		$pontoY = ImagesY($imagem_orig);
-		$imagem_fin = ImageCreateTrueColor($largura, $altura);
-		ImageCopyResampled($imagem_fin, $imagem_orig, 0, 0, 0, 0, $largura+1, $altura+1, $pontoX, $pontoY);
-		ImageJPEG($imagem_fin, $imagem_gerada,100);
-		ImageDestroy($imagem_orig);
-		ImageDestroy($imagem_fin); 
-
-		$largura = 800;
-		$percent = ($largura/$largura1);
-		$altura = $altura1 * $percent;
-		
-		$imagem_gerada = $pastaFotos.$nome."m.jpg";
-		$path = $imagem;
-		$imagem_orig = ImageCreateFromJPEG($path);
-		$pontoX = ImagesX($imagem_orig);
-		$pontoY = ImagesY($imagem_orig);
-		$imagem_fin = ImageCreateTrueColor($largura, $altura);
-		ImageCopyResampled($imagem_fin, $imagem_orig, 0, 0, 0, 0, $largura+1, $altura+1, $pontoX, $pontoY);
-		ImageJPEG($imagem_fin, $imagem_gerada,80);
-		ImageDestroy($imagem_orig);
-		ImageDestroy($imagem_fin);
-		
-		$largura = 320;
-		$percent = ($largura/$largura1);
-		$altura = $altura1 * $percent;
-
-		$imagem_gerada = $pastaFotos.$nome."p.jpg";
-		$path = $imagem;
-		$imagem_orig = ImageCreateFromJPEG($path);
-		$pontoX = ImagesX($imagem_orig);
-		$pontoY = ImagesY($imagem_orig);
-		$imagem_fin = ImageCreateTrueColor($largura, $altura);
-		ImageCopyResampled($imagem_fin, $imagem_orig, 0, 0, 0, 0, $largura+1, $altura+1, $pontoX, $pontoY);
-		ImageJPEG($imagem_fin, $imagem_gerada,80);
-		ImageDestroy($imagem_orig);
-		ImageDestroy($imagem_fin);
-	
-		//apagar a imagem antiga
-		unlink ($imagem);
-	}
 /*****
 //funcao para formatar a data 
 
@@ -140,11 +84,6 @@
         $data = explode("-", $data);
         return $data = $data[2]."/".$data[1]."/".$data[0];
     }
-    
-/*****
-//funcao para retirar nome da editora 
-
-****/
 
     
 /*****
@@ -172,3 +111,23 @@
         return $valor;
         
     }
+
+	function mensagem($titulo, $mensagem, $icone) { //Função que retorna um alerta bonitinho
+
+		?>
+		<script>
+			//mostrar a telinha animada - alert
+			Swal.fire(
+			  '<?=$titulo?>',
+			  '<?=$mensagem?>',
+			  '<?=$icone?>'
+			).then((result) => {
+				//retornar para a tela anterior
+				history.back();
+			})
+		</script>
+		<?php
+	
+		exit;
+	
+	}

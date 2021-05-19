@@ -9,7 +9,7 @@
 		<div class="col-12 col-xl-12">
 			<div class="card">
 				<div class="card-header">
-					<div class="float-end">
+					<div class="float-end mt-2">
 						<a href="cadastro/clienteJ" class="btn btn-primary">Cad. Pessoa Juridica</a>
                         <a href="cadastro/clienteF" class="btn btn-primary">Cad. Pessoa Fisica</a>
 					</div>
@@ -79,9 +79,7 @@
                                                 <a href="cadastro/clienteF/'.$id.'" alt="Editar" title="Editar">
                                                     <i class="align-middle"  data-feather="edit-2"></i>
                                                 </a>
-                                                <a href="javascript:excluir('.$id.')" alt="Excluir" title="Excluir">
-                                                    <i class="align-middle" data-feather="trash"></i>
-                                                </a>
+                                                
                                             </td>
                                         </tr> ';
                                     };
@@ -101,31 +99,31 @@
                                 <th>Razão Social</th>
                                 <th>CNPJ</th>
                                 <th>Cidade</th>
-                                <th>Email</th>
-                                <th>Site</th>
+                                <th style="width: 5%;">Email</th>
+                                <th style="width: 5%;">Site</th>
                                 <th>Telefone</th>
                                 <th>Ações</th> 
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                                $sql = "SELECT id, razaoSocial, cnpj, email, cidade, estado, pessoaFJ, telefone, siteJ, ativo FROM cliente
+                                $sql = "SELECT id, razaoSocial, cnpj, email, cidade, estado, pessoaFJ, telefone, siteClienteJuridico, ativo FROM cliente
                                 ORDER BY id";
                                 $consulta = $pdo->prepare($sql);
                                 $consulta->execute();
 
                                 while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
                                     //separar os dados
-                                    $id 	            = $dados->id;
-                                    $pessoaFJ           = $dados->pessoaFJ;
-                                    $razaoSocial 	    = $dados->razaoSocial;
-                                    $cnpj           	= $dados->cnpj;
-                                    $email 	            = $dados->email;
-                                    $telefone 	        = $dados->telefone;
-                                    $cidade 	        = $dados->cidade;
-                                    $estado             = $dados->estado;
-                                    $siteJ              = $dados->siteJ;
-                                    $ativo              = $dados->ativo;
+                                    $id 	                = $dados->id;
+                                    $pessoaFJ               = $dados->pessoaFJ;
+                                    $razaoSocial 	        = $dados->razaoSocial;
+                                    $cnpj               	= $dados->cnpj;
+                                    $email 	                = $dados->email;
+                                    $telefone 	            = $dados->telefone;
+                                    $cidade 	            = $dados->cidade;
+                                    $estado                 = $dados->estado;
+                                    $siteClienteJuridico    = $dados->siteClienteJuridico;
+                                    $ativo                  = $dados->ativo;
 
                                     if ($pessoaFJ == "J" and $ativo == "1") { 
 
@@ -134,15 +132,13 @@
                                                 <td>'.$cnpj.'</td>
                                                 <td>'.$cidade.' - '.$estado.'</td>
                                                 <td>'.$email.'</td>
-                                                <td>'.$siteJ.'</td>
+                                                <td>'.$siteClienteJuridico.'</td>
                                                 <td>'.$telefone.'</td>
                                                 <td class="table-action text-center">
                                                     <a href="cadastro/clienteJ/'.$id.'" alt="Editar" title="Editar">
                                                         <i class="align-middle"  data-feather="edit-2"></i>
                                                     </a>
-                                                    <a href="javascript:excluir('.$id.')" alt="Excluir" title="Excluir">
-                                                        <i class="align-middle" data-feather="trash"></i>
-                                                    </a>
+                                                   
                                                 </td>
                                             </tr> ';
                                     };

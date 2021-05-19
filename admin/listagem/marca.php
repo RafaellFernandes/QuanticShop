@@ -42,9 +42,7 @@
 												<a href="cadastro/marca/'.$id.'" alt="Editar" title="Editar">
 													<i class="align-middle"  data-feather="edit-2"></i>
 												</a>
-												<a href="excluir/inativarMarca" alt="Excluir" title="Excluir">
-													<i class="align-middle" data-feather="trash"></i>				
-												</a>
+												
 											</td>
 										</tr>';
 								}

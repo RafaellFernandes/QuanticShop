@@ -4,11 +4,12 @@
     exit;
   }
 
+  include "validacao/functions.php";
   //verificar se existem dados no POST
   if ( $_POST ) {
 
   	//recuperar os dados do formulario
-  	$id = $nome_dept = "";
+  	$id = $nome_dept = $ativo ="";
 
   	foreach ($_POST as $key => $value) {
   		//guardar as variaveis
@@ -38,7 +39,11 @@
 
   	//verificar se esta vazio, se tem algo é pq existe um registro com o mesmo nome
   	if ( !empty ( $dados->id ) ) {
-  		echo '<script>alert("Já existe um departamento com esse nome");history.back();</script>';
+		$titulo = "Atenção";
+		$mensagem = "Já Existe um Departamento com esse Nome";
+		$icone = "warning";
+		mensagem($titulo, $mensagem, $icone);
+  		echo 'history.back();';
   		exit;
   	}
 
@@ -46,22 +51,33 @@
   	//se o id estiver preenchido - update
   	if ( empty ( $id ) ) {
   		//inserir os dados no banco
-  		$sql = "INSERT INTO departamento (nome_dept) VALUES( ? )";
+  		$sql = "INSERT INTO departamento (nome_dept, ativo) VALUES( :nome_dept, :ativo )";
   		$consulta = $pdo->prepare($sql);
-  		$consulta->bindParam(1, $nome_dept);
+  		$consulta->bindParam(":nome_dept", $nome_dept);
+		$consulta->bindParam(":ativo", $ativo);
 
   	} else {
   		//atualizar os dados  	
-  		$sql = "UPDATE departamento SET nome_dept = ? WHERE id = ? LIMIT 1";	
+  		$sql = "UPDATE departamento SET nome_dept = :nome_dept, ativo = :ativo WHERE id = :id LIMIT 1";	
   		$consulta = $pdo->prepare($sql);
-  		$consulta->bindParam(1, $nome_dept);
-  		$consulta->bindParam(2, $id);
+  		$consulta->bindParam(":nome_dept", $nome_dept);
+		$consulta->bindParam(":ativo", $ativo);
+  		$consulta->bindParam(":id", $id);
   	}
   	//executar e verificar se deu certo
   	if ( $consulta->execute() ) {
-  		echo '<script>alert("Departamento Salvo com Sucesso");location.href="listagem/departamento";</script>';
+		$titulo = "Sucesso";
+		$mensagem = "Departamento Salvo!";
+		$icone = "success";
+		mensagem($titulo, $mensagem, $icone);
+  		echo 'location.href="listagem/departamento"';
+
   	} else {
-  		echo '<script>alert("Erro ao salvar");history.back();</script>';
+		$titulo = "Erro";
+		$mensagem = "Erro ao Salvar!";
+		$icone = "error";
+		mensagem($titulo, $mensagem, $icone);
+  		echo '<script>history.back();</script>';
   		exit;
   	}
 
@@ -69,5 +85,9 @@
   	//mensagem de erro
   	//javascript - mensagem alert
   	//retornar hostory.back
-  	echo '<script>alert("Erro ao realizar requisição");history.back();</script>';
+	$titulo = "Erro";
+	$mensagem = "Erro ao Realizar Requisição";
+	$icone = "error";
+	mensagem($titulo, $mensagem, $icone);
+  	echo '<script>history.back();</script>';
   }

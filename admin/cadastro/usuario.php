@@ -4,14 +4,18 @@
   if ( !isset ( $_SESSION["quanticshop"]["id"] ) ){
     exit;
   }
-    //mostrar erros
-    ini_set('display_errors',1);
-    ini_set('display_startup_erros',1);
-	error_reporting(E_ALL);
+
+  include "validacao/functions.php";
+
+  //mostrar erros
+  ini_set('display_errors',1);
+  ini_set('display_startup_erros',1);
+  error_reporting(E_ALL);
 	
   if ( !isset ( $id ) ) $id = "";
 
-  $primeiro_nome = $sobrenome = $email = $login = $senha = $cidade_id = $foto = $cep = $cidade = $estado = $bairro = $complemento = $numero_resid = $endereco = "";
+  $primeiro_nome = $sobrenome = $email = $login = $senha = $cidade_id = $foto = $cep = $cidade = 
+  $estado = $bairro = $complemento = $numero_resid = $endereco = $ativo = $genero_id = $dataNascimento = $cpf = $celular ="";
 
 if(!empty($id)){
     //selecionar dados
@@ -24,7 +28,11 @@ if(!empty($id)){
     $dados = $consulta->fetch(PDO::FETCH_OBJ);
     
     if(empty($dados->id)){
-        echo "<p class='alert alert-danger'>Usuario não existe! </p>";
+		$titulo = "Erro";
+		$mensagem = "Usuário Não Existente";
+		$icone = "error";
+		mensagem($titulo, $mensagem, $icone);
+        // echo "<p class='alert alert-danger'>Usuario não existe! </p>";
         exit;
     }
     
@@ -43,16 +51,20 @@ if(!empty($id)){
 	$bairro                 = $dados->bairro;
 	$numero_resid           = $dados->numero_resid;
 	$endereco               = $dados->endereco;
+	$ativo 		            = $dados->ativo;
+	$dataNascimento         = $dados->dataNascimento;
+	$genero_id              = $dados->genero_id;
+	$cpf                    = $dados->cpf;
+	$celular                = $dados->celular;
 
-    
 }
 ?>
 <div class="container-fluid p-0">
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h4>Cadastro</h4>
-                <h6 class="card-subtitle text-muted">Usuario</h6>
+				<h4>CADASTRO</h4>
+				<h6 style="color: blue;"><b>Usuário</b></h6>
             </div>
             <div class="card-body">
 				<form name="formCadastro" method="post" action="salvar/usuario" data-parsley-validate enctype="multipart/form-data">
@@ -76,6 +88,38 @@ if(!empty($id)){
 							<label for="email">E-mail:</label>
 							<input type="email" name="email" id="email" class="form-control" required data-parsley-required-message="Preencha o e-mail"  placeholder="email@exemplo.com.br"
 							data-parsley-type-message="Digite um e-mail válido" onblur="confirmarEmail(this.value)" value="<?=$email;?>">
+						</div>
+						<div class="mb-3 col-12 col-md-4 mt-2">
+							<label for="cpf">CPF:</label>
+							<input type="text" name="cpf" id="cpf" class="form-control" required data-parsley-required-message="Preencha o cpf" value="<?=$cpf;?>" onblur="verificarCpf(this.value)" placeholder="Digite seu CPF">
+						</div>
+						<div class="mb-3 col-12 col-md-4">
+							<label class="form-label" for="genero_id">Gênero:</label>
+							<select name="genero_id" id="genero_id" class="form-control" required data-parsley-required-message="selecione uma opção">
+                                <option value="<?=$genero_id;?>">Selecione o Gênero</option>
+                                    <?php
+                                        $sql = "SELECT * FROM genero ORDER BY id";
+                                        $consulta = $pdo->prepare($sql);
+                                        $consulta->execute();
+
+                                        while ($d = $consulta->fetch(PDO::FETCH_OBJ) ) {
+                                        //separar os dados
+                                            $id   = $d->id;
+                                            $genero = $d->genero;
+                                            echo '<option value="'.$id.'">'.$genero.'</option>';
+                                        }                    
+                                    ?>
+                            </select>
+						</div>
+						<div class="mb-3 col-12 col-md-4 mt-2">
+							<label for="dataNascimento">Data de Nascimento:</label>
+							<input type="text" name="dataNascimento" id="dataNascimento" class="form-control" required data-parsley-required-message="Preencha a data de nascimento" 
+							placeholder="Ex: 11/12/1990" value="<?=$dataNascimento;?>">
+						</div>
+						<div class="mb-3 col-12 col-md-4 mt-2">
+							<label for="celular">Celular:</label>
+							<input type="text" name="celular" id="celular" class="form-control" placeholder="Celular com DDD"
+							value="<?=$celular;?>" required data-parsley-required-message="Preencha o Celular">
 						</div>
 						<div class="col-12 col-md-4 mt-2">
 							<label for="login">Login:</label>
@@ -136,6 +180,15 @@ if(!empty($id)){
 							<label for="numero_resid">Numero de Residencia:</label>
 							<input type="text" id="numero_resid" name="numero_resid" class="form-control"  value="<?=$cidade_id;?>" placeholder="Numero Residencia">
 						</div> 
+						<div class="col-12 col-md-2 mt-2">
+							<label for="ativo">Ativo</label>
+							<select name="ativo" id="ativo" class="form-control" 
+								required data-parsley-required-message="Selecione uma opção">
+								<option value="">...</option>
+								<option value="1" <?= $ativo == '1' ? "selected" : "" ?>>Ativo</option>
+								<option value="0"  <?= $ativo == '0' ? "selected" : "" ?>>Inativo</option>
+							</select>
+                        </div>
 					</div><br>
 					<div class="row g-2">
                         <div class="col-sm-4 mt-4">
@@ -161,7 +214,10 @@ if(!empty($id)){
 <script type="text/javascript">
 
 	$(document).ready(function(){
-        $("#cep").mask("99999-999");      
+        $("#cep").mask("99999-999"); 
+		$('#cpf').mask('000.000.000-00');
+		$("#dataNascimento").mask("00/00/0000");
+		$("#celular").mask("(00) 00000-0000");     
 	});
 
     function confirmarEmail(email){

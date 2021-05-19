@@ -4,6 +4,8 @@
     exit;
   }
 
+  include "validacao/functions.php";
+
   if ( !isset ( $id ) ) $id = "";
 
   $nomeFantasia = $razaoSocial = $cnpj = $cep = $endereco = $cidade_id = $telefone = $cidade = $estado = $email = $inscricaoEstadual = 
@@ -40,7 +42,10 @@ if(!empty($id)){
 	$siteFornecedor      = $dados->siteFornecedor;
    
 	if(empty($dados->id)){
-        echo "<p class='alert alert-danger'> O Fornecedor não existe! </p>";
+		$titulo = "Erro";
+		$mensagem = "Fornecedor Não Existente";
+		$icone = "error";
+		mensagem($titulo, $mensagem, $icone);
         exit;
     }
 }
@@ -49,8 +54,8 @@ if(!empty($id)){
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-header">
-				<h4>Cadastro</h4>
-				<h6 class="card-subtitle text-muted">Fornecedor</h6>
+			<h4>CADASTRO</h4>
+				<h6 style="color: blue;"><b>Forcedor</b></h6>
 			</div>
 			<div class="card-body">
 				<form name="formCadastro" method="post" action="salvar/fornecedor" data-parsley-validate enctype="multipart/form-data">
@@ -61,9 +66,14 @@ if(!empty($id)){
 							<input type="text" name="id" id="id" class="form-control" readonly value="<?=$id;?>">
 						</div>
 						<div class="col-12 col-md-2">
-							<label for="ativo">Ativo:</label>
-							<input type="text" name="ativo" id="ativo" class="form-control" value="<?=$ativo;?>" placeholder="S ou N">
-						</div>
+							<label for="ativo">Ativo</label>
+							<select name="ativo" id="ativo" class="form-control" 
+								required data-parsley-required-message="Selecione uma opção">
+								<option value="">...</option>
+								<option value="1" <?= $ativo == '1' ? "selected" : "" ?>>Ativo</option>
+								<option value="0"  <?= $ativo == '0' ? "selected" : "" ?>>Inativo</option>
+							</select>
+                        </div>
 						<div class="col-12 col-md-10">
 							<label for="razaoSocial">Razão Social:</label>
 							<input type="text" name="razaoSocial" id="razaoSocial" class="form-control" required data-parsley-required-message="Preencha o nome" 

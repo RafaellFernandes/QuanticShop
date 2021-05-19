@@ -23,7 +23,7 @@ if ( !empty ( $id ) ) {
     $dados = $consulta->fetch(PDO::FETCH_OBJ);
 
     //separar os dados
-    //$id 	    = $dados->id;
+    $id 	    = $dados->id;
     $cidade 	= $dados->cidade;
     $estado 	= $dados->estado;
   

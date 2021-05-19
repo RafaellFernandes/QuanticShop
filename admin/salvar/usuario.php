@@ -11,13 +11,13 @@
   //verificar se existem dados no POST
   if ( $_POST ) {
 
-    //include "../validacao/functions.php";
-    include "../admin/validacao/functions.php";
-    //include "../config/conexao.php";
-   include "../admin/config/conexao.php";
+    include "validacao/functions.php";
+    include "config/conexao.php";
+    include "validacao/imagens.php";
 
   	//recuperar os dados do formulario
-  	$id = $primeiro_nome = $sobrenome = $email = $login = $senha = $cidade_id = $foto = $cep = $cidade = $estado = $bairro = $complemento = $numero_resid = "";
+  	$id = $primeiro_nome = $sobrenome = $email = $login = $senha = $cidade_id = $foto = $cep = $cidade = $estado = $bairro = 
+    $complemento = $numero_resid = $ativo = $cpf = $celular = $dataNascimento = "";
       
     //print_r($_POST);
     //print_r($_FILES);
@@ -50,34 +50,35 @@
     
     $arquivo = time()."-".$_SESSION["quanticshop"]["id"];
     
-    
-      
       if(empty($id)){
           
-         //$senha = crypt($senha);
-         //$senha = password_hash($senha, PASSWORD_DEFAULT);
-         $senha = password_hash($senha, PASSWORD_BCRYPT);
-          //inserir se o id estiver em branco
-          $sql = "INSERT INTO usuario(primeiro_nome, sobrenome, email, login, senha, cidade_id, foto, cidade, estado, cep, complemento, bairro, numero_resid, endereco) 
-          VALUES (:primeiro_nome, :sobrenome, :email, :login, :senha, :cidade_id, :foto, :cidade, :estado, :cep, :complemento, :bairro, :numero_resid, :endereco) ";
-          $consulta = $pdo->prepare($sql);
-          $consulta->bindParam(":primeiro_nome", $primeiro_nome);
-          $consulta->bindParam(":sobrenome", $sobrenome);
-          $consulta->bindParam(":login", $login);
-          $consulta->bindParam(":email", $email);
-          $consulta->bindParam(":senha", $senha);
-          $consulta->bindParam(":cidade_id", $cidade_id);
-          $consulta->bindParam(":foto", $arquivo);
-          $consulta->bindParam(":cidade", $cidade);
-          $consulta->bindParam(":estado", $estado);
-          $consulta->bindParam(":cep", $cep);
-          $consulta->bindParam(":complemento", $complemento);
-          $consulta->bindParam(":bairro", $bairro);
-          $consulta->bindParam(":numero_resid", $numero_resid);
-          $consulta->bindParam(":endereco", $endereco);
+        //$senha = crypt($senha);
+        //$senha = password_hash($senha, PASSWORD_DEFAULT);
+        $senha = password_hash($senha, PASSWORD_BCRYPT);
 
-          
-          
+        //inserir se o id estiver em branco
+        $sql = "INSERT INTO usuario(primeiro_nome, sobrenome, email, login, senha, cidade_id, foto, cidade, estado, cep, complemento, bairro, numero_resid, endereco, ativo, cpf, dataNascimento, celular) 
+        VALUES (:primeiro_nome, :sobrenome, :email, :login, :senha, :cidade_id, :foto, :cidade, :estado, :cep, :complemento, :bairro, :numero_resid, :endereco, :ativo, :cpf, :dataNascimento, :celular) ";
+        $consulta = $pdo->prepare($sql);
+        $consulta->bindParam(":primeiro_nome", $primeiro_nome);
+        $consulta->bindParam(":sobrenome", $sobrenome);
+        $consulta->bindParam(":login", $login);
+        $consulta->bindParam(":email", $email);
+        $consulta->bindParam(":senha", $senha);
+        $consulta->bindParam(":cidade_id", $cidade_id);
+        $consulta->bindParam(":foto", $arquivo);
+        $consulta->bindParam(":cidade", $cidade);
+        $consulta->bindParam(":estado", $estado);
+        $consulta->bindParam(":cep", $cep);
+        $consulta->bindParam(":complemento", $complemento);
+        $consulta->bindParam(":bairro", $bairro);
+        $consulta->bindParam(":numero_resid", $numero_resid);
+        $consulta->bindParam(":endereco", $endereco);
+        $consulta->bindParam(":ativo", $ativo);
+        $consulta->bindParam(":cpf", $cpf);
+        $consulta->bindParam(":dataNascimento", $dataNascimento);
+        $consulta->bindParam(":celular", $celular);
+ 
       } else{
           //update se o id estiver preenchido
           //qual arquivo sera gravado
@@ -85,24 +86,30 @@
                 $foto = $arquivo;
             }
                     
-          $sql = "UPDATE usuario SET primeiro_nome = :primeiro_nome, sobrenome = :sobrenome, email = :email, login = :login, senha = :senha,
-          cidade_id = :cidade_id, foto = :foto, cidade = :cidade, estado = :estado, cep = :cep, complemento = :complemento, bairro = :bairro, numero_resid = :numero_resid, endereco = :endereco WHERE id = :id ";
-          $consulta = $pdo->prepare($sql);
-          $consulta->bindParam(":primeiro_nome", $primeiro_nome);
-          $consulta->bindParam(":sobrenome", $sobrenome);
-          $consulta->bindParam(":login", $login);
-          $consulta->bindParam(":email", $email);
-          $consulta->bindParam(":senha", $senha);
-          $consulta->bindParam(":cidade_id", $cidade_id);
-          $consulta->bindParam(":foto", $arquivo);
-          $consulta->bindParam(":cidade", $cidade);
-          $consulta->bindParam(":estado", $estado);
-          $consulta->bindParam(":cep", $cep);
-          $consulta->bindParam(":complemento", $complemento);
-          $consulta->bindParam(":bairro", $bairro);
-          $consulta->bindParam(":numero_resid", $numero_resid);
-          $consulta->bindParam(":endereco", $endereco);
-          $consulta->bindParam(":id", $id);
+        $sql = "UPDATE usuario SET primeiro_nome = :primeiro_nome, sobrenome = :sobrenome, email = :email, login = :login, senha = :senha,
+        cidade_id = :cidade_id, foto = :foto, cidade = :cidade, estado = :estado, cep = :cep, complemento = :complemento, bairro = :bairro, 
+        numero_resid = :numero_resid, endereco = :endereco, ativo = :ativo, dataNascimento = :dataNascimento, cpf = :cpf, celular = :celular WHERE id = :id ";
+       
+        $consulta = $pdo->prepare($sql);
+        $consulta->bindParam(":primeiro_nome", $primeiro_nome);
+        $consulta->bindParam(":sobrenome", $sobrenome);
+        $consulta->bindParam(":login", $login);
+        $consulta->bindParam(":email", $email);
+        $consulta->bindParam(":senha", $senha);
+        $consulta->bindParam(":cidade_id", $cidade_id);
+        $consulta->bindParam(":foto", $arquivo);
+        $consulta->bindParam(":cidade", $cidade);
+        $consulta->bindParam(":estado", $estado);
+        $consulta->bindParam(":cep", $cep);
+        $consulta->bindParam(":complemento", $complemento);
+        $consulta->bindParam(":bairro", $bairro);
+        $consulta->bindParam(":numero_resid", $numero_resid);
+        $consulta->bindParam(":endereco", $endereco);
+        $consulta->bindParam(":ativo", $ativo);
+        $consulta->bindParam(":cpf", $cpf);
+        $consulta->bindParam(":dataNascimento", $dataNascimento);
+        $consulta->bindParam(":celular", $celular);
+        $consulta->bindParam(":id", $id);
           
       }
       //executar e verificar se deu certo
@@ -112,12 +119,22 @@
                 //a capa deve estar vazia e ID nao estiver vazio
                 //gravar no banco 
                 $pdo->commit();
-                echo "<script>alert('Usuario salvo com Sucesso!');location.href='listagem/usuario';</script>";
+
+                $titulo = "Sucesso";
+                $mensagem = "Usuário Salvo!";
+                $icone = "success";
+                mensagem($titulo, $mensagem, $icone);
+                echo "<script>location.href='listagem/usuario';</script>";
 
             }
             //veririfcar tipo imagem
             if($_FILES["foto"]["type"]  !=  "image/jpeg"){
-                echo "<script>alert('Seleciona uma imagem Jpeg');history.back();</script>";
+
+                $titulo = "Atenção";
+                $mensagem = "Selecione uma Imagem JPG";
+                $icone = "warning";
+                mensagem($titulo, $mensagem, $icone);
+                echo "<script>history.back();</script>";
                 exit;
             }
             if ( move_uploaded_file($_FILES["foto"]["tmp_name"], "../fotos/".$_FILES["foto"]["name"])){
@@ -129,14 +146,29 @@
 
                 //gravar no banco - se tudo deu certo
                 $pdo->commit();
-                echo "<script>alert('Usuario salvo com Sucesso!');location.href='listagem/usuario';</script>";
+                $titulo = "Sucesso";
+                $mensagem = "Usuário Salvo!";
+                $icone = "success";
+                mensagem($titulo, $mensagem, $icone);
+                echo "<script>location.href='listagem/usuario';</script>";
+               
             }
 
             //erro ao gravar
-            echo "<script>alert('Erro ao gravar no servidor');history.back();</script>";
+            $titulo = "Erro";
+            $mensagem = "Erro ao Gravar no Servidor";
+            $icone = "error";
+            mensagem($titulo, $mensagem, $icone);
+            echo "<script>history.back();</script>";
             exit;
+
         } else {
-            echo '<script>alert("Erro ao salvar");history.back();</script>';
+            
+            $titulo = "Erro";
+            $mensagem = "Erro ao Salvar";
+            $icone = "error";
+            mensagem($titulo, $mensagem, $icone);
+            echo '<script>history.back();</script>';
             exit;
         }
   }

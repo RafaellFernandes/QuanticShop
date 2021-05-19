@@ -3,23 +3,24 @@
   if ( !isset ( $_SESSION["quanticshop"]["id"] ) ){
     exit;
   }
-      //mostrar erros
-    ini_set('display_errors',1);
-    ini_set('display_startup_erros',1);
-    error_reporting(E_ALL);
+
+  //mostrar erros
+  ini_set('display_errors',1);
+  ini_set('display_startup_erros',1);
+  error_reporting(E_ALL);
 
   //verificar se existem dados no POST
   if ( $_POST ) {
-    include "../admin/validacao/functions.php";
-    include "../admin/config/conexao.php";
+    include "validacao/functions.php";
+    include "config/conexao.php";
 
   	//recuperar os dados do formulario
     $id = $email = $senha = $cep = $telefone = $celular = $pessoaFJ = $nomeFantasia = $razaoSocial =
-    $cnpj = $inscricao_estadual = $estado = $cidade = $endereco = $bairro = $numero_resid = $cidade_id = $ativo = $siteJ = $complemento = $genero_id = "";
+    $cnpj = $inscricao_estadual = $estado = $cidade = $endereco = $bairro = $numero_resid = $cidade_id = $ativo = $siteClienteJuridico = $complemento = $genero_id = "";
       
-      var_dump($_POST);
-      print_r($_POST);
-      print_r($_FILES);
+    // var_dump($_POST);
+    // print_r($_POST);
+    // print_r($_FILES);
       
   	foreach ($_POST as $key => $value) {
   	//guardar as variaveis
@@ -57,8 +58,8 @@
           //$Senha = password_hash($Senha, PASSWORD_DEFAULT);
           $senha = password_hash($senha, PASSWORD_BCRYPT);
           //inserir se o id estiver em branco
-          $sql = "INSERT INTO cliente (email, senha, cep, endereco, bairro, cidade_id, telefone, celular, numero_resid, pessoaFJ, cidade, estado, nomeFantasia, razaoSocial, cnpj, inscricao_estadual, ativo, siteJ, complemento, genero_id) 
-          VALUES (:email, :senha, :cep, :endereco, :bairro, :cidade_id, :telefone, :celular, :numero_resid, :pessoaFJ, :cidade, :estado, :nomeFantasia, :razaoSocial, :cnpj, :inscricao_estadual, :ativo, :siteJ, :complemento, :genero_id)";
+          $sql = "INSERT INTO cliente (email, senha, cep, endereco, bairro, cidade_id, telefone, celular, numero_resid, pessoaFJ, cidade, estado, nomeFantasia, razaoSocial, cnpj, inscricao_estadual, ativo, siteClienteJuridico, complemento, genero_id) 
+          VALUES (:email, :senha, :cep, :endereco, :bairro, :cidade_id, :telefone, :celular, :numero_resid, :pessoaFJ, :cidade, :estado, :nomeFantasia, :razaoSocial, :cnpj, :inscricao_estadual, :ativo, :siteClienteJuridico, :complemento, :genero_id)";
           $consulta = $pdo->prepare($sql);
           $consulta->bindParam(":email", $email);
           $consulta->bindParam(":senha", $senha);
@@ -77,7 +78,7 @@
           $consulta->bindParam(":cnpj", $cnpj);
           $consulta->bindParam(":inscricao_estadual", $inscricao_estadual);
           $consulta->bindParam(":ativo", $ativo);
-          $consulta->bindParam(":siteJ", $siteJ);
+          $consulta->bindParam(":siteClienteJuridico", $siteClienteJuridico);
           $consulta->bindParam(":complemento", $complemento);
           $consulta->bindParam(":genero_id", $genero_id);
         
@@ -90,7 +91,7 @@
          bairro = :bairro, cidade_id = :cidade_id, telefone = :telefone, celular = :celular, 
             numero_resid = :numero_resid, pessoaFJ = :pessoaFJ, cidade = :cidade, estado = :estado, nomeFantasia = :nomeFantasia,
             razaoSocial = :razaoSocial, cnpj = :cnpj, inscricao_estadual = :inscricao_estadual, ativo = :ativo,
-             siteJ = :siteJ, complemento = :complemento, genero_id = :genero_id WHERE id = :id";
+             siteClienteJuridico = :siteClienteJuridico, complemento = :complemento, genero_id = :genero_id WHERE id = :id";
 
           $consulta = $pdo->prepare($sql);
           $consulta->bindParam(":email", $email);
@@ -110,7 +111,7 @@
           $consulta->bindParam(":cnpj", $cnpj);
           $consulta->bindParam(":inscricao_estadual", $inscricao_estadual);
           $consulta->bindParam(":ativo", $ativo);
-          $consulta->bindParam(":siteJ", $siteJ);
+          $consulta->bindParam(":siteClienteJuridico", $siteClienteJuridico);
           $consulta->bindParam(":complemento", $complemento);
           $consulta->bindParam(":genero_id", $genero_id);
           $consulta->bindParam(":id", $id);
@@ -118,15 +119,29 @@
       }
       //executar e verificar se deu certo
         if ( $consulta->execute() ) {
-                //gravar no banco 
-                $pdo->commit();
-                echo "<script>alert('Cliente Salvo com Sucesso!');location.href='listagem/cliente';</script>";
-
-            //erro ao gravar
-            echo "<script>alert('Erro ao gravar no servidor');history.back();</script>";
-            exit;
-        } else {
-            echo '<script>alert("Erro ao salvar");history.back();</script>';
-            exit;
+          //gravar no banco 
+          $pdo->commit();
+          $titulo = "Sucesso";
+          $mensagem = "Cliente Salvo!";
+          $icone = "success";
+          mensagem($titulo, $mensagem, $icone);
+          echo "<script>location.href='listagem/cliente';</script>";
         }
-   }
+
+        //erro ao gravar
+        $titulo = "Erro";
+        $mensagem = "Erro ao Gravar no Servidor!";
+        $icone = "error";
+        mensagem($titulo, $mensagem, $icone);
+        echo "<script>history.back();</script>";
+        exit;
+
+      } else {
+
+        $titulo = "Erro";
+        $mensagem = "Erro ao Salvar";
+        $icone = "error";
+        mensagem($titulo, $mensagem, $icone);
+        echo '<script>history.back();</script>';
+        exit;
+      }

@@ -7,8 +7,8 @@
   //verificar se existem dados no POST
 if ( $_POST ) {
 
-	include "../admin/validacao/functions.php";
-    include "../admin/config/conexao.php";
+	include "validacao/functions.php";
+    include "config/conexao.php";
 	
   	//recuperar os dados do formulario
   	$id = $nome_marca = $ativo = "";
@@ -20,7 +20,11 @@ if ( $_POST ) {
 
   	//validar os campos - em branco
   	if ( empty ( $nome_marca ) ) {
-  		echo '<script>alert("Preencha a marca");history.back();</script>';
+		$titulo = "Erro";
+		$mensagem = "Preencha a marca";
+		$icone = "error";
+		mensagem($titulo, $mensagem, $icone);
+  		echo '<script>history.back();</script>';
   		exit;
   	}
 
@@ -38,7 +42,11 @@ if ( $_POST ) {
 
   	//verificar se esta vazio, se tem algo é pq existe um registro com o mesmo nome
   	if ( !empty ( $dados->id ) ) {
-  		echo '<script>alert("Já existe uma marca com este nome registrada");history.back();</script>';
+  		// echo '<script>alert("Já existe uma marca com este nome registrada");history.back();</script>';
+		  $titulo = "Erro";
+		  $mensagem = "Já existe uma marca com este nome registrada";
+		  $icone = "error";
+		  mensagem($titulo, $mensagem, $icone);
   		exit;
   	}
 
@@ -67,12 +75,24 @@ if ( $_POST ) {
 	if ( $consulta->execute() ) {
 		//gravar no banco 
 		$pdo->commit();
-		echo "<script>alert('Marca Salva com Sucesso!');location.href='listagem/marca';</script>";
+		$titulo = "Sucesso";
+		$mensagem = "Marca Salva com Sucesso!";
+		$icone = "success";
+		mensagem($titulo, $mensagem, $icone);
+		echo "<script>location.href='listagem/marca';</script>";
 	}
 	//erro ao gravar
-	echo "<script>alert('Erro ao gravar no servidor');history.back();</script>";
+		$titulo = "Erro";
+		$mensagem = "Erro ao gravar no servidor";
+		$icone = "error";
+		mensagem($titulo, $mensagem, $icone);
+	echo "<script>history.back();</script>";
 	exit;
 } else {
-	echo '<script>alert("Erro ao salvar");history.back();</script>';
+		$titulo = "Erro";
+		$mensagem = "Erro ao Salvar";
+		$icone = "error";
+		mensagem($titulo, $mensagem, $icone);
+	echo '<script>history.back();</script>';
 	exit;
 }

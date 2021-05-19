@@ -5,6 +5,8 @@
     exit;
   }
 
+  include "validacao/functions.php";
+
     //mostrar erros
 	ini_set('display_errors',1);
 	ini_set('display_startup_erros',1);
@@ -12,8 +14,8 @@
   
   if ( !isset ( $id ) ) $id = "";
 
-   $email = $senha = $cep = $telefone = $celular = $pessoaFJ = $nomeFantasia = $razaoSocial = $cnpj = $inscricao_estadual =  $estado = $cidade = $endereco = $bairro = 
-   $numero_resid = $cidade_id = $ativo = $siteJ = $complemento =  $genero_id = "";
+   $email = $senha = $cep = $telefone = $celular = $pessoaFJ = $nomeFantasia = $razaoSocial = $cnpj = $inscricao_estadual = 
+    $estado = $cidade = $endereco = $bairro = $numero_resid = $cidade_id = $ativo = $siteJ = $complemento =  $genero_id = "";
 
   if ( !empty ( $id ) ) {
 	  //selecionar os dados do cliente
@@ -26,7 +28,10 @@
 	  $dados = $consulta->fetch(PDO::FETCH_OBJ);
 
 	  if ( empty ( $dados->id ) ) {
-		  echo "<p class='alert alert-danger'>Cliente Não Existente</p>";
+		$titulo = "Erro";
+		$mensagem = "Cliente Não Existente";
+		$icone = "error";
+		mensagem($titulo, $mensagem, $icone);
 	  }
 
 	  $id                      = $dados->id;
@@ -47,7 +52,7 @@
 	  $complemento             = $dados->complemento;
 	  $numero_resid            = $dados->numero_resid;
 	  $cidade_id               = $dados->cidade_id;
-      $siteJ                   = $dados->siteJ;
+      $siteclienteJuridico     = $dados->siteclienteJuridico;
 	  $ativo                   = $dados->ativo;
 	  $genero_id               = $dados->genero_id;
 	  
@@ -59,10 +64,10 @@
 	<div class="card">
 		<div class="card-header">
             <div class="float-end">
-				<a href="cadastro/clienteF" class="btn btn-primary">Cad. Pessoa Fisica</a> 
+				<a href="cadastro/clienteF" class="btn btn-primary mt-2">Cad. Pessoa Fisica</a> 
 			</div>
-			<h4>Cadastro</h5>
-			<h6 class="card-subtitle text-muted">Cliente | Pessoa Juridica</h6>
+			<h4>CADASTRO</h4>
+			<h6 style="color: blue;"><b>Cliente | Pessoa Juridica</b></h6>
 		</div>
 		<div class="card-body">
 			<form name="formCadastro" method="post" action="salvar/clienteJ" data-parsley-validate enctype="multipart/form-data">
@@ -126,9 +131,9 @@
 							data-parsley-type-message="Digite um E-mail válido" placeholder="exemple@hotmail.com" value="<?=$email;?>" onblur="confirmarEmail(this.value)">
 						</div>
                         <div class="mb-3 col-12 col-md-4 mt-2">
-							<label for="siteJ">Site:</label>
-							<input type="text" name="siteJ" id="siteJ" class="form-control" required data-parsley-required-message="Preencha o site" 
-							 placeholder="www.exemplo.com" value="<?=$siteJ;?>">
+							<label for="siteclienteJuridico">Site:</label>
+							<input type="text" name="siteclienteJuridico" id="siteclienteJuridico" class="form-control" required data-parsley-required-message="Preencha o site" 
+							 placeholder="www.exemplo.com" value="<?=$siteclienteJuridico;?>">
 						</div>
 						<div class="mb-3 col-12 col-md-4 mt-2">
 							<label for="senha">Senha:</label>
@@ -171,10 +176,15 @@
 							<label for="complemento">Complemento:</label>
 							<input type="text" name="complemento" id="complemento" class="form-control" value="<?=$complemento;?>">
 						</div> 
-						<div class="mb-3 col-12 col-md-2 mt-2">
+						<div class="col-12 col-md-2 mt-2">
 							<label for="ativo">Ativo</label>
-							<input type="text" name="ativo" id="ativo" class="form-control" value="<?=$ativo;?>" placeholder="S ou N">
-						</div><br>
+							<select name="ativo" id="ativo" class="form-control" 
+								required data-parsley-required-message="Selecione uma opção">
+								<option value="">...</option>
+								<option value="1" <?= $ativo == '1' ? "selected" : "" ?>>Ativo</option>
+								<option value="0"  <?= $ativo == '0' ? "selected" : "" ?>>Inativo</option>
+							</select>
+                        </div><br>
 					</div><br>
 					<div class="row g-2">
                         <div class="col-sm-4 mt-4">

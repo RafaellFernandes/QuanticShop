@@ -5,10 +5,12 @@
     exit;
   }
 
-    //mostrar erros
-	ini_set('display_errors',1);
-	ini_set('display_startup_erros',1);
-    error_reporting(E_ALL);
+  include "validacao/functions.php";
+
+  //mostrar erros
+  ini_set('display_errors',1);
+  ini_set('display_startup_erros',1);
+  error_reporting(E_ALL);
   
   if ( !isset ( $id ) ) $id = "";
 
@@ -27,7 +29,10 @@
 	  $dados = $consulta->fetch(PDO::FETCH_OBJ);
 
 	  if ( empty ( $dados->id ) ) {
-		  echo "<p class='alert alert-danger'>Cliente Não Existente</p>";
+		$titulo = "Erro";
+		$mensagem = "Cliente Não Existente";
+		$icone = "error";
+		mensagem($titulo, $mensagem, $icone);
 	  }
 
 	  $id                      = $dados->id;
@@ -60,13 +65,13 @@
 	<div class="card">
 		<div class="card-header">
 			<div class="mb-2 float-end">
-				<a href="cadastro/clienteJ" class="btn btn-primary">Cad. Pessoa Juridica</a> 
+				<a href="cadastro/clienteJ" class="btn btn-primary mt-2">Cad. Pessoa Juridica</a> 
 			</div>
-			<h4>Cadastro</h5>
-			<h6 class="card-subtitle text-muted">Cliente | Pessoa Fisica </h6>
+			<h4>CADASTRO</h4>
+			<h6 style="color: blue;"><b>Cliente | Pessoa Fisica </b></h6>
 		</div>
 		<div class="card-body">
-			<form name="formCadastro" method="post" action="salvar/clienteF" data-parsley-validate enctype="multipart/form-data"><!---->
+			<form name="formCadastro" method="post" action="salvar/clienteF" data-parsley-validate enctype="multipart/form-data">
 				<p class="card-subtitle text-muted">Todos os Campos são Obrigatórios</p><br>
 					<div class="row">
 						<div class="mb-3 col-12 col-md-2 mt-2">
@@ -182,10 +187,15 @@
 							<label for="complemento">Complemento</label>
 							<input type="text" name="complemento" id="complemento" class="form-control" value="<?=$complemento;?>" placeholder="Casa ou Apto.">
 						</div>
-						<div class="mb-3 col-12 col-md-2 mt-2">
+						<div class="col-12 col-md-2 mt-2">
 							<label for="ativo">Ativo</label>
-							<input type="text" name="ativo" id="ativo" class="form-control" value="<?=$ativo;?>" placeholder="S ou N">
-						</div>
+							<select name="ativo" id="ativo" class="form-control" 
+								required data-parsley-required-message="Selecione uma opção">
+								<option value="">...</option>
+								<option value="1" <?= $ativo == '1' ? "selected" : "" ?>>Ativo</option>
+								<option value="0"  <?= $ativo == '0' ? "selected" : "" ?>>Inativo</option>
+							</select>
+                        </div>
 						<br>
 					</div><br>
 					<div class="row g-2">

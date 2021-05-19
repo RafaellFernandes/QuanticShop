@@ -68,8 +68,8 @@
     }
   }
 ?>
-<!-- <link href="styleLogin.css" rel="stylesheet"> -->
-<div class="container d-flex flex-column fonte mb-5">
+<!-- <link href="../assets/styleLogin.css" rel="stylesheet"> -->
+<div class="container d-flex flex-column fonte">
 	<div class="row vh-100">
 		<div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
 			<div class="d-table-cell align-middle">
@@ -77,35 +77,36 @@
 					<h1 class="h2 fonte">Seja Bem Vindo</h1>
 					<p class="lead">Entre na sua Conta para Continuar</p>
 				</div>
-				<div class="card mb-5">
+				<div class="card">
 					<div class="card-body">
 						<div class="m-sm-4">
 							<div class="text-center">
-                <p class="lead fonte1">Sistema Quantic</p>
+                                <p class="lead fonte1">Sistema Quantic</p>
 								<img src="img/enter.png" alt="Entre" class="img-fluid " width="70" height="70" />
-                <?=$msg;?>
+                                <?=$msg;?>
 							</div>
 							<form class="user" name="login" method="post" data-parsley-validate>
 								<div class="mb-3">
 									<label class="form-label fonte1">Login</label>
 									<input class="form-control form-control-lg" id="login" type="text" name="login" placeholder="Login de Acesso" 
-                  required data-parsley-validate="Preencha o Login"/>
+                                        required data-parsley-validate="Preencha o Login"/>
 								</div>
 								<div class="mb-3">
 									<label class="form-label fonte1">Senha</label>
 									<input class="form-control form-control-lg" type="password" name="senha" id="senha" placeholder="Digite sua Senha" 
-                  required data-parsley-validate="Preencha a Senha" />
+                                         required data-parsley-validate="Preencha a Senha" />
 									<small>
-                    <a href="pages-reset-password.html">Esqueceu a Senha?</a>
-                  </small>
+                                        <a href="pages-reset-password.html">Esqueceu a Senha?</a>
+                                    </small>
 								</div>
+                              
 								<div>
 									<label class="form-check" for="lembrar">
-                    <input class="form-check-input" type="checkbox" value="lembrar"  id="lembrar" name="lembrar" checked>
-                    <span class="form-check-label fonte1">
-                      Lembrar meu Login
-                    </span>
-                  </label>
+                                    <input class="form-check-input" type="checkbox" value="lembrar"  id="customCheck" name="lembrar" checked>
+                                    <span class="form-check-label fonte1" for="customCheck">
+                                    Lembrar meu Login
+                                    </span>
+                                </label>
 								</div>
 								<div class="text-center mt-3">
 									<!-- <a href="index.html" class="btn btn-lg btn-primary">Sign in</a> -->
@@ -119,3 +120,33 @@
 		</div>
   </div>
 </div>
+<script>
+$(document).ready(function() {
+    //var nome = 'Robson Pereira Vieira Jr';
+    //localStorage.setItem('nome', nome);
+    //var texto = localStorage.getItem('nome');
+    //alert(texto);
+
+    $('#customCheck').click(function() {
+        if ($('#customCheck').is(':checked')) {
+
+            var login = $('#login').val();
+            if (login == '') {
+                alert('Preencha o campo login');
+                $('#customCheck').prop("checked", false);
+            } else {
+                localStorage.setItem('loginAdm', login);
+            }
+
+        } else {
+            localStorage.setItem('loginAdm', '');
+        }
+    })
+
+    var loginAdm = localStorage.getItem('loginAdm');
+    if (loginAdm) {
+        $('#login').val(loginAdm);
+        $('#customCheck').prop("checked", true);
+    }
+})
+</script>

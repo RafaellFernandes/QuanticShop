@@ -11,8 +11,8 @@
 
   //verificar se existem dados no POST
   if ( $_POST ) {
-    include "../admin/validacao/functions.php";
-    include "../admin/config/conexao.php";
+    include "validacao/functions.php";
+    include "config/conexao.php";
 
   	//recuperar os dados do formulario
   	$id = $nomeFantasia = $razaoSocial = $cnpj = $cep = $endereco = $cidade_id = $telefone = $cidade = $estado = $email = $inscricaoEstadual = 
@@ -98,9 +98,17 @@
   	if ( $consulta->execute() ) {
         //salvar no banco
         $pdo->commit();
-        echo '<script>alert("Transportadora Salvo com Sucesso!");location.href="listagem/transportadora";</script>';
+        $titulo = "Sucesso";
+		$mensagem = "Transportadora Salva!";
+		$icone = "success";
+		mensagem($titulo, $mensagem, $icone);
+        echo '<script>location.href="listagem/transportadora";</script>';
     } else {
-        echo '<script>alert("Erro ao salvar");history.back();</script>';
+        $titulo = "Erro";
+		$mensagem = "Erro ao Salvar";
+		$icone = "error";
+		mensagem($titulo, $mensagem, $icone);
+        echo '<script>history.back();</script>';
         exit;
     }
 
@@ -108,5 +116,9 @@
     //mensagem de erro
     //javascript - mensagem alert
     //retornar history.back
-    echo '<script>alert("Erro ao realizar requisição");history.back();</script>';
+    $titulo = "Erro";
+	$mensagem = "Erro ao Realizar Requisição";
+	$icone = "error";
+	mensagem($titulo, $mensagem, $icone);
+    echo '<script>history.back();</script>';
 }

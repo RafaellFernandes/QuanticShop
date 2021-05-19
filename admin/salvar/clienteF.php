@@ -3,15 +3,17 @@
   if ( !isset ( $_SESSION["quanticshop"]["id"] ) ){
     exit;
   }
-      //mostrar erros
-    ini_set('display_errors',1);
-    ini_set('display_startup_erros',1);
-    error_reporting(E_ALL);
+
+  //mostrar erros
+  ini_set('display_errors',1);
+  ini_set('display_startup_erros',1);
+  error_reporting(E_ALL);
 
   //verificar se existem dados no POST
   if ( $_POST ) {
-    include "../admin/validacao/functions.php";
-    include "../admin/config/conexao.php";
+    
+    include "validacao/functions.php";
+    include "config/conexao.php";
 
   	//recuperar os dados do formulario
     $id = $primeiro_nome = $sobrenome = $cpf  = $data_nascimento = $email = $senha = $cep = $telefone = $celular = $foto = 
@@ -84,8 +86,6 @@
           $consulta->bindParam(":ativo", $ativo);
           $consulta->bindParam(":genero_id", $genero_id);
         
-          
-          
       } else {
           //update se o id estiver preenchido
           //qual arquivo sera gravado
@@ -128,12 +128,21 @@
                 //a capa deve estar vazia e ID nao estiver vazio
                 //gravar no banco 
                 $pdo->commit();
-                echo "<script>alert('Cliente Salvo com Sucesso!');location.href='listagem/cliente';</script>";
+
+                $titulo = "Sucesso";
+                $mensagem = "Cliente Salvo!";
+                $icone = "success";
+                mensagem($titulo, $mensagem, $icone);
+                echo "<script>location.href='listagem/cliente';</script>";
 
             }
-            //veririfcar tipo imagem
+            //verificar tipo imagem
             if($_FILES["foto"]["type"]  !=  "image/jpeg"){
-                echo "<script>alert('Seleciona uma imagem Jpeg');history.back();</script>";
+                $titulo = "Atenção";
+                $mensagem = "Selecione uma Imagem JPG!";
+                $icone = "warning";
+                mensagem($titulo, $mensagem, $icone);
+                echo "<script>history.back();</script>";
                 exit;
             }
             if ( move_uploaded_file($_FILES["foto"]["tmp_name"], "../fotos/".$_FILES["foto"]["name"])){
@@ -145,14 +154,29 @@
 
                 //gravar no banco - se tudo deu certo
                 $pdo->commit();
-                echo "<script>alert('Cliente Salvo com Sucesso!');location.href='listagem/cliente';</script>";
+
+                $titulo = "Sucesso";
+                $mensagem = "Cliente Salvo!";
+                $icone = "success";
+                mensagem($titulo, $mensagem, $icone);
+                echo "<script>location.href='listagem/cliente';</script>";
             }
 
             //erro ao gravar
-            echo "<script>alert('Erro ao gravar no servidor');history.back();</script>";
+            $titulo = "Erro";
+            $mensagem = "Erro ao Gravar no Servidor!";
+            $icone = "error";
+            mensagem($titulo, $mensagem, $icone);
+            echo "<script>history.back();</script>";
             exit;
+
         } else {
-            echo '<script>alert("Erro ao salvar");history.back();</script>';
+
+            $titulo = "Erro";
+            $mensagem = "Erro ao Salvar!";
+            $icone = "error";
+            mensagem($titulo, $mensagem, $icone);
+            echo '<script>history.back();</script>';
             exit;
         }
   }

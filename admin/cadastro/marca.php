@@ -4,6 +4,8 @@
     exit;
   }
 
+  include "validacao/functions.php";
+
   //iniciar as variaveis 
   $nome_marca = $ativo ="";
 
@@ -18,12 +20,21 @@
   	$consulta = $pdo->prepare($sql);
   	$consulta->bindParam(1, $id); 
   	$consulta->execute();
+
   	$dados  = $consulta->fetch(PDO::FETCH_OBJ);
 
+	if ( empty ( $dados->id ) ) {
+		$titulo = "Erro";
+		$mensagem = "Marca Não Existente";
+		$icone = "error";
+		mensagem($titulo, $mensagem, $icone);
+		
+	}
+
   	//separar os dados
-  	$id 	  = $dados->id;
+  	$id 		   = $dados->id;
 	$nome_marca    = $dados->nome_marca;
-	$ativo = $dados->ativo;
+	$ativo 		   = $dados->ativo;
 
   } 
 ?>
@@ -32,12 +43,11 @@
 		<div class="card">
 			<div class="card-header">
 				<div class="float-end">
-					<a href="cadastro/departamento" class="btn btn-primary">Cadastrar Departamento</a> 
-					<a href="cadastro/produto" class="btn btn-primary">Cadastrar Produto</a>
+					<a href="cadastro/departamento" class="btn btn-primary mt-1">Cadastrar Departamento</a> 
+					<a href="cadastro/produto" class="btn btn-primary mt-1">Cadastrar Produto</a>
 				</div>
-				<h4>Cadastro</h4>
-				<h6 class="card-subtitle text-muted">Marca</h6>
-				
+				<h4>CADASTRO</h4>
+				<h6 style="color: blue;"><b>Marca</b></h6>
 			</div>
 			<div class="card-body">
 				<form name="formCadastro" method="post" action="salvar/marca" data-parsley-validate>
@@ -47,22 +57,21 @@
 							<label for="id">ID</label>
 							<input type="text" name="id" id="id" class="form-control" readonly value="<?=$id;?>">
 						</div>
-						<div class="col-12 col-md-12">
+						<div class="col-12 col-md-10">
 							<label for="nome_marca">Nome</label>
 							<input type="text" name="nome_marca" id="nome_marca" class="form-control" required data-parsley-required-message="Preencha este campo, por favor"
 							value="<?=$nome_marca;?>">
 						</div>
-						<div class="col-12 col-md-2 mt-2">
-                        <label for="ativo">Ativo</label>
-                        <select name="ativo" id="ativo" class="form-control" 
-                        required data-parsley-required-message="Selecione uma opção">
-                            <option value="">...</option>
-                            <option value="0">Inativo</option>
-                            <option value="1">Ativo</option>
-					    </select>
+						<div class="col-12 col-md-2">
+							<label for="ativo">Ativo</label>
+							<select name="ativo" id="ativo" class="form-control" 
+								required data-parsley-required-message="Selecione uma opção">
+								<option value="">...</option>
+								<option value="1" <?= $ativo == '1' ? "selected" : "" ?>>Ativo</option>
+								<option value="0"  <?= $ativo == '0' ? "selected" : "" ?>>Inativo</option>
+							</select>
                         </div>
 					</div><br>
-
 					<div class="row g-2">
                         <div class="col-sm-4 mt-4">
 							<button type="submit" class="btn btn-success margin" alt="Salvar" title="Salvar">

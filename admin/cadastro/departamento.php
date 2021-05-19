@@ -5,8 +5,10 @@
         exit;
     }
 
+    include "validacao/functions.php";
+
     //iniciar as variaveis
-    $nome_dept = "";
+    $nome_dept = $ativo = "";
 
     //se nao existe o id
     if ( !isset ( $id ) ) $id = "";
@@ -22,9 +24,18 @@
 
         $dados = $consulta->fetch(PDO::FETCH_OBJ);
 
+        if ( empty ( $dados->id ) ) {
+            $titulo = "Erro";
+            $mensagem = "Departamento Não Existente";
+            $icone = "error";
+		    mensagem($titulo, $mensagem, $icone);
+         
+        }
+  
         //separar os dados
-        //$id 	    = $dados->id;
+        $id 	        = $dados->id;
         $nome_dept  	= $dados->nome_dept ;
+        $ativo 		    = $dados->ativo;
 	  
   }
   
@@ -33,12 +44,12 @@
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-header">
-                <div class="float-end">
+                <div class="float-end mt-2">
 					<a href="cadastro/marca" class="btn btn-primary">Cadastrar Marca</a> 
 					<a href="cadastro/produto" class="btn btn-primary">Cadastrar Produto</a>
 				</div>
-				<h4>Cadastro</h4>
-				<h6 class="card-subtitle text-muted">Departamento</h6>
+				<h4>CADASTRO</h4>
+				<h6 style="color: blue;"><b>Departamento</b></h6>
 				
 			</div>
 			<div class="card-body">
@@ -49,11 +60,20 @@
 							<label for="id">ID</label>
 							<input type="text" name="id" id="id" class="form-control" readonly value="<?=$id;?>">
 						</div>
-						<div class="col-12 col-md-12">
+						<div class="col-12 col-md-10">
 							<label for="nome_dept">Departamento:</label>
 							<input type="text" name="nome_dept" id="nome_dept" class="form-control" required data-parsley-required-message="Preencha este campo, por favor"
 							value="<?=$nome_dept;?>">
 						</div> 
+                        <div class="col-12 col-md-2">
+							<label for="ativo">Ativo</label>
+							<select name="ativo" id="ativo" class="form-control" 
+								required data-parsley-required-message="Selecione uma opção">
+								<option value="">...</option>
+								<option value="1" <?= $ativo == '1' ? "selected" : "" ?>>Ativo</option>
+								<option value="0"  <?= $ativo == '0' ? "selected" : "" ?>>Inativo</option>
+							</select>
+                        </div>
 					</div><br>
 					<div class="row g-2">
                         <div class="col-sm-4 mt-4">

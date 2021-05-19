@@ -3,9 +3,6 @@
 // https://youtu.be/57bzZuvp6OQ -> Upload de "vários" arquivos e salvando no Banco de Dados (DE UMA SÓ VEZ) com PHP
 // https://youtu.be/TxY6loI4dHw -> Upload de Múltiplos arquivos (Salvando na Pasta) - ...continuação
 
-
-
-
   //verificar se não está logado
   if ( !isset ( $_SESSION["quanticshop"]["id"] ) ){
     exit;
@@ -18,8 +15,9 @@
 
  //verificar se existem dados no POST
  if ( $_POST ) {
-    include "../admin/validacao/functions.php";
-    include "../admin/config/conexao.php";
+    include "validacao/functions.php";
+    include "config/conexao.php";
+    include "validacao/imagem.php";
 
     //recuperar variaveis
     $id = $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto = $ativo = $departamento_id = $marca_id = "";
@@ -57,6 +55,7 @@
        
         $sql= "INSERT INTO produto (nome_produto, codigo, descricao, espec_tecnica, foto,  departamento_id, marca_id, ativo) 
         values(:nome_produto, :codigo, :descricao, :espec_tecnica, :foto, :departamento_id, :marca_id, :ativo)";
+
         $consulta = $pdo->prepare($sql);
         $consulta->bindParam(':nome_produto',$nome_produto);
         $consulta->bindParam(':codigo',$codigo);
@@ -76,6 +75,7 @@
         $sql= "UPDATE produto SET nome_produto = :nome_produto, codigo = :codigo,  
         descricao = :descricao, espec_tecnica = :espec_tecnica, foto = :foto, ativo = :ativo, departamento_id = :departamento_id,
         marca_id = :marca_id WHERE id = :id";
+
         $consulta = $pdo->prepare($sql);
         $consulta->bindParam(':nome_produto',$nome_produto);
         $consulta->bindParam(':codigo',$codigo);
@@ -94,21 +94,24 @@
             //a foto deve estar vazia e ID nao estiver vazio
             //gravar no banco 
             $pdo->commit();
-            echo "<script>alert('Produto Salvo!');location.href='listagem/produto';</script>";
+            $titulo = "Sucesso";
+            $mensagem = "Produto Salvo!";
+            $icone = "sucess";
+            mensagem($titulo, $mensagem, $icone);
+            echo "<script>location.href='listagem/produto';</script>";
             
         }
         //verificar tipo imagem
         if($_FILES["foto"]["type"]  !=  "image/jpeg"){
-            echo "<script>alert('Seleciona uma imagem Jpeg');history.back();</script>";
+
+            $titulo = "Atenção";
+            $mensagem = "Selecione uma Imagem JPG";
+            $icone = "warning";
+            mensagem($titulo, $mensagem, $icone);
+            echo "<script>history.back();</script>";
             exit;
         }
         
-        // $foto = isset($_FILES['foto']) ? $_FILES['foto'] : FALSE;
-        // $diretorio = "../fotos/".$_FILES["foto"]["name"];
-
-        // for ($controle = 0; $controle < count($foto['name']); $controle++){
-
-        //     $destino = $diretorio."/".$foto['name'][$controle];
             if ( move_uploaded_file($_FILES["foto"]["tmp_name"], "../fotos/".$_FILES["foto"]["name"])){
                 
                 $pastaFotos = "../fotos/";
@@ -118,16 +121,27 @@
                 
                 //gravar no banco - se tudo deu certo
                 $pdo->commit();
-                echo "<script>alert('Produto Salvo com sucesso!');location.href='listagem/produto';</script>";
+                $titulo = "Sucesso";
+                $mensagem = "Produto Salvo!";
+                $icone = "success";
+                mensagem($titulo, $mensagem, $icone);
+                echo "<script>location.href='listagem/produto';</script>";
             }
         // }
         //erro ao gravar
-        echo "<script>alert('Erro ao gravar no servidor');history.back();</script>";
+        $titulo = "Erro";
+		$mensagem = "Erro ao Gravar no Servidor";
+		$icone = "error";
+		mensagem($titulo, $mensagem, $icone);
+        echo "<script>history.back();</script>";
         exit;
     }
     
     //echo consulta->errorInfo()[2];
     exit;
 }
-
-echo '<p class="alert alert-danger>Requisição inválida</p>"';
+$titulo = "Erro";
+$mensagem = "Requisição Inválida";
+$icone = "error";
+mensagem($titulo, $mensagem, $icone);
+// echo '<p class="alert alert-danger>Requisição inválida</p>"';

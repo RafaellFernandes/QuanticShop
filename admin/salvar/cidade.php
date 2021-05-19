@@ -47,9 +47,17 @@
       
   	//executar e verificar se deu certo
   	if ( $consulta->execute() ) {
-  		echo '<script>alert("Registro Salvo");location.href="listagem/cidade";</script>';
+		$titulo = "Sucesso";
+		$mensagem = "Cidade Salva";
+		$icone = "success";
+		mensagem($titulo, $mensagem, $icone);
+  		echo '<script>location.href="listagem/cidade";</script>';
   	} else {
-  		echo '<script>alert("Erro ao salvar");history.back();</script>';
+		$titulo = "Erro";
+		$mensagem = "Erro ao Salvar";
+		$icone = "error";
+		mensagem($titulo, $mensagem, $icone);
+  		echo '<script>history.back();</script>';
   		exit;
   	}
 
@@ -57,5 +65,9 @@
   	//mensagem de erro
   	//javascript - mensagem alert
   	//retornar hostory.back
-  	echo '<script>alert("Erro ao realizar requisição");history.back();</script>';
+	 	$titulo = "Erro";
+		$mensagem = "Erro ao Realizar Requisição";
+		$icone = "error";
+		mensagem($titulo, $mensagem, $icone);
+  	echo '<script>history.back();</script>';
   }

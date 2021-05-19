@@ -4,9 +4,9 @@
     exit;
   }
   //mostrar erros
-	// ini_set('display_errors',1);
-	// ini_set('display_startup_erros',1);
-    // error_reporting(E_ALL);
+  ini_set('display_errors',1);
+  ini_set('display_startup_erros',1);
+  error_reporting(E_ALL);
     
 
 //se nao existe o id
@@ -18,7 +18,7 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
   //verificar se existe um id
   if ( !empty ( $id ) ) {
 
-    include "../admin/validacao/functions.php";
+    include "validacao/functions.php";
    
   	//selecionar os dados do banco para poder editar
       $sql = "SELECT p.*,d.*,m.* FROM produto p
@@ -30,6 +30,14 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
       $consulta->execute();
       
   	$dados  = $consulta->fetch(PDO::FETCH_OBJ);
+
+    if ( empty ( $dados->id ) ) {
+        $titulo = "Erro";
+        $mensagem = "Produto Não Existente";
+        $icone = "error";
+        mensagem($titulo, $mensagem, $icone);
+        // echo "<p class='alert alert-danger'>Produto Não Existente</p>";
+    }
 
   	//separar os dados
     $id         	          = $dados->id;
@@ -43,6 +51,7 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
     $marca_id                 = $dados->marca_id;
     $nome_marca               = $dados->nome_marca;
     $foto                     = $dados->foto;
+    $ativo 		              = $dados->ativo;
   }
 
 ?>
@@ -61,12 +70,12 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-header">
-                <div class="float-end">
+                <div class="float-end mt-2">
 					<a href="cadastro/marca" class="btn btn-primary">Cadastrar Marca</a> 
 					<a href="cadastro/departamento" class="btn btn-primary">Cadastrar Departamento</a>
 				</div>
-				<h4>Cadastro</h4>
-				<h6 class="card-subtitle text-muted">Produto</h6>
+				<h4>CADASTRO</h4>
+				<h6 style="color: blue;"><b>Produto</b></h6>
 				
 			</div>
 			<div class="card-body">
@@ -124,13 +133,13 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
                         </div>
                         
                         <div class="col-12 col-md-2 mt-2">
-                        <label for="ativo">Ativo</label>
-                        <select name="ativo" id="ativo" class="form-control" 
-                        required data-parsley-required-message="Selecione uma opção">
-                            <option value="">Selecione</option>
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-					    </select>
+							<label for="ativo">Ativo</label>
+							<select name="ativo" id="ativo" class="form-control" 
+								required data-parsley-required-message="Selecione uma opção">
+								<option value="">...</option>
+								<option value="1" <?= $ativo == '1' ? "selected" : "" ?>>Ativo</option>
+								<option value="0"  <?= $ativo == '0' ? "selected" : "" ?>>Inativo</option>
+							</select>
                         </div>
                         <div class="col-12 col-md-10 mt-2">
                             <?php 

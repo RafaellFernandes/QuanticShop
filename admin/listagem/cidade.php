@@ -10,10 +10,10 @@
 			<div class="card">
 				<div class="card-header">
 					<div class="float-end">
-						<a href="cadastro/cidade" class="btn btn-info">Cadastrar Novo</a>
+						<a href="cadastro/cidade" class="btn btn-primary mt-2">Cadastrar Novo</a>
 					</div>
-					<h4>Lista</h4>
-					<h6 class="card-subtitle text-muted">Cidades e Estados</h6>
+					<h4>LISTA</h4>
+					<h6 style="color: green;">Cidades e Estados</h6>
 				</div>
 				<table class="table table-bordered table-hover table-striped" id="tabela">
 					<thead>
@@ -43,9 +43,7 @@
 											<a href="cadastro/cidade/'.$id.'" alt="Editar" title="Editar">
 												<i class="align-middle"  data-feather="edit-2"></i>
 											</a>
-											<a href="javascript:excluir('.$id.')" alt="Excluir" title="Excluir">
-												<i class="align-middle" data-feather="trash"></i>
-											</a>
+											
 										</td>
 									</tr>';
 								}
