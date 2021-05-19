@@ -1,27 +1,25 @@
-<style>
-	
-</style>
+
 <!-- Example single danger button -->
 <nav class="navbar navbar-dark bg-dark">
 <div class="btn-group">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Departamento
-  </button>
-  <ul class="dropdown-menu">
-  <li><a class="dropdown-item" href="computadores">Computadores</a></li>
-              <li><a class="dropdown-item" href="eletrodomesticos">Eletrodomésticos</a></li>
-              <li><a class="dropdown-item" href="eletronicos">Eletrônicos</a></li>
-              <li><a class="dropdown-item" href="eletroportateis">Eletroportáteis</a></li>
-              <li><a class="dropdown-item" href="gamer">Gamer</a></li>
-              <li><a class="dropdown-item" href="hardware">Hardware</a></li>
-              <li><a class="dropdown-item" href="impressora">Impressora</a></li>
-              <li><a class="dropdown-item" href="notebooks">Notebooks</a></li>
-              <li><a class="dropdown-item" href="perifericos">Periféricos</a></li>
-              <li><a class="dropdown-item" href="redeinternet">Rede e Internet</a></li>
-              <li><a class="dropdown-item" href="smartHome">Smart Home</a></li>
-              <li><a class="dropdown-item" href="smartphone">Smartphones</a></li>
-  </ul>
 
+  <ul class="nav" id="nav">	
+  
+              <li><a class="dropdown-item " href="departamento/eletrodomesticos">Eletrodomésticos</a></li>
+              <li><a class="dropdown-item" href="departamento/eletronicos">Eletrônicos</a></li>
+              <li><a class="dropdown-item" href="departamento/eletroportateis">Eletroportáteis</a></li>
+              <li><a class="dropdown-item" href="departamento/gamer">Gamer</a></li>
+              <li><a class="dropdown-item" href="departamento/hardware">Hardware</a></li>
+              <li><a class="dropdown-item" href="departamento/impressora">Impressora</a></li>
+              <li><a class="dropdown-item" href="departamento/notebooks">Notebooks</a></li>
+              <li><a class="dropdown-item" href="departamento/perifericos">Periféricos</a></li>
+              <li><a class="dropdown-item" href="departamento/redeinternet">Rede e Internet</a></li>
+              <li><a class="dropdown-item" href="departamento/smartHome">Smart Home</a></li>
+              <li><a class="dropdown-item" href="departamento/smartphone">Smartphones</a></li>
+
+			  
+  </ul>
+ 
 </nav>
 
 </div>
@@ -70,3 +68,8 @@
 		</div>
 	</div>
 </div>
+<style>
+	.dropdown-item {
+		color: white;
+	}
+</style>

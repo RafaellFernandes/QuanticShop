@@ -113,18 +113,18 @@
 
                         <div type="text" class="col-12 col-md-4 mt-2 ">
                         <label >Valor de Custo:</label>
-                        <input type="number" name="custo_unitario" class="form-control number_format" required data-parsley-required-message="Preencha este campo" 
+                        <input type="number" id="custo_unitario" name="custo_unitario" class="form-control number_format" required data-parsley-required-message="Preencha este campo" 
                             class="form-control" value="<?=$custo_unitario;?>" placeholder="R$ 0,00">
                         </div>         
                       
                         <div type="text" class="col-12 col-md-4 mt-2">
                             <label >Margem(%):</label>
-                            <input type="number" name="porcentagem_lucro" class="form-control"  required data-parsley-required-message="Preencha este campo" 
-                            class="form-control" value="<?=$porcentagem_lucro;?>" placeholder="%">
-                        </div> 
+                            <input type="number" id="porcentagem_lucro" name="porcentagem_lucro" class="form-control"  required data-parsley-required-message="Preencha este campo" 
+                            class="form-control" onblur="valorVenda()" value="<?=$porcentagem_lucro;?>" placeholder="%">
+                        </div>
                         <div type="text" class="col-12 col-md-4 mt-2">
                             <label >Valor de Venda:</label>
-                            <input type="number" name="venda_unitaria" class="form-control" required data-parsley-required-message="Preencha este campo" 
+                            <input type="number" id="venda_unitario" name="venda_unitaria" class="form-control" required data-parsley-required-message="Preencha este campo" 
                             class="form-control" value="<?=$venda_unitaria;?>" placeholder="R$ 0,00">         
                         </div>
                         <div class="mb-3 col-12 col-md-4 mt-2">
@@ -155,7 +155,7 @@
     </div>
 </div>
 
-<script>$("#valor_unitario").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});</script>
+<!-- <script>$("#valor_unitario").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});</script> -->
 <script type="text/javascript">
 $(document).ready(function(){ 
 	$("#data_cadastro").mask("00/00/0000");
@@ -168,3 +168,15 @@ $(document).ready(function(){
 	});
 </script>
 
+<script>
+    function valorVenda(){
+ var custo = document.getElementById("custo_unitario").value;
+ var porcentagem = document.getElementById("porcentagem_lucro").value;
+ var venda = parseInt(custo) * parseInt(porcentagem);
+ document.getElementById("venda_unitario").value = venda;
+ console.log(porcentagem);
+ console.log(custo);
+ console.log(venda);
+
+    }
+</script>
