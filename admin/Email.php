@@ -12,7 +12,7 @@
         
         public function __construct($host = null, $username = null, $senha = null, $nome = null){
 
-		    $this->mailer = new PHPMailer;
+		    $this->mailer = new PHPMailer();
 
             $this->mailer->isSMTP();                                      // Set mailer to use SMTP
             $this->mailer->Host = $host; //'smtp.gmail.com';               // Host de disparo de emails do seu servidor
@@ -21,7 +21,6 @@
             $this->mailer->Password = $senha;                            // SMTP senha do usuário/email que envia email
             $this->mailer->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
             $this->mailer->Port = 2525;                                  // TCP port to connect to
-
             $this->mailer->setFrom($username, $nome); //Enviado de 
             $this->mailer->addReplyTo($username, $nome); //Responder para
             $this->mailer->isHTML(true); 

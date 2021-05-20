@@ -2,6 +2,11 @@
       include('config/conexao.php');
       include('Email.php');
 
+       //mostrar erros
+       ini_set('display_errors', 1);
+       ini_set('display_startup_erros', 1);
+       error_reporting(E_ALL);
+
       if(isset($_POST['esqueciasenha'])){
         $token = uniqid();
         
@@ -14,7 +19,7 @@
          if($sql->rowCount() == 1){
             $info = $sql->fetch();
         
-            $mail = new Email('smtp.mailtrap.io','raphaelldff@gmail.com','fa9d79d2aa1c8c','9f243cd520239f');
+            $mail = new Email('smtp.mailtrap.io','3a1d8178ea29ef','59b79050e81fd1','Quantic Shop');
 
             $mail->enviarPara($_POST['email'], $info['primeiro_nome']);
 
@@ -35,8 +40,10 @@
             }else{
                  $data['erro'] = true;
             }
- 
+            
             die('As orientações para criar uma nova senha no site tal foram enviadas ao seu e-mail.');
+        
+           
        }else{
             die('Não encontramos esse <b>email</b> em nossa base de dados.');
        }
