@@ -14,7 +14,7 @@
          if($sql->rowCount() == 1){
             $info = $sql->fetch();
         
-            $mail = new Email('smtp.mailtrap.io','9f243cd520239f','fa9d79d2aa1c8c','Quantic Shop');
+            $mail = new Email('smtp.mailtrap.io','raphaelldff@gmail.com','fa9d79d2aa1c8c','9f243cd520239f');
 
             $mail->enviarPara($_POST['email'], $info['primeiro_nome']);
 

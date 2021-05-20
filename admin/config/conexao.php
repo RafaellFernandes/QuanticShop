@@ -1,4 +1,5 @@
 <?php
+session_start();
 	//arquivo para criar uma conexão com o banco de dados mysql
 	$servidor = "localhost";
 	//em 99% dos casos é localhost
