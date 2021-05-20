@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '4638205790cd00c6c9e16aae630602d07bb360ca',
+    'reference' => '50b609157cb38ac76a99ea39c45d284643271363',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '4638205790cd00c6c9e16aae630602d07bb360ca',
+      'reference' => '50b609157cb38ac76a99ea39c45d284643271363',
     ),
     'mpdf/mpdf' => 
     array (
@@ -50,6 +50,15 @@
       array (
       ),
       'reference' => '996434e5492cb4c3edcb9168db6fbb1359ef965a',
+    ),
+    'phpmailer/phpmailer' => 
+    array (
+      'pretty_version' => 'v6.4.1',
+      'version' => '6.4.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '9256f12d8fb0cd0500f93b19e18c356906cbed3d',
     ),
     'psr/log' => 
     array (

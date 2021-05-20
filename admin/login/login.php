@@ -70,7 +70,6 @@ if ($_POST) {
           "cidade_id" => $dados->cidade_id,
           "genero_id" => $dados->genero_id
          
-
         );
       //redirecionar para o home
       $msg = 'Deu certo!';
@@ -86,7 +85,7 @@ if ($_POST) {
   }
 }
 ?>
-
+<div class="wrapper bodyLogin">
 <div class="container d-flex flex-column fonte mb-5 ">
     <div class="row vh-100">
         <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
@@ -96,11 +95,11 @@ if ($_POST) {
                     <p class="lead">Entre na sua Conta para Continuar</p>
                 </div>
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body ">
                         <div class="m-sm-4">
                             <div class="text-center">
-                                <p class="lead fonte1">Sistema Quantic</p>
-                                <img src="img/enter.png" alt="Entre" class="img-fluid " width="70" height="70" />
+                                <p class="lead fonte1"><b>Sistema Quantic</b></p>
+                                <img src="img/saturno.png" alt="Entre" class="img-fluid " width="80" height="80" />
                                 <?= $msg; ?>
                             </div>
                             <form class="user" name="login" method="post" data-parsley-validate>
@@ -116,7 +115,7 @@ if ($_POST) {
                                         placeholder="Digite sua Senha" required
                                         data-parsley-validate="Preencha a Senha" />
                                     <small>
-                                        <a href="pages-reset-password.html">Esqueceu a Senha?</a>
+                                        <a class="link" href="esqueci-a-senha.php">Esqueceu a Senha?</a>
                                     </small>
                                 </div>
 
@@ -140,6 +139,7 @@ if ($_POST) {
             </div>
         </div>
     </div>
+</div>
 </div>
 <script>
 $(document).ready(function() {

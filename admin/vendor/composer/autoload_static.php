@@ -18,6 +18,7 @@ class ComposerStaticInit8ae84dcddb7ca8ca7774c8b5c53c261c
         'P' => 
         array (
             'Psr\\Log\\' => 8,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
         'M' => 
         array (
@@ -37,6 +38,10 @@ class ComposerStaticInit8ae84dcddb7ca8ca7774c8b5c53c261c
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'Mpdf\\' => 
         array (
