@@ -168,6 +168,22 @@
 					</li>
 
 					<li class="sidebar-header">
+						Relatórios e Etc
+					</li>
+					<li class="sidebar-item">
+						<a data-bs-target="#ui3" data-bs-toggle="collapse" class="sidebar-link collapsed">
+						  <i class="align-middle" data-feather="file"></i> <span class="align-middle">Relatórios</span>
+						</a>
+						<ul id="ui3" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
+							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/clientesAtivos">Clientes Ativos</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/financeiro">Financeiro</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/fornecedorMarca">Fornecedores com Marca Mais Vendida</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/produtoMaisVendido">Produto Mais Vendido</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/produtoMenosVendido">Produto Menos Vendido</a></li>
+						</ul>
+					</li>
+
+					<li class="sidebar-header">
 						Controle de Processos
 					</li>
 					<li class="sidebar-item">
@@ -200,22 +216,6 @@
 						<li class="sidebar-item"><a class="sidebar-link" href="controleEstoque/listaEstoque">Lista Estoque</a></li>
 						</ul>
 					</li>
-
-					<li class="sidebar-header">
-						Relatórios e Etc
-					</li>
-					<li class="sidebar-item">
-						<a data-bs-target="#ui3" data-bs-toggle="collapse" class="sidebar-link collapsed">
-						  <i class="align-middle" data-feather="file"></i> <span class="align-middle">Relatórios</span>
-						</a>
-						<ul id="ui3" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
-							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/clientesAtivos">Clientes Ativos</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/financeiro">Financeiro</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/fornecedorMarca">Fornecedores com Marca Mais Vendida</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/produtoMaisVendido">Produto Mais Vendido</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/produtoMenosVendido">Produto Menos Vendido</a></li>
-						</ul>
-					</li>
 				</ul>
 
 				<div class="sidebar-cta">
@@ -238,7 +238,6 @@
 				<a class="sidebar-toggle d-flex">
           <i class="hamburger align-self-center"></i>
         </a>
-
 				<form class="d-none d-sm-inline-block">
 					<div class="input-group input-group-navbar">
 						<input type="text" class="form-control" placeholder="Pesquisar..." aria-label="Search">

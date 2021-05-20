@@ -58,7 +58,6 @@
                                                 <a href="cadastro/usuario/'.$id.'" alt="Editar" title="Editar">
                                                     <i class="align-middle"  data-feather="edit-2"></i>
                                                 </a>
-                                                
                                             </td>
                                         </tr>';
                                 }
@@ -70,14 +69,7 @@
         </div>
     </div>
  </div>
-<script>
-   function inativar(id){
-        if (confirm("Deseja mesmo inativar? ")) {
-            //ir para inativação
-            location.href="inativos/usuario/"+id;
-        }
-    }
-    
+<script>    
     $(document).ready( function () {
         $('#tabela').DataTable({
             language: {

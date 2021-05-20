@@ -3,68 +3,93 @@
 if (!isset($_SESSION["quanticshop"]["id"])) {
 	exit;
 }
-
+include "config/conexao.php";
 ?>
 <div class="row mb-2 mb-xl-3">
+<div><h6> Olá <?=$_SESSION["quanticshop"]["primeiro_nome"];?> Seja Bem vindo(a).</h6></div>
     <div class="col-auto d-none d-sm-block">
         <h3>Painel de <strong>Análise</strong></h3>
     </div>
 </div>
+
 <div class="row">
     <div class="col-xl-12 col-xxl-5 d-flex">
         <div class="w-100">
             <div class="row">
                 <div class="col-sm-6">
-                    <!-- <a class="btn btn-danger" target="_blank" href="testepdf.php">pdf</a> -->
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title mb-4">TCC</h5>
-                            <h3 class="mt-1 mb-3">
+                            <h4 class="mt-1 mb-3">
                                 <?php
-								$date = strtotime("June 24, 2021 7:00 PM");
-								$remaining = $date - time();
-								$days_remaining = floor($remaining / 86400);
-								$hours_remaining = floor(($remaining % 86400) / 3600);
-								echo "Faltam $days_remaining Dias e $hours_remaining Horas Restantes";
+                                    $date = strtotime("June 24, 2021 7:00 PM");
+                                    $remaining = $date - time();
+                                    $days_remaining = floor($remaining / 86400);
+                                    $hours_remaining = floor(($remaining % 86400) / 3600);
+                                    echo "Faltam $days_remaining Dias e $hours_remaining Horas Restantes";
 								?>
-                            </h3>
+                            </h4>
                             <div class="mb-1">
-                                <!-- <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25% </span> -->
                                 <span>Documentação: </span>
-                                <span class=" text-primary "> <i class="mdi mdi-arrow-bottom-right"></i><?php $rem = strtotime('2021-05-30 19:00:00') - time();
-																										$day = floor($rem / 86400);
-																										$hr = floor(($rem % 86400) / 3600);
-																										$min = floor(($rem % 3600) / 60);
-																										$sec = ($rem % 60);
-																										if ($day) echo "$day Dias ";
-																										if ($hr) echo "$hr Horas ";
-																										if ($min) echo "$min Minutos ";
-																										if ($sec) echo "$sec Segundos ";
-																										echo "Restantes..."; ?></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title mb-4">Vendas</h5>
-                            <h1 class="mt-1 mb-3">2.382</h1>
-                            <div class="mb-1">
-                                <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
-                                <span class="text-muted"> desde a semana passada</span>
+                                <span class=" text-primary "> <i class="mdi mdi-arrow-bottom-right"></i>
+                                    <?php $rem = strtotime('2021-05-30 19:00:00') - time();
+                                        $day = floor($rem / 86400);
+                                        $hr = floor(($rem % 86400) / 3600);
+                                        $min = floor(($rem % 3600) / 60);
+                                        $sec = ($rem % 60);
+                                        if ($day) echo "$day Dias ";
+                                        if ($hr) echo "$hr Horas ";
+                                        if ($min) echo "$min Minutos ";
+                                        if ($sec) echo "$sec Segundos ";
+                                        echo "Restantes...";
+                                    ?>
+                                </span>
                             </div>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title mb-4">Visitantes</h5>
-                            <h1 class="mt-1 mb-3">14.212</h1>
+                            <h3 class="card-title mb-4">Clientes Cadastrados</h3>
+                            <h2 class="mt-1 mb-3">
+                                <?php
+                                    $total = 0;
+                                    $n = 1;
+                                    $sql = "SELECT count(*) as t FROM cliente";
+                                    $sql = $pdo->query($sql);
+                                    $sql = $sql->fetch();
+                                    $total = $sql['t'];
+                                    echo $total;
+                                ?>
+                            </h2>
                             <div class="mb-1">
-                                <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25% </span>
+                                <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i>+<?=$total; ?> </span>
                                 <span class="text-muted"> desde a semana passada</span>
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title mb-4">Produtos Vendidos</h4>
+                            <h2 class="mt-1 mb-3">
+                                <?php
+                                    $conn = mysqli_connect('localhost','root','','quanticshop');
+ 
+                                    $resultado = mysqli_query($conn, "SELECT sum(vezesVendido) FROM produto");
+                                    $linhas = mysqli_num_rows($resultado);
+                                 
+                                    while($linhas = mysqli_fetch_array($resultado)){
+                                         echo $linhas['sum(vezesVendido)'].'<br/>';
+                                    }
+                                 
+                                ?>
+                            </h2>
+                            <div class="mb-1">
+                                <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> +25 </span>
+                                <span class="text-muted"> desde a semana passada</span>
+                            </div>
+                        </div>
+                    </div><!--
                 </div>
                 <div class="col-sm-6">
                     <div class="card">
@@ -96,13 +121,13 @@ if (!isset($_SESSION["quanticshop"]["id"])) {
                                 <span class="text-muted"> desde a semana passada</span>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="col-xl-12 col-xxl-7">
+    <!-- <div class="col-xl-12 col-xxl-7">
         <div class="card flex-fill w-100">
             <div class="card-header">
 
@@ -114,7 +139,7 @@ if (!isset($_SESSION["quanticshop"]["id"])) {
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 
 <!-- <div class="row">

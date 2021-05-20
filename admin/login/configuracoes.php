@@ -1,5 +1,5 @@
 <div class="container-fluid p-0">
-	<h1 class="h3 mb-3">Configurações</h1>
+	<h1 class="h3 mb-3">Configurações de Conta</h1>
 	<div class="row">
 		<div class="col-md-3 col-xl-2">
 			<div class="card">
@@ -32,20 +32,20 @@
 									<div class="col-md-8">
 										<div class="mb-3">
 											<label class="form-label" for="inputUsername">Nome de Usuário</label>
-											<input type="text" class="form-control" id="inputUsername" placeholder="Nome de Usuário">
+											<input type="text" class="form-control" id="inputUsername" placeholder="<?=$_SESSION["quanticshop"]["primeiro_nome"];?>">
 										</div>
 										<div class="mb-3">
-											<label class="form-label" for="inputUsername">Biografia</label>
-											<textarea rows="2" class="form-control" id="inputBio" placeholder="Tell something about yourself"></textarea>
+											<label class="form-label" for="inputUsername">Login</label>
+											<input type="text" class="form-control" id="inputUsername" placeholder="<?=$_SESSION["quanticshop"]["login"];?>">
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="text-center">
-											<img alt="Charles Hall" src="img/avatars/avatar.jpg" class="rounded-circle img-responsive mt-2" width="128" height="128" />
+											<img alt="<?=$_SESSION["quanticshop"]["primeiro_nome"];?>" title="<?=$_SESSION["quanticshop"]["primeiro_nome"];?>" src="../fotos/<?=$_SESSION["quanticshop"]["foto"];?>p.jpg" class="rounded-circle img-responsive mt-2" width="128" height="128" />
 											<div class="mt-2">
 												<span class="btn btn-primary"><i class="fas fa-upload"></i> Upload</span>
 											</div>
-											<small>For best results, use an image at least 128px by 128px in .jpg format</small>
+											<small>Para obter melhores resultados, use uma imagem de pelo menos 128 x 128 pixels no formato .jpg</small>
 										</div>
 									</div>
 								</div>
@@ -62,25 +62,25 @@
 								<div class="row">
 									<div class="mb-3 col-md-6">
 										<label class="form-label" for="inputFirstName">Primeiro Nome</label>
-										<input type="text" class="form-control" id="inputFirstName" placeholder="First name">
+										<input type="text" class="form-control" id="inputFirstName" placeholder="<?=$_SESSION["quanticshop"]["primeiro_nome"];?>">
 									</div>
 									<div class="mb-3 col-md-6">
 										<label class="form-label" for="inputLastName">Sobrenome</label>
-										<input type="text" class="form-control" id="inputLastName" placeholder="Last name">
+										<input type="text" class="form-control" id="inputLastName" placeholder="<?=$_SESSION["quanticshop"]["sobrenome"];?>">
 									</div>
-								</div>
-								<div class="mb-3">
-									<label class="form-label" for="inputEmail4">Email</label>
-									<input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-								</div>
-								<div class="mb-3">
-									<label class="form-label" for="inputAddress">Endereço</label>
-									<input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+									<div class="mb-3 col-md-6">
+										<label class="form-label" for="inputEmail4">Email</label>
+										<input type="email" class="form-control" id="inputEmail4" placeholder="<?=$_SESSION["quanticshop"]["email"];?>">
+									</div>
+									<div class="mb-3 col-md-6">
+										<label class="form-label" for="inputAddress">Endereço</label>
+										<input type="text" class="form-control" id="inputAddress" placeholder="<?=$_SESSION["quanticshop"]["endereco"];?>">
+									</div>
 								</div>
 								<div class="row">
 									<div class="mb-3 col-md-6">
 										<label class="form-label" for="inputCity">Cidade</label>
-										<input type="text" class="form-control" id="inputCity">
+										<input type="text" class="form-control" id="inputCity"  placeholder="<?=$_SESSION["quanticshop"]["cidade"];?>">
 									</div>
 									<div class="mb-3 col-md-4">
 										<label class="form-label" for="inputState">Estado</label>
@@ -91,7 +91,7 @@
 									</div>
 									<div class="mb-3 col-md-2">
 										<label class="form-label" for="inputZip">Cep</label>
-										<input type="text" class="form-control" id="inputZip">
+										<input type="text" class="form-control" id="inputZip"  placeholder="<?=$_SESSION["quanticshop"]["cep"];?>">
 									</div>
 								</div>
 								<button type="submit" class="btn btn-primary">Salvar Mudanças</button>
