@@ -61,6 +61,13 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
 
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+	<style>
+		a{
+			text-decoration: none;
+		}
+
+	</style>
 	
 </head>
 
@@ -310,7 +317,7 @@
 					<div class="row text-muted">
 						<div class="col-6 text-start">
 							<p class="mb-0">
-								<a href="../home" class="text-muted" ><strong>Quantic Shop</strong></a> &copy;
+								<a href="../loja/pages/home" class="text-muted" ><strong>Quantic Shop</strong></a> &copy;
 							</p>
 						</div>
 						<div class="col-6 text-end">
