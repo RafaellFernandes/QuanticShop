@@ -16,13 +16,13 @@
 <head>
 	<title>Itens</title>
 	<meta charset="utf-8">
-
-	
+	<link rel="stylesheet" type="text/css" href="css/sb-admin-2.min.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
-	
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 	<script src="vendor/jquery/jquery.min.js"></script>
-	
+	<script src="js/sweetalert2.js"></script>
+
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 </head>
@@ -70,31 +70,32 @@
 		where produto_id = :produto_id AND 
 		venda_id = :venda_id limit 1";
 		$consulta = $pdo->prepare($sql);
-		$consulta->bindParam(':produto_id', $produto_id);
 		$consulta->bindParam(':venda_id', $venda_id);
+		$consulta->bindParam(':produto_id', $produto_id);
 		$consulta->execute();
 
 		$dados = $consulta->fetch(PDO::FETCH_OBJ);
 
 		//formatar o valor - funcao no docs.php
-		$valor= formatarValor( $valor );
+		$valor= formatarValor($valor);
 
 		if ( empty ( $dados->produto_id ) ){
 			//se não existir - inserir
-			$sql = "insert into item_venda values(:venda_id, :produto_id, :valor, :quantidade)";
+			$sql = "insert into item_venda (valor, quantidade, venda_id, produto_id) values (:valor, :quantidade, :venda_id, :produto_id)";
 
 		} else {
 			//se existir - atualizar
+			
 			$sql = "update item_venda set valor = :valor, quantidade = :quantidade where venda_id = :venda_id AND produto_id = :produto_id limit 1";
 
 		}
 
 		$consulta = $pdo->prepare($sql);
-		$consulta->bindParam(':venda_id', $venda_id);
-		$consulta->bindParam(':produto_id', $produto_id);
 		$consulta->bindParam(':valor', $valor);
 		$consulta->bindParam(':quantidade', $quantidade);
-
+		$consulta->bindParam(':venda_id', $venda_id);
+		$consulta->bindParam(':produto_id', $produto_id);
+		
 		//verificar se executou certo - resetar o form
 		if ( $consulta->execute() ) {
 			echo "<script>top.$('#formItens')[0].reset();</script>";

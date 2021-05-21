@@ -142,9 +142,9 @@
             //separar a string pelo -
             cliente = cliente.split(" - ");
             //console.log(cliente);
-            //jogar o id para o cliente_id
+            //jogar o id para o cliente_i
             $("#cliente_id").val(cliente[0]);
-        }
+        } 
     })
 </script>
 
@@ -160,11 +160,18 @@
 
         ?>
         <br>
-        <div class="card">
-            <div class="card-header">
-                <h2>Selecione um produto</h2>
-            </div>
-            <div class="card-body">
+        <div class="container-fluid p-0">
+	<div class="row">
+		<div class="col-12 col-xl-12">
+			<div class="card">
+				<div class="card-header">
+					<div class="float-end">	
+           
+                    </div>
+                <h4>Selecione um Produto</h4>
+				<h6 class="card-subtitle text-muted"></h6>
+                </div>
+                <div class="card-body">
                 <form name="formItens" id="formItens" method="post" action="itens.php" target="itens" data-parsley-validate="">
                     <input type="hidden" name="venda_id" value="<?=$id?>">
                     <div class="row">
@@ -173,12 +180,12 @@
                             <?=$disabled?>>
                         </div>
                         <div class="col-12 col-md-4">
-                            <input type="text" name="nomeproduto" id="produto"
+                            <input type="text" name="produto" id="produto"
                             class="form-control" required data-parsley-required-message="Selecione um produto" list="listProdutos" <?=$disabled?> >
 
-                            <datalist id="listProdutos">
+                            <datalist id="listProdutos"> 
                             <?php
-                            $sql = "select id, nome_produto, valor from produto where ativo = 'S' order by nome_produto";
+                            $sql = "select id, nome_produto, valor_unitario from produto where ativo = 'S' order by nome_produto";
                             $consulta = $pdo->prepare($sql);
                             $consulta->execute();
 
@@ -222,7 +229,7 @@
                     //console.log(p);
                     produto = p[0];
                     $("#produto_id").val(produto);
-                    //realizar a busca de valor no buscaValor.php
+                    //realizar a busca de valor no buscaValor.php OVO MORRER PERA AI
                     $.get("buscaValor.php",
                         {produto:produto},
                         function(dados){
@@ -230,7 +237,7 @@
                             if ( dados == "erro" ) {
                                 //sweet alert
                             } else {
-                                $("#valor").val(dados);
+                                $("#valor_unitario").val(dados);
                             }
                     })
 
