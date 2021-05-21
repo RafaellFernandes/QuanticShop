@@ -103,7 +103,7 @@
 
  <!-- ============================================== -->
 
-<div class="main">
+<!-- <div class="main">
 	<div class="content-top">
 		<h2>Destaques</h2>
 	
@@ -144,15 +144,53 @@
 		</script>
 		<script type="text/javascript" src="vendor/js/jquery.flexisel.js"></script>
 	</div>
-</div>
+</div> -->
 
-<div class="content-bottom">
-	<div class="container">
+<div class="content-bottom prod">
+	<div class="container-fluid">
 		<div class="row content_bottom-text">
-			<div class="col-md-7">
-				<h3>Produtos e <br>Mais Produtos</h3>
-				<p class="m_1"> magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio.</p>
-				<p class="m_2">ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio.</p>
+			<div class="col-md-12">
+				<h3 class="text-center">Produtos Mais Comprados</h3>
+				<h5 class="mb-5 text-center"><b>Esses são os Produtos Mais Comprados pelos Nossos Clientes, de uma olhada Tambem!<b></h5>
+        <div class="container">
+          <div class="row justify-content-center">
+            <?php
+              $sql = "SELECT p.id pid, p.ativo pativo, p.*
+                      FROM produto p 
+                      ORDER BY p.vezesVendido DESC";
+
+              $consulta = $pdo->prepare($sql);
+							$consulta->execute();                            
+
+							while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
+								//separar os dados
+								$pid 		                     = $dados->pid;
+                $foto                        = $dados->foto;
+                $nome_produto 		           = $dados->nome_produto;
+                $valor_unitario              = $dados->valor_unitario;
+                $valor_unitario              = number_format($valor_unitario,2, '.' , ',');
+                $vezesVendido                = $dados->vezesVendido;
+                $imagem                      = "../fotos/".$foto."p.jpg";
+                $pativo					             = $dados->pativo;
+
+								//mostrar na tela
+								if ($pativo == "1"){
+                  echo '<div class="col-12 col-md-4">
+                  <div class="card " style="width: 18rem;">
+                        <img src="'.$imagem.'" class="card-img-top" alt="'.$nome_produto.'">
+                          <div class="card-body">
+                            <h5 class="card-title">'.$nome_produto.'</h5>
+                            <p class="card-text">R$ '.$valor_unitario.'</p>
+                            <a href="products/'.$pid.'" class="btn btn-primary">Comprar</a>
+                          </div>
+                        </div>
+                        </div>
+                    ';
+                }
+							}
+						?>
+          </div>
+        </div>
 			</div>
 		</div>
 	</div>

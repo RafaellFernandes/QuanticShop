@@ -228,8 +228,8 @@
 				<div class="col-md-3">
 					<ul class="footer_box">
 						<h4>Sobre</h4>
-						<li><a href="sobre">Sobre Nós</a></li>
-						<li><a href="#">Empyt</a></li>
+						<li><a href="pages/sobre">Sobre Nós</a></li>
+						<!-- <li><a href="#">Empyt</a></li> -->
 					</ul>
 				</div>
 				<div class="col-md-3">
@@ -243,7 +243,7 @@
 				</div>
 				<div class="col-md-3">
 					<ul class="footer_box">
-						<h4>Newsletter</h4>
+						<h4>GOOD NEWS</h4>
 						<div class="footer_search">
 							<form>
 								<input type="text" value="Entre com seu Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Entre com seu Email';}">
@@ -253,14 +253,14 @@
 						<ul class="social">	
 							<li class="twitter"><a href="https://twitter.com/"><span> </span></a></li>
 							<li class="instagram"><a href="https://www.instagram.com/"><span> </span></a></li>	
-							<li class="facebook"><a href="https://www.instagram.com/"><span> </span></a></li>								  				
+							<li class="facebook"><a href="https://www.facebook.com/"><span> </span></a></li>								  				
 						</ul>   					
 					</ul>
 				</div>
 			</div>
 			<div class="row footer_bottom ">
 				<div class="copy">
-			    	<p class="text-center">© 2019 - 2021  <a href="home" target="_blank">Quantic Shop™</a></p>
+			    	<p class="text-center">© 2019 - 2021  <a href="pages/home" target="_blank">Quantic Shop™</a></p>
 		    	</div>
    			</div>
 		</div>

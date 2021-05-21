@@ -30,7 +30,7 @@
 						<div class="text">
 							<textarea name="message"  placeholder="Mensagem"></textarea>
 							<!-- If you want form to redirect to a specific url after submission -->
-							<input type="hidden" name="redirectTo" value="http://localhost/lojaTeste/emailEnviado"> 
+							<input type="hidden" name="redirectTo" value="http://localhost/QuanticShop/loja/pages/emailEnviado"> 
 							<input type="submit" value="Submit" class="btn btn-primary float-end"/>
 						</div>
 					</form>
