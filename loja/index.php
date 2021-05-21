@@ -243,7 +243,7 @@
 				</div>
 				<div class="col-md-3">
 					<ul class="footer_box">
-						<h4>GOOD NEWS </h4>
+						<h4>GOOD NEWS</h4>
 						<div class="footer_search">
 							<form>
 								<input type="text" value="Entre com seu Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Entre com seu Email';}">

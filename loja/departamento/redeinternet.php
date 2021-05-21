@@ -1,35 +1,60 @@
-<br>
-<br>
-<br>
-<br>
-<h2><strong> Rede e Internet </strong></h2>
-<br>
-<div class="row">
-	<?php
-		//selecionar 1 produto aleatorios
-		$sql = "SELECT id, Nome, ValorProduto, FotoProduto, departamento_id FROM produto WHERE departamento_id IN (11)";
-		$consulta = $pdo->prepare($sql);
-		$consulta->execute();
+<nav class="navbar navbar-dark bg-dark">
+	<div class="btn-group btn-group-sm btn-sm">
+  		<ul class="nav" id="nav">	
+            <li><a class="dropdown-item" href="departamento/eletrodomesticos">Eletrodomésticos</a></li>
+            <li><a class="dropdown-item" href="departamento/eletronicos">Eletrônicos</a></li>
+            <li><a class="dropdown-item" href="departamento/eletroportateis">Eletroportáteis</a></li>
+            <li><a class="dropdown-item" href="departamento/gamer">Gamer</a></li>
+            <li><a class="dropdown-item" href="departamento/hardware">Hardware</a></li>
+            <li><a class="dropdown-item" href="departamento/impressora">Impressora</a></li>
+            <li><a class="dropdown-item" href="departamento/notebooks">Notebooks</a></li>
+            <li><a class="dropdown-item" href="departamento/perifericos">Periféricos</a></li>
+            <li><a class="dropdown-item" href="departamento/redeinternet">Rede e Internet</a></li>
+            <li><a class="dropdown-item" href="departamento/smartHome">Smart Home</a></li>
+            <li><a class="dropdown-item" href="departamento/smartphone">Smartphones</a></li>
+			<li><a class="dropdown-item" href="departamento/computadores">Computadores</a></li>	  
+  		</ul>
+	</div>
+</nav>
+<div class="content-top">
+	<h2>Rede e Internet</h2>
+	<div class="close_but"><i class="close1"></i></div>
+	<div class="container-fluid">
+		<div class="row shop_box">
+			<div class="row container-fluid">
+				<?php
+					//selecionar 1 produto aleatorios
+					$sql = "SELECT id, Nome, ValorProduto, FotoProduto, departamento_id FROM produto WHERE departamento_id IN (11)";
+					$consulta = $pdo->prepare($sql);
+					$consulta->execute();
 
-		while ( $linha = $consulta->fetch(PDO::FETCH_ASSOC) ) {
+					while ( $linha = $consulta->fetch(PDO::FETCH_ASSOC) ) {
 
-			//recuperar as variaveis
-			$id 	            = $linha["id"];
-			$Nome               = $linha["Nome"];
-			$ValorProduto      	= $linha["ValorProduto"];
-			$FotoProduto     	= $linha["FotoProduto"] ."p.jpg";
+						//recuperar as variaveis
+						$id 	            = $linha["id"];
+						$Nome               = $linha["Nome"];
+						$ValorProduto      	= $linha["ValorProduto"];
+						$FotoProduto     	= $linha["FotoProduto"] ."p.jpg";
 
-			//formatar o valor
-			$ValorProduto = number_format($ValorProduto, 2, ",", ".");
-			//var,casas decimais,sep decimal,sep milhares
+						//formatar o valor
+						$ValorProduto = number_format($ValorProduto, 2, ",", ".");
+						//var,casas decimais,sep decimal,sep milhares
 
-			echo "<div class='col-3 text-center'>
-					<img src='fotos/$FotoProduto' class='w-75'>
-					<p>$Nome</p>
-					<p class='valor'>R$ $ValorProduto</p>
-					<a href='produto/$id'
-					class='btn btn-info'>Detalhes</a>
-				</div>";
-		}
-	?>
+						echo "<div class='col-3 text-center'>
+								<img src='fotos/$FotoProduto' class='w-75'>
+								<p>$Nome</p>
+								<p class='valor'>R$ $ValorProduto</p>
+								<a href='produto/$id'
+								class='btn btn-info'>Detalhes</a>
+							</div>";
+					}
+				?>
+			</div>
+		</div>
+	</div>
 </div>
+<style>
+	.dropdown-item {
+		color: white;
+	}
+</style>
