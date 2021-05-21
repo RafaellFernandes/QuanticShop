@@ -184,7 +184,7 @@
 						<ul id="ui3" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
 							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/clientesAtivos">Clientes Ativos</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/financeiro">Financeiro</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/fornecedorMarca">Fornecedores com Marca Mais Vendida</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/fornecedorMarca">Marca Mais Comprada por Fornecedor</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/produtoMaisVendido">Produto Mais Vendido</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="relatorios/produtoMenosVendido">Produto Menos Vendido</a></li>
 						</ul>

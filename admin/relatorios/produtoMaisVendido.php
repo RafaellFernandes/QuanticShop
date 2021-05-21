@@ -11,7 +11,7 @@
 			<div class="card">
 				<div class="card-header">
 					<div class="float-end">
-						<a class="btn btn-danger" target="_blank" href="relatorioProdutoMaisVendido.php">Gerar PDF</a>
+						<a class="btn btn-danger mt-3" target="_blank" href="relatorioProdutoMaisVendido.php">Gerar PDF</a>
 					</div>
 					<h4>RELATÓRIO</h4>
 					<h6 style="color: blue;"><strong>Produto Mais Vendido</strong></h6>
