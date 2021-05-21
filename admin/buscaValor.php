@@ -11,7 +11,7 @@
 		include "validacao/functions.php";
 		include "config/conexao.php";
 
-		$sql = "select valor_unitario from produto where id = :produto limit 1";
+		$sql = "select valor_unitario from produto where id = :produto limit 1"; 
 		$consulta = $pdo->prepare($sql);
 		$consulta->bindParam(':produto', $produto);
 		$consulta->execute();
