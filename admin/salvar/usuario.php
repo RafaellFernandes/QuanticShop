@@ -45,6 +45,54 @@
         echo "<script>alert('Preencha a senha!');history.back();</script>";
     }
 
+       
+//programação para copiar uma imagem
+//no insert envio da foto é obrigatório
+//no update só se for selecionada uma nova imagem
+//se o id estiver em branco e o imagem tbém - erro
+
+if ( ( empty ( $id ) ) and ( empty ( $_FILES['foto']['name'] ) ) ) {
+  mensagem("Erro ao enviar imagem", 
+      "Selecione um arquivo JPG válido", 
+      "error");
+} 
+
+//se existir imagem - copia para o servidor
+if ( !empty ( $_FILES['foto']['name'] ) ) {
+  //calculo para saber quantos mb tem o arquivo
+  $tamanho = $_FILES['foto']['size'];
+  $t = 8 * 1024 * 1024; //byte - kbyte - megabyte
+
+  $foto = time();
+  $usuario = $_SESSION['quanticshop']['id'];
+
+  //definir um nome para a imagem
+  $foto = "produto_{$foto}_{$usuario}";
+
+  //validar se é jpg
+  if ( $_FILES['foto']['type'] != 'image/jpeg' ) {
+      mensagem("Erro ao enviar imagem", 
+      "O arquivo enviado não é um JPG válido, selecione um arquivo JPG", 
+      "error");
+  } else if ( $tamanho > $t ) {
+      mensagem("Erro ao enviar imagem", 
+      "O arquivo é muito grande e não pode ser enviado. Tente arquivos menores que 8 MB", 
+      "error");
+  } else if ( !copy ( $_FILES['foto']['tmp_name'], '../fotos/'.$_FILES['foto']['name'] ) ) {
+      mensagem("Erro ao enviar imagem", 
+      "Não foi possível copiar o arquivo para o servidor", 
+      "error");
+  }
+
+      //redimensionar a imagem
+      $pastaFotos = '../fotos/';
+      loadImg($pastaFotos.$_FILES['foto']['name'], 
+              $foto, 
+              $pastaFotos);
+
+} //fim da verificação da foto
+
+
     //iniciar uma transacao
     $pdo->beginTransaction();
     

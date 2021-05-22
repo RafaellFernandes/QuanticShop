@@ -14,8 +14,11 @@
   
   if ( !isset ( $id ) ) $id = "";
 
-  $primeiro_nome = $sobrenome = $cpf = $data_nascimento = $email = $senha = $cep = $telefone = $celular = $foto =
+  $primeiro_nome = $sobrenome = $cpf = $data_nascimento = $email = $cep = $telefone = $celular = $foto =
   $pessoaFJ =  $estado = $cidade = $endereco = $bairro = $complemento = $numero_resid = $cidade_id = $ativo = $genero_id = "";
+
+  //validação do require da senha
+    $senha = "required data-parsley-required-message='Digite uma senha' ";
 
   if ( !empty ( $id ) ) {
 	  //selecionar os dados do cliente
@@ -28,35 +31,33 @@
 
 	  $dados = $consulta->fetch(PDO::FETCH_OBJ);
 
-	  if ( empty ( $dados->id ) ) {
-		$titulo = "Erro";
-		$mensagem = "Cliente Não Existente";
-		$icone = "error";
-		mensagem($titulo, $mensagem, $icone);
+	  $id = "";
+
+	  if ( !empty ( $dados->id ) ) {
+
+		$id                      = $dados->id;
+		$primeiro_nome           = $dados->primeiro_nome;
+		$sobrenome               = $dados->sobrenome;
+		$cpf                     = $dados->cpf;
+		$data_nascimento         = $dados->data_nascimento;
+		$email                   = $dados->email;
+		$telefone                = $dados->telefone;
+		$celular                 = $dados->celular;
+		$foto                    = $dados->foto;
+		$pessoaFJ                = $dados->pessoaFJ;
+		$cep                     = $dados->cep;
+		$estado                  = $dados->estado;
+		$cidade                  = $dados->cidade;
+		$endereco                = $dados->endereco;
+		$bairro                  = $dados->bairro;
+		$complemento             = $dados->complemento;
+		$numero_resid            = $dados->numero_resid;
+		$cidade_id               = $dados->cidade_id;
+		$ativo                   = $dados->ativo;
+		$genero_id               = $dados->genero_id;
+		//retirar a validação da senha
+	  	$senha = NULL;
 	  }
-
-	  $id                      = $dados->id;
-	  $primeiro_nome           = $dados->primeiro_nome;
-	  $sobrenome               = $dados->sobrenome;
-	  $cpf                     = $dados->cpf;
-	  $data_nascimento         = $dados->data_nascimento;
-	  $email                   = $dados->email;
-	  $senha                   = $dados->senha;
-	  $telefone                = $dados->telefone;
-	  $celular                 = $dados->celular;
-	  $foto                    = $dados->foto;
-	  $pessoaFJ                = $dados->pessoaFJ;
-	  $cep                     = $dados->cep;
-	  $estado                  = $dados->estado;
-	  $cidade                  = $dados->cidade;
-	  $endereco                = $dados->endereco;
-	  $bairro                  = $dados->bairro;
-	  $complemento             = $dados->complemento;
-	  $numero_resid            = $dados->numero_resid;
-	  $cidade_id               = $dados->cidade_id;
-	  $ativo                   = $dados->ativo;
-	  $genero_id               = $dados->genero_id;
-
   }
 ?>
 <script src="assets/mask/jquery.mask.js"></script>
@@ -75,8 +76,14 @@
 				<p class="card-subtitle text-muted">Todos os Campos são Obrigatórios</p><br>
 					<div class="row">
 						<div class="mb-3 col-12 col-md-2 mt-2">
-							<label for="pessoaFJ">pessoaFJ:</label>
-							<input type="text" name="pessoaFJ" id="pessoaFJ" class="form-control"  value="<?=$pessoaFJ;?>" placeholder="F ou J">
+							<label for="pessoaFJ">Pessoa F/J:</label>
+							<select name="pessoaFJ" id="pessoaFJ" class="form-control" 
+								required data-parsley-required-message="Selecione uma opção">
+								<!-- <option value="">...</option> -->
+								<option value="F" <?= $pessoaFJ == 'F' ? "selected" : "" ?>>Fisica</option>
+								<!-- <option value="J"  <?//= $pessoaFJ == 'J' ? "selected" : "" ?>>Juridica</option> -->
+							</select>
+						
 						</div>
 						<div class="mb-3 col-12 col-md-2" style="display: none;">
 							<label for="id">ID:</label>
@@ -94,7 +101,9 @@
 						</div>
 						<div class="mb-3 col-12 col-md-4 mt-2">
 							<label for="cpf">CPF:</label>
-							<input type="text" name="cpf" id="cpf" class="form-control" required data-parsley-required-message="Preencha o cpf" value="<?=$cpf;?>" onblur="verificarCpf(this.value)" placeholder="Digite seu CPF">
+							<input type="text" name="cpf" id="cpf" class="form-control"
+							required data-parsley-required-message="Digite o CPF" inputmode="numeric" value="<?=$cpf?>"
+							data-inputmask="'mask':'999.999.999-99'">
 						</div>	
 						<div class="mb-3 col-12 col-md-4">
 							<label class="form-label" for="genero_id">Gênero:</label>
@@ -119,19 +128,24 @@
 							<input type="text" name="data_nascimento" id="data_nascimento" class="form-control" required data-parsley-required-message="Preencha a data de nascimento" 
 							placeholder="Ex: 11/12/1990" value="<?=$data_nascimento;?>">
 						</div>
-						<div class="mb-3 col-12 col-md-4 mt-2">
-							<label for="foto">Foto </label>
-							<input type="file" name="foto" id="foto" class="form-control" >
-							<input type="hidden" name="foto" value="<?=$foto?>" class="form-control">
-								<?php  	
-									if( !empty($foto)){
-										$foto = "<img src='../fotos/".$foto."p.jpg' alt='".$primeiro_nome."' width='150px'>";
-									} else{
-										$foto = "";
-									}
-								?>
-							<div><?php echo $foto;?></div>
-						</div>
+						<div class="col-12 col-md-4 mt-2">
+                            <?php
+                                $required = ' required data-parsley-required-message="Selecione um arquivo" ';
+                                $link = NULL;
+                                //verificar se a imagem não esta em branco
+                                if ( !empty ( $foto ) ) {
+                                    //caminho para a imagem
+                                    $img = "../fotos/{$foto}m.jpg";
+                                    //criar um link para abrir a imagem
+                                    $link = "<a href='{$img}' data-lightbox='foto' class='badge badge-success'>Abrir imagem</a>";
+                                    $required = NULL;
+                                }
+                            ?>
+                            <label for="foto">Imagem (JPG)* <?=$link?>:</label>
+                            <input type="file" name="foto" 
+                            id="foto" class="form-control"
+                            <?=$required?> accept="image/jpeg">
+                        </div>
 						<div class="mb-3 col-12 col-md-4 mt-2">
 							<label for="telefone">Telefone:</label>
 							<input type="text" name="telefone" id="telefone" class="form-control" placeholder="Telefone com DDD" value="<?=$telefone;?>">
@@ -144,16 +158,18 @@
 						<div class="mb-3 col-12 col-md-4 mt-2">
 							<label for="email">E-mail:</label>
 							<input type="email" name="email" id="email" class="form-control" required data-parsley-required-message="Preencha o e-mail" 
-							data-parsley-type-message="Digite um E-mail válido" placeholder="exemple@hotmail.com" value="<?=$email;?>" onblur="confirmarEmail(this.value)">
+							 placeholder="exemple@hotmail.com" value="<?=$email;?>">
 						</div>
-						<div class="mb-3 col-12 col-md-4 mt-2">
+						<div class="col-12 col-md-6">
 							<label for="senha">Senha:</label>
-							<input type="password" name="senha" id="senha" class="form-control" value="<?=$senha?>" placeholder="Digite sua Senha">
+							<input type="password" name="senha" id="senha" class="form-control"
+							<?=$senha?> >
 						</div>
-						<div class="mb-3 col-12 col-md-4 mt-2">
-							<label for="senha2">Redigite a Senha:</label>
-							<input type="password" name="senha2" id="senha2" class="form-control"  data-parsley-equalto="#senha" data-parsley-trigger="keyup" data-parsley-error-message="Senha não confere" value="<?=$senha?>"
-							placeholder="Redigite sua Senha">
+						<div class="col-12 col-md-6">
+							<label for="redigite">Redigite a senha:</label>
+							<input type="password" name="redigite" id="redigite" class="form-control" <?=$senha?>
+							data-parsley-equalto="#senha"
+							data-parsley-equalto-message="As senhas devem ser iguais">
 						</div>
 						<div class="mb-3 col-12 col-md-3 mt-2">
 							<label for="cep">CEP:</label>
@@ -191,7 +207,7 @@
 							<label for="ativo">Ativo</label>
 							<select name="ativo" id="ativo" class="form-control" 
 								required data-parsley-required-message="Selecione uma opção">
-								<option value="">...</option>
+								<option value="">Selecione</option>
 								<option value="1" <?= $ativo == '1' ? "selected" : "" ?>>Ativo</option>
 								<option value="0"  <?= $ativo == '0' ? "selected" : "" ?>>Inativo</option>
 							</select>
@@ -201,7 +217,7 @@
 					<div class="row g-2">
                         <div class="col-sm-4 mt-4">
 							<button type="submit" class="btn btn-success margin">
-								Salvar Dados
+								Salvar/Alterar Dados
 							</button>
                         </div>
                         <div class="col-sm">
@@ -210,9 +226,6 @@
                             </div> 
                         </div>
                     </div>
-					<!-- <button type="button" id="teste" class="btn btn-info margin">
-							<i class="fas fa-check"></i> teste
-					</button>  -->
 			</form>
 			<br><div class="clearfix"></div>
 		</div>
@@ -231,31 +244,34 @@
 		$("#telefone").mask("(00) 0000-0000");
 		$("#celular").mask("(00) 00000-0000");
 
-		//mostra se o jquery esta funcionando ou nao
-		/* $('#teste').click(function(){
-			 console.log("Funcionando o Jquery");
-		})*/
 	});
 
-	function verificarCpf(cpf) {
-		$.get("validacao/verificarCpf.php", {cpf:cpf, id:<?=$id;?>}, function(dados){
-			if(dados != ""){
-				//mostrar erro retornado
-				alert(dados);
-				//zerar cpf
-				$("#cpf").val("");
-			}
-		})
-	}
+	//executar somente depois de carregar
+$(document).ready(function(){
+    //funcao para buscar o mesmo cpf
+    $("#cpf").blur(function(){
+        //recuperar o id e o cpf
+        var id = $("#id").val();
+        var cpf = $("#cpf").val();
 
-	function confirmarEmail(email){
-		   $.get("validacao/verificaEmail.php", {email:email,id:<?=$id;?>}, function(dados){
-			   if(dados != ""){
-				   alert(dados);
-				   $("#email").val("");
-			   }
-		   }) 
-	}
+        if ( cpf != "" ){
+            //console.log(cpf);
+            $.post("buscaCpf.php",
+                {cpf:cpf,id:id},
+                function(dados){
+                    //console.log(dados);
+                    if (dados != "") {
+                        Swal.fire(
+                          'Erro', //titulo
+                          dados, //mensagem
+                          'error' //icone
+                        )
+                        $("#cpf").val("");
+                    }
+                })
+        }
+    })
+});
 
 	$("#cep").blur(function(){
 		//pegar o cep
@@ -286,27 +302,3 @@
     });	
 </script>
 </div>
-<!--  
-<script>
-	/**
-	*  método para trocar a máscara do campo CPF/CNPJ quando o usuário alterar o tipo da pessoa. 
-	* @param evt evento de alteração do valor do campo
-	*/
-	public void trocarMascara(ValueChangeEvent evt){
-		itemSelecionado.setValue(evt.getNewValue());
-		if(itemSelecionado.getValue() != null){
-			mascaraCpfCnpj(itemSelecionado.getValue().toString());
-		}
-	}
-
-	// método para setar a máscara
-	/** * método para setar a máscara de CPF/CNPJ e o tpPessoa * @param tipoPessoa */
- 	public void mascaraCpfCnpj(String tipoPessoa){ 
-	 	if (tipoPessoa.equalsIgnoreCase("PJ")) {
-			this.setMascaraCpfCnpj("99.999.999/9999-99"); 
-			this.getPessoa().setTpPessoa("PJ"); 
-		} else { 
-			this.setMascaraCpfCnpj("999.999.999-99"); 
-			this.getPessoa().setTpPessoa("PJ"); } 
-		} 
-</script>-->

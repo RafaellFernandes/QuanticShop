@@ -134,18 +134,23 @@ if(!empty($id)){
 							<input type="password" name="senha2" id="senha2" class="form-control" data-parsley-equalto="#senha" data-parsley-trigger="keyup" data-parsley-error-message="Senha não confere" value="<?=$senha?>">
 						</div>
 						<div class="col-12 col-md-4 mt-2">
-							<label for="foto">Foto (JPG):</label>
-							<input type="file" name="foto" id="foto" class="form-control">
-							<input type="hidden" name="foto" value="<?=$foto?>" class="form-control" >
-								<?php 	
-									if( !empty($foto)){
-										$foto = "<img src='../fotos/".$foto."p.jpg' alt='".$primeiro_nome."' width='150px'>";
-									} else{
-										$foto = "";
-									}
-								?>
-								<div><?php echo $foto ;?></div>
-						</div>
+                            <?php
+                                $required = ' required data-parsley-required-message="Selecione um arquivo" ';
+                                $link = NULL;
+                                //verificar se a imagem não esta em branco
+                                if ( !empty ( $foto ) ) {
+                                    //caminho para a imagem
+                                    $img = "../fotos/{$foto}m.jpg";
+                                    //criar um link para abrir a imagem
+                                    $link = "<a href='{$img}' data-lightbox='foto' class='badge badge-success'>Abrir imagem</a>";
+                                    $required = NULL;
+                                }
+                            ?>
+                            <label for="foto">Imagem (JPG)* <?=$link?>:</label>
+                            <input type="file" name="foto" 
+                            id="foto" class="form-control"
+                            <?=$required?> accept="image/jpeg">
+                        </div>
 						<div class="col-12 col-md-4  mt-2">
 							<label for="cep">CEP:</label>
 							<input type="text" name="cep" id="cep" class="form-control" required data-parsley-required-message="Preencha o CEP"
