@@ -1,45 +1,20 @@
 <?php
-session_start();
 
 require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/funcaoBancoPDF.php';
+
 $mpdf = new \Mpdf\Mpdf();
 
+$grupo = selectAllProdutoMaisVend();
+$nome = nomePessoa();
+$data = dataEmissao();
 
-function abrirBanco(){
-    $conexao = new mysqli("localhost", "root", "", "quanticshop");
-    return $conexao;
-}
-
-function selectAllPessoa(){
-    $banco = abrirBanco();
-    $sql = "SELECT p.id pid, p.ativo pativo, p.*, m.id mid, m.*, d.id did, d.*  
-            FROM produto p 
-            INNER JOIN departamento d ON (d.id = p.departamento_id)
-            INNER JOIN marca m ON (m.id = p.marca_id)
-            WHERE p.ativo = 1
-            ORDER BY p.vezesVendido DESC ";
-
-    $resultado = $banco->query($sql);
-    $banco->close();
-    while ($row = mysqli_fetch_array($resultado)) {
-        $grupo[] = $row;
-    }
-    return $grupo;
-}
-
-$grupo = selectAllPessoa();
-
-// $mpdf->SetDisplayMode("fullpage");
-
+$mpdf->SetDisplayMode("fullpage");
 $stylesheet = file_get_contents('stylepdf.css');
-date_default_timezone_set('America/Sao_Paulo');
-
-$nome = $_SESSION['quanticshop']['primeiro_nome'];
-// $nome =  $_SERVER['HTTP_USER_AGENT'];
 
 $html = "
 <h2>Relatório de Produtos Mais Vendidos</h2>
-<p>Data de Emissão: ". date('d/m/Y H:i:s')."</p>
+<p>Data de Emissão: ".$data."</p>
 <p>Gerado Por: ". $nome ."</p><hr/>
     <div>
         <table>
@@ -55,19 +30,19 @@ $html = "
                 </tr>
             </thead>
             <tbody>";
-                    foreach ($grupo as $pessoa) {
+            foreach ($grupo as $pessoa) {
                 
-                    $html = $html ."    <tr>
-                        <td>{$pessoa["pid"]}</td>
-                        <td>".($pessoa["nome_produto"])."</td>
-                        <td>".($pessoa["codigo"])."</td>
-                        <td>R$ ".($pessoa["valor_unitario"])."</td>
-                        <td>".($pessoa["vezesVendido"])."</td>
-                        <td>".($pessoa["marca_id"])."-".($pessoa["nome_marca"])."</td>
-                        <td>".($pessoa["departamento_id"])."-".($pessoa["nome_dept"])."</td>
-                     </tr>";
-                 }
-               
+                $html = $html ."    <tr>
+                    <td>{$pessoa["pid"]}</td>
+                    <td>".($pessoa["nome_produto"])."</td>
+                    <td>".($pessoa["codigo"])."</td>
+                    <td>R$ ".($pessoa["valor_unitario"])."</td>
+                    <td>".($pessoa["vezesVendido"])."</td>
+                    <td>".($pessoa["marca_id"])."-".($pessoa["nome_marca"])."</td>
+                    <td>".($pessoa["departamento_id"])."-".($pessoa["nome_dept"])."</td>
+                 </tr>";
+             }
+                   
           $html = $html ."  </tbody>
         </table></div>";
 

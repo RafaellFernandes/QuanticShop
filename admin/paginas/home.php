@@ -31,7 +31,7 @@ include "config/conexao.php";
                             </h4>
                             <div class="mb-1">
                                 <span>Documentação: </span>
-                                <span class=" text-primary "> <i class="mdi mdi-arrow-bottom-right"></i>
+                                <span class=" text-warning "> <i class="mdi mdi-arrow-bottom-right"></i>
                                     <?php $rem = strtotime('2021-05-30 19:00:00') - time();
                                         $day = floor($rem / 86400);
                                         $hr = floor(($rem % 86400) / 3600);
