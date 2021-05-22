@@ -1,25 +1,23 @@
 <?php
   //verificar se não está logado
-  if ( !isset ( $_SESSION["quanticshop"]["id"] ) ){
-    exit;
-  }
+  if ( !isset ( $_SESSION["quanticshop"]["id"] ) )exit;
+
   //mostrar erros
   ini_set('display_errors',1);
   ini_set('display_startup_erros',1);
   error_reporting(E_ALL);
     
+include "validacao/functions.php";
 
 //se nao existe o id
 if ( !isset ( $id ) ) $id = "";
 
 //iniciar as variaveis
-$nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto = $ativo = $departamento_id = $marca_id = "";
+$nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto = $promocao = $ativo = $departamento_id = $marca_id = "";
 
   //verificar se existe um id
-  if ( !empty ( $id ) ) {
+  if (!empty ( $id ) ) {
 
-    include "validacao/functions.php";
-   
   	//selecionar os dados do banco para poder editar
       $sql = "SELECT p.*,d.*,m.* FROM produto p
                 left join departamento d on (d.id = p.departamento_id)
@@ -47,6 +45,7 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
     $descricao                = $dados->descricao;
     $codigo                   = $dados->codigo;
     $departamento_id          = $dados->departamento_id;
+    $promocao                 = $dados->promocao;
     $nome_dept                = $dados->nome_dept;
     $marca_id                 = $dados->marca_id;
     $nome_marca               = $dados->nome_marca;
@@ -58,11 +57,8 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
                         
@@ -100,7 +96,7 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
                             <select name="marca_id" id="marca_id" class="form-control" required data-parsley-required-message="selecione uma opção">
                                 <option value="<?=$marca_id;?>">Selecione a Marca</option>
                                     <?php
-                                        $sql = "SELECT * FROM marca ORDER BY id";
+                                        $sql = "SELECT * FROM marca WHERE ativo = '1' ORDER BY id";
                                         $consulta = $pdo->prepare($sql);
                                         $consulta->execute();
 
@@ -118,7 +114,7 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
                             <select name="departamento_id" id="departamento_id" class="form-control" required data-parsley-required-message="Selecione um Departamento">
                                 <option value="<?=$departamento_id;?>">Selecione o Departamento</option>
                                     <?php
-                                        $sql = "SELECT id, nome_dept FROM departamento ORDER BY nome_dept";
+                                        $sql = "SELECT * FROM departamento WHERE ativo = '1' ORDER BY nome_dept";
                                         $consulta = $pdo->prepare($sql);
                                         $consulta->execute();
 
@@ -132,43 +128,45 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
                             </select>
                         </div>
                        <div class="col-12 col-md-4 mt-2">
-                        <label for="valor_unitario">Valor do Produto*:</label>
-                        <input type="text" name="valor_unitario" id="valor_unitario" class="form-control valor" required 
-                        data-parsley-required-message="Digite o valor do produto" inputmode="numeric" value="<?=$valor_unitario?>">
+                            <label for="valor_unitario">Valor do Produto*:</label>
+                            <input type="text" name="valor_unitario" id="valor_unitario" class="form-control valor" required 
+                            data-parsley-required-message="Digite o valor do produto" inputmode="numeric" placeholder="R$ 0,00" value="<?=$valor_unitario?>">
 				        </div>
-                        
+
+                        <div class="col-12 col-md-4 mt-2">
+                            <label for="promocao">Valor Promocional:</label>
+                            <input type="text" name="promocao" id="promocao" class="form-control valor" 
+                            inputmode="numeric" value="<?=$promocao?>">
+                        </div>
+
                         <div class="col-12 col-md-2 mt-2">
 							<label for="ativo">Ativo</label>
-							<select name="ativo" id="ativo" class="form-control" 
-								required data-parsley-required-message="Selecione uma opção">
-								<option value="">...</option>
-								<option value="1" <?= $ativo == '1' ? "selected" : "" ?>>Ativo</option>
+							<select name="ativo" id="ativo" class="form-control" required data-parsley-required-message="Selecione uma opção">
+								<!-- <option value="">...</option>
+								<option value="1" <?//= $ativo == '1' ? "selected" : "" ?>>Ativo</option>  -->
 								<option value="0"  <?= $ativo == '0' ? "selected" : "" ?>>Inativo</option>
 							</select>
                         </div>
+
                         <div class="col-12 col-md-4 mt-2">
-                        <?php
-
-                            $required = ' required data-parsley-required-message="Selecione um arquivo" ';
-                            $link = NULL;
-
-                            //verificar se a imagem não esta em branco
-                            if ( !empty ( $foto ) ) {
-                                //caminho para a imagem
-                                $foto = "../fotos/{$foto}m.jpg";
-                                //criar um link para abrir a imagem
-                                $link = "<a href='{$foto}' data-lightbox='foto' class='badge badge-success'>Abrir imagem</a>";
-                                $required = NULL;
-
-                            }
-
-                        ?>
-                        <label for="foto">Imagem (JPG)* <?=$link?>:</label>
-                        <input type="file" name="foto" 
-                        id="foto" class="form-control"
-                        <?=$required?> accept="image/jpeg">
+                            <?php
+                                $required = ' required data-parsley-required-message="Selecione um arquivo" ';
+                                $link = NULL;
+                                //verificar se a imagem não esta em branco
+                                if ( !empty ( $foto ) ) {
+                                    //caminho para a imagem
+                                    $img = "../fotos/{$foto}m.jpg";
+                                    //criar um link para abrir a imagem
+                                    $link = "<a href='{$img}' data-lightbox='foto' class='badge badge-success'>Abrir imagem</a>";
+                                    $required = NULL;
+                                }
+                            ?>
+                            <label for="foto">Imagem (JPG)* <?=$link?>:</label>
+                            <input type="file" name="foto" 
+                            id="foto" class="form-control"
+                            <?=$required?> accept="image/jpeg">
                         </div>
-                        
+
                         <div class="col-12 col-md-12 mt-2">
                             <label for="descricao">Descrição</label>
                             <textarea name="descricao" id="summernote" required data-parsley-required-message="Preencha este campo" 
@@ -183,11 +181,11 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
                     <div class="row g-2">
                     <div class="col-sm-4 mt-4">
 							<button type="submit" class="btn btn-success margin">
-								Salvar Dados
+                                    Salvar / Alterar
 							</button>
                         </div>
                         <div class="col-sm">
-                            <div class="float-right mt-3 ">
+                            <div class="float-end mt-3 ">
                                 <a href="listagem/produto" class="btn btn-primary">Listar Registros</a> 
                             </div> 
                         </div>
@@ -199,12 +197,6 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
 </div>
 
 <script>$("#valor_unitario").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});</script>
-
-<!-- <script type="text/javascript">
-    $(document).ready(function() {
-        $("#qtd_estoque").mask("999999");
-    });
-</script> -->
 
 <script>
     $('#summernote').summernote({
@@ -236,6 +228,7 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
         ]
     });
 </script>
+
 <script type="text/javascript">
 $(document).ready(function(){ 
 	$("#ativo").val("<?=$ativo?>");

@@ -1,12 +1,6 @@
-
 <?php
-// https://youtu.be/57bzZuvp6OQ -> Upload de "vários" arquivos e salvando no Banco de Dados (DE UMA SÓ VEZ) com PHP
-// https://youtu.be/TxY6loI4dHw -> Upload de Múltiplos arquivos (Salvando na Pasta) - ...continuação
-
   //verificar se não está logado
-  if ( !isset ( $_SESSION["quanticshop"]["id"] ) ){
-    exit;
-  }
+  if ( !isset ( $_SESSION["quanticshop"]["id"] ) )exit;
 
   //mostrar erros
 	ini_set('display_errors',1);
@@ -15,14 +9,13 @@
 
  //verificar se existem dados no POST
  if ( $_POST ) {
+
     include "validacao/functions.php";
     include "config/conexao.php";
     include "validacao/imagem.php";
 
     //recuperar variaveis
-    $id = $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto = $ativo = $departamento_id = $marca_id = "";
-
-    // var_dump($_POST);
+    // $id = $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto = $ativo = $departamento_id = $marca_id = "";
 
     foreach ($_POST as $key => $value) {
         //guardar as variaveis
@@ -39,40 +32,99 @@
         echo "<script>alert('Preencha a Descrição');history.back();</script>";
     } else if( empty($espec_tecnica) ){
         echo "<script>alert('Preencha a especificação tecnica');history.back();</script>";
-    }  else if( empty($ativo) ){
-        echo "<script>alert('Preencha o ativo');history.back();</script>";   
-    }
-    //iniciar uma transacao
+    } 
     
-    $pdo->beginTransaction();
+//programação para copiar uma imagem
+//no insert envio da foto é obrigatório
+//no update só se for selecionada uma nova imagem
+//se o id estiver em branco e o imagem tbém - erro
+
+    if ( ( empty ( $id ) ) and ( empty ( $_FILES['foto']['name'] ) ) ) {
+        mensagem("Erro ao enviar imagem", 
+            "Selecione um arquivo JPG válido", 
+            "error");
+    } 
+
+    //se existir imagem - copia para o servidor
+    if ( !empty ( $_FILES['foto']['name'] ) ) {
+        //calculo para saber quantos mb tem o arquivo
+        $tamanho = $_FILES['foto']['size'];
+        $t = 8 * 1024 * 1024; //byte - kbyte - megabyte
+
+        $foto = time();
+        $usuario = $_SESSION['quanticshop']['id'];
+
+        //definir um nome para a imagem
+        $foto = "produto_{$foto}_{$usuario}";
+
+        //validar se é jpg
+        if ( $_FILES['foto']['type'] != 'image/jpeg' ) {
+            mensagem("Erro ao enviar imagem", 
+            "O arquivo enviado não é um JPG válido, selecione um arquivo JPG", 
+            "error");
+        } else if ( $tamanho > $t ) {
+            mensagem("Erro ao enviar imagem", 
+            "O arquivo é muito grande e não pode ser enviado. Tente arquivos menores que 8 MB", 
+            "error");
+        } else if ( !copy ( $_FILES['foto']['tmp_name'], '../fotos/'.$_FILES['foto']['name'] ) ) {
+            mensagem("Erro ao enviar imagem", 
+            "Não foi possível copiar o arquivo para o servidor", 
+            "error");
+        }
+
+            //redimensionar a imagem
+            $pastaFotos = '../fotos/';
+            loadImg($pastaFotos.$_FILES['foto']['name'], 
+                    $foto, 
+                    $pastaFotos);
+
+    } //fim da verificação da foto
+
+    //iniciar uma transacao
+    // $pdo->beginTransaction();
     
     $valor_unitario = formatarValor($valor_unitario);
     
-    $arquivo = time()."-".$_SESSION["quanticshop"]["id"];
+    // $arquivo = time()."-".$_SESSION["quanticshop"]["id"];
     
     if(empty($id)){
         //inserir
        
-        $sql= "INSERT INTO produto (nome_produto, codigo, descricao, espec_tecnica, foto,  departamento_id, marca_id, ativo) 
-        values(:nome_produto, :codigo, :descricao, :espec_tecnica, :foto, :departamento_id, :marca_id, :ativo)";
+        $sql= "INSERT INTO produto (nome_produto, codigo, descricao, valor_unitario, espec_tecnica, foto,  departamento_id, marca_id, ativo) 
+        values(:nome_produto, :codigo, :descricao, :valor_unitario, :espec_tecnica, :foto, :departamento_id, :marca_id, :ativo)";
 
         $consulta = $pdo->prepare($sql);
         $consulta->bindParam(':nome_produto',$nome_produto);
         $consulta->bindParam(':codigo',$codigo);
         $consulta->bindParam(':descricao',$descricao);
+        $consulta->bindParam(':valor_unitario', $valor_unitario);
         $consulta->bindParam(':espec_tecnica',$espec_tecnica);
-        $consulta->bindParam(':foto',$arquivo);
+        $consulta->bindParam(':foto',$foto);
         $consulta->bindParam(':ativo',$ativo);
         $consulta->bindParam(':departamento_id',$departamento_id);
         $consulta->bindParam(':marca_id',$marca_id); 
         
-    } else{
-        //qual arquivo sera gravado
-        if(!empty( $_FILES["foto"]["name"])){
-            $foto = $arquivo;
-        }
-        //update
-        $sql= "UPDATE produto SET nome_produto = :nome_produto, codigo = :codigo,  
+    } else if (empty($foto)){
+
+        $sql= "UPDATE produto SET nome_produto = :nome_produto, codigo = :codigo,  valor_unitario =:valor_unitario,
+        descricao = :descricao, espec_tecnica = :espec_tecnica, promocao = :promocao, ativo = :ativo, departamento_id = :departamento_id,
+        marca_id = :marca_id WHERE id = :id";
+
+        $consulta = $pdo->prepare($sql);
+        $consulta->bindParam(':nome_produto',$nome_produto);
+        $consulta->bindParam(':codigo',$codigo);
+        $consulta->bindParam(':descricao',$descricao);
+        $consulta->bindParam(':valor_unitario', $valor_unitario);
+        $consulta->bindParam(':espec_tecnica',$espec_tecnica);
+        $consulta->bindParam(':promocao', $promocao);
+        $consulta->bindParam(':ativo',$ativo);
+        $consulta->bindParam(':departamento_id',$departamento_id);
+        $consulta->bindParam(':marca_id',$marca_id); 
+        $consulta->bindParam(':id',$id);
+    }
+    else {
+        
+        $sql= "UPDATE produto SET nome_produto = :nome_produto, codigo = :codigo, promocao = :promocao, valor_unitario =:valor_unitario,
         descricao = :descricao, espec_tecnica = :espec_tecnica, foto = :foto, ativo = :ativo, departamento_id = :departamento_id,
         marca_id = :marca_id WHERE id = :id";
 
@@ -80,68 +132,31 @@
         $consulta->bindParam(':nome_produto',$nome_produto);
         $consulta->bindParam(':codigo',$codigo);
         $consulta->bindParam(':descricao',$descricao);
+        $consulta->bindParam(':valor_unitario', $valor_unitario);
         $consulta->bindParam(':espec_tecnica',$espec_tecnica);
-        $consulta->bindParam(':foto',$arquivo);
+        $consulta->bindParam(':promocao', $promocao);
+        $consulta->bindParam(':foto',$foto);
         $consulta->bindParam(':ativo',$ativo);
         $consulta->bindParam(':departamento_id',$departamento_id);
         $consulta->bindParam(':marca_id',$marca_id); 
         $consulta->bindParam(':id',$id);
-}
-    
-    if($consulta->execute()){
-        //verificar se o arquivo nao está sendo enviado 
-        if( empty($_FILES["foto"]["type"]) and (!empty($id)) ){
-            //a foto deve estar vazia e ID nao estiver vazio
-            //gravar no banco 
-            $pdo->commit();
-            $titulo = "Sucesso";
-            $mensagem = "Produto Salvo!";
-            $icone = "sucess";
-            mensagem($titulo, $mensagem, $icone);
-            echo "<script>location.href='listagem/produto';</script>";
-            
-        }
-        //verificar tipo imagem
-        if($_FILES["foto"]["type"]  !=  "image/jpeg"){
-
-            $titulo = "Atenção";
-            $mensagem = "Selecione uma Imagem JPG";
-            $icone = "warning";
-            mensagem($titulo, $mensagem, $icone);
-            echo "<script>history.back();</script>";
-            exit;
-        }
-        
-            if ( move_uploaded_file($_FILES["foto"]["tmp_name"], "../fotos/".$_FILES["foto"]["name"])){
-                
-                $pastaFotos = "../fotos/";
-                $nome = $arquivo;
-                $imagem = $_FILES["foto"]["name"];
-                loadImg($pastaFotos,$imagem,$nome);
-                
-                //gravar no banco - se tudo deu certo
-                $pdo->commit();
-                $titulo = "Sucesso";
-                $mensagem = "Produto Salvo!";
-                $icone = "success";
-                mensagem($titulo, $mensagem, $icone);
-                echo "<script>location.href='listagem/produto';</script>";
-            }
-        // }
-        //erro ao gravar
-        $titulo = "Erro";
-		$mensagem = "Erro ao Gravar no Servidor";
-		$icone = "error";
-		mensagem($titulo, $mensagem, $icone);
-        echo "<script>history.back();</script>";
-        exit;
     }
     
-    //echo consulta->errorInfo()[2];
-    exit;
+    if($consulta->execute()){
+           
+            //gravar no banco 
+            // $pdo->commit();
+            $titulo = "Sucesso";
+            $mensagem = "Produto Salvo/Alterado!";
+            $icone = "sucess";
+            mensagem($titulo, $mensagem, $icone);
+            
+    } else {
+         //erro ao gravar
+        echo $erro = $consulta->errorInfo()[2];
+        $titulo = "Erro";
+		$mensagem = "Erro ao Gravar/Alterar Produto";
+		$icone = "error";
+		mensagem($titulo, $mensagem, $icone);
+    }
 }
-$titulo = "Erro";
-$mensagem = "Requisição Inválida";
-$icone = "error";
-mensagem($titulo, $mensagem, $icone);
-// echo '<p class="alert alert-danger>Requisição inválida</p>"';
