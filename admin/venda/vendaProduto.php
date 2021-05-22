@@ -185,7 +185,7 @@
 
                             <datalist id="listProdutos"> 
                             <?php
-                            $sql = "select id, nome_produto, valor_unitario from produto where ativo = 'S' order by nome_produto";
+                            $sql = "select id, nome_produto from produto where ativo = 'S' order by nome_produto";
                             $consulta = $pdo->prepare($sql);
                             $consulta->execute();
 
@@ -196,7 +196,7 @@
                             </datalist>
                         </div>
                         <div class="col-12 col-md-2">
-                            <input type="text" name="valor" id="valor" class="form-control" required 
+                            <input type="text" name="venda_unitaria" id="venda_unitaria" class="form-control" required 
                             data-parsley-required-message="Preencha o valor" 
                             <?=$disabled?>>
                         </div>
@@ -229,15 +229,15 @@
                     //console.log(p);
                     produto = p[0];
                     $("#produto_id").val(produto);
-                    //realizar a busca de valor no buscaValor.php OVO MORRER PERA AI
+                    //realizar a busca de valor no buscaValor.php 
                     $.get("buscaValor.php",
-                        {produto:produto},
+                        {venda_unitaria:venda_unitaria},
                         function(dados){
 
                             if ( dados == "erro" ) {
                                 //sweet alert
                             } else {
-                                $("#valor_unitario").val(dados);
+                                $("#venda_unitaria").val(dados);
                             }
                     })
 

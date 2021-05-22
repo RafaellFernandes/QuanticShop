@@ -117,7 +117,7 @@
                 $pastaFotos = "../fotos/";
                 $nome = $arquivo;
                 $imagem = $_FILES["foto"]["name"];
-                redimensionarImagem($pastaFotos,$imagem,$nome);
+                loadImg($pastaFotos,$imagem,$nome);
                 
                 //gravar no banco - se tudo deu certo
                 $pdo->commit();

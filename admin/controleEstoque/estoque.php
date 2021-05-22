@@ -12,7 +12,7 @@
 //se nao existe o id
 if ( !isset ( $id ) ) $id = "";
 //iniciar as variaveis
-$produto_id = $qtd_estoque = "";
+$produto_id = $qtd_estoque = $produto = NULL;
 
   //verificar se existe um id
   if ( !empty ( $id ) ) {
@@ -50,24 +50,38 @@ $produto_id = $qtd_estoque = "";
                             <label for="id">ID</label>
                             <input type="text" name="id" id="id" readonly class="form-control" value="<?=$id;?>">
                         </div>
-                        <div class="col-12 col-md-8">
-                            <label for="produto_id">ID Produto</label>
-                            <select name="produto_id" id="produto_id" class="form-control" required data-parsley-required-message="selecione uma opção">
-                                <option value="<?=$produto_id;?>"></option>
-                                    <?php
-                                        $sql = "SELECT * FROM produto ORDER BY nome_produto";
-                                        $consulta = $pdo->prepare($sql);
-                                        $consulta->execute();
+                       
+                        <div class="col-2">
+                    <label for="produto_id">Id Produto</label>
+                    <input type="text" name="produto_id" id="produto_id"
+                    class="form-control" required 
+                    data-parsley-required-message="Selecione o produto" readonly
+                    value="<?=$produto_id?>">
+                </div>
+                <div class="col-10">
+                    <label for="produto">Selecione o Produto:</label>
+                    <input type="text" name="produto"
+                    id="produto" required
+                    data-parsley-required-message="Selecione um produto"
+                    list="produtos"
+                    class="form-control"
+                    value="<?=$produto?>">
 
-                                        while ($d = $consulta->fetch(PDO::FETCH_OBJ) ) {
-                                        //separar os dados
-                                            $id   = $d->id;
-                                            $nome_produto = $d->nome_produto;
-                                            echo '<option value="'.$id.'">'.$nome_produto.'</option>';
-                                        }                    
-                                    ?>
-                            </select>
-                        </div>
+                    <datalist id="produtos">
+                        <?php
+                            $sql = "select id, nome_produto, marca_id, departamento_id from produto
+                                order by nome_produto";
+                            $consulta = $pdo->prepare($sql);
+                            $consulta->execute();
+
+                            while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ){
+
+                                echo "<option value='{$dados->id} - {$dados->nome_produto} - {$dados->marca_id} - {$dados->departamento_id}'>";
+
+                            }
+                        ?>
+                    </datalist>
+                </div> 
 
                         <div class="col-12 col-md-4">
                             <label for="qtd_estoque">Quantidade em Estoque</label>
@@ -86,6 +100,20 @@ $produto_id = $qtd_estoque = "";
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $("#produto").blur(function(){
+
+        var produto = $("#produto").val();
+
+        if ( produto != "" ) {
+            //separar a string pelo -
+            produto = produto.split(" - ");
+           
+            //jogar o id para o produto_id
+            $("#produto_id").val(produto[0]);
+        }
+    })
+</script>
 
 <script>$("#valor_bruto").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});</script>
 <script type="text/javascript">

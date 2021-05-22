@@ -8,7 +8,7 @@
 	* ao final irá apagar a imagem original
 	* ********************************** */
 
-	function loadImg($imagem, $nome, $pastaFotos)
+	function loadImg($imagem, $nome, $pastaimagems)
 	{
 
 		//pega o tipo de imagem - jpg ou png
@@ -34,7 +34,7 @@
 
 		if ( $tipo == "image/png") {
 
-			$imagem_gerada = $pastaFotos.$nome."g.png";
+			$imagem_gerada = $pastaimagems.$nome."g.png";
 			$path = $imagem;
 			$imagem_orig = ImageCreateFromPNG($path);
 			$pontoX = ImagesX($imagem_orig);
@@ -53,7 +53,7 @@
 			ImageDestroy($imagem_fin);
 
 
-			$imagem_gerada = $pastaFotos.$nome."m.png";
+			$imagem_gerada = $pastaimagems.$nome."m.png";
 			$path = $imagem;
 			$imagem_orig = ImageCreateFromPNG($path);
 			$pontoX = ImagesX($imagem_orig);
@@ -71,7 +71,7 @@
 			ImageDestroy($imagem_orig);
 			ImageDestroy($imagem_fin);
 
-			$imagem_gerada = $pastaFotos.$nome."p.png";
+			$imagem_gerada = $pastaimagems.$nome."p.png";
 			$path = $imagem;
 			$imagem_orig = ImageCreateFromPNG($path);
 			$pontoX = ImagesX($imagem_orig);
@@ -92,7 +92,7 @@
 
 		} else {
 
-			$imagem_gerada = $pastaFotos.$nome."g.jpg";
+			$imagem_gerada = $pastaimagems.$nome."g.jpg";
 			$path = $imagem;
 			$imagem_orig = ImageCreateFromJPEG($path);
 			$pontoX = ImagesX($imagem_orig);
@@ -103,7 +103,7 @@
 			ImageDestroy($imagem_orig);
 			ImageDestroy($imagem_fin); 
 
-			$imagem_gerada = $pastaFotos.$nome."m.jpg";
+			$imagem_gerada = $pastaimagems.$nome."m.jpg";
 			$path = $imagem;
 			$imagem_orig = ImageCreateFromJPEG($path);
 			$pontoX = ImagesX($imagem_orig);
@@ -114,7 +114,7 @@
 			ImageDestroy($imagem_orig);
 			ImageDestroy($imagem_fin);
 
-			$imagem_gerada = $pastaFotos.$nome."p.jpg";
+			$imagem_gerada = $pastaimagems.$nome."p.jpg";
 			$path = $imagem;
 			$imagem_orig = ImageCreateFromJPEG($path);
 			$pontoX = ImagesX($imagem_orig);

@@ -14,7 +14,8 @@
     if ( !isset ( $id ) ) $id = "";
 
     //iniciar as variaveis
-    $produto_id = $fornecedor_id = $lote = $data_cadastro = $qtd_produto = $venda_unitaria = $custo_unitario = "";
+    $produto_id = $fornecedor_id = $lote = $data_cadastro = $qtd_produto = $venda_unitaria = $custo_unitario = $status = 
+    $produto= NULL;;
 
     //verificar se existe um id
     if ( !empty ( $id ) ) {
@@ -43,6 +44,8 @@
     $fornecedor_id            = $dados->fornecedor_id;
     $razaoSocial              = $dados->razaoSocial;
     $lote                     = $dados->lote;
+    $status                   = $dados->status;
+   
         
   }
 
@@ -70,24 +73,37 @@
                             <label for="id">ID</label>
                             <input type="text" name="id" id="id" readonly class="form-control" value="<?=$id;?>">
                         </div>
-                        <div class="col-12 col-md-4 mt-2">
-                            <label for="produto_id">Produto</label>
-                            <select name="produto_id" id="produto_id" class="form-control" required data-parsley-required-message="Selecione um Produto">
-                                <option value="<?=$produto_id;?>">Selecione o Produto</option>
-                                    <?php
-                                        $sql = "SELECT id, nome_produto FROM produto ORDER BY nome_produto";
-                                        $consulta = $pdo->prepare($sql);
-                                        $consulta->execute();
+                        <div class="col-2">
+                    <label for="produto_id">Id Produto</label>
+                    <input type="text" name="produto_id" id="produto_id"
+                    class="form-control" required 
+                    data-parsley-required-message="Selecione o produto" readonly
+                    value="<?=$produto_id?>">
+                </div>
+                <div class="col-10">
+                    <label for="produto">Selecione o Produto:</label>
+                    <input type="text" name="produto"
+                    id="produto" required
+                    data-parsley-required-message="Selecione um produto"
+                    list="produtos"
+                    class="form-control"
+                    value="<?=$produto?>">
 
-                                        while ($d = $consulta->fetch(PDO::FETCH_OBJ) ) {
-                                        //separar os dados
-                                            $id           = $d->id;
-                                            $nome_produto = $d->nome_produto;
-                                            echo '<option value="'.$id.'">'.$nome_produto.'</option>';
-                                        }
-                                    ?>
-                            </select>
-                        </div>
+                    <datalist id="produtos">
+                        <?php
+                            $sql = "select id, nome_produto, marca_id, departamento_id from produto
+                                order by nome_produto";
+                            $consulta = $pdo->prepare($sql);
+                            $consulta->execute();
+
+                            while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ){
+
+                                echo "<option value='{$dados->id} - {$dados->nome_produto} - {$dados->marca_id} - {$dados->departamento_id}'>";
+
+                            }
+                        ?>
+                    </datalist>
+                </div> 
                         <div class="col-12 col-md-4 mt-2">
                             <label for="lote">Lote</label>
                             <input type="text" name="lote" id="lote" class="form-control" value="<?=$lote;?>" placeholder="Nº Lote">
@@ -112,18 +128,18 @@
                         </div>
 
                         <div type="text" class="col-12 col-md-4 mt-2 ">
-                        <label >Valor de Custo:</label>
+                        <label >Valor de Custo</label>
                         <input type="number" id="custo_unitario" name="custo_unitario" class="form-control number_format" required data-parsley-required-message="Preencha este campo" 
                             class="form-control" value="<?=$custo_unitario;?>" placeholder="R$ 0,00">
                         </div>         
                       
                         <div type="text" class="col-12 col-md-4 mt-2">
-                            <label >Margem(%):</label>
+                            <label >Margem(%)</label>
                             <input type="number" id="porcentagem_lucro" name="porcentagem_lucro" class="form-control"  required data-parsley-required-message="Preencha este campo" 
                             class="form-control" onblur="valorVenda()" value="<?=$porcentagem_lucro;?>" placeholder="%">
                         </div>
                         <div type="text" class="col-12 col-md-4 mt-2">
-                            <label >Valor de Venda:</label>
+                            <label >Valor de Venda</label>
                             <input type="number" id="venda_unitario" name="venda_unitaria" class="form-control" required data-parsley-required-message="Preencha este campo" 
                             class="form-control" value="<?=$venda_unitaria;?>" placeholder="R$ 0,00">         
                         </div>
@@ -134,14 +150,14 @@
                                     required data-parsley-required-message="Preencha a data"
                                     value="<?=$data_cadastro?>">
                                </div>
-                        <div class="col-12 col-md-2 mt-2">
-                        <label for="status">Status</label>
-                        <select name="status" id="status" class="form-control" 
-                        required data-parsley-required-message="Selecione uma opção">
-                            <option value="">Selecione</option>
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-					    </select>
+                               <div class="col-12 col-md-4">
+							<label for="status">Status</label>
+							<select name="status" id="status" class="form-control" 
+								required data-parsley-required-message="Selecione uma opção">
+								<option value="">...</option>
+								<option value="1" <?= $status == '1' ? "selected" : "" ?>>Ativo</option>
+								<option value="0"  <?= $status == '0' ? "selected" : "" ?>>Inativo</option>
+							</select>
                         </div>
                         <div class="row g-2">
                             <div class="col-sm-4 mt-4">
@@ -156,6 +172,20 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $("#produto").blur(function(){
+
+        var produto = $("#produto").val();
+
+        if ( produto != "" ) {
+            //separar a string pelo -
+            produto = produto.split(" - ");
+           
+            //jogar o id para o produto_id
+            $("#produto_id").val(produto[0]);
+        }
+    })
+</script>
 
 <!-- <script>$("#valor_unitario").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});</script> -->
 <script type="text/javascript">
@@ -182,3 +212,4 @@ $(document).ready(function(){
 
     }
 </script>
+

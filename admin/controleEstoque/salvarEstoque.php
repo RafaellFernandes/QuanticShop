@@ -33,7 +33,7 @@ if ( $_POST ) {
   	//se o id estiver preenchido - update
   	if ( empty ( $id ) ) {
   		//inserir os dados no banco
-  		$sql = "INSERT INTO estoque (produto_id, qtd_estoque) VALUES( :produto_id, :qtd_estoque)";
+  		$sql = "INSERT INTO estoque (produto_id, qtd_estoque) VALUES (:produto_id, :qtd_estoque)";
   		$consulta = $pdo->prepare($sql);
 		$consulta->bindParam(":produto_id", $produto_id);
         $consulta->bindParam(":qtd_estoque", $qtd_estoque);

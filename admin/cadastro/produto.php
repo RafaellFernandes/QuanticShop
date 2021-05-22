@@ -131,6 +131,11 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
                                     ?>
                             </select>
                         </div>
+                       <div class="col-12 col-md-4 mt-2">
+                        <label for="valor_unitario">Valor do Produto*:</label>
+                        <input type="text" name="valor_unitario" id="valor_unitario" class="form-control valor" required 
+                        data-parsley-required-message="Digite o valor do produto" inputmode="numeric" value="<?=$valor_unitario?>">
+				        </div>
                         
                         <div class="col-12 col-md-2 mt-2">
 							<label for="ativo">Ativo</label>
@@ -141,23 +146,27 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
 								<option value="0"  <?= $ativo == '0' ? "selected" : "" ?>>Inativo</option>
 							</select>
                         </div>
-                        <div class="col-12 col-md-10 mt-2">
-                            <?php 
-                                //variavel r requerido se ID está vazio
-                                $r = 'required data-parsley-required-message="Selecione uma foto"';     
-                                if(!empty($id)) $r = '';
-                            ?>
-                            <label for="foto">Foto(s) do Produto (.jpg)</label>
-                            <input type="file" name="foto" id="foto" class="form-control" accept=".jpg"<?=$r;?> multiple>
-                            <input type="hidden" name="foto" value="<?=$foto;?>" class="form-control" multiple >     
-                                <?php
-                                    if( !empty($foto)){
-                                        $foto = "<img src='../fotos/".$foto."p.jpg' alt='".$nome_produto."' width='150px'>";
-                                    } else{
-                                        $foto = "";
-                                    }
-                                ?>
-                            <div><?php echo $foto ;?></div>
+                        <div class="col-12 col-md-4 mt-2">
+                        <?php
+
+                            $required = ' required data-parsley-required-message="Selecione um arquivo" ';
+                            $link = NULL;
+
+                            //verificar se a imagem não esta em branco
+                            if ( !empty ( $foto ) ) {
+                                //caminho para a imagem
+                                $foto = "../fotos/{$foto}m.jpg";
+                                //criar um link para abrir a imagem
+                                $link = "<a href='{$foto}' data-lightbox='foto' class='badge badge-success'>Abrir imagem</a>";
+                                $required = NULL;
+
+                            }
+
+                        ?>
+                        <label for="foto">Imagem (JPG)* <?=$link?>:</label>
+                        <input type="file" name="foto" 
+                        id="foto" class="form-control"
+                        <?=$required?> accept="image/jpeg">
                         </div>
                         
                         <div class="col-12 col-md-12 mt-2">
@@ -172,10 +181,10 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
                         </div>
                     </div>
                     <div class="row g-2">
-                        <div class="col-sm-4 mt-4">
-                            <button type="submit" class="btn btn-success margin mt-3">
-                                Salvar Dados
-                            </button>
+                    <div class="col-sm-4 mt-4">
+							<button type="submit" class="btn btn-success margin">
+								Salvar Dados
+							</button>
                         </div>
                         <div class="col-sm">
                             <div class="float-right mt-3 ">
