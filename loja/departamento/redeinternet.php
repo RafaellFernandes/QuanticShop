@@ -44,7 +44,7 @@
 								<img src='fotos/$FotoProduto' class='w-75'>
 								<p>$Nome</p>
 								<p class='valor'>R$ $ValorProduto</p>
-								<a href='produto/$id'
+								<a href='pages/produto/$id'
 								class='btn btn-info'>Detalhes</a>
 							</div>";
 					}

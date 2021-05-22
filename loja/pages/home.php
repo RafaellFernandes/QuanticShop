@@ -162,31 +162,44 @@
               $consulta = $pdo->prepare($sql);
 							$consulta->execute();                            
 
-							while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
-								//separar os dados
-								$pid 		                     = $dados->pid;
+                while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
+                //separar
+                $pid 		                     = $dados->pid;
                 $foto                        = $dados->foto;
                 $nome_produto 		           = $dados->nome_produto;
                 $valor_unitario              = $dados->valor_unitario;
                 $valor_unitario              = number_format($valor_unitario,2, '.' , ',');
                 $vezesVendido                = $dados->vezesVendido;
-                $imagem                      = "../fotos/".$foto."p.jpg";
+                $foto                        = "../fotos/".$foto."p.jpg";
                 $pativo					             = $dados->pativo;
-
+              
+          
+                //se tiver promo - valor = valor da promo
+                //senao valor = valor do produto
+          
+                //se a promo esta vazio - valor = valor do produto
+                if ( empty ( $promocao ) ) {
+                  //1499.99 -> 1.499,99
+                  $valor_unitario = "R$ " . number_format($valor_unitario, 2, ",", ".");
+                  $desc = "";
+                } else {
+                  //valor normal
+                  $desc = "R$ " . number_format($valor_unitario, 2, ",", ".");
+                  //valor promocional
+                  $valor_unitario = "R$ " . number_format($promocao, 2, ",", ".");
+                }
 								//mostrar na tela
 								if ($pativo == "1"){
-                  echo '<div class="col-12 col-md-4">
-                  <div class="card " style="width: 18rem;">
-                        <img src="'.$imagem.'" class="card-img-top" alt="'.$nome_produto.'">
-                          <div class="card-body">
-                            <h5 class="card-title">'.$nome_produto.'</h5>
-                            <p class="card-text">R$ '.$valor_unitario.'</p>
-                            <a href="products/'.$pid.'" class="btn btn-primary">Comprar</a>
-                          </div>
-                        </div>
-                        </div>
-                    ';
-                }
+                  echo "<div class='col-3 text-center'>
+                  <img src='fotos/$foto' class='w-65'>
+                  <p>$nome_produto</p>
+                  
+                  <p class='valor'>R$ $valor_unitario</p>
+                  <a href='pages/produto/$pid'
+                  class='btn btn-info'>Detalhes</a><br>
+                  </div>";
+   
+               }
 							}
 						?>
           </div>

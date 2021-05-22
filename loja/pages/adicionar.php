@@ -15,24 +15,22 @@
 		}
 
 		//selecionar os dados do banco
-		$sql = "select id, produto, valor, promo 
+		$sql = "select id, nome_produto, valor_unitario, promocao 
 			from produto 
 			where id = ".(int)$id." limit 1";
 
-		$result = mysqli_query($con, $sql);
-		$dados = mysqli_fetch_array($result);
 
 		//separar os dados
 		$id = $dados["id"];
-		$produto = $dados["produto"];
-		$valor = $dados["valor"];
-		$promo = $dados["promo"];
+		$produto = $dados["nome_produto"];
+		$valor = $dados["valor_unitario"];
+		$promo = $dados["promocao"];
 
 		//o valorProduto sempre será o valor do produto
-		$valorProduto = $valor;
+		$valorProduto = $valor_unitario;
 		//se existir um valor promo, valorProduto será o valor Promo
-		if ( !empty ( $promo ) ) {
-			$valorProduto = $promo;
+		if ( !empty ( $promocao ) ) {
+			$valorProduto = $promocao;
 		}
 
 		//valor total
@@ -40,14 +38,14 @@
 
 		//guardar esses valores na sessao
 		$_SESSION["carrinho"][$id] = array("id"=>$id, 
-										"produto"=>$produto,
-										"valor"=>$valorProduto,
+										"nome_produto"=>$nome_produto,
+										"valor_unitario"=>$valorProduto,
 										"quantidade"=>$quantidade,
 										"total"=>$total);
 		//print_r ( $_SESSION['carrinho'] );
 
 		//redirecionar para o carrinho
-		echo "<script>location.href='index.php?pagina=carrinho';</script>";
+		echo "<script>location.href = 'carrinho/quantidade/'+produto+"/"+quantidade;</script>";
 
 		exit;
 

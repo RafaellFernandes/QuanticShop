@@ -1,9 +1,7 @@
 <?php
+//verificar se a variável $pagina não existe
+if ( !isset ( $pagina ) ) exit;
 
-//verificar se nao esta logado
-if ( !isset ( $_SESSION["quanticshop"]["id"] ) ) {
-    exit;
-}
 
 	$op = $produto = "";
 	if ( isset ( $p[1] ) ) $op = trim ( $p[1] );
@@ -69,6 +67,7 @@ if ( !isset ( $_SESSION["quanticshop"]["id"] ) ) {
 				$nome_produto   = $c["nome_produto"];
 				$valor_unitario = $c["valor_unitario"];
 				$quantidade     = $c["quantidade"];
+				$promocao       = $c["promocao"];
 
 				$total = $valor_unitario * $quantidade;
 

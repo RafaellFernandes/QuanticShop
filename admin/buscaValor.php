@@ -8,15 +8,26 @@
 
 	if ( !empty ( $produto ) ) {
 
-		include "validacao/functions.php";
+		
 		include "config/conexao.php";
 
-		$sql = "select venda_unitaria from item_compra where id = :venda_unitaria limit 1"; 
+		$sql = "select valor from produto where id = :produto limit 1"; 
 		$consulta = $pdo->prepare($sql);
-		$consulta->bindParam(':venda_unitaria', $venda_unitaria);
+		$consulta->bindParam(':produto', $produto);
 		$consulta->execute();
 
 		$dados = $consulta->fetch(PDO::FETCH_OBJ);
 
-	
+		//verificar se há valor promocional
+		if ( ( isset ( $dados->promocao ) ) and ( $dados->promocao > 0 ) ) {
+			echo number_format($dados->promocao, 2, ",", ".");
+			exit;
+		}
+
+		if ( !empty ( $dados->valor ) ) {
+			echo number_format($dados->valor, 2, ",", ".");
+			exit;
+		}
+
+		echo "erro";
 	}

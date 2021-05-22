@@ -231,7 +231,7 @@
                     $("#produto_id").val(produto);
                     //realizar a busca de valor no buscaValor.php 
                     $.get("buscaValor.php",
-                        {venda_unitaria:venda_unitaria},
+                        {produto:produto},
                         function(dados){
 
                             if ( dados == "erro" ) {

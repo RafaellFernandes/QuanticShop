@@ -148,20 +148,20 @@
 									</ul></li>';
 									}
 								?>
-							</ul>
-							
-							
+							</ul>	
 							<script type="text/javascript" src="vendor/js/responsive-nav.js"></script>
 				    	</div>							
 	    		  		<div class="clear"></div>
 	    	  	    	</div>
 						<div class="header_right">
-							<!-- start search-->
+						<ul class="navbar-nav ml-auto">
+    
 							</a>
 						</li>
 						</ul>
-						
-									<div class="clear"></div>
+					
+
+								<div class="clear"></div>
 								</ul>
 							</li>
 				    	</ul>

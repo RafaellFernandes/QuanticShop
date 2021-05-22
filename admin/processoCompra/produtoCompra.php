@@ -23,7 +23,7 @@
     include "../admin/validacao/functions.php";
    
     //selecionar os dados do banco para poder editar
-    $sql = "SELECT c.*, f.razaoSocial, p.nome_produto  FROM item_compra c
+    $sql = "SELECT c.*  date_format(v.data,'%Y-%m-%d') data, f.razaoSocial, p.nome_produto  FROM item_compra c
     LEFT JOIN fornecedor f on (f.id = c.fornecedor_id)
     LEFT JOIN produto p on(p.id = c.produto_id) LIMIT 1";
     $consulta = $pdo->prepare($sql);
@@ -69,18 +69,8 @@
                 <form method="post" name="formCadastro"  action="processoCompra/salvarProdutoCompra" data_parsley_validate enctype="multipart/form-data">
                     <p> Todos os campos são obrigatórios </p>
                     <div class="row">
-                        <div class="col-12 col-md-2"  style="display: none;">
-                            <label for="id">ID</label>
-                            <input type="text" name="id" id="id" readonly class="form-control" value="<?=$id;?>">
-                        </div>
-                        <div class="col-2">
-                    <label for="produto_id">Id Produto</label>
-                    <input type="text" name="produto_id" id="produto_id"
-                    class="form-control" required 
-                    data-parsley-required-message="Selecione o produto" readonly
-                    value="<?=$produto_id?>">
-                </div>
-                <div class="col-10">
+                    
+                    <div class="col-12 col-md-4 mt-2">
                     <label for="produto">Selecione o Produto:</label>
                     <input type="text" name="produto"
                     id="produto" required
@@ -141,9 +131,9 @@
                         <div type="text" class="col-12 col-md-4 mt-2">
                             <label >Valor de Venda</label>
                             <input type="number" id="venda_unitario" name="venda_unitaria" class="form-control" required data-parsley-required-message="Preencha este campo" 
-                            class="form-control" value="<?=$venda_unitaria;?>" placeholder="R$ 0,00">         
+                            class="form-control" readonly value="<?=$venda_unitaria;?>" placeholder="R$ 0,00">         
                         </div>
-                        <div class="col-12 col-md-4">
+                        <div type="text" class="col-12 col-md-4 mt-2">
                                     <label for="data_cadastro">Data</label>
                                     <input type="date" name="data_cadastro"
                                     id="data_cadastro" class="form-control"

@@ -40,19 +40,13 @@
 								$valor_unitario = number_format($valor_unitario, 2, ",", ".");
 								//var,casas decimais,sep decimal,sep milhares
 
-								echo "<br>
-								<div class='col-sm-3 text-center'>
-								<div class='shop_desc'>
-										<img src='fotos/$foto' class='img-responsive' alt='$nome_produto'/>
-										<div class='clear'></div>
-										<h4>$nome_produto</h4>
-										<span class='actual'>R$ $valor_unitario</span><br>
-										<ul class='buttons'>
-											<li class='cart'><a href='produto/$id'>Add ao Carrinho</a></li>
-											<li class='shop_btn'><a href='products/$id'>Mais Detalhes</a></li>
-											<div class='clear'></div>
-										</ul>
-									</div></div><br> ";
+								echo "<div class='col-3 text-center'>
+								<img src='fotos/$foto' class='w-65'>
+								<p>$nome_produto</p>
+								<p class='valor'>R$ $valor_unitario</p>
+								<a href='pages/produto/$id'
+								class='btn btn-info'>Detalhes</a><br>
+								</div>";
 							}
 						?>	
 					</div>
