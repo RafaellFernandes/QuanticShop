@@ -12,6 +12,7 @@
 
   //incluir o arquivo de conexao
   include "config/conexao.php";
+  include "validacao/functions.php";
 
   $site   = $_SERVER['SERVER_NAME'];
   $porta  = $_SERVER['SERVER_PORT'];
@@ -89,7 +90,7 @@
     ?>
 		<nav id="sidebar" class="sidebar">
 			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="index.html" style="text-decoration: none;">
+				<a class="sidebar-brand" href="paginas/home" style="text-decoration: none;">
 					<span class="align-middle">Quantic Shop</span>
 				</a>
 

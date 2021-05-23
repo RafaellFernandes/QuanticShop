@@ -18,7 +18,7 @@ exit;
 include "config/conexao.php";
 ?>
 <div class="row mb-2 mb-xl-3">
-<div><h6> Olá <?=$_SESSION["quanticshop"]["primeiro_nome"];?> Seja Bem vindo(a).</h6></div>
+<div><h6> Olá <?=$_SESSION["quanticshop"]["primeiro_nome"]." ".$_SESSION["quanticshop"]["sobrenome"];?> Seja Bem vindo(a).</h6></div>
     <div class="col-auto d-none d-sm-block">
         <h3>Painel de <strong>Análise</strong></h3>
     </div>
@@ -43,7 +43,7 @@ include "config/conexao.php";
                             </h4>
                             <div class="mb-1">
                                 <span>Documentação: </span>
-                                <span class=" text-warning "> <i class="mdi mdi-arrow-bottom-right"></i>
+                                <span class=" text-danger "> <i class="mdi mdi-arrow-bottom-right"></i>
                                     <?php $rem = strtotime('2021-05-30 19:00:00') - time();
                                         $day = floor($rem / 86400);
                                         $hr = floor(($rem % 86400) / 3600);
