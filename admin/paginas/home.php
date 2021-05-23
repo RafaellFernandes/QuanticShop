@@ -101,7 +101,7 @@ include "config/conexao.php";
                                 <span class="text-muted"> desde a semana passada</span>
                             </div>
                         </div>
-                    </div><!--
+                    </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="card">
@@ -114,6 +114,7 @@ include "config/conexao.php";
                             </div>
                         </div>
                     </div>
+                   
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title mb-4">Pedidos</h5>
@@ -133,7 +134,7 @@ include "config/conexao.php";
                                 <span class="text-muted"> desde a semana passada</span>
                             </div>
                         </div>
-                    </div> -->
+                    </div> 
                 </div>
             </div>
         </div>

@@ -24,7 +24,7 @@
 			<div class="row container-fluid">
 				<?php
 					//selecionar 1 produto aleatorios
-					$sql = "SELECT id, nome_produto, valor_unitario, foto, departamento_id FROM produto WHERE departamento_id IN (1)";
+					$sql = "SELECT id, nome_produto, venda_unitaria, foto, departamento_id FROM produto WHERE departamento_id IN (1)";
 					$consulta = $pdo->prepare($sql);
 					$consulta->execute();
 
@@ -33,17 +33,17 @@
 						//recuperar as variaveis
 						$id 	            = $linha["id"];
 						$nome_produto       = $linha["nome_produto"];
-						$valor_unitario     = $linha["valor_unitario"];
+						$venda_unitaria     = $linha["venda_unitaria"];
 						$foto    	        = $linha["foto"] ."p.jpg";
 
 						//formatar o valor
-						$valor_unitario = number_format($valor_unitario, 2, ",", ".");
+						$venda_unitaria = number_format($venda_unitaria, 2, ",", ".");
 						//var,casas decimais,sep decimal,sep milhares
 
 						echo "<div class='col-3 text-center'>
 								<img src='fotos/$foto' class='w-75'>
 								<p>$nome_produto</p>
-								<p class='valor'>R$ $valor_unitario</p>
+								<p class='valor'>R$ $venda_unitaria</p>
 								<a href='pages/produto/$id'
 								class='btn btn-info'>Detalhes</a>
 							</div>";

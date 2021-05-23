@@ -24,30 +24,27 @@
 			<div class="row container-fluid">
 				<?php
 					//selecionar 1 produto aleatorios
-					$sql = "SELECT id, Nome, ValorProduto, FotoProduto, departamento_id FROM produto WHERE departamento_id IN (11)";
+					$sql = "SELECT id, nome_produto, venda_unitaria, foto, departamento_id FROM produto WHERE departamento_id IN (11)";
 					$consulta = $pdo->prepare($sql);
 					$consulta->execute();
 
 					while ( $linha = $consulta->fetch(PDO::FETCH_ASSOC) ) {
 
-						//recuperar as variaveis
-						$id 	            = $linha["id"];
-						$Nome               = $linha["Nome"];
-						$ValorProduto      	= $linha["ValorProduto"];
-						$FotoProduto     	= $linha["FotoProduto"] ."p.jpg";
+					//separar os campos
+					$id              	= $linha["id"];
+					$nome_produto       = $linha["nome_produto"];
+					$venda_unitaria    	= $linha["venda_unitaria"];
+					$FotoProduto    	= $linha["foto"]."p.jpg";
 
-						//formatar o valor
-						$ValorProduto = number_format($ValorProduto, 2, ",", ".");
-						//var,casas decimais,sep decimal,sep milhares
+					$venda_unitaria = number_format($venda_unitaria, 2, ",", ".");
 
-						echo "<div class='col-3 text-center'>
-								<img src='fotos/$FotoProduto' class='w-75'>
-								<p>$Nome</p>
-								<p class='valor'>R$ $ValorProduto</p>
-								<a href='pages/produto/$id'
-								class='btn btn-info'>Detalhes</a>
-							</div>";
-					}
+					echo "<div class='col-4 mt-3 text-center'>
+							<img src='fotos/$foto' class='w-100 '>
+							<p>$nome_produto</p>
+							<p class='valor'>R$ $venda_unitaria</p>
+							<a href='pages/produto/$id' class='btn btn-danger'>Detalhes</a>
+						</div>";
+				}
 				?>
 			</div>
 		</div>

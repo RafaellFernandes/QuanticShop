@@ -21,7 +21,7 @@ exit;
 			<div class="card">
 				<div class="card-header">
 					<div class="float-end">
-						<a href="controleEstoque/estoque" class="btn btn-info">Cadastrar Novo</a>
+						<a href="controleEstoque/estoque" class="btn btn-primary">Cadastrar Novo</a>
 					</div>
 					<h4>Lista</h4>
 					<h6 class="card-subtitle text-muted">Estoque</h6>

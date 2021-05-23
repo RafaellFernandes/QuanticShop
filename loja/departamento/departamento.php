@@ -26,7 +26,7 @@
 <div class="row">
 	<?php
 		//selecionar os produtos daquele departamento
-		$sql = "SELECT id, nome_produto, valor_unitario, 
+		$sql = "SELECT id, nome_produto, venda_unitaria, 
 			foto
             FROM produto";
             
@@ -40,15 +40,15 @@
 			//separar os campos
 			$id              	= $linha["id"];
 			$nome_produto       = $linha["nome_produto"];
-			$valor_unitario     = $linha["valor_unitario"];
+			$venda_unitaria    = $linha["venda_unitaria"];
 			$foto    	        = $linha["foto"]."p.jpg";
 
-			$ValorProduto = number_format($ValorProduto,2,",",".");
+			$venda_unitaria = number_format($venda_unitaria, 2, ",", ".");
 
 			echo "<div class='col-4 mt-3 text-center'>
 					<img src='fotos/$foto' class='w-100 '>
 					<p>$nome_produto</p>
-					<p class='valor'>R$ $valor_unitario</p>
+					<p class='valor'>R$ $venda_unitaria</p>
 					<a href='pages/produto/$id' class='btn btn-danger'>Detalhes</a>
 				</div>";
 		}
