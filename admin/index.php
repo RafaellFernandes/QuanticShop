@@ -87,10 +87,10 @@
 
         //mostrar a pagina bonita do template
     ?>
-		<nav id="sidebar" class="sidebar">
-			<div class="sidebar-content js-simplebar">
+		<nav id="sidebar" class="sidebar" >
+			<div class="sidebar-content js-simplebar" >
 				<a class="sidebar-brand" href="paginas/home" style="text-decoration: none;">
-					<span class="align-middle">Quantic Shop</span>
+					<span class="align-middle"><img src="img/saturno.png" width="60" height="60"> Quantic Shop</span>
 				</a>
 
 				<ul class="sidebar-nav">
@@ -110,11 +110,11 @@
 						</a>
 					</li>
 
-					<li class="sidebar-item">
+					<!-- <li class="sidebar-item">
 						<a class="sidebar-link" href="paginas/pages-invoice">
 						  <i class="align-middle" data-feather="credit-card"></i> <span class="align-middle">Fatura</span>
 						</a>
-					</li>
+					</li> -->
 
 					<li class="sidebar-header">
 						Gerenciamento
@@ -255,13 +255,11 @@
 							<i class="fas fa-cog"></i>
 							</a>
 
-							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-								<img src="../fotos/<?=$_SESSION["quanticshop"]["foto"];?>p.jpg" class="avatar img-fluid rounded me-1" alt="<?=$_SESSION["quanticshop"]["primeiro_nome"];?>" /> <span class="text-dark"><?=$_SESSION["quanticshop"]["primeiro_nome"];?></span>
+							<a class="nav-link d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+								<img src="../fotos/<?=$_SESSION["quanticshop"]["foto"];?>p.jpg" class="avatar rounded me-1" alt="<?=$_SESSION["quanticshop"]["primeiro_nome"];?>" /> <span class="text-dark"><?=$_SESSION["quanticshop"]["primeiro_nome"];?></span>
 							</a>
 							<div class="dropdown-menu dropdown-menu-end">
 								<a class="dropdown-item" href="login/perfil"><i class="align-middle me-1" data-feather="user"></i> Perfil</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="login/configuracoes"><i class="align-middle me-1" data-feather="settings"></i>Configurações</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#sair"><i class="align-middle mr-1" data-feather="log-out"></i> Log out</a>
 							</div>
@@ -317,10 +315,7 @@
 						<div class="col-6 text-end">
 							<ul class="list-inline">
 								<li class="list-inline-item">
-									<a class="text-muted" href="paginas/politicaPrivacidade">Privacidade</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="paginas/termosCondicoes">Termos</a>
+									<a class="text-muted" href="paginas/termos">Termos</a>
 								</li>
 							</ul>
 						</div>
