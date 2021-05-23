@@ -1,17 +1,8 @@
 <?php
-/*
-	    validaCPF - função para validar CPF
-	    Como usar: 
-	    $cpf = "123.123.123-34";
-	    $msg = validaCPF($cpf);
-	    if ( $msg != 1 ) echo $msg; //deu erro
-	    retornando 1 o documento é inválido
-	*/
+
 	function validaCPF($cpf) {
-	 
 	    // Extrai somente os números
 	    $cpf = preg_replace( '/[^0-9]/is', '', $cpf );
-	     
 	    // Verifica se foi informado todos os digitos corretamente
 	    if (strlen($cpf) != 11) {
 	        return "O CPF precisa ter ao menos 11 números";
@@ -34,7 +25,6 @@
 	    }
 	    return true;
 	}
-
 
 	function validaCNPJ($cnpj) {
 	    $cnpj = preg_replace('/[^0-9]/', '', (string) $cnpj);
@@ -68,21 +58,12 @@
         $data = explode("/", $data);
         return $data = $data[2]."-".$data[1]."-".$data[0];
     }
-/*****
-//funcao para formatar a data 
 
-****/
-    function atualizarData($data){
-        $data = explode("-", $data);
-        return $data = $data[2]."/".$data[1]."/".$data[0];
-    }
-
-	
     
-/*****
-//funcao para retirar espaço 
+// /*****
+// //funcao para retirar espaço 
 
-****/
+// ****/
 
     function retirar($texto){
         //12__
@@ -90,10 +71,10 @@
         return str_replace("_","",$texto);
     }
 
-/*****
-//funcao para foramtar valor
+// /*****
+// //funcao para foramtar valor
 
-****/
+// ****/
     function formatarValor($valor){
         // 12.000,00 -> 12000.00
         //primeiro troca o ponto

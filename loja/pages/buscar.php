@@ -12,7 +12,7 @@
     
     
      while ( $rows_produto = $result_produto->fetch_array(PDO::FETCH_OBJ) ) {
-         echo "Produtos: ".$rows_produto['Nome']."<br>";
+         echo "Produtos: ".$rows_produto['nome_produto']."<br>";
 
     }
    //$result = mysqli_query($link, "SELECT descricao FROM quartos WHERE nome_quarto='Quarto Ibiza'");
