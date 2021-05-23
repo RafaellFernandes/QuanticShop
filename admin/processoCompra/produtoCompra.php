@@ -33,7 +33,7 @@ exit;
     include "validacao/functions.php";
    
     //selecionar os dados do banco para poder editar
-    $sql="SELECT c.*, date_format(c.data_cadastro, '%d/%m/%Y') data_cadastro, f.razaoSocial, p.nome_produto
+    $sql="SELECT c.*, date_format(c.data_cadastro, '%d/%m/%Y') data_cadastro, f.razaoSocial, p.nome_produto, p.ativo pativo
 	FROM item_compra c 
     INNER JOIN fornecedor f on (f.id = c.fornecedor_id)
     INNER JOIN produto p on(p.id = c.produto_id) WHERE c.id = :id LIMIT 1";
@@ -53,6 +53,7 @@ exit;
     $razaoSocial              = $dados->razaoSocial;
     $lote                     = $dados->lote;
     $status                   = $dados->status;
+    $pativo                   = $dados->pativo;
         
   }
 
@@ -82,8 +83,8 @@ exit;
                             <select name="produto_id" id="produto_id" class="form-control" required data-parsley-required-message="Selecione um Produto">
                                 <option value="<?=$produto_id;?>">Selecione o produto</option>
                                     <?php
-                                        $sql = "SELECT id, nome_produto FROM produto
-                                        ORDER BY nome_produto  WHERE ativo = 0";
+                                        $sql = "SELECT * FROM produto WHERE ativo = 0 
+                                        ORDER BY nome_produto  ";
                                         $consulta = $pdo->prepare($sql);
                                         $consulta->execute();
 

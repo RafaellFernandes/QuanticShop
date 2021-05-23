@@ -45,7 +45,7 @@ exit;
 					</thead>
 					<tbody>
 						<?php
-							$sql = "SELECT p.*, m.*, d.* 
+							$sql = "SELECT p.ativo pativo, p.*, m.*, d.* 
 									FROM produto p 
 							 		LEFT JOIN departamento d ON (d.id = p.departamento_id)
                 					LEFT JOIN marca m ON(m.id = p.marca_id) 
@@ -63,17 +63,17 @@ exit;
 								$nome_marca                     = $dados->nome_marca;
 								$departamento_id                = $dados->departamento_id;
 								$nome_dept                      = $dados->nome_dept;
-								$valor_unitario                 = $dados->valor_unitario;
-								$valor_unitario                 = number_format($valor_unitario,2, '.' , ',');	
+								$venda_unitaria                 = $dados->venda_unitaria;
+								$venda_unitaria                 = number_format($venda_unitaria,2, '.' , ',');	
 								$imagem                         = "../fotos/".$foto."p.jpg";
-                                $ativo                          = $dados->ativo;
+                                $pativo                          = $dados->pativo;
 												
 								//mostrar na tela
-                                if ( $ativo == "0" ) {
+                                if ( $pativo == "0" ) {
 									echo '<tr>	
 											<td><img src="'.$imagem.'" alt="'.$nome_produto.'"  width="48" height="48" class="rounded-circle mr-2"></td>
 											<td>'.$nome_produto.'</td>
-											<td>R$ '.$valor_unitario.'</td>
+											<td>R$ '.$venda_unitaria.'</td>
 											<td>'.$nome_marca.'</td>
 											<td>'.$nome_dept.'</td>
 											<td class="table-action text-center">

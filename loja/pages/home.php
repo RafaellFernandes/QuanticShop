@@ -171,7 +171,7 @@ $testeNivel = $_SESSION["quanticshop"]["nivelAcesso"];
                 $pid 		                     = $dados->pid;
                 $foto                        = $dados->foto;
                 $nome_produto 		           = $dados->nome_produto;
-                $valor_unitario              = $dados->valor_unitario;
+                $venda_unitaria              = $dados->venda_unitaria;
                
                 $vezesVendido                = $dados->vezesVendido;
                 $foto                        = "../fotos/".$foto."p.jpg";
@@ -184,13 +184,13 @@ $testeNivel = $_SESSION["quanticshop"]["nivelAcesso"];
                 //se a promo esta vazio - valor = valor do produto
                 if ( empty ( $promocao ) ) {
                   //1499.99 -> 1.499,99
-                  $valor_unitario = "R$ " . number_format($valor_unitario, 2, ",", ".");
+                  $venda_unitaria = "R$ " . number_format($venda_unitaria, 2, ",", ".");
                   $desc = "";
                 } else {
                   //valor normal
-                  $desc = "R$ " . number_format($valor_unitario, 2, ",", ".");
+                  $desc = "R$ " . number_format($venda_unitaria, 2, ",", ".");
                   //valor promocional
-                  $valor_unitario = "R$ " . number_format($promocao, 2, ",", ".");
+                  $venda_unitaria = "R$ " . number_format($promocao, 2, ",", ".");
                 }
 								//mostrar na tela
 								if ($pativo == "1"){
@@ -198,7 +198,7 @@ $testeNivel = $_SESSION["quanticshop"]["nivelAcesso"];
                   <img src='fotos/$foto' class='w-65'>
                   <p>$nome_produto</p>
                   
-                  <p class='valor'>R$ $valor_unitario</p>
+                  <p class='valor'>R$ $venda_unitaria</p>
                   <a href='pages/produto/$pid'
                   class='btn btn-info'>Detalhes</a><br>
                   </div>";

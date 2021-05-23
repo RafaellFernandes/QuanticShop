@@ -34,12 +34,12 @@
 						$id              	= $linha["id"];
 						$nome_produto       = $linha["nome_produto"];
 						$venda_unitaria    	= $linha["venda_unitaria"];
-						$FotoProduto    	= $linha["foto"]."p.jpg";
+						$foto           	= $linha["foto"]."p.jpg";
 	
 						$venda_unitaria = number_format($venda_unitaria, 2, ",", ".");
 	
 						echo "<div class='col-4 mt-3 text-center'>
-								<img src='fotos/$foto' class='w-100 '>
+								<img src='../fotos/$foto' class='w-100 '>
 								<p>$nome_produto</p>
 								<p class='valor'>R$ $venda_unitaria</p>
 								<a href='pages/produto/$id' class='btn btn-danger'>Detalhes</a>
