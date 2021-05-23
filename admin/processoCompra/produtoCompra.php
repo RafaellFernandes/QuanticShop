@@ -25,7 +25,7 @@ exit;
     if ( !isset ( $id ) ) $id = "";
 
     //iniciar as variaveis
-    $produto_id = $fornecedor_id = $lote = $data_cadastro = $qtd_produto = $venda_unitaria = $custo_unitario = $status = $porcentagem_lucro = "";
+    $produto_id = $fornecedor_id = $lote = $data_cadastro = $qtd_produto = $status = "";
 
     //verificar se existe um id
     if ( !empty ( $id ) ) {
@@ -47,19 +47,12 @@ exit;
     $id         	          = $dados->id;
     $nome_produto 	          = $dados->nome_produto; 
     $produto_id               = $dados->produto_id;
-    $custo_unitario           = $dados->custo_unitario;
-    $custo_unitario           = number_format($custo_unitario,2,",",".");
-    $venda_unitaria           = $dados->venda_unitaria;
-    $venda_unitaria           = number_format($venda_unitaria,2,",",".");
-    $porcentagem_lucro        = $dados->porcentagem_lucro;
     $data_cadastro            = $dados->data_cadastro;
     $qtd_produto              = $dados->qtd_produto;
     $fornecedor_id            = $dados->fornecedor_id;
     $razaoSocial              = $dados->razaoSocial;
     $lote                     = $dados->lote;
     $status                   = $dados->status;
-    
-   
         
   }
 
@@ -126,22 +119,22 @@ exit;
                             </select>
                         </div>
 
-                        <div type="text" class="col-12 col-md-4 mt-2 ">
+                        <!-- <div type="text" class="col-12 col-md-4 mt-2 ">
                         <label >Valor de Custo</label>
                         <input type="number" id="custo_unitario" name="custo_unitario" class="form-control number_format" required data-parsley-required-message="Preencha este campo" 
-                            class="form-control" value="<?=$custo_unitario;?>" placeholder="R$ 0,00">
+                            class="form-control" value="<?//=$custo_unitario;?>" placeholder="R$ 0,00">
                         </div>         
                       
                         <div type="text" class="col-12 col-md-4 mt-2">
                             <label >Margem(%)</label>
                             <input type="number" id="porcentagem_lucro" name="porcentagem_lucro" class="form-control"  required data-parsley-required-message="Preencha este campo" 
-                            class="form-control" onblur="valorVenda()" value="<?=$porcentagem_lucro;?>" placeholder="%">
+                            class="form-control" onblur="valorVenda()" value="<?//=$porcentagem_lucro;?>" placeholder="%">
                         </div>
                         <div type="text" class="col-12 col-md-4 mt-2">
                             <label >Valor de Venda</label>
                             <input type="number" id="venda_unitario" name="venda_unitaria" class="form-control" required data-parsley-required-message="Preencha este campo" 
-                            class="form-control" readonly value="<?=$venda_unitaria;?>" placeholder="R$ 0,00">         
-                        </div>
+                            class="form-control" readonly value="<?//=$venda_unitaria;?>" placeholder="R$ 0,00">         
+                        </div> -->
                         <div type="text" class="col-12 col-md-4 mt-2">
                             <label for="data_cadastro">Data</label>
                             <input type="date" name="data_cadastro" id="data_cadastro" class="form-control"

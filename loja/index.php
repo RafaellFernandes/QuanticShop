@@ -72,6 +72,12 @@
 	<link href="vendor/css/style.css" rel='stylesheet' type='text/css' />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	 <!-- Font Awesome -->
+	 <script src="https://kit.fontawesome.com/862f0da969.js" crossorigin="anonymous"></script>
+
+	 <!-- Ionicons -->
+	 <link  rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 	
 	<link rel="shortcut icon" href="vendor/images/saturno.png">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -128,8 +134,6 @@
 								<li><a href="pages/shop">Shop</a></li>
 								<li><a href="pages/sobre">Sobre</a></li>
 								<li><a href="pages/contact">Contato</a></li>	
-								<li><a href="pages/carrinho"><i class="fa fa-cart-plus" aria-hidden="true"></i>Carrinho</a></li>
-									
 								
 								<?php
 									if(!isset($_SESSION["quanticshop"]["id"])){
@@ -148,29 +152,27 @@
 									</ul></li>';
 									}
 								?>
+								<li><a href="pages/carrinho"><i class="fa fa-cart-plus" aria-hidden="true"></i></a></li>
 							</ul>	
-							<script type="text/javascript" src="vendor/js/responsive-nav.js"></script>
-				    	</div>							
-	    		  		<div class="clear"></div>
-	    	  	    	</div>
-						<div class="header_right">
-						<ul class="navbar-nav ml-auto">
-    
-							</a>
-						</li>
-						</ul>
-					
 
-								<div class="clear"></div>
-								</ul>
-							</li>
-				    	</ul>
+								<script type="text/javascript" src="vendor/js/responsive-nav.js"></script>
+								
+							</div>	
+							
+						
+						<div class="clear"></div>
+						
+					</div>
+								
+						<div class="clear"></div>
+								
 		        		<div class="clear"></div>
-	        		</div>
-	      		</div>
-		  	</div>
-	  	</div>
+						
+	        	</div>
+	      	</div>
+		</div>
 	</div>
+	
   	<main>
 		<?php
 			//adicionar a programação para abrir a página desejada
