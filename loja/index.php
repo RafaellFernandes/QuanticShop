@@ -127,7 +127,7 @@
 								<li><a href="pages/home">Home</a></li>
 								<li><a href="pages/shop">Shop</a></li>
 								<li><a href="pages/sobre">Sobre</a></li>
-								<li><a href="politicas/contact">Contato</a></li>	
+								<li><a href="pages/contact">Contato</a></li>	
 								<li><a href="pages/carrinho"><i class="fa fa-cart-plus" aria-hidden="true"></i>Carrinho</a></li>
 									
 								

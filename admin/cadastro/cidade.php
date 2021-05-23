@@ -36,7 +36,7 @@ if ( !empty ( $id ) ) {
         <div class="card">
             <div class="card-header">
                 <h4>Cadastro</h4>
-                <h6 class="card-subtitle text-muted">Cidade e Estado</h6>
+                <h6 style="color: green;"><b>Cidade e Estado</b></h6>
             </div>
             <div class="card-body">
                 <form name="formCadastro" method="post" action="salvar/cidade" data-parsley-validate>
