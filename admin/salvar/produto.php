@@ -95,7 +95,7 @@ exit;
     //iniciar uma transacao
     // $pdo->beginTransaction();
     
-    $valor_unitario = formatarValor($valor_unitario);
+    $venda_unitaria = formatarValor($venda_unitaria);
     
     // $arquivo = time()."-".$_SESSION["quanticshop"]["id"];
     
@@ -115,15 +115,12 @@ exit;
         $consulta->bindParam(':ativo',$ativo);
         $consulta->bindParam(':departamento_id',$departamento_id);
         $consulta->bindParam(':marca_id',$marca_id); 
-        // $consulta->bindParam(':fornecedor_id',$fornecedor_id); 
-        // $consulta->bindParam(':estoque_id',$estoque_id);  
-
-        
+       
     } else if (empty($foto)){
 
         $sql= "UPDATE produto SET nome_produto = :nome_produto, codigo = :codigo,  valor_unitario =:valor_unitario,
         descricao = :descricao, espec_tecnica = :espec_tecnica, promocao = :promocao, ativo = :ativo, departamento_id = :departamento_id,
-        marca_id = :marca_id, fornecedor_id = :fornecedor_id, estoque_id = :estoque_id WHERE id = :id";
+        marca_id = :marca_id WHERE id = :id";
 
         $consulta = $pdo->prepare($sql);
         $consulta->bindParam(':nome_produto',$nome_produto);
@@ -135,15 +132,13 @@ exit;
         $consulta->bindParam(':ativo',$ativo);
         $consulta->bindParam(':departamento_id',$departamento_id);
         $consulta->bindParam(':marca_id',$marca_id);
-        $consulta->bindParam(':fornecedor_id',$fornecedor_id);  
-        $consulta->bindParam(':estoque_id',$estoque_id);  
         $consulta->bindParam(':id',$id);
     }
     else {
         
         $sql= "UPDATE produto SET nome_produto = :nome_produto, codigo = :codigo, promocao = :promocao, valor_unitario =:valor_unitario,
         descricao = :descricao, espec_tecnica = :espec_tecnica, foto = :foto, ativo = :ativo, departamento_id = :departamento_id,
-        marca_id = :marca_id, fornecedor_id = :fornecedor_id, estoque_id = :estoque_id WHERE id = :id";
+        marca_id = :marca_id WHERE id = :id";
 
         $consulta = $pdo->prepare($sql);
         $consulta->bindParam(':nome_produto',$nome_produto);
@@ -155,8 +150,7 @@ exit;
         $consulta->bindParam(':foto',$foto);
         $consulta->bindParam(':ativo',$ativo);
         $consulta->bindParam(':departamento_id',$departamento_id);
-        $consulta->bindParam(':marca_id',$marca_id); 
-        $consulta->bindParam(':estoque_id',$estoque_id);  
+        $consulta->bindParam(':marca_id',$marca_id);  
         $consulta->bindParam(':id',$id);
     }
     
