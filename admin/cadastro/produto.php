@@ -13,13 +13,13 @@ include "validacao/functions.php";
 if ( !isset ( $id ) ) $id = "";
 
 //iniciar as variaveis
-$nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto = $promocao = $ativo = $departamento_id = $marca_id = $fornecedor_id = $estoque_id = "";
+$nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto = $promocao = $ativo = $departamento_id = $marca_id =  $estoque_id = "";
 
   //verificar se existe um id
   if (!empty ( $id ) ) {
 
   	//selecionar os dados do banco para poder editar
-      $sql = "SELECT p.,d.,m.* FROM produto p
+      $sql = "SELECT p.*,d.*,m.* FROM produto p
                 left join departamento d on (d.id = p.departamento_id)
                 left join marca m on(m.id = p.marca_id)
                 WHERE p.id = :id LIMIT 1";
@@ -91,30 +91,30 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
                             <label for="codigo">Codigo</label>
                             <input type="text" name="codigo" id="codigo" class="form-control" value="<?=$codigo;?>" placeholder="Código do Produto">
                         </div>
-                        <div class="col-12 col-md-4">
+                        <!-- <div class="col-12 col-md-4">
                             <label for="codigo">Fornecedor</label>
                             <select name="fornecedor_id" id="fornecedor_id" class="form-control" required data-parsley-required-message="Selecione o fornecedor">
-                                <option value="<?=$fornecedor;?>">Selecione o Fornecedor</option>
+                                <option value="<?//=$fornecedor_id;?>">Selecione o Fornecedor</option>
                                     <?php
-                                        $sql = "SELECT nomeFantasia, id FROM fornecedor WHERE ativo = 'S' ORDER BY id";
-                                        $consulta = $pdo->prepare($sql);
-                                        $consulta->execute();
+                                        // $sql = "SELECT nomeFantasia, id FROM fornecedor WHERE ativo = 1 ORDER BY id";
+                                        // $consulta = $pdo->prepare($sql);
+                                        // $consulta->execute();
 
-                                        while ($d = $consulta->fetch(PDO::FETCH_OBJ) ) {
-                                        //separar os dados
-                                            $id   = $d->id;
-                                            $nomeFantasia = $d->nomeFantasia;
-                                            echo '<option value="'.$id.'">'.$nomeFantasia.'</option>';
-                                        }                    
+                                        // while ($d = $consulta->fetch(PDO::FETCH_OBJ) ) {
+                                        // //separar os dados
+                                        //     $id   = $d->id;
+                                        //     $nomeFantasia = $d->nomeFantasia;
+                                        //     echo '<option value="'.$id.'">'.$nomeFantasia.'</option>';
+                                        // }                    
                                     ?>
                             </select>
-                        </div>
+                        </div> -->
                         <div class="col-12 col-md-4 mt-2">
                             <label for="marca_id">Marca</label>
                             <select name="marca_id" id="marca_id" class="form-control" required data-parsley-required-message="selecione uma opção">
                                 <option value="<?=$marca_id;?>">Selecione a Marca</option>
                                     <?php
-                                        $sql = "SELECT * FROM marca WHERE ativo = 'S' ORDER BY id";
+                                        $sql = "SELECT * FROM marca WHERE ativo = 1 ORDER BY id";
                                         $consulta = $pdo->prepare($sql);
                                         $consulta->execute();
 
@@ -132,7 +132,7 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
                             <select name="departamento_id" id="departamento_id" class="form-control" required data-parsley-required-message="Selecione um Departamento">
                                 <option value="<?=$departamento_id;?>">Selecione o Departamento</option>
                                     <?php
-                                        $sql = "SELECT * FROM departamento ORDER BY nome_dept";
+                                        $sql = "SELECT * FROM departamento WHERE ativo = 1 ORDER BY nome_dept ";
                                         $consulta = $pdo->prepare($sql);
                                         $consulta->execute();
 
@@ -155,9 +155,9 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
                         <div class="col-12 col-md-2 mt-2">
 							<label for="ativo">Status</label>
 							<select name="ativo" id="ativo" class="form-control" required data-parsley-required-message="Selecione uma opção">
-							    <option value="">Selecione</option>
-								<option value="S" <?= $ativo == 'S' ? "selected" : "" ?>>Ativo</option>
-								<option value="N"  <?= $ativo == 'N' ? "selected" : "" ?>>Inativo</option>
+							    <!-- <option value="">Selecione</option>
+								<option value="S" <?//= $ativo == 'S' ? "selected" : "" ?>>Ativo</option> -->
+								<option value="0"  <?= $ativo == '0' ? "selected" : "" ?>>Inativo</option>
 							</select>
                         </div>
 
@@ -179,24 +179,24 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
                             id="foto" class="form-control"
                             <?=$required?> accept="image/jpeg">
                         </div>
-                        <div class="col-12 col-md-2 mt-2">
+                        <!-- <div class="col-12 col-md-2 mt-2">
 							<label for="estoque">Estoque</label>
 							<select name="estoque_id" id="estoque_id" class="form-control" required data-parsley-required-message="Selecione um estoque">
-                            <option value="<?=$estoque_id;?>">Selecione o Estoque</option>
+                            <option value="<?//=$estoque_id;?>">Selecione o Estoque</option>
                                     <?php
-                                        $sql = "SELECT id, qtd_produto FROM estoque ORDER BY qtd_produto";
-                                        $consulta = $pdo->prepare($sql);
-                                        $consulta->execute();
+                                        // $sql = "SELECT id, qtd_produto FROM estoque ORDER BY qtd_produto";
+                                        // $consulta = $pdo->prepare($sql);
+                                        // $consulta->execute();
 
-                                        while ($d = $consulta->fetch(PDO::FETCH_OBJ) ) {
-                                        //separar os dados
-                                            $id        = $d->id;
-                                            $qtd_produto  = $d->qtd_produto;
-                                            echo '<option value="'.$id.'">'.$qtd_produto.'</option>';
-                                        }
+                                        // while ($d = $consulta->fetch(PDO::FETCH_OBJ) ) {
+                                        // //separar os dados
+                                        //     $id        = $d->id;
+                                        //     $qtd_produto  = $d->qtd_produto;
+                                        //     echo '<option value="'.$id.'">'.$qtd_produto.'</option>';
+                                        // }
                                     ?>
 							</select>
-                        </div>
+                        </div> -->
 
                         <div class="col-12 col-md-12 mt-2">
                             <label for="descricao">Descrição</label>

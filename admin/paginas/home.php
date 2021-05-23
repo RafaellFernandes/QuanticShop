@@ -1,8 +1,15 @@
 <?php
-//verificar se não está logado
 if (!isset($_SESSION["quanticshop"]["id"])) {
-	exit;
+    echo "<script>alert('Erro na requisição da página');location.href='javascript:history.back()'</script>";
+    exit;
 }
+
+if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+    echo "<script>alert('Erro na requisição da página');location.href='javascript:history.back()'</script>";
+    exit;
+}
+
+
 include "config/conexao.php";
 ?>
 <div class="row mb-2 mb-xl-3">

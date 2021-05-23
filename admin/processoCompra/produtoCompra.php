@@ -78,8 +78,8 @@
                             <select name="produto_id" id="produto_id" class="form-control" required data-parsley-required-message="Selecione um Produto">
                                 <option value="<?=$produto_id;?>">Selecione o produto</option>
                                     <?php
-                                        $sql = "select id, nome_produto from produto
-                                        order by nome_produto";
+                                        $sql = "SELECT id, nome_produto FROM produto
+                                        ORDER BY nome_produto  WHERE ativo = 0";
                                         $consulta = $pdo->prepare($sql);
                                         $consulta->execute();
 
@@ -132,19 +132,17 @@
                             class="form-control" readonly value="<?=$venda_unitaria;?>" placeholder="R$ 0,00">         
                         </div>
                         <div type="text" class="col-12 col-md-4 mt-2">
-                                    <label for="data_cadastro">Data</label>
-                                    <input type="date" name="data_cadastro"
-                                    id="data_cadastro" class="form-control"
-                                    required data-parsley-required-message="Preencha a data"
-                                    value="<?=$data_cadastro?>">
-                               </div>
-                               <div type="text" class="col-12 col-md-4 mt-2">
+                            <label for="data_cadastro">Data</label>
+                            <input type="date" name="data_cadastro" id="data_cadastro" class="form-control"
+                            required data-parsley-required-message="Preencha a data" value="<?=$data_cadastro?>">
+                        </div>
+                        <div type="text" class="col-12 col-md-4 mt-2">
 							<label for="status">Status</label>
 							<select name="status" id="status" class="form-control" 
 								required data-parsley-required-message="Selecione uma opção">
-								<option value="">...</option>
-								<option value="S" <?= $status == 'S' ? "selected" : "" ?>>Ativo</option>
-								<option value="N"  <?= $status == 'N' ? "selected" : "" ?>>Inativo</option>
+								<!-- <option value="">...</option> -->
+								<option value="1" <?= $status == '1' ? "selected" : "" ?>>Ativo</option>
+								<!-- <option value="N"  <?//= $status == 'N' ? "selected" : "" ?>>Inativo</option> -->
 							</select>
                         </div>
                         <div type="text" class="col-12 col-md-4 mt-2 ">

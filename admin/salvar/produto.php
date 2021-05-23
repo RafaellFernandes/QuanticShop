@@ -90,8 +90,8 @@
     if(empty($id)){
         //inserir
        
-        $sql= "INSERT INTO produto (nome_produto, codigo, descricao, valor_unitario, espec_tecnica, foto,  departamento_id, marca_id, fornecedor_id, estoque_id, ativo) 
-        values(:nome_produto, :codigo, :descricao, :valor_unitario, :espec_tecnica, :foto, :departamento_id, :marca_id, :fornecedor_id, :estoque_id, :ativo)";
+        $sql= "INSERT INTO produto (nome_produto, codigo, descricao, valor_unitario, espec_tecnica, foto,  departamento_id, marca_id, ativo) 
+        values(:nome_produto, :codigo, :descricao, :valor_unitario, :espec_tecnica, :foto, :departamento_id, :marca_id, :ativo)";
 
         $consulta = $pdo->prepare($sql);
         $consulta->bindParam(':nome_produto',$nome_produto);
@@ -103,8 +103,8 @@
         $consulta->bindParam(':ativo',$ativo);
         $consulta->bindParam(':departamento_id',$departamento_id);
         $consulta->bindParam(':marca_id',$marca_id); 
-        $consulta->bindParam(':fornecedor_id',$fornecedor_id); 
-        $consulta->bindParam(':estoque_id',$estoque_id);  
+        // $consulta->bindParam(':fornecedor_id',$fornecedor_id); 
+        // $consulta->bindParam(':estoque_id',$estoque_id);  
 
         
     } else if (empty($foto)){
