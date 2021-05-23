@@ -145,7 +145,7 @@ exit;
 							<label for="status">Status</label>
 							<select name="status" id="status" class="form-control" 
 								required data-parsley-required-message="Selecione uma opção">
-								<!-- <option value="">...</option> -->
+								<option value="">...</option>
 								<option value="1" <?= $status == '1' ? "selected" : "" ?>>Ativo</option>
 								<!-- <option value="N"  <?//= $status == 'N' ? "selected" : "" ?>>Inativo</option> -->
 							</select>
@@ -200,7 +200,7 @@ $(document).ready(function(){
     function valorVenda(){
  var custo = document.getElementById("custo_unitario").value;
  var porcentagem = document.getElementById("porcentagem_lucro").value;
- var venda = parseInt(custo) * parseInt(porcentagem)/100;
+ var venda = parseInt(custo) * parseInt(porcentagem/100);
  document.getElementById("venda_unitario").value = venda;
  console.log(porcentagem);
  console.log(custo);
