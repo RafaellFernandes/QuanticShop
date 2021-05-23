@@ -4,14 +4,14 @@
 	if ( ! isset ( $_SESSION['quanticshop']['id'] ) )
 	 exit;
 
-	$produto = trim ( $_GET['produto'] ??  NULL );
+	$produto = trim ( $_GET['produto_id'] ??  NULL );
 
 	if ( !empty ( $produto ) ) {
 
 		
 		include "config/conexao.php";
 
-		$sql = "select valor from produto where id = :produto limit 1"; 
+		$sql = "select valor_unitario from produto where id = :produto limit 1"; 
 		$consulta = $pdo->prepare($sql);
 		$consulta->bindParam(':produto', $produto);
 		$consulta->execute();
@@ -24,8 +24,8 @@
 			exit;
 		}
 
-		if ( !empty ( $dados->valor ) ) {
-			echo number_format($dados->valor, 2, ",", ".");
+		if ( !empty ( $dados->valor_unitario ) ) {
+			echo number_format($dados->valor_unitario, 2, ",", ".");
 			exit;
 		}
 

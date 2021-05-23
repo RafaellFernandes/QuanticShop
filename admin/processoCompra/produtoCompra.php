@@ -14,18 +14,18 @@
     if ( !isset ( $id ) ) $id = "";
 
     //iniciar as variaveis
-    $produto_id = $fornecedor_id = $lote = $data_cadastro = $qtd_produto = $venda_unitaria = $custo_unitario = $status = 
-    $produto= NULL;;
+    $produto_id = $fornecedor_id = $lote = $data_cadastro = $qtd_produto = $venda_unitaria = $custo_unitario = $status = $porcentagem_lucro = "";
 
     //verificar se existe um id
     if ( !empty ( $id ) ) {
 
-    include "../admin/validacao/functions.php";
+    include "validacao/functions.php";
    
     //selecionar os dados do banco para poder editar
-    $sql = "SELECT c.*  date_format(v.data,'%Y-%m-%d') data, f.razaoSocial, p.nome_produto  FROM item_compra c
-    LEFT JOIN fornecedor f on (f.id = c.fornecedor_id)
-    LEFT JOIN produto p on(p.id = c.produto_id) LIMIT 1";
+    $sql="SELECT c.*, date_format(c.data_cadastro, '%d/%m/%Y') data_cadastro, f.razaoSocial, p.nome_produto
+	FROM item_compra c 
+    INNER JOIN fornecedor f on (f.id = c.fornecedor_id)
+    INNER JOIN produto p on(p.id = c.produto_id) WHERE c.id = :id LIMIT 1";
     $consulta = $pdo->prepare($sql);
     $consulta->bindParam(":id", $id);
     $consulta->execute();
@@ -40,11 +40,14 @@
     $custo_unitario           = number_format($custo_unitario,2,",",".");
     $venda_unitaria           = $dados->venda_unitaria;
     $venda_unitaria           = number_format($venda_unitaria,2,",",".");
+    $porcentagem_lucro        = $dados->porcentagem_lucro;
     $data_cadastro            = $dados->data_cadastro;
+    $qtd_produto              = $dados->qtd_produto;
     $fornecedor_id            = $dados->fornecedor_id;
     $razaoSocial              = $dados->razaoSocial;
     $lote                     = $dados->lote;
     $status                   = $dados->status;
+    
    
         
   }
@@ -71,29 +74,24 @@
                     <div class="row">
                     
                     <div class="col-12 col-md-4 mt-2">
-                    <label for="produto">Selecione o Produto:</label>
-                    <input type="text" name="produto"
-                    id="produto" required
-                    data-parsley-required-message="Selecione um produto"
-                    list="produtos"
-                    class="form-control"
-                    value="<?=$produto?>">
+                            <label for="produto_id">Produto</label>
+                            <select name="produto_id" id="produto_id" class="form-control" required data-parsley-required-message="Selecione um Produto">
+                                <option value="<?=$produto_id;?>">Selecione o produto</option>
+                                    <?php
+                                        $sql = "select id, nome_produto from produto
+                                        order by nome_produto";
+                                        $consulta = $pdo->prepare($sql);
+                                        $consulta->execute();
 
-                    <datalist id="produtos">
-                        <?php
-                            $sql = "select id, nome_produto, marca_id, departamento_id from produto
-                                order by nome_produto";
-                            $consulta = $pdo->prepare($sql);
-                            $consulta->execute();
-
-                            while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ){
-
-                                echo "<option value='{$dados->id} - {$dados->nome_produto} - {$dados->marca_id} - {$dados->departamento_id}'>";
-
-                            }
-                        ?>
-                    </datalist>
-                </div> 
+                                        while ($d = $consulta->fetch(PDO::FETCH_OBJ) ) {
+                                        //separar os dados
+                                            $id            = $d->id;
+                                            $nome_produto  = $d->nome_produto;
+                                            echo '<option value="'.$id.'">'.$nome_produto.'</option>';
+                                        }
+                                    ?>
+                            </select>
+                        </div>
                         <div class="col-12 col-md-4 mt-2">
                             <label for="lote">Lote</label>
                             <input type="text" name="lote" id="lote" class="form-control" value="<?=$lote;?>" placeholder="Nº Lote">
@@ -140,21 +138,26 @@
                                     required data-parsley-required-message="Preencha a data"
                                     value="<?=$data_cadastro?>">
                                </div>
-                               <div class="col-12 col-md-4">
+                               <div type="text" class="col-12 col-md-4 mt-2">
 							<label for="status">Status</label>
 							<select name="status" id="status" class="form-control" 
 								required data-parsley-required-message="Selecione uma opção">
 								<option value="">...</option>
-								<option value="1" <?= $status == '1' ? "selected" : "" ?>>Ativo</option>
-								<option value="0"  <?= $status == '0' ? "selected" : "" ?>>Inativo</option>
+								<option value="S" <?= $status == 'S' ? "selected" : "" ?>>Ativo</option>
+								<option value="N"  <?= $status == 'N' ? "selected" : "" ?>>Inativo</option>
 							</select>
                         </div>
+                        <div type="text" class="col-12 col-md-4 mt-2 ">
+                        <label >Quantidade comprada</label>
+                        <input type="number" id="qtd_produto" name="qtd_produto" class="form-control number_format" required data-parsley-required-message="Preencha este campo" 
+                            class="form-control" value="<?=$qtd_produto;?>">
+                        </div>       
                         <div class="row g-2">
-                            <div class="col-sm-4 mt-4">
-                                <button type="submit" class="btn btn-success margin mt-3">
-                                    Salvar Dados
-                                </button>
-                            </div>
+                        <div class="col-sm-4 mt-4">
+							<button type="submit" class="btn btn-success margin">
+								Salvar Dados
+							</button>
+                        </div>
                         </div> 
                     </div>
                 </form>

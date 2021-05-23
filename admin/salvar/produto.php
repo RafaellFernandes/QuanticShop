@@ -23,15 +23,15 @@
     }
 
     if( empty($nome_produto) ){
-        echo "<script>alert('Preencha o Nome do Produto');history.back();</script>";
+        echo "<>alert('Preencha o Nome do Produto');history.back();</>";
     } else if( empty($departamento_id) ){
-        echo "<script>alert('Selecione o Departamento');history.back();</script>";
+        echo "<>alert('Selecione o Departamento');history.back();</>";
     } else if( empty($marca_id) ){
-        echo "<script>alert('Selecione a Marca do produto');history.back();</script>";
+        echo "<>alert('Selecione a Marca do produto');history.back();</>";
     } else if( empty($descricao) ){
-        echo "<script>alert('Preencha a Descrição');history.back();</script>";
+        echo "<>alert('Preencha a Descrição');history.back();</>";
     } else if( empty($espec_tecnica) ){
-        echo "<script>alert('Preencha a especificação tecnica');history.back();</script>";
+        echo "<>alert('Preencha a especificação tecnica');history.back();</>";
     } 
     
 //programação para copiar uma imagem
@@ -90,8 +90,8 @@
     if(empty($id)){
         //inserir
        
-        $sql= "INSERT INTO produto (nome_produto, codigo, descricao, valor_unitario, espec_tecnica, foto,  departamento_id, marca_id, ativo) 
-        values(:nome_produto, :codigo, :descricao, :valor_unitario, :espec_tecnica, :foto, :departamento_id, :marca_id, :ativo)";
+        $sql= "INSERT INTO produto (nome_produto, codigo, descricao, valor_unitario, espec_tecnica, foto,  departamento_id, marca_id, fornecedor_id, estoque_id, ativo) 
+        values(:nome_produto, :codigo, :descricao, :valor_unitario, :espec_tecnica, :foto, :departamento_id, :marca_id, :fornecedor_id, :estoque_id, :ativo)";
 
         $consulta = $pdo->prepare($sql);
         $consulta->bindParam(':nome_produto',$nome_produto);
@@ -103,12 +103,15 @@
         $consulta->bindParam(':ativo',$ativo);
         $consulta->bindParam(':departamento_id',$departamento_id);
         $consulta->bindParam(':marca_id',$marca_id); 
+        $consulta->bindParam(':fornecedor_id',$fornecedor_id); 
+        $consulta->bindParam(':estoque_id',$estoque_id);  
+
         
     } else if (empty($foto)){
 
         $sql= "UPDATE produto SET nome_produto = :nome_produto, codigo = :codigo,  valor_unitario =:valor_unitario,
         descricao = :descricao, espec_tecnica = :espec_tecnica, promocao = :promocao, ativo = :ativo, departamento_id = :departamento_id,
-        marca_id = :marca_id WHERE id = :id";
+        marca_id = :marca_id, fornecedor_id = :fornecedor_id, estoque_id = :estoque_id WHERE id = :id";
 
         $consulta = $pdo->prepare($sql);
         $consulta->bindParam(':nome_produto',$nome_produto);
@@ -119,14 +122,16 @@
         $consulta->bindParam(':promocao', $promocao);
         $consulta->bindParam(':ativo',$ativo);
         $consulta->bindParam(':departamento_id',$departamento_id);
-        $consulta->bindParam(':marca_id',$marca_id); 
+        $consulta->bindParam(':marca_id',$marca_id);
+        $consulta->bindParam(':fornecedor_id',$fornecedor_id);  
+        $consulta->bindParam(':estoque_id',$estoque_id);  
         $consulta->bindParam(':id',$id);
     }
     else {
         
         $sql= "UPDATE produto SET nome_produto = :nome_produto, codigo = :codigo, promocao = :promocao, valor_unitario =:valor_unitario,
         descricao = :descricao, espec_tecnica = :espec_tecnica, foto = :foto, ativo = :ativo, departamento_id = :departamento_id,
-        marca_id = :marca_id WHERE id = :id";
+        marca_id = :marca_id, fornecedor_id = :fornecedor_id, estoque_id = :estoque_id WHERE id = :id";
 
         $consulta = $pdo->prepare($sql);
         $consulta->bindParam(':nome_produto',$nome_produto);
@@ -139,6 +144,7 @@
         $consulta->bindParam(':ativo',$ativo);
         $consulta->bindParam(':departamento_id',$departamento_id);
         $consulta->bindParam(':marca_id',$marca_id); 
+        $consulta->bindParam(':estoque_id',$estoque_id);  
         $consulta->bindParam(':id',$id);
     }
     

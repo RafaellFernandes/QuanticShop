@@ -17,7 +17,7 @@ if ( $_POST ) {
     include "../admin/config/conexao.php";
 
     //recuperar dados do formulario
-    $id = $produto_id = $fornecedor_id = $lote = $custo_unitario = $porcentagem_lucro = $venda_unitaria = $data_cadastro = "";
+    $id = $produto_id = $fornecedor_id = $lote = $custo_unitario = $porcentagem_lucro = $venda_unitaria = $data_cadastro = $qtd_produto = "";
 
     foreach ($_POST as $key => $value) {
         $$key = trim ( $value );
@@ -25,7 +25,7 @@ if ( $_POST ) {
     }
     //verificar se as variaveis estao vazias
      if( empty($produto_id) ){
-        echo "<script>alert('Preencha o nome do produto!');history.back();</script>";
+        echo "<script>alert('Selecione um produto!');history.back();</script>";
     } else if( empty($custo_unitario) ){
         echo "<script>alert('Preencha o Valor!');history.back();</script>";
     } else if( empty($venda_unitaria) ){
@@ -38,6 +38,8 @@ if ( $_POST ) {
         echo "<script>alert('Preencha o fornecedor!');history.back();</script>";
     } else if( empty($lote) ){
         echo "<script>alert('Preencha o lote');history.back();</script>";
+    } else if( empty($qtd_produto) ){
+        echo "<script>alert('Preencha o lote');history.back();</script>";    
 
     }    
 
@@ -48,12 +50,12 @@ if ( $_POST ) {
     $venda_unitaria = formatarValor($venda_unitaria);
 
 
-    $data_cadastro = formatar($data_cadastro);
+   
 
     if(empty($id)){
 
-        $sql = "INSERT INTO item_compra(custo_unitario, data_cadastro, lote, fornecedor_id, produto_id, venda_unitaria, porcentagem_lucro)
-        VALUES (:custo_unitario, :data_cadastro, :lote, :fornecedor_id, :produto_id, :venda_unitaria, :porcentagem_lucro)";
+        $sql = "INSERT INTO item_compra(custo_unitario, data_cadastro, lote, fornecedor_id, produto_id, venda_unitaria, porcentagem_lucro, qtd_produto)
+        VALUES (:custo_unitario, :data_cadastro, :lote, :fornecedor_id, :produto_id, :venda_unitaria, :porcentagem_lucro, :qtd_produto)";
         $consulta = $pdo->prepare($sql);
         $consulta->bindParam(':custo_unitario', $custo_unitario);
         $consulta->bindParam(':data_cadastro', $data_cadastro);
@@ -62,12 +64,14 @@ if ( $_POST ) {
         $consulta->bindParam(':produto_id', $produto_id);
         $consulta->bindParam(':venda_unitaria', $venda_unitaria);
         $consulta->bindParam(':porcentagem_lucro', $porcentagem_lucro);
+        $consulta->bindParam(':qtd_produto', $qtd_produto);
+
 
   
     } else { 
     
-        $sql = "UPDATE item_compra SET custo_unitario = :valor_unitario, data_cadastro = :data_cadastro, lote = :lote, 
-        fornecedor_id = :fornecedor_id, produto_id = :produto_id, venda_unitaria = :venda_unitaria, porcentagem_lucro = :porcentagem_lucro WHERE id = :id ";
+        $sql = "UPDATE item_compra SET custo_unitario = :custo_unitario, data_cadastro = :data_cadastro, lote = :lote, 
+        fornecedor_id = :fornecedor_id, produto_id = :produto_id, venda_unitaria = :venda_unitaria, porcentagem_lucro = :porcentagem_lucro, qtd_produto = :qtd_produto WHERE id = :id ";
         $consulta = $pdo->prepare($sql);
         $consulta->bindParam(':custo_unitario', $custo_unitario);
         $consulta->bindParam(':data_cadastro', $data_cadastro);
@@ -76,7 +80,7 @@ if ( $_POST ) {
         $consulta->bindParam(':produto_id', $produto_id);
         $consulta->bindParam(':venda_unitaria', $venda_unitaria);
         $consulta->bindParam(':porcentagem_lucro', $porcentagem_lucro);
-
+        $consulta->bindParam(':qtd_produto', $qtd_produto);
         $consulta->bindParam(":id", $id);
     }
 

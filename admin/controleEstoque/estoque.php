@@ -89,12 +89,17 @@ $produto_id = $qtd_estoque = $produto = NULL;
                         </div>
 
                         <div class="row g-2">
-                            <div class="col-sm-4 mt-4">
-                                <button type="submit" class="btn btn-success margin mt-3">
-                                    Salvar Dados
-                                </button>
-                            </div>
-                        </div> 
+                    <div class="col-sm-4 mt-4">
+							<button type="submit" class="btn btn-success margin">
+                                    Salvar / Alterar
+							</button>
+                        </div>
+                        <div class="col-sm">
+                            <div class="float-end mt-3 ">
+                                <a href="controleEstoque/listaEstoque" class="btn btn-primary">Listar Registros</a> 
+                            </div> 
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

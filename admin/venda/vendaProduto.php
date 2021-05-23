@@ -185,18 +185,18 @@
 
                             <datalist id="listProdutos"> 
                             <?php
-                            $sql = "select id, nome_produto from produto where ativo = 'S' order by nome_produto";
+                            $sql = "select id, nome_produto,valor_unitario from produto where ativo = 'S' order by nome_produto";
                             $consulta = $pdo->prepare($sql);
                             $consulta->execute();
 
                             while ( $d = $consulta->fetch(PDO::FETCH_OBJ) ){
-                                echo "<option value='{$d->id} - {$d->nome_produto}'>";
+                                echo "<option value='{$d->id} - {$d->nome_produto} - {$d->valor_unitario}'>";
                             }
                             ?>
                             </datalist>
                         </div>
                         <div class="col-12 col-md-2">
-                            <input type="text" name="venda_unitaria" id="venda_unitaria" class="form-control" required 
+                            <input type="text" name="valor" id="valor" class="form-control" required 
                             data-parsley-required-message="Preencha o valor" 
                             <?=$disabled?>>
                         </div>
@@ -228,18 +228,22 @@
                     p = produto.split(" - ");
                     //console.log(p);
                     produto = p[0];
+                    valor = p[2];
+                    
                     $("#produto_id").val(produto);
+                    $("#valor").val(valor);
                     //realizar a busca de valor no buscaValor.php 
-                    $.get("buscaValor.php",
-                        {produto:produto},
-                        function(dados){
-
-                            if ( dados == "erro" ) {
-                                //sweet alert
-                            } else {
-                                $("#venda_unitaria").val(dados);
-                            }
-                    })
+                    // $.get("buscaValor.php",
+                    //     {produto:produto},
+                    //     function(dados){
+                    //         if ( dados == "erro" ) {
+                    //             console.log("Deu erro");
+                    //             //sweet alert
+                    //         } else {
+                    //             console.log("Entrou aqui");
+                    //             $("#valor").val(dados);
+                    //         }
+                    // })
 
                 }
             })

@@ -168,7 +168,7 @@
                 $foto                        = $dados->foto;
                 $nome_produto 		           = $dados->nome_produto;
                 $valor_unitario              = $dados->valor_unitario;
-                $valor_unitario              = number_format($valor_unitario,2, '.' , ',');
+               
                 $vezesVendido                = $dados->vezesVendido;
                 $foto                        = "../fotos/".$foto."p.jpg";
                 $pativo					             = $dados->pativo;

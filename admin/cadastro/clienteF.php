@@ -160,12 +160,12 @@
 							<input type="email" name="email" id="email" class="form-control" required data-parsley-required-message="Preencha o e-mail" 
 							 placeholder="exemple@hotmail.com" value="<?=$email;?>">
 						</div>
-						<div class="col-12 col-md-6">
+						<div class="mb-3 col-12 col-md-4 mt-2">
 							<label for="senha">Senha:</label>
 							<input type="password" name="senha" id="senha" class="form-control"
 							<?=$senha?> >
 						</div>
-						<div class="col-12 col-md-6">
+						<div class="mb-3 col-12 col-md-4 mt-2">
 							<label for="redigite">Redigite a senha:</label>
 							<input type="password" name="redigite" id="redigite" class="form-control" <?=$senha?>
 							data-parsley-equalto="#senha"
