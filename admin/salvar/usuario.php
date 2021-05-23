@@ -78,7 +78,7 @@ if ( !empty ( $_FILES['foto']['name'] ) ) {
   $usuario = $_SESSION['quanticshop']['id'];
 
   //definir um nome para a imagem
-  $foto = "produto_{$foto}_{$usuario}";
+  $foto = "usuario_{$foto}_{$usuario}";
 
   //validar se é jpg
   if ( $_FILES['foto']['type'] != 'image/jpeg' ) {

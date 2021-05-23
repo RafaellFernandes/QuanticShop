@@ -12,7 +12,6 @@
 
   //incluir o arquivo de conexao
   include "config/conexao.php";
-  include "validacao/functions.php";
 
   $site   = $_SERVER['SERVER_NAME'];
   $porta  = $_SERVER['SERVER_PORT'];
@@ -108,12 +107,6 @@
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="login/perfil">
 						  <i class="align-middle" data-feather="user"></i> <span class="align-middle">Perfil</span>
-						</a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="login/configuracoes">
-						  <i class="align-middle" data-feather="settings"></i> <span class="align-middle">Configurações</span>
 						</a>
 					</li>
 

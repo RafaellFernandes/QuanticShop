@@ -36,14 +36,6 @@
 	}
 
 
-	function validarSenha($senha) {
-		if (!preg_match(("/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/i"),$senha)) {
-			return "A senha deve conter 8 caracteres, sendo um caracter especial e um número";
-		}
-		return;
-	}
-
-
 	function validaCNPJ($cnpj) {
 	    $cnpj = preg_replace('/[^0-9]/', '', (string) $cnpj);
 	    // Valida tamanho
