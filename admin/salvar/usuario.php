@@ -1,9 +1,20 @@
 <?php
-  //verificar se não está logado
-     if ( !isset ( $_SESSION["quanticshop"]["id"] ) ){
-        exit;
-    }
-      //mostrar erros
+if (!isset($_SESSION["quanticshop"]["id"])) {
+    $titulo = "Erro";
+    $mensagem = "Usuário Não Logado";
+    $icone = "error";
+    mensagem($titulo, $mensagem, $icone);
+exit;
+}
+
+if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+    $titulo = "Erro";
+    $mensagem = "Erro na Requisição da Página";
+    $icone = "error";
+    mensagem($titulo, $mensagem, $icone);
+exit;
+}
+    //mostrar erros
     ini_set('display_errors',1);
     ini_set('display_startup_erros',1);
     error_reporting(E_ALL);

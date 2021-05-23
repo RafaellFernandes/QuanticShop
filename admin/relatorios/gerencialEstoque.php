@@ -1,4 +1,19 @@
-<?php if ( !isset ( $_SESSION["quanticshop"]["id"] ) )exit;?>						
+<?php if (!isset($_SESSION["quanticshop"]["id"])) {
+    $titulo = "Erro";
+    $mensagem = "Usuário Não Logado";
+    $icone = "error";
+    mensagem($titulo, $mensagem, $icone);
+exit;
+}
+
+if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+    $titulo = "Erro";
+    $mensagem = "Erro na Requisição da Página";
+    $icone = "error";
+    mensagem($titulo, $mensagem, $icone);
+exit;
+}
+?>						
 <div class="container-fluid p-0">
 	<div class="row">
 		<div class="col-12 col-xl-12">

@@ -2,8 +2,21 @@
 	//iniciar a sessao
 	session_start();
 
-	//verificar se esta logado
-    if ( ! isset ( $_SESSION['quanticshop']['id'] ) ) exit;
+	if (!isset($_SESSION["quanticshop"]["id"])) {
+        $titulo = "Erro";
+        $mensagem = "Usuário Não Logado";
+        $icone = "error";
+        mensagem($titulo, $mensagem, $icone);
+    exit;
+    }
+    
+    if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+        $titulo = "Erro";
+        $mensagem = "Erro na Requisição da Página";
+        $icone = "error";
+        mensagem($titulo, $mensagem, $icone);
+    exit;
+    }
 
     //recuperar os dados
     $id = trim ( $_POST["id"] ?? NULL );

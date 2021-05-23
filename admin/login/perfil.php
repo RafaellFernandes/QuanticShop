@@ -1,10 +1,52 @@
 <?php
-    //verificar se não está logado
-    if ( !isset ( $_SESSION["quanticshop"]["id"] ) ){
-        exit;
-    }
+ if (!isset($_SESSION["quanticshop"]["id"])) {
+	$titulo = "Erro";
+	$mensagem = "Usuário Não Logado";
+	$icone = "error";
+	mensagem($titulo, $mensagem, $icone);
+exit;
+}
+
+if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+$titulo = "Erro";
+$mensagem = "Erro na Requisição da Página";
+$icone = "error";
+mensagem($titulo, $mensagem, $icone);
+exit;
+}
+
 
 	$hoje = date_create($_SESSION["quanticshop"]["dataNascimento"]); 
+	$id = $_SESSION["quanticshop"]["id"];
+	$sql = "SELECT * FROM usuario WHERE id = $id";
+	$consulta = $pdo->prepare($sql);
+	$consulta->bindParam(":id", $id);
+	$consulta->execute();
+	$dados = $consulta->fetch(PDO::FETCH_OBJ);
+
+$primeiro_nome          = $dados->primeiro_nome;
+$sobrenome              = $dados->sobrenome;
+$email                  = $dados->email;
+$login                  = $dados->login;
+$senha                  = $dados->senha;
+$foto                   = $dados->foto;
+$cidade_id              = $dados->cidade_id;
+$cidade                 = $dados->cidade;
+$estado                 = $dados->estado;
+$cep                    = $dados->cep;
+$complemento            = $dados->complemento;
+$bairro                 = $dados->bairro;
+$numero_resid           = $dados->numero_resid;
+$endereco               = $dados->endereco;
+$ativo 		            = $dados->ativo;
+$dataNascimento         = $dados->dataNascimento;
+$genero_id              = $dados->genero_id;
+$cpf                    = $dados->cpf;
+$celular                = $dados->celular;
+
+
+
+
 
 ?>
 <div class="container-fluid p-0">
@@ -16,15 +58,15 @@
 					<h5 class="card-title mb-0">Detalhes do Perfil</h5>
 				</div>
 				<div class="card-body text-center">
-					<img src="../fotos/<?=$_SESSION["quanticshop"]["foto"];?>p.jpg" alt="<?=$_SESSION["quanticshop"]["primeiro_nome"];?>" class="img-fluid  mb-2" width="128" height="128" />
-					<h4 class="card-title mb-0"><?=$_SESSION["quanticshop"]["primeiro_nome"];?></h4>
+					<img src="../fotos/<?=$foto;?>p.jpg" alt="<?=$primeiro_nome;?>" class="img-fluid  mb-2" width="128" height="128" />
+					<h4 class="card-title mb-0"><?=$primeiro_nome ." ". $sobrenome;?></h4>
 					
 				</div>
 				<hr class="my-0" />
 				<div class="card-body">
 					<h5 class="h6 card-title">Sobre</h5>
 					<ul class="list-unstyled mb-0">
-						<li class="mb-1"><h7><span data-feather="home" class="feather-sm me-1"></span>Mora em <?=$_SESSION["quanticshop"]["cidade"];?> - <?=$_SESSION["quanticshop"]["estado"];?></h7></li>
+						<li class="mb-1"><h7><span data-feather="home" class="feather-sm me-1"></span>Mora em <?=$cidade;?> - <?=$_SESSION["quanticshop"]["estado"];?></h7></li>
 						<li class="mb-1"><h7><span data-feather="mail" class="feather-sm me-1"></span>Email <?=$_SESSION["quanticshop"]["email"];?></h7></li>
 						<li class="mb-1"><h7><span data-feather="heart" class="feather-sm me-1"></span>Nasceu em <?=date_format($hoje, 'd/m/Y');?></h7></li>
 					</ul>
@@ -48,7 +90,7 @@
 
 							<div class="col-12 col-sm-5">
 								<span>Primeiro Nome</span>
-								<input class="form-control" type="text" placeholder="<?=$_SESSION["quanticshop"]["primeiro_nome"];?>" aria-label="readonly input example" readonly>
+								<input class="form-control" type="text" placeholder="nome" aria-label="readonly input example" value="<?=$primeiro_nome;?>" >
 							</div>
 
 							<div class="col-12 col-sm-5">

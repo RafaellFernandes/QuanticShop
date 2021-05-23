@@ -1,14 +1,19 @@
 <?php
 if (!isset($_SESSION["quanticshop"]["id"])) {
-    echo "<script>alert('Erro na requisição da página');location.href='javascript:history.back()'</script>";
-    exit;
+    $titulo = "Erro";
+    $mensagem = "Usuário Não Logado";
+    $icone = "error";
+    mensagem($titulo, $mensagem, $icone);
+exit;
 }
 
 if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-    echo "<script>alert('Erro na requisição da página');location.href='javascript:history.back()'</script>";
-    exit;
+    $titulo = "Erro";
+    $mensagem = "Erro na Requisição da Página";
+    $icone = "error";
+    mensagem($titulo, $mensagem, $icone);
+exit;
 }
-
 
 include "config/conexao.php";
 ?>

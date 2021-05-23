@@ -1,12 +1,24 @@
 <?php
-  //verificar se não está logado
-  if ( !isset ( $_SESSION["quanticshop"]["id"] ) ){
-    exit;
-  }
-  //mostrar erros
-	// ini_set('display_errors',1);
-	// ini_set('display_startup_erros',1);
-    // error_reporting(E_ALL);
+if (!isset($_SESSION["quanticshop"]["id"])) {
+    $titulo = "Erro";
+    $mensagem = "Usuário Não Logado";
+    $icone = "error";
+    mensagem($titulo, $mensagem, $icone);
+exit;
+}
+
+if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+$titulo = "Erro";
+$mensagem = "Erro na Requisição da Página";
+$icone = "error";
+mensagem($titulo, $mensagem, $icone);
+exit;
+}
+
+    //mostrar erros
+	ini_set('display_errors',1);
+	ini_set('display_startup_erros',1);
+    error_reporting(E_ALL);
     
 
 //se nao existe o id
@@ -17,7 +29,7 @@ $produto_id = $qtd_estoque = $produto = NULL;
   //verificar se existe um id
   if ( !empty ( $id ) ) {
 
-    include "../admin/validacao/functions.php";
+    include "validacao/functions.php";
    
   	//selecionar os dados do banco para poder editar
       $sql = "SELECT * FROM estoque WHERE id = :id LIMIT 1";

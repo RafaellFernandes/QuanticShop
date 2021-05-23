@@ -1,10 +1,14 @@
+<?php
+$testeNivel = $_SESSION["quanticshop"]["nivelAcesso"];
+?>
+
 <style>
 .video{
   width: 100%;
   height:auto;
 }
 </style>
-
+<h1><?=$testeNivel;?></h1>
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" id="carousel">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
