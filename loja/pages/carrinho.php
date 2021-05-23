@@ -1,128 +1,111 @@
 <?php
-//verificar se a variável $pagina não existe
-if ( !isset ( $pagina ) ) exit;
+	//verificar se a variável $pagina não existe
+	if ( !isset ( $pagina ) ) exit;
+?>
+<h1 class="text-center">Carrinho de Compras</h1>
 
+<?php
+	
+	if ( isset ( $_SESSION['cliente']['nome'] ) ) {
 
-	$op = $produto = "";
-	if ( isset ( $p[1] ) ) $op = trim ( $p[1] );
-	if ( isset ( $p[2] ) ) $produto = trim ( $p[2] );
-
-	if ( $op == "add" ) {
-
-		$sql = "SELECT id, nome_produto, valor_unitario FROM produto WHERE id = ? LIMIT 1";
-		$consulta = $pdo->prepare($sql);
-		$consulta->bindParam(1, $produto, PDO::PARAM_INT);
-		$consulta->execute();
-		$linha 	  = $consulta->fetch(PDO::FETCH_OBJ);
-
-		if ( isset ( $linha->id ) ) { 
-			$id 	        = 	$linha->id;
-			$nome_produto   =	$linha->nome_produto;
-			$valor_unitario =	$linha->valor_unitario;
-
-			$_SESSION["carrinho"][$id] = array("id"=>$id, "nome_produto"=>$nome_produto, "valor_unitario"=>$valor_unitario, "quantidade"=>1);
-		}
-
-	} else if ( $op == "quantidade" ) {
-
-		$quantidade = 1;
-		if ( isset ( $p[3] ) ) $quantidade = trim ( $p[3] );
-		$_SESSION["carrinho"][$produto]["quantidade"] = $quantidade;
-
-	} else if ( $op == "del" ) {
-
-		unset ( $_SESSION["carrinho"][$produto] );
-
-	} else if ( $op == "limpar" ) {
-
-		unset ( $_SESSION["carrinho"] );
-
+		echo "<p><strong>Olá ".$_SESSION['cliente']['nome']." - <a href='sair.php'>Efetuar Logout</a></strong></p>";
 	}
 
+	//iniciar uma variavel chamada $produtos com o valor
+	$produtos = 0;
+	
+	//verificar se existem produtos no carrinho
+	if ( isset ( $_SESSION['carrinho'] ) )
+		//count - contar número de linhas
+		$produtos = count( $_SESSION['carrinho'] );
+
 ?>
-<br><br><br>
-<div class="mr-5 ml-5 mt-5 mb-5">
-	<h1>Carrinho de Compras:</h1>
+
+<p class="alert alert-warning">
+	Existem <?=$produtos?> produto(s) diferente(s) no carrinho:
+</p>
+
+<table class="table table-striped table-bordered table-hover">
+	<thead>
+		<tr>
+			<td>Nome do Produto</td>
+			<td>Quantidade</td>
+			<td>Vlr Unit.</td>
+			<td>Vlr Total</td>
+			<td></td>
+		</tr>
+	</thead>
+	<tbody>
 	<?php
-		if ( isset ( $_SESSION["carrinho"] ) ) {
-			?>
-			<table class="table table-bordered table-striped">
-				<thead>
-					<tr>
-						<td>Nome do Produto</td>
-						<td>Valor Unitário</td>
-						<td>Quantidade</td>
-						<td>Total</td>
-						<td>Excluir</td>
-					</tr>
-				</thead>
+		//mostrar o itens do $_SESSION['carrinho']
+		//print_r ( $_SESSION['carrinho'] );
 
-			<?php
+		$totalGeral = 0;
 
-			$geral = 0;
+		//se existem produtos no carrinho
+		if ( $produtos > 0 ) {	
 
-			foreach ( $_SESSION["carrinho"] as $c ) {
-				
-				$id 		    = $c["id"];
-				$nome_produto   = $c["nome_produto"];
-				$valor_unitario = $c["valor_unitario"];
-				$quantidade     = $c["quantidade"];
-				$promocao       = $c["promocao"];
+			//percorrer o array e mostrar os produtos
+			foreach ( $_SESSION['carrinho'] as $dados ) {
+				//recuperar os dados do array carrinho
+				$id = $dados["id"];
+				$produto = $dados["produto"];
+				$valor = $dados["valor"];
+				$quantidade = $dados["quantidade"];
+				$total = $dados["total"];
 
-				$total = $valor_unitario * $quantidade;
+				//somar o totalGeral
+				$totalGeral = $total + $totalGeral;
+				//formatar os valores
+				$valor = number_format($valor, 2, "," , ".");
+				$total = number_format($total, 2, ",", ".");
 
-				$geral = $total + $geral;
-
-				$valor_unitario = number_format($valor_unitario,2,",",".");
-				$total = number_format($total,2,",",".");
-
+				//mostrar os resultados em uma linha da tabela
+				//tr - linha
+				//td - célula ou coluna
 				echo "<tr>
-					<td>$nome_produto</td>
-					<td>$valor_unitario</td>
+					<td>{$produto}</td>
+					<td>{$quantidade}</td>
+					<td>R$ {$valor}</td>
+					<td>R$ {$total}</td>
 					<td>
-						<input type='text' value='$quantidade' onblur='adicionaQuantidade($id, this.value)' class='form-control'>
+						<button type='button' class='btn btn-danger btn-sm' onclick='excluirProduto({$id})'>
+							<i class='fas fa-trash'></i>
+						</button>
 					</td>
-					<td>$total</td>
-					<td><a href='carrinho/del/$id' class='btn btn-danger btn-sn'><i class='fas fa-trash'></i></a> </td>
-				</tr>";
+				</tr>";			
 			}
-			$geral = number_format($geral,2,",",".");
-			?>
-				<tfoot>
-					<tr>
-						<td colspan="3">TOTAL:</td>
-						<td colspan="2">R$ <?=$geral;?></td>
-					</tr>
-				</tfoot>
-			</table>
-				
 
-				<a href="carrinho/limpar" class="btn btn-danger btn-lg float-left">
-				<i class="fas fa-check"></i> Limpar Carrinho
-				</a>
-
-				<a href="loginCliente" class="btn btn-success btn-lg float-right">
-				<i class="fas fa-check"></i> Realizar pagamento
-				</a>
-
-			
-				<br>
-			</form>
-
-			<br>
-			<script type="text/javascript">
-				function adicionaQuantidade(produto, quantidade) {
-					location.href = 'carrinho/quantidade/'+produto+"/"+quantidade;
-				}		
-			</script>
-		
-			<?php
-		}else{
-			echo "<p class=\"alert alert-danger\">Não existem produtos no carrinho</p>";
-			
 		}
-		
-
 	?>
-</div>
- 
+	</tbody>
+	<tfoot>
+		<tr>
+			<td>Valor Total:</td>
+			<td></td>
+			<td></td>
+			<td>R$ <?=number_format($totalGeral, 2, "," , ".");?></td>
+			<td></td>
+		</tr>
+	</tfoot>
+</table>
+
+<a href="index.php?pagina=limpar" class="btn btn-danger btn-lg float-left">
+	Limpar Carrinho
+</a>
+<a href="index.php?pagina=finalizar" class="btn btn-success btn-lg float-right">
+	Finalizar Pedido
+</a>
+
+<div class="clearfix"></div>
+
+<script>
+	//funcao para perguntar se quer realmente excluir o produto
+	function excluirProduto(id) {
+		//perguntar se deseja excluir
+		if ( confirm ("Deseja realmente excluir este item?") ) {
+			//envio para página que irá excluir com o id do produto
+			location.href="index.php?pagina=excluir&id="+id;
+		}
+	}
+</script>

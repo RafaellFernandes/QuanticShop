@@ -145,12 +145,7 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
                                     ?>
                             </select>
                         </div>
-                       <div class="col-12 col-md-4 mt-2">
-                            <label for="valor_unitario">Valor do Produto*:</label>
-                            <input type="text" name="valor_unitario" id="valor_unitario" class="form-control valor" required 
-                            data-parsley-required-message="Digite o valor do produto" inputmode="numeric" placeholder="R$ 0,00" value="<?=$valor_unitario?>">
-				        </div>
-
+                       
                         <div class="col-12 col-md-4 mt-2">
                             <label for="promocao">Valor Promocional:</label>
                             <input type="text" name="promocao" id="promocao" class="form-control valor" 

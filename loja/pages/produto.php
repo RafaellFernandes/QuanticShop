@@ -1,23 +1,53 @@
 <?php
-	$id = "";
-	if ( isset ( $p[1]) ) {
-		$id = trim ( $p[1] );
-	}
+	// $id = $valor_unitario = NULL;
+    //validação do require da senha
+    if ( !empty ( $id ) ) {
 
-	//selecionar o quadrinho
-	$sql = "select *, nome_produto from produto where id = ? limit 1";
-	$consulta = $pdo->prepare($sql);
-	$consulta->bindParam(1, $id, PDO::PARAM_INT);
-	$consulta->execute();
-	$linha 		= $consulta->fetch(PDO::FETCH_ASSOC);
+    	$sql = "select * 
+    	from produto
+    	where id = :id limit 1";
+    	$consulta = $pdo->prepare($sql);
+    	$consulta->bindParam(':id', $id);
+    	$consulta->execute();
 
-	$id           	      = $linha["id"];
-	$nome_produto         = $linha["nome_produto"];
-	$promocao             = $linha["promocao"];
-	$foto   	          = $linha["foto"]."g.jpg";
-	$descricao            = $linha["descricao"];
-  	$valor_unitario 	  = $linha["valor_unitario"];
-	
+    	//recuperar os dados
+    	$linha = $consulta->fetch(PDO::FETCH_OBJ);
+
+        
+
+	// $id = "";
+	// if ( isset ( $p[1]) ) {
+	// 	$id = trim ( $p[1] );
+	// }
+
+	// $id = $_GET['id'];
+	// echo $id;
+
+	// //selecionar o quadrinho
+	// $sql = "select * from produto where id = ? limit 1";
+	// $consulta = $pdo->prepare($sql);
+	// // $consulta->bindParam(1, $id, PDO::PARAM_INT);
+	// //passar um parametro - id
+	// $consulta->bindParam(':id', $id);
+	// //executar o sql
+	// $consulta->execute();
+	// 	// $linha = $consulta->fetch(PDO::FETCH_ASSOC);
+	// $linha = $consulta->fetch(PDO::FETCH_ASSOC);
+
+	//executar o comando sql
+	// $consulta->execute();
+
+	// while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ){
+
+
+	$id           	      = $linha->id;
+	$nome_produto         = $linha->nome_produto;
+	$promocao             = $linha->promocao;
+	$foto   	          = $linha->foto."g.jpg";
+	$descricao            = $linha->descricao;
+  	$valor_unitario 	  = $linha->valor_unitario;
+	  $id = "";
+	}	
 
     if ( empty ( $promocao ) ) {
 		//1499.99 -> 1.499,99
