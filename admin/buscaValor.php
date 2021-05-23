@@ -11,7 +11,7 @@
 		
 		include "config/conexao.php";
 
-		$sql = "select valor_unitario from produto where id = :produto limit 1"; 
+		$sql = "select venda_unitaria from produto where id = :produto limit 1"; 
 		$consulta = $pdo->prepare($sql);
 		$consulta->bindParam(':produto', $produto);
 		$consulta->execute();
@@ -24,8 +24,8 @@
 			exit;
 		}
 
-		if ( !empty ( $dados->valor_unitario ) ) {
-			echo number_format($dados->valor_unitario, 2, ",", ".");
+		if ( !empty ( $dados->venda_unitaria ) ) {
+			echo number_format($dados->venda_unitaria, 2, ",", ".");
 			exit;
 		}
 

@@ -45,19 +45,19 @@
 	$promocao             = $linha->promocao;
 	$foto   	          = $linha->foto."g.jpg";
 	$descricao            = $linha->descricao;
-  	$valor_unitario 	  = $linha->valor_unitario;
-	  $id = "";
+  	$venda_unitaria 	  = $linha->venda_unitaria;
+	$id = "";
 	}	
 
     if ( empty ( $promocao ) ) {
 		//1499.99 -> 1.499,99
-		$valor_unitario = "R$ " . number_format($valor_unitario, 2, ",", ".");
+		$venda_unitaria = "R$ " . number_format($venda_unitaria, 2, ",", ".");
 		$desc = "";
 	} else {
 		//valor normal
-		$desc = "R$ " . number_format($valor_unitario, 2, ",", ".");
+		$desc = "R$ " . number_format($venda_unitaria, 2, ",", ".");
 		//valor promocional
-		$valor_unitario = "R$ " . number_format($promocao, 2, ",", ".");
+		$venda_unitaria = "R$ " . number_format($promocao, 2, ",", ".");
 	}
 	?>
 <br><br><br>
@@ -68,9 +68,9 @@
     </div>
     <div class="col-md-8">
       <div class="card-body">
-		<h5 class="card-title valor_unitario"><strong><?=$nome_produto;?></strong></h5><br>
+		<h5 class="card-title venda_unitaria"><strong><?=$nome_produto;?></strong></h5><br>
 		<br>
-		<p class="valor_unitario"><strong>Valor: R$ <?=$valor_unitario;?></strong></p>
+		<p class="venda_unitaria"><strong>Valor: R$ <?=$venda_unitaria;?></strong></p>
 		<a href="pages/carrinho/<?=$id;?>" class="btn btn-success">Adicionar ao Carrinho</a><br>
 		<p class="card-text"><strong>Descrição:</strong> <?=$descricao;?></p>
 		<br>  

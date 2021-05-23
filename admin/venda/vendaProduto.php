@@ -161,7 +161,7 @@
         ?>
         <br>
         <div class="container-fluid p-0">
-	<div class="row">
+	    <div class="row">
 		<div class="col-12 col-xl-12">
 			<div class="card">
 				<div class="card-header">
@@ -185,12 +185,12 @@
 
                             <datalist id="listProdutos"> 
                             <?php
-                            $sql = "select id, nome_produto,valor_unitario from produto where ativo = 'S' order by nome_produto";
+                            $sql = "select id, nome_produto, venda_unitaria from produto where ativo = 'S' order by nome_produto";
                             $consulta = $pdo->prepare($sql);
                             $consulta->execute();
 
                             while ( $d = $consulta->fetch(PDO::FETCH_OBJ) ){
-                                echo "<option value='{$d->id} - {$d->nome_produto} - {$d->valor_unitario}'>";
+                                echo "<option value='{$d->id} - {$d->nome_produto} - {$d->venda_unitaria}'>";
                             }
                             ?>
                             </datalist>

@@ -44,7 +44,7 @@ if ( $_POST ) {
   		$sql = "UPDATE estoque SET produto_id = :produto_id, qtd_estoque = :qtd_estoque WHERE id = :id";	
   		$consulta = $pdo->prepare($sql);
 		$consulta->bindParam(":produto_id", $produto_id);
-        $consulta->bindParam(":qtd_estoque", $qtd_estoque);
+		$consulta->bindParam(":qtd_estoque", $qtd_estoque);
   		$consulta->bindParam(":id", $id);
   	}
     //executar e verificar se deu certo
