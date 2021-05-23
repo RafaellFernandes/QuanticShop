@@ -309,7 +309,7 @@
 					<div class="row text-muted">
 						<div class="col-6 text-start">
 							<p class="mb-0">
-								<a href="../loja/pages/home" class="text-muted" ><strong>Quantic Shop</strong></a> &copy;
+								<a href="../loja/pages/home" target="_blank" class="text-muted" ><strong>Quantic Shop</strong></a> &copy;
 							</p>
 						</div>
 						<div class="col-6 text-end">
