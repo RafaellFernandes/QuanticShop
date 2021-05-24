@@ -66,36 +66,33 @@ exit;
                                 $consulta->execute();
                                 while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
                                     //separar os dados
-                                    $id 	            = $dados->id;
-                                    $foto           	= $dados->foto;
-                                    $primeiro_nome 	    = $dados->primeiro_nome;
-                                    $sobrenome 	        = $dados->sobrenome;
-                                    $data_nascimento 	= $dados->data_nascimento;
-                                    $email 	            = $dados->email;
-                                    $celular 	        = $dados->celular;
-                                    $cidade      	    = $dados->cidade;
-                                    $pessoaFJ           = $dados->pessoaFJ;
-                                    $estado             = $dados->estado;
-                                    $ativo              = $dados->ativo;
+                                    $pessoaFJ  = $dados->pessoaFJ; 
+                                    $ativo     = $dados->ativo;
+                                    $foto      = "../fotos/{$dados->foto}p.jpg"; 
+                                    $fotog     = "../fotos/{$dados->foto}g.jpg"; 
 
                                     if ($pessoaFJ == "F" and $ativo == "1") {
-                                        echo '<tr>
-                                            <td><img src="../fotos/'.$foto.'p.jpg" alt="'.$primeiro_nome.'" width="48" height="48" class="rounded-circle mr-2"></td>
-                                            <td>'.$primeiro_nome.' '.$sobrenome.'</td>
-                                            <td>'.$data_nascimento.'</td>
-                                            <td>'.$cidade.' - '.$estado.'</td>
-                                            <td>'.$email.'</td>
-                                            <td>'.$celular.'</td>
-                                            <td class="table-action text-center">
-                                                <a href="cadastro/clienteF/'.$id.'" alt="Editar" title="Editar">
-                                                    <i class="align-middle"  data-feather="edit-2"></i>
-                                                </a>
-                                                
-                                            </td>
-                                        </tr> ';
-                                    };
-                                    
-                                }
+                            ?>
+                                <tr>
+                                    <td>
+                                        <a href="<?=$fotog?>" data-lightbox="foto" title="<?=$dados->primeiro_nome?>">
+                                            <img src="<?=$foto?>" alt="<?=$dados->primeiro_nome?>" width="100px">
+                                        </a>
+                                    </td>                                   
+                                    <td><?=$dados->primeiro_nome?> <?=$dados->sobrenome?></td>
+                                    <td><?=$dados->data_nascimento?></td>
+                                    <td><?=$dados->cidade?>-<?=$dados->estado?></td>
+                                    <td><?=$dados->email?></td>
+                                    <td><?=$dados->celular?></td>
+                                    <td class="table-action text-center">
+                                        <a href="cadastro/clienteF/<?=$dados->id?>" alt="Editar" title="Editar">
+                                            <i class="align-middle"  data-feather="edit-2"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php
+                                };   
+                            }
                             ?>
                         </tbody>
                     </table>
@@ -110,8 +107,7 @@ exit;
                                 <th>Razão Social</th>
                                 <th>CNPJ</th>
                                 <th>Cidade</th>
-                                <th style="width: 5%;">Email</th>
-                                <th style="width: 5%;">Site</th>
+                                <th width="10%">Email<br> Site</th>
                                 <th>Telefone</th>
                                 <th>Ações</th> 
                             </tr>
@@ -142,8 +138,7 @@ exit;
                                                 <td>'.$razaoSocial.'</td>
                                                 <td>'.$cnpj.'</td>
                                                 <td>'.$cidade.' - '.$estado.'</td>
-                                                <td>'.$email.'</td>
-                                                <td>'.$siteClienteJuridico.'</td>
+                                                <td>'.$email.'<br>'.$siteClienteJuridico.'</td>
                                                 <td>'.$telefone.'</td>
                                                 <td class="table-action text-center">
                                                     <a href="cadastro/clienteJ/'.$id.'" alt="Editar" title="Editar">

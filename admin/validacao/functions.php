@@ -87,7 +87,6 @@
     }
 
 	function mensagem($titulo, $mensagem, $icone) { //Função que retorna um alerta bonitinho
-
 		?>
 		<script>
 			//mostrar a telinha animada - alert
@@ -101,7 +100,5 @@
 			})
 		</script>
 		<?php
-	
 		exit;
-	
 	}

@@ -86,7 +86,7 @@ exit;
 				<p class="card-subtitle text-muted">Todos os Campos são Obrigatórios</p><br>
 					<div class="row">
 						<div class="mb-3 col-12 col-md-2 mt-2">
-							<label for="pessoaFJ">Pessoa F/J:</label>
+							<label for="pessoaFJ">Pessoa F/J: ocultar</label>
 							<select name="pessoaFJ" id="pessoaFJ" class="form-control" 
 								required data-parsley-required-message="Selecione uma opção">
 								<!-- <option value="">...</option> -->
@@ -112,7 +112,7 @@ exit;
 						<div class="mb-3 col-12 col-md-4 mt-2">
 							<label for="cpf">CPF:</label>
 							<input type="text" name="cpf" id="cpf" class="form-control"
-							required data-parsley-required-message="Digite o CPF" inputmode="numeric" value="<?=$cpf?>"
+							required data-parsley-required-message="Digite o CPF" inputmode="numeric" value="<?=$cpf?>" placeholder="123.456.789-00"
 							data-inputmask="'mask':'999.999.999-99'">
 						</div>	
 						<div class="mb-3 col-12 col-md-4">
@@ -168,25 +168,24 @@ exit;
 						<div class="mb-3 col-12 col-md-4 mt-2">
 							<label for="email">E-mail:</label>
 							<input type="email" name="email" id="email" class="form-control" required data-parsley-required-message="Preencha o e-mail" 
-							 placeholder="exemple@hotmail.com" value="<?=$email;?>">
+							 placeholder="exemple@hotmail.com" value="<?=$email;?>" onblur="confirmarEmail(this.value)">
 						</div>
 						<div class="mb-3 col-12 col-md-4 mt-2">
-							<label for="senha">Senha:</label>
-							<input type="password" name="senha" id="senha" class="form-control"
+							<label for="senha">Senha:</label> 
+							<input type="password" name="senha" id="senha" class="form-control" minlength="5" maxlength="20" placeholder="Min: 5 Max: 20"
 							<?=$senha?> >
 						</div>
 						<div class="mb-3 col-12 col-md-4 mt-2">
 							<label for="redigite">Redigite a senha:</label>
-							<input type="password" name="redigite" id="redigite" class="form-control" <?=$senha?>
-							data-parsley-equalto="#senha"
-							data-parsley-equalto-message="As senhas devem ser iguais">
+							<input type="password" name="redigite" id="redigite" class="form-control" <?=$senha?> data-parsley-equalto="#senha"
+							data-parsley-equalto-message="As senhas devem ser iguais"  minlength="5" maxlength="20" placeholder="Min: 5 Max: 20">
 						</div>
 						<div class="mb-3 col-12 col-md-3 mt-2">
 							<label for="cep">CEP:</label>
 							<input type="text" name="cep" id="cep" class="form-control" required data-parsley-required-message="Preencha o CEP" value="<?=$cep;?>" placeholder="Digite o CEP da Sua Cidade">
 						</div>
 						<div class="mb-3 col-12 col-md-2 mt-2"  >
-							<label for="cidade_id">ID Cidade</label>
+							<label for="cidade_id">ID Cidade: ocultar</label>
 							<input type="text" name="cidade_id" id="cidade_id" class="form-control" required data-parsley-required-message="Preencha a Cidade" readonly value="<?=$cidade_id;?>">
 						</div>
 						<div class="mb-3 col-12 col-md-3 mt-2">
@@ -247,16 +246,24 @@ exit;
 ?>
 <script type="text/javascript">
 
-	$(document).ready(function(){ 
-		$('#cep').mask('00000-000');
-		$('#cpf').mask('000.000.000-00');
-		$("#data_nascimento").mask("00/00/0000");
-		$("#telefone").mask("(00) 0000-0000");
-		$("#celular").mask("(00) 00000-0000");
+$(document).ready(function(){ 
+	$('#cep').mask('00000-000');
+	$('#cpf').mask('000.000.000-00');
+	$("#data_nascimento").mask("00/00/0000");
+	$("#telefone").mask("(00) 0000-0000");
+	$("#celular").mask("(00) 00000-0000");
+});
 
-	});
+function confirmarEmail(email){
+	   $.get("validacao/verificaEmailCliente.php", {email:email,id:<?=$id;?>}, function(dados){
+		   if(dados != ""){
+			   alert(dados);
+			   $("#email").val("");
+		   }
+	   }) 
+}
 
-	//executar somente depois de carregar
+//executar somente depois de carregar
 $(document).ready(function(){
     //funcao para buscar o mesmo cpf
     $("#cpf").blur(function(){

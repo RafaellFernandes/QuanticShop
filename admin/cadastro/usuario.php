@@ -15,17 +15,17 @@ mensagem($titulo, $mensagem, $icone);
 exit;
 }
 
-  include "validacao/functions.php";
+include "validacao/functions.php";
 
-  //mostrar erros
-  ini_set('display_errors',1);
-  ini_set('display_startup_erros',1);
-  error_reporting(E_ALL);
+//mostrar erros
+ini_set('display_errors',1);
+ini_set('display_startup_erros',1);
+error_reporting(E_ALL);
 	
-  if ( !isset ( $id ) ) $id = "";
+if ( !isset ( $id ) ) $id = "";
 
-  $primeiro_nome = $sobrenome = $email = $login = $senha = $cidade_id = $foto = $cep = $cidade = 
-  $estado = $bairro = $complemento = $numero_resid = $endereco = $ativo = $genero_id = $dataNascimento = $cpf = $celular ="";
+$primeiro_nome = $sobrenome = $email = $login = $senha = $cidade_id = $foto = $cep = $cidade = 
+$estado = $bairro = $complemento = $numero_resid = $endereco = $ativo = $genero_id = $dataNascimento = $cpf = $celular ="";
 
 if(!empty($id)){
     //selecionar dados
@@ -74,35 +74,69 @@ if(!empty($id)){
         <div class="card">
             <div class="card-header">
 				<h4>CADASTRO</h4>
-				<h6 style="color: blue;"><b>Usuário</b></h6>
+				<h6 style="color: blue;"><b>Usuário | Admin</b></h6>
             </div>
             <div class="card-body">
 				<form name="formCadastro" method="post" action="salvar/usuario" data-parsley-validate enctype="multipart/form-data">
 					<p>Todos os Campos são Obrigatórios.</p>
 					<div class="row">
+
 						<div class="col-12 col-md-1" style="display: none;">
 							<label for="id">ID</label>
-							<input type="text" name="id" id="id" class="form-control" readonly value="<?=$id;?>">
+							<input type="text"
+							 	name="id"
+							 	id="id" 
+							  	class="form-control" 
+							  	readonly value="<?=$id;?>">
 						</div>
+
 						<div class="col-12 col-md-6">
 							<label for="primeiro_nome">Primeiro Nome:</label>
-							<input type="text" name="primeiro_nome" id="primeiro_nome" class="form-control" required data-parsley-required-message="Preencha o nome" 
-							value="<?=$primeiro_nome;?>" placeholder="Digite seu Primeiro nome">
+							<input type="text" 	
+								name="primeiro_nome"
+								id="primeiro_nome"
+								class="form-control"
+								required data-parsley-required-message="Preencha o nome" 
+								value="<?=$primeiro_nome;?>" 
+								placeholder="Digite seu Primeiro nome">
 						</div>
+
 						<div class="col-12 col-md-6">
 							<label for="sobrenome">Sobrenome:</label>
-							<input type="text" name="sobrenome" id="sobrenome" class="form-control" required data-parsley-required-message="Preencha o nome" 
-							value="<?=$sobrenome;?>" placeholder="Digite seu sobrenome completo">
+							<input type="text" 
+								name="sobrenome"
+								id="sobrenome" 
+								class="form-control" 
+								required data-parsley-required-message="Preencha o nome" 
+								value="<?=$sobrenome;?>" 
+								placeholder="Digite seu sobrenome completo">
 						</div>
+
 						<div class="col-12 col-md-4 mt-2">
 							<label for="email">E-mail:</label>
-							<input type="email" name="email" id="email" class="form-control" required data-parsley-required-message="Preencha o e-mail"  placeholder="email@exemplo.com.br"
-							data-parsley-type-message="Digite um e-mail válido" onblur="confirmarEmail(this.value)" value="<?=$email;?>">
+							<input type="email" 
+								name="email" 
+								id="email" 
+								class="form-control"
+								required data-parsley-required-message="Preencha o e-mail" 
+								placeholder="email@exemplo.com.br"
+								data-parsley-type-message="Digite um e-mail válido" 
+								onblur="confirmarEmailUser(this.value)" 
+								value="<?=$email;?>">
 						</div>
+
 						<div class="mb-3 col-12 col-md-4 mt-2">
 							<label for="cpf">CPF:</label>
-							<input type="text" name="cpf" id="cpf" class="form-control" required data-parsley-required-message="Preencha o cpf" value="<?=$cpf;?>" onblur="verificarCpf(this.value)" placeholder="Digite seu CPF">
+							<input type="text" 
+								name="cpf" 
+								id="cpf" 
+								class="form-control" 
+								required data-parsley-required-message="Preencha o cpf"
+								value="<?=$cpf;?>" 
+								onblur="verificarCpf(this.value)" 
+								placeholder="Digite seu CPF">
 						</div>
+
 						<div class="mb-3 col-12 col-md-4">
 							<label class="form-label" for="genero_id">Gênero:</label>
 							<select name="genero_id" id="genero_id" class="form-control" required data-parsley-required-message="selecione uma opção">
@@ -121,28 +155,37 @@ if(!empty($id)){
                                     ?>
                             </select>
 						</div>
+
 						<div class="mb-3 col-12 col-md-4 mt-2">
 							<label for="dataNascimento">Data de Nascimento:</label>
 							<input type="text" name="dataNascimento" id="dataNascimento" class="form-control" required data-parsley-required-message="Preencha a data de nascimento" 
 							placeholder="Ex: 11/12/1990" value="<?=$dataNascimento;?>">
 						</div>
+
 						<div class="mb-3 col-12 col-md-4 mt-2">
 							<label for="celular">Celular:</label>
 							<input type="text" name="celular" id="celular" class="form-control" placeholder="Celular com DDD"
 							value="<?=$celular;?>" required data-parsley-required-message="Preencha o Celular">
 						</div>
+
 						<div class="col-12 col-md-4 mt-2">
 							<label for="login">Login:</label>
-							<input type="text" name="login" id="login" class="form-control" required data-parsley-required-message="Preencha o Login" placeholder="Digite o Login de Acesso ao sistema" value="<?=$login;?>">
+							<input type="text" name="login" id="login" class="form-control" required data-parsley-required-message="Preencha o Login" 
+							placeholder="Digite o Login de Acesso ao sistema" value="<?=$login;?>">
 						</div>
+
 						<div class="col-12 col-md-4 mt-2">
 							<label for="senha">Senha:</label>
-							<input type="password" name="senha" id="senha" class="form-control" value="<?=$senha?>">
+							<input type="password" name="senha" id="senha" class="form-control" value="<?=$senha?>" minlength="5" maxlength="20" 
+							placeholder="Min: 5 e Max: 20">
 						</div>
+
 						<div class="col-12 col-md-4 mt-2">
-							<label for="senha2">Redigite a Senha:</label>
-							<input type="password" name="senha2" id="senha2" class="form-control" data-parsley-equalto="#senha" data-parsley-trigger="keyup" data-parsley-error-message="Senha não confere" value="<?=$senha?>">
+							<label for="redigite">Redigite a Senha:</label>
+							<input type="password" name="redigite" id="redigite" class="form-control" data-parsley-equalto="#senha"
+        					data-parsley-equalto-message="As senhas devem ser iguais"  value="<?=$senha?>" placeholder="Redigite Sua Senha">
 						</div>
+
 						<div class="col-12 col-md-4 mt-2">
                             <?php
                                 $required = ' required data-parsley-required-message="Selecione um arquivo" ';
@@ -161,40 +204,50 @@ if(!empty($id)){
                             id="foto" class="form-control"
                             <?=$required?> accept="image/jpeg">
                         </div>
+
 						<div class="col-12 col-md-4  mt-2">
 							<label for="cep">CEP:</label>
 							<input type="text" name="cep" id="cep" class="form-control" required data-parsley-required-message="Preencha o CEP"
 							value="<?=$cep;?>" placeholder="Código Postal">
 						</div>
-						<div class="col-12 col-md-2 mt-2" style="display: none;">
+
+						<div class="col-12 col-md-2 mt-2">
 							<label for="cidade_id">ID Cidade</label>
 							<input type="text" name="cidade_id" id="cidade_id" class="form-control" required data-parsley-required-message="Preencha a Cidade" readonly
 							value="<?=$cidade_id;?>">
 						</div>
+
 						<div class="col-12 col-md-4 mt-2">
 							<label for="cidade">Nome da Cidade:</label>
 							<input type="text" id="cidade" name="cidade" class="form-control" value="<?=$cidade;?>" placeholder="ex: São Paulo">
 						</div>
+
 						<div class="col-12 col-md-4 mt-2">
 							<label for="estado">Estado:</label>
-							<input type="text" id="estado" name="estado" class="form-control"  value="<?=$cidade_id;?>" placeholder="UF">
+							<input type="text" id="estado" name="estado" class="form-control"  value="<?=$estado;?>" placeholder="UF">
 						</div> 	
+
 						<div class="col-12 col-md-4 mt-2">
 							<label for="bairro">Bairro:</label>
 							<input type="text" id="bairro" name="bairro" class="form-control"  value="<?=$bairro;?>" placeholder="Bairro">
 						</div> 
+
 						<div class="col-12 col-md-4 mt-2">
 							<label for="endereco">Endereço:</label>
-							<input type="text" id="endereco" name="endereco" class="form-control"  value="<?=$cidade_id;?>" placeholder="Endereço">
-						</div> 
+							<input type="text" id="endereco" name="endereco" class="form-control"  value="<?=$endereco;?>" placeholder="Endereço">
+						</div>
+
 						<div class="col-12 col-md-4  mt-2">
 							<label for="complemento">Complemento:</label>
-							<input type="text" id="complemento" name="complemento" class="form-control"  value="<?=$complemento;?>" placeholder="Complemento">
-						</div> 
+							<input type="text" id="complemento" name="complemento" class="form-control"  value="<?=$complemento;?>" 
+							placeholder="Casa, Apto, Andar, Sala, Conjunto, Etc ">
+						</div>
+
 						<div class="col-12 col-md-4 mt-2">
 							<label for="numero_resid">Numero de Residencia:</label>
-							<input type="text" id="numero_resid" name="numero_resid" class="form-control"  value="<?=$cidade_id;?>" placeholder="Numero Residencia">
+							<input type="text" id="numero_resid" name="numero_resid" class="form-control"  value="<?=$numero_resid;?>" placeholder="Numero Residencia">
 						</div> 
+
 						<div class="col-12 col-md-2 mt-2">
 							<label for="ativo">Ativo</label>
 							<select name="ativo" id="ativo" class="form-control" 
@@ -204,6 +257,7 @@ if(!empty($id)){
 								<option value="0"  <?= $ativo == '0' ? "selected" : "" ?>>Inativo</option>
 							</select>
                         </div>
+
 					</div><br>
 					<div class="row g-2">
                         <div class="col-sm-4 mt-4">
@@ -235,8 +289,8 @@ if(!empty($id)){
 		$("#celular").mask("(00) 00000-0000");     
 	});
 
-    function confirmarEmail(email){
-        $.get("../admin/validacao/verificaEmail.php", {email:email,id:<?=$id;?>}, function(dados){
+    function confirmarEmailUser(email){
+        $.get("validacao/verificaEmailUser.php", {email:email,id:<?=$id;?>}, function(dados){
             if(dados != ""){
                 alert(dados);
                 $("#email").val("");
