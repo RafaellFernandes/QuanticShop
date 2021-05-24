@@ -64,8 +64,8 @@ action="https://pagseguro.uol.com.br/v2/checkout/payment.html">
 						$i++;
 						//recuperar os dados do array carrinho
 						$id = $dados["id"];
-						$produto = $dados["produto"];
-						$valor = $dados["valor"];
+						$produto = $dados["nome_produto"];
+						$venda_unitaria = $dados["venda_unitaria"];
 						$quantidade = $dados["quantidade"];
 						$total = $dados["total"];
 
@@ -79,18 +79,18 @@ action="https://pagseguro.uol.com.br/v2/checkout/payment.html">
 						//tr - linha
 						//td - célula ou coluna
 						echo "<tr>
-							<td>{$produto}</td>
+							<td>{$nome_produto}</td>
 							<td>{$quantidade}</td>
-							<td>R$ {$valor}</td>
+							<td>R$ {$venda_unitaria}</td>
 							<td>R$ {$total}</td>
 						</tr>";	
 
 						//formatar o valor com 2 casas decimais
-						$valorPagseguro = number_format($dados['valor'],2,".","");
+						$valorPagseguro = number_format($dados['venda_unitaria'],2,".","");
 						//1.9 => 1.90
 
 						echo "<input name=\"itemId{$i}\" type=\"hidden\" value=\"000{$i}\">  
-				        <input name=\"itemDescription{$i}\" type=\"hidden\" value=\"{$produto}\">  
+				        <input name=\"itemDescription{$i}\" type=\"hidden\" value=\"{$nome_produto}\">  
 				        <input name=\"itemAmount{$i}\" type=\"hidden\" value=\"{$valorPagseguro}\">  
 				        <input name=\"itemQuantity{$i}\" type=\"hidden\" value=\"{$quantidade}\">  
 				        <input name=\"itemWeight{$i}\" type=\"hidden\" value=\"1000\">";		

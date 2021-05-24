@@ -6,9 +6,9 @@
 
 <?php
 	
-	if ( isset ( $_SESSION['cliente']['nome'] ) ) {
+	if ( isset ( $_SESSION['cliente']['primeiro_nome'] ) ) {
 
-		echo "<p><strong>Olá ".$_SESSION['cliente']['nome']." - <a href='sair.php'>Efetuar Logout</a></strong></p>";
+		echo "<p><strong>Olá ".$_SESSION['cliente']['primeiro_nome']." - <a href='sair.php'>Efetuar Logout</a></strong></p>";
 	}
 
 	//iniciar uma variavel chamada $produtos com o valor
@@ -49,15 +49,15 @@
 			foreach ( $_SESSION['carrinho'] as $dados ) {
 				//recuperar os dados do array carrinho
 				$id = $dados["id"];
-				$produto = $dados["produto"];
-				$valor = $dados["valor"];
+				$produto = $dados["nome_produto"];
+				$venda_unitaria = $dados["venda_unitaria"];
 				$quantidade = $dados["quantidade"];
 				$total = $dados["total"];
 
 				//somar o totalGeral
 				$totalGeral = $total + $totalGeral;
 				//formatar os valores
-				$valor = number_format($valor, 2, "," , ".");
+				$venda_unitaria = number_format($venda_unitaria, 2, "," , ".");
 				$total = number_format($total, 2, ",", ".");
 
 				//mostrar os resultados em uma linha da tabela
@@ -66,7 +66,7 @@
 				echo "<tr>
 					<td>{$produto}</td>
 					<td>{$quantidade}</td>
-					<td>R$ {$valor}</td>
+					<td>R$ {$venda_unitaria}</td>
 					<td>R$ {$total}</td>
 					<td>
 						<button type='button' class='btn btn-danger btn-sm' onclick='excluirProduto({$id})'>
@@ -93,10 +93,9 @@
 <a href="index.php?pagina=limpar" class="btn btn-danger btn-lg float-left">
 	Limpar Carrinho
 </a>
-<a href="index.php?pagina=finalizar" class="btn btn-success btn-lg float-right">
+<a href="" class="btn btn-success btn-lg float-right">
 	Finalizar Pedido
 </a>
-
 <div class="clearfix"></div>
 
 <script>
