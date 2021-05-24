@@ -76,7 +76,7 @@ exit;
                                 <tr>
                                     <td>
                                         <a href="<?=$fotog?>" data-lightbox="foto" title="<?=$dados->primeiro_nome?>">
-                                            <img src="<?=$foto?>" alt="<?=$dados->primeiro_nome?>" width="100px">
+                                            <img src="<?=$foto?>" alt="<?=$dados->primeiro_nome?>" width="70px">
                                         </a>
                                     </td>                                   
                                     <td><?=$dados->primeiro_nome?> <?=$dados->sobrenome?></td>

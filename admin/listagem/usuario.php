@@ -46,31 +46,30 @@ exit;
 
                             while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
                                 //separar os dados
-                                $id                     = $dados->id;
-                                $primeiro_nome       	= $dados->primeiro_nome;
-                                $sobrenome              = $dados->sobrenome;
-                                $email                  = $dados->email;
-                                $foto                   = $dados->foto;
-                                $login                  = $dados->login;
-                                $cidade 	            = $dados->cidade;
-                                $estado                 = $dados->estado;
-                                $imagem                 = "../fotos/".$foto."p.jpg";
-                                $ativo                  = $dados->ativo;
+                                $foto       = "../fotos/{$dados->foto}p.jpg";
+                                $fotog        = "../fotos/{$dados->foto}g.jpg"; 
+                                $ativo        = $dados->ativo;
 
                                 //mostrar na tela
                                 if ($ativo == "1"){
-                                    echo '<tr>
-                                            <td><img src="'.$imagem.'" alt="'.$primeiro_nome.'" width="48" height="48" class="rounded-circle mr-2"></td>
-                                            <td>'.$primeiro_nome.' '.$sobrenome.'</td>
-                                            <td>'.$email.'</td>
-                                            <td>'.$login.'</td>
-                                            <td>'.$cidade.' - '.$estado.'</td>
+                                    ?>
+                                        <tr>
+                                            <td>
+                                                <a href="<?=$fotog?>" data-lightbox="foto" title="<?=$dados->primeiro_nome?>">
+                                                    <img src="<?=$foto?>" alt="<?=$dados->primeiro_nome?>" width="70px">
+                                                </a>
+                                            </td>    
+                                            <td><?=$dados->primeiro_nome?> <?=$dados->sobrenome?></td>              
+                                            <td><?=$dados->email?></td>
+                                            <td><?=$dados->login?></td>
+                                            <td><?=$dados->cidade?>-<?=$dados->estado?></td>
                                             <td class="table-action text-center">
-                                                <a href="cadastro/usuario/'.$id.'" alt="Editar" title="Editar">
+                                                <a href="cadastro/usuario/<?=$dados->id?>" alt="Editar" title="Editar">
                                                     <i class="align-middle"  data-feather="edit-2"></i>
                                                 </a>
                                             </td>
-                                        </tr>';
+                                        </tr>
+                                    <?php
                                 }
                             }
                         ?>
