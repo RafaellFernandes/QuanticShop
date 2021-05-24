@@ -14,55 +14,53 @@ if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
     mensagem($titulo, $mensagem, $icone);
 exit;
 }
-
-     //mostrar erros
+include "validacao/functions.php";
+    //mostrar erros
     ini_set('display_errors',1);
 	ini_set('display_startup_erros',1);
     error_reporting(E_ALL);
-    
 
     //se nao existe o id
     if ( !isset ( $id ) ) $id = "";
 
     //iniciar as variaveis
-    $produto_id = $fornecedor_id = $lote = $data_cadastro = $qtd_produto = $status = "";
+    $produto_id = $nome_produto = $lote = $fornecedor_id = $razaoSocial = $data_cadastro = $ativo = $qtd_produto =  "";
 
     //verificar se existe um id
     if ( !empty ( $id ) ) {
-
-    include "validacao/functions.php";
-   
-    //selecionar os dados do banco para poder editar
-    $sql="SELECT c.*, date_format(c.data_cadastro, '%d/%m/%Y') data_cadastro, f.razaoSocial, p.nome_produto, p.ativo pativo
-	FROM item_compra c 
-    INNER JOIN fornecedor f on (f.id = c.fornecedor_id)
-    INNER JOIN produto p on(p.id = c.produto_id) WHERE c.id = :id LIMIT 1";
-    $consulta = $pdo->prepare($sql);
-    $consulta->bindParam(":id", $id);
-    $consulta->execute();
-      
-  	$dados  = $consulta->fetch(PDO::FETCH_OBJ);
-
-  	//separar os dados
-    $id         	          = $dados->id;
-    $nome_produto 	          = $dados->nome_produto; 
-    $produto_id               = $dados->produto_id;
-    $data_cadastro            = $dados->data_cadastro;
-    $qtd_produto              = $dados->qtd_produto;
-    $fornecedor_id            = $dados->fornecedor_id;
-    $razaoSocial              = $dados->razaoSocial;
-    $lote                     = $dados->lote;
-    $status                   = $dados->status;
-    $pativo                   = $dados->pativo;
+        //selecionar os dados do banco para poder editar
+        $sql="SELECT ic.id id, ic.*, f.id fid, f.ativo fativo , f.*, p.id pid, p.ativo pativo, p.* 
+                FROM item_compra ic 
+                INNER JOIN fornecedor f ON (ic.fornecedor_id = f.id ) 
+                INNER JOIN produto p ON (ic.produto_id = p.id ) 
+                WHERE ic.id = :id LIMIT 1";
+        $consulta = $pdo->prepare($sql);
+        $consulta->bindParam(":id", $id);
+        $consulta->execute();
         
-  }
+        $dados  = $consulta->fetch(PDO::FETCH_OBJ);
+
+        $id = "";
+
+        if ( !empty ( $dados->id ) ) {
+  
+            //separar os dados
+            $id         	          = $dados->id;
+            $nome_produto 	          = $dados->nome_produto; 
+            $produto_id               = $dados->produto_id;
+            $fornecedor_id            = $dados->fornecedor_id;
+            $razaoSocial              = $dados->razaoSocial;
+            $data_cadastro            = $dados->data_cadastro;
+            $qtd_produto              = $dados->qtd_produto;
+            $lote                     = $dados->lote;
+            $ativo                    = $dados->ativo;
+            // $pativo                   = $dados->pativo;
+        }
+    }
 
 ?>
-<script src="assets/mask/jquery.mask.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
-                        
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>                       -->
 <div class="container-fluid p-0">
 	<div class="col-md-12">
 		<div class="card"> 
@@ -81,7 +79,7 @@ exit;
                     <div class="col-12 col-md-4 mt-2">
                             <label for="produto_id">Produto</label>
                             <select name="produto_id" id="produto_id" class="form-control" required data-parsley-required-message="Selecione um Produto">
-                                <option value="<?=$produto_id;?>">Selecione o produto</option>
+                                <option value="<?=$produto_id;?>"></option>
                                     <?php
                                         $sql = "SELECT * FROM produto WHERE ativo = 0 
                                         ORDER BY nome_produto  ";
@@ -119,48 +117,31 @@ exit;
                                     ?>
                             </select>
                         </div>
-
-                        <!-- <div type="text" class="col-12 col-md-4 mt-2 ">
-                        <label >Valor de Custo</label>
-                        <input type="number" id="custo_unitario" name="custo_unitario" class="form-control number_format" required data-parsley-required-message="Preencha este campo" 
-                            class="form-control" value="<?//=$custo_unitario;?>" placeholder="R$ 0,00">
-                        </div>         
-                      
-                        <div type="text" class="col-12 col-md-4 mt-2">
-                            <label >Margem(%)</label>
-                            <input type="number" id="porcentagem_lucro" name="porcentagem_lucro" class="form-control"  required data-parsley-required-message="Preencha este campo" 
-                            class="form-control" onblur="valorVenda()" value="<?//=$porcentagem_lucro;?>" placeholder="%">
-                        </div>
-                        <div type="text" class="col-12 col-md-4 mt-2">
-                            <label >Valor de Venda</label>
-                            <input type="number" id="venda_unitario" name="venda_unitaria" class="form-control" required data-parsley-required-message="Preencha este campo" 
-                            class="form-control" readonly value="<?//=$venda_unitaria;?>" placeholder="R$ 0,00">         
-                        </div> -->
                         <div type="text" class="col-12 col-md-4 mt-2">
                             <label for="data_cadastro">Data</label>
                             <input type="date" name="data_cadastro" id="data_cadastro" class="form-control"
                             required data-parsley-required-message="Preencha a data" value="<?=$data_cadastro?>">
                         </div>
-                        <div type="text" class="col-12 col-md-4 mt-2">
-							<label for="status">Status</label>
-							<select name="status" id="status" class="form-control" 
+                        <div class="col-12 col-md-2 mt-2">
+							<label for="ativo">Ativo</label>
+							<select name="ativo" id="ativo" class="form-control" 
 								required data-parsley-required-message="Selecione uma opção">
 								<option value="">...</option>
-								<option value="1" <?= $status == '1' ? "selected" : "" ?>>Ativo</option>
-								<!-- <option value="N"  <?//= $status == 'N' ? "selected" : "" ?>>Inativo</option> -->
+								<option value="1" <?= $ativo == '1' ? "selected" : "" ?>>Ativo</option>
+								<option value="0"  <?= $ativo == '0' ? "selected" : "" ?>>Inativo</option>
 							</select>
                         </div>
-                        <div type="text" class="col-12 col-md-4 mt-2 ">
-                        <label >Quantidade comprada</label>
-                        <input type="number" id="qtd_produto" name="qtd_produto" class="form-control number_format" required data-parsley-required-message="Preencha este campo" 
-                            class="form-control" value="<?=$qtd_produto;?>">
+                            <div type="text" class="col-12 col-md-4 mt-2 ">
+                            <label >Quantidade comprada</label>
+                            <input type="number" id="qtd_produto" name="qtd_produto" class="form-control number_format" required data-parsley-required-message="Preencha este campo" 
+                                class="form-control" value="<?=$qtd_produto;?>">
                         </div>       
                         <div class="row g-2">
-                        <div class="col-sm-4 mt-4">
-							<button type="submit" class="btn btn-success margin">
-								Salvar Dados
-							</button>
-                        </div>
+                            <div class="col-sm-4 mt-4">
+                                <button type="submit" class="btn btn-success margin">
+                                    Salvar Dados
+                                </button>
+                            </div>
                         </div> 
                     </div>
                 </form>

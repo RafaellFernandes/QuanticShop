@@ -106,18 +106,18 @@ if ( !empty ( $_FILES['foto']['name'] ) ) {
 
 
     //verificar se a senha foi digitada
-      if ( !empty ( $senha ) ) {
-        //validar senha - 8 letras 1 numero 1 especial
-        $validarSenha = validarSenha($senha);
+    //   if ( !empty ( $senha ) ) {
+    //     //validar senha - 8 letras 1 numero 1 especial
+    //     $validarSenha = validarSenha($senha);
 
-        if (!empty ($validarSenha ) ) {
-            $mensagem = $validarSenha;
-            $titulo = "Erro";
-            $icone = "error";
-            mensagem($titulo, $mensagem, $icone);
-            exit;
-        }
-    }
+    //     if (!empty ($validarSenha ) ) {
+    //         $mensagem = $validarSenha;
+    //         $titulo = "Erro";
+    //         $icone = "error";
+    //         mensagem($titulo, $mensagem, $icone);
+    //         exit;
+    //     }
+    // }
          
       if(empty($id)){
           

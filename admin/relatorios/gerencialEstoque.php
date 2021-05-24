@@ -56,24 +56,21 @@ exit;
 							while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
 								//separar os dados
 
+                                $eid 		                 = $dados->eid;
+                                $icid 		                 = $dados->icid;
                                 $pid 		                 = $dados->pid;
                                 $codigo                      = $dados->codigo;
-                                $pativo                      = $dados->pativo;
                                 $nome_produto                = $dados->nome_produto;
-                                $vezesVendido                = $dados->vezesVendido;
-                                $vezes                       = $dados->vezes;
-
-								$icid 		                 = $dados->icid;
-                                $produto_id 		         = $dados->produto_id;
+                                $qtd_estoque                 = $dados->qtd_estoque;  
                                 $datacad                     = $dados->datacad;
+                                $quantidade                  = $dados->quantidade;
                                 $custo_unitario              = $dados->custo_unitario;
                                 $custo_unitario              = number_format($custo_unitario,2, '.' , ',');	
-                                $qtd_produto                 = $dados->qtd_produto;
-                                $icstatus					 = $dados->icstatus;
-                                $quantidade                  = $dados->quantidade;
-
-                                $eid 		                 = $dados->eid;
-                                $qtd_estoque                 = $dados->qtd_estoque;                                
+                                $vezes                       = $dados->vezes;
+                                $vezesVendido                = $dados->vezesVendido;
+                                $pativo                      = $dados->pativo;
+                                
+                                $qtd_produto                 = $dados->qtd_produto;                             
 
 								//mostrar na tela
 								if ($pativo == "1"){
@@ -86,8 +83,9 @@ exit;
                                             <td>'.$qtd_produto.'</td>
                                             <td>R$ '.$custo_unitario.'</td>
                                             <td>'.$vezesVendido.'</td>
-                                            <td>'.$vezes.'</td>
                                             <td>'.$quantidade.'</td>
+                                            <td>'.$vezes.'</td>
+                                           
 									     </tr>';
 								}
 								
