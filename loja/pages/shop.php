@@ -20,12 +20,13 @@
 	<h2>Produtos em Destaque</h2>
 	<div class="close_but"><i class="close1"></i></div>
 	<div class="container-fluid">
-		<div class="row shop_box">
-			<div class="row container-fluid">
+		<!-- <div class="row"> -->
+		<div class="card-group">
+			
 			<!-- <div class="col-sm-3 text-center"> -->
 						<?php
 							//selecionar 1 produto aleatorios
-							$sql = "SELECT id, nome_produto, venda_unitaria, foto FROM produto ORDER BY rand() LIMIT 20";
+							$sql = "SELECT * FROM produto ORDER BY rand() LIMIT 20";
 							$consulta = $pdo->prepare($sql);
 							$consulta->execute();
 
@@ -40,21 +41,27 @@
 								$venda_unitaria = number_format($venda_unitaria, 2, ",", ".");
 								//var,casas decimais,sep decimal,sep milhares
 
-								echo "<div class='col-3 text-center'>
-								<img src='../fotos/$foto' class='w-65'>
-								<p>$nome_produto</p>
-								<p class='valor'>R$ $venda_unitaria</p>
-								<a href='pages/produto/$id'
-								class='btn btn-info'>Detalhes</a><br>
-								</div>";
+								echo "
+								<div class='col-sm-2 text-center m-3'>
+										<div class='card'>
+											<img src='../fotos/$foto' class='card-img-top' width='40' height='auto' alt='$nome_produto'>
+											<div class='card-body'>
+												<p class='card-title'>$nome_produto</p>
+												<p class='card-text' style='color: green;'>R$ $venda_unitaria</p>
+												<a href='pages/produto/$id' class='btn btn-primary'>Detalhes</a><br>
+											</div>
+										</div>
+									</div>
+									";
 							}
 						?>	
+			
 					</div>
 				</div>
 			</div>			
 		</div>
 	</div>
-</div>
+
 <style>
 	.dropdown-item {
 		color: white;

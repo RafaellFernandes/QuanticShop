@@ -1,52 +1,19 @@
 <?php
-	// $id = $valor_unitario = NULL;
-    //validação do require da senha
     if ( !empty ( $id ) ) {
 
-    	$sql = "select * 
-    	from produto
-    	where id = :id limit 1";
+    	$sql = "SELECT * 
+    	FROM produto
+    	WHERE id = :id LIMIT 1";
     	$consulta = $pdo->prepare($sql);
     	$consulta->bindParam(':id', $id);
     	$consulta->execute();
+    	$dados = $consulta->fetch(PDO::FETCH_OBJ);
 
-    	//recuperar os dados
-    	$linha = $consulta->fetch(PDO::FETCH_OBJ);
-
-        
-
-	// $id = "";
-	// if ( isset ( $p[1]) ) {
-	// 	$id = trim ( $p[1] );
-	// }
-
-	// $id = $_GET['id'];
-	// echo $id;
-
-	// //selecionar o quadrinho
-	// $sql = "select * from produto where id = ? limit 1";
-	// $consulta = $pdo->prepare($sql);
-	// // $consulta->bindParam(1, $id, PDO::PARAM_INT);
-	// //passar um parametro - id
-	// $consulta->bindParam(':id', $id);
-	// //executar o sql
-	// $consulta->execute();
-	// 	// $linha = $consulta->fetch(PDO::FETCH_ASSOC);
-	// $linha = $consulta->fetch(PDO::FETCH_ASSOC);
-
-	//executar o comando sql
-	// $consulta->execute();
-
-	// while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ){
-
-
-	$id           	      = $linha->id;
-	$nome_produto         = $linha->nome_produto;
-	$promocao             = $linha->promocao;
-	$foto   	          = $linha->foto."g.jpg";
-	$descricao            = $linha->descricao;
-  	$venda_unitaria 	  = $linha->venda_unitaria;
-	$id = "";
+		$promocao             = $dados->promocao;
+		$foto      = "../fotos/{$dados->foto}m.jpg"; 
+		$fotog     = "../fotos/{$dados->foto}g.jpg"; 
+		$venda_unitaria 	  = $dados->venda_unitaria;
+		$id = "";
 	}	
 
     if ( empty ( $promocao ) ) {
@@ -59,22 +26,30 @@
 		//valor promocional
 		$venda_unitaria = "R$ " . number_format($promocao, 2, ",", ".");
 	}
-	?>
-<br><br><br>
-<div class="card mt-5">
-  <div class="row no-gutters">
-    <div class="col-md-4">
-      <img src="fotos/<?=$foto;?>" class="card-img">
+?>
+<div class="card">
+  <div class="row no-gutters mt-3">
+    <div class="col-md-5" >
+		<a href="<?=$fotog?>" data-lightbox="foto" title="<?=$dados->nome_produto?>">
+        	<img src="<?=$foto?>" alt="<?=$dados->nome_produto?>" width="100%" height="100%">
+      	</a>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-7">
       <div class="card-body">
-		<h5 class="card-title venda_unitaria"><strong><?=$nome_produto;?></strong></h5><br>
+		<h5 class="card-title venda_unitaria"><strong><?=$dados->nome_produto?></strong></h5><br>
+		<p>Código do Produto: <?=$dados->codigo?></p>
 		<br>
-		<p class="venda_unitaria"><strong>Valor: R$ <?=$venda_unitaria;?></strong></p>
-		<a href="pages/carrinho/<?=$id;?>" class="btn btn-success">Adicionar ao Carrinho</a><br>
-		<p class="card-text"><strong>Descrição:</strong> <?=$descricao;?></p>
+		<p class="venda_unitaria"><strong>Valor: R$ <?=$dados->venda_unitaria;?></strong></p>
+		<a href="pages/carrinho/<?=$dados->id;?>" class="btn btn-success">Adicionar ao Carrinho</a><br>
+		
 		<br>  
 	</div>
     </div>
+	<div class="container-fluid mt-5">
+	<div class="row col-12">
+	<p class="card-body"><strong>Descrição:</strong> <?=$dados->descricao;?></p>
+	<p class="card-body"><?=$dados->espec_tecnica;?></p>
+	</div>
+	</div>
   </div>
 </div>
