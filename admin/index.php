@@ -256,7 +256,7 @@
 							</a>
 
 							<a class="nav-link d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-								<img src="../fotos/<?=$_SESSION["quanticshop"]["foto"];?>p.jpg" class="avatar rounded me-1" alt="<?=$_SESSION["quanticshop"]["primeiro_nome"];?>" /> <span class="text-dark"><?=$_SESSION["quanticshop"]["primeiro_nome"];?></span>
+								<img src="../fotos/<?=$_SESSION["quanticshop"]["foto"];?>g.jpg" class="avatar rounded me-1" alt="<?=$_SESSION["quanticshop"]["primeiro_nome"];?>" /> <span class="text-dark"><?=$_SESSION["quanticshop"]["primeiro_nome"];?></span>
 							</a>
 							<div class="dropdown-menu dropdown-menu-end">
 								<a class="dropdown-item" href="login/perfil"><i class="align-middle me-1" data-feather="user"></i> Perfil</a>

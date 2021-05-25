@@ -2,6 +2,5 @@
   session_start();
   $_SESSION = array();
   session_destroy();
-  header("Location: login/login");
-  
+  header("Location: http://localhost/QuanticShop/loja/login/login");
 ?>

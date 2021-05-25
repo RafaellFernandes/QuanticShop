@@ -205,16 +205,22 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
                         </div>
                     </div>
                     <div class="row g-2">
-                    <div class="col-sm-4 mt-4">
+                        <div class="col-sm-4 mt-4">
 							<button type="submit" class="btn btn-success margin">
                                     Salvar / Alterar
 							</button>
                         </div>
-                        <div class="col-sm">
-                            <div class="float-end mt-3 ">
+                        <div class="col-sm-4 mt-4">
+                            <div class="float-center text-center">
+                                <a href="processoCompra/produtoCompra" class="btn btn-danger">Item Compra</a> 
+                            </div> 
+                        </div>
+                        <div class="col-sm-4 mt-4">
+                            <div class="float-end">
                                 <a href="listagem/produto" class="btn btn-primary">Listar Registros</a> 
                             </div> 
                         </div>
+                        
                     </div>
                 </form>
             </div>

@@ -65,9 +65,9 @@ include "validacao/functions.php";
 	<div class="col-md-12">
 		<div class="card"> 
 		   <div class="card-header">
-           <div class="float-end">
+           <!-- <div class="float-end">
 				<a href="processoCompra/listaProduto" class="btn btn-primary">Listagem</a> 
-		   </div>
+		   </div> -->
 				<h4>Cadastro</h4>
 				<h6 class="card-subtitle text-muted">Produto Entrada</h6>
 			</div>
@@ -142,6 +142,16 @@ include "validacao/functions.php";
                                     Salvar Dados
                                 </button>
                             </div>
+                            <div class="col-sm-4 mt-4">
+                            <div class="float-center text-center">
+                                <a href="controleEstoque/estoque" class="btn btn-danger">Estoque</a> 
+                            </div> 
+                        </div>
+                        <div class="col-sm-4 mt-4">
+                            <div class="float-end">
+                                <a href="processoCompra/listaProduto" class="btn btn-primary">Listar Registros</a> 
+                            </div> 
+                        </div>
                         </div> 
                     </div>
                 </form>

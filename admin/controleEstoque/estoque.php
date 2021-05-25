@@ -94,24 +94,27 @@ $produto_id = $qtd_estoque = $produto = NULL;
                         ?>
                     </datalist>
                 </div> 
-
                         <div class="col-12 col-md-4">
                             <label for="qtd_estoque">Quantidade em Estoque</label>
                             <input type="number" name="qtd_estoque" id="qtd_estoque" required data-parsley-required-message="Preencha este campo" class="form-control" value="<?=$qtd_estoque;?>">
                         </div>
-
                         <div class="row g-2">
-                    <div class="col-sm-4 mt-4">
-							<button type="submit" class="btn btn-success margin">
-                                    Salvar / Alterar
-							</button>
+                            <div class="col-sm-4 mt-4">
+                                <button type="submit" class="btn btn-success margin">
+                                        Salvar / Alterar
+                                </button>
+                            </div>
+                            <div class="col-sm-4 mt-4">
+                                <div class="float-center text-center">
+                                    <a href="venda/vendaProduto" class="btn btn-danger">Item Venda</a> 
+                                </div> 
+                            </div>
+                            <div class="col-sm-4 mt-4">
+                                <div class="float-end">
+                                    <a href="controleEstoque/listaEstoque" class="btn btn-primary">Listar Registros</a> 
+                                </div> 
+                            </div>
                         </div>
-                        <div class="col-sm">
-                            <div class="float-end mt-3 ">
-                                <a href="controleEstoque/listaEstoque" class="btn btn-primary">Listar Registros</a> 
-                            </div> 
-                        </div>
-                    </div>
                 </form>
             </div>
         </div>

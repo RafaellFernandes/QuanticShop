@@ -1,211 +1,288 @@
 <?php
+if ( isset ( $_SESSION["quanticshop"]["id"] ) )exit;
 
-  //verificar se não está logado
-  if ( isset ( $_SESSION["quanticshop"]["id"] ) ){
-    exit;
-  }
-
-    //mostrar erros
-	ini_set('display_errors',1);
-	ini_set('display_startup_erros',1);
-    error_reporting(E_ALL);
+//mostrar erros
+ini_set('display_errors',1);
+ini_set('display_startup_erros',1);
+error_reporting(E_ALL);
   
-  if ( !isset ( $id ) ) $id = "";
+if ( !isset ( $id ) ) $id = "";
 
-  $primeiro_nome = $sobrenome = $cpf = $data_nascimento = $email = $senha = $cep = $telefone = $celular =
-  $pessoaFJ =  $estado = $cidade = $endereco = $bairro = $complemento = $numero_resid = $cidade_id = $ativo = $genero_id = "";
+$primeiro_nome = $sobrenome = $cpf = $data_nascimento = $email = $senha = $cep = $telefone = $celular =
+$pessoaFJ =  $estado = $cidade = $endereco = $bairro = $complemento = $numero_resid = $cidade_id = $ativo = $genero_id = "";
 
-  if ( !empty ( $id ) ) {
-	  //selecionar os dados do cliente
-	  $sql =  "SELECT c.*, DATE_FORMAT(c.DataNascimento,'%d/%m/%Y') DataNascimento,
-	  ci.cidade, ci.estado FROM cliente c 
-	  INNER JOIN cidade ci ON ( ci.id = c.cidade_id ) WHERE c.id = :id LIMIT 1";
-	  $consulta = $pdo->prepare( $sql);
-	  $consulta->bindParam(":id", $id);
-	  $consulta->execute();
+if ( !empty ( $id ) ) {
+	//selecionar os dados do cliente
+	$sql =  "SELECT c.*, DATE_FORMAT(c.DataNascimento,'%d/%m/%Y') DataNascimento,
+	ci.cidade, ci.estado FROM cliente c 
+	INNER JOIN cidade ci ON ( ci.id = c.cidade_id ) WHERE c.id = :id LIMIT 1";
+	$consulta = $pdo->prepare( $sql);
+	$consulta->bindParam(":id", $id);
+	$consulta->execute();
 
-	  $dados = $consulta->fetch(PDO::FETCH_OBJ);
+	$dados = $consulta->fetch(PDO::FETCH_OBJ);
 
-	  if ( empty ( $dados->id ) ) {
-		  echo "<p class='alert alert-danger'>Cliente Não Existente</p>";
-	  }
-
-	  $id                      = $dados->id;
-	  $primeiro_nome           = $dados->primeiro_nome;
-	  $sobrenome               = $dados->sobrenome;
-	  $cpf                     = $dados->cpf;
-	  $data_nascimento         = $dados->data_nascimento;
-	  $email                   = $dados->email;
-	  $senha                   = $dados->senha;
-	  $telefone                = $dados->telefone;
-	  $celular                 = $dados->celular;
-	  $pessoaFJ                = $dados->pessoaFJ;
-	  $cep                     = $dados->cep;
-	  $estado                  = $dados->estado;
-	  $cidade                  = $dados->cidade;
-	  $endereco                = $dados->endereco;
-	  $bairro                  = $dados->bairro;
-	  $complemento             = $dados->complemento;
-	  $numero_resid            = $dados->numero_resid;
-	  $cidade_id               = $dados->cidade_id;
-	  $ativo                   = $dados->ativo;
-	  $genero_id               = $dados->genero_id;
-
-  }
+	if ( empty ( $dados->id ) ) {
+		echo "<p class='alert alert-danger'>Cliente Não Existente</p>";
+	}
+	$id                      = $dados->id;
+	$primeiro_nome           = $dados->primeiro_nome;
+	$sobrenome               = $dados->sobrenome;
+	$cpf                     = $dados->cpf;
+	$data_nascimento         = $dados->data_nascimento;
+	$email                   = $dados->email;
+	$senha                   = $dados->senha;
+	$telefone                = $dados->telefone;
+	$celular                 = $dados->celular;
+	$pessoaFJ                = $dados->pessoaFJ;
+	$cep                     = $dados->cep;
+	$estado                  = $dados->estado;
+	$cidade                  = $dados->cidade;
+	$endereco                = $dados->endereco;
+	$bairro                  = $dados->bairro;
+	$complemento             = $dados->complemento;
+	$numero_resid            = $dados->numero_resid;
+	$cidade_id               = $dados->cidade_id;
+	$ativo                   = $dados->ativo;
+	$genero_id               = $dados->genero_id;
+}
 ?>
-<!-- ==================================== -->
-<!--    LINKS DE MASCARAS E VALIDAÇOES    -->
-<!-- ==================================== -->
 <script src="assets/mask/jquery.mask.js"></script>
-
-<div class="main">
-      <div class="shop_top">
-	     <div class="container">
-			<form name="formCadastro" method="post" action="salvarCliente" data-parsley-validate enctype="multipart/form-data" > 
-				<div class="register-top-grid">
-					<h3>INFORMAÇÕES PESSOAIS</h3>
-
-                    <div style="display: none;">
-                      <label for="id">ID:</label>
-                      <input type="text" name="id" id="id" class="form-control" readonly value="<?=$id;?>" placeholder="Automatico">
-                    </div>
-
-					<div>
-						<span>
-                        PRIMEIRO NOME
-                        <label for="primeiro_nome"></label>
-                        </span>
-						<input name="primeiro_nome" id="primeiro_nome" class="form-control" required data-parsley-required-message="Preencha o Primeiro Nome" 
-							value="<?=$primeiro_nome;?>" placeholder="Digite o Primeiro Nome"> 
-					</div>
-
-					<div>
-						<span>
-                        SOBRENOME
-                        <label for="sobrenome"></label>
-                        </span>
-						<input type="text" name="sobrenome" id="sobrenome" class="form-control" required data-parsley-required-message="Preencha o Sobrenome" 
-						value="<?=$sobrenome;?>" placeholder="Digite o Sobrenome"> 
-					</div>
-
-					<div>
-						<span>
-                        CPF
-                        <label for="cpf"></label>
-                        </span>
-						<input type="text" name="cpf" inputmode="numeric"  id="cpf" class="form-control" required data-parsley-required-message="Preencha o cpf"  
-						onblur="verificarCpf(this.value)" value="<?=$cpf;?>" placeholder="Digite seu CPF" data-inputmask="'mask':'999.999.999-99'"> 
-					</div>
-
-                    <div>
-						<span>
-                        GENERO
-                        <label class="form-label" for="genero_id"></label>
-                      	</span>
-                      	<select name="genero_id" id="genero_id" class="form-control" required data-parsley-required-message="selecione uma opção">
-                        	<option value="<?=$genero_id;?>">Selecione o Gênero</option>
-                          	<?php
-								$sql = "SELECT * FROM genero ORDER BY id";
-								$consulta = $pdo->prepare($sql);
-								$consulta->execute();
-
-								while ($d = $consulta->fetch(PDO::FETCH_OBJ) ) {
-									//separar os dados
-									$id   = $d->id;
-									$genero = $d->genero;
-									echo '<option value="'.$id.'">'.$genero.'</option>';
-								}                    
-							?>
-						</select>
-					</div>
-
-                    <div>
-						<span>DATA DE NASCIMENTO<label for="data_nascimento"></label></span>
-						<input type="text" name="data_nascimento" id="data_nascimento" class="form-control" required data-parsley-required-message="Preencha a data de nascimento" 
-						placeholder="Ex: 11/12/1990" value="<?=$data_nascimento;?>"> 
-					</div>
-
-                    <div>
-                      <span>TELEFONE<label for="telefone"></label></span>
-                      <input type="text" name="telefone" id="telefone" class="form-control" placeholder="Telefone com DDD" value="<?=$telefone;?>">
-                    </div>
-
-                    <div>
-                      <span>CELULAR<label for="celular"></label></span>
-                      <input type="text" name="celular" id="celular" class="form-control" placeholder="Celular com DDD"
-                      value="<?=$celular;?>" required data-parsley-required-message="Preencha o Celular">
-                    </div>
-
-                    <div class="clear"> </div>
-
-                    <div class="register-center-grid" style="text-justify: left;">
-                      	<h3>INFORMAÇÕES DE SOBRE CIDADE</h3>
-                    </div>
-						<div>
-							<span>CEP<label for="cep"></label></span>
-							<input type="text" name="cep" id="cep" class="form-control" required data-parsley-required-message="Preencha o CEP" value="<?=$cep;?>" placeholder="Digite o CEP da Sua Cidade">
+<div class="container-fluid p-0 mt-3">
+    <div class="col-md-12">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4 class="text-center">Cadastre-se</h4>
+            </div>
+            <div class="card-body">
+				<form name="formCadastro" method="post" action="login/salvarCliente" data-parsley-validate enctype="multipart/form-data" > 
+					<div class="row">
+						<h5>INFORMAÇÕES PESSOAIS</h5>
+						<div style="display: none;">
+							<label for="id">ID:</label>
+							<input type="text" name="id" id="id" class="form-control" readonly value="<?=$id;?>" placeholder="id">
 						</div>
-
-						<div>
+						<div class="col-12 col-md-4">
+							<span>Primeiro Nome<label for="primeiro_nome"></label></span>
+							<input name="primeiro_nome" 
+								id="primeiro_nome"
+								class="form-control" 
+								required data-parsley-required-message="Preencha o Primeiro Nome" 
+								value="<?=$primeiro_nome;?>" 
+								placeholder="Digite o Primeiro Nome"> 
+						</div>
+						<div class="col-12 col-md-4">
+							<span> Sobrenome<label for="sobrenome"></label></span>
+							<input type="text" 
+								name="sobrenome" 
+								id="sobrenome"
+								class="form-control" 
+								required data-parsley-required-message="Preencha o Sobrenome" 
+								value="<?=$sobrenome;?>" 
+								placeholder="Digite o Sobrenome"> 
+						</div>
+						<div class="col-12 col-md-4">
+							<span>CPF<label for="cpf"></label></span>
+							<input type="text" 
+								name="cpf" 
+								inputmode="numeric" 
+								id="cpf"
+								class="form-control" 
+								required data-parsley-required-message="Preencha o cpf"  
+								onblur="verificarCpf(this.value)" 
+								value="<?=$cpf;?>" 
+								placeholder="Digite seu CPF" 
+								data-inputmask="'mask':'999.999.999-99'"> 
+						</div>
+						<div class="col-12 col-md-2 mt-2">
+							<span>Gênero<label class="form-label" for="genero_id"></label></span>
+							<select name="genero_id" id="genero_id" class="form-control" required data-parsley-required-message="selecione uma opção">
+								<option value="<?=$genero_id;?>">Selecione seu Gênero</option>
+								<?php
+									$sql = "SELECT * FROM genero ORDER BY id";
+									$consulta = $pdo->prepare($sql);
+									$consulta->execute();
+									while ($d = $consulta->fetch(PDO::FETCH_OBJ) ) {
+										echo "<option value={$d->id}>{$d->genero}</option>";
+									}                    
+								?>
+							</select>
+						</div>
+						<div class="col-12 col-md-2 mt-2">
+							<span>Data de Nascimento<label for="data_nascimento"></label></span>
+							<input type="text"
+								name="data_nascimento" 
+								id="data_nascimento"
+								class="form-control" 
+								required data-parsley-required-message="Preencha a data de nascimento" 
+								placeholder="Ex: 11/12/1990" 
+								value="<?=$data_nascimento;?>"> 
+						</div>
+						<div class="col-12 col-md-2 mt-2">
+							<span>Celular<label for="celular"></label></span>
+							<input type="text" 
+								name="celular" 
+								id="celular" 
+								class="form-control" 
+								placeholder="Celular com DDD"
+								value="<?=$celular;?>" 
+								required data-parsley-required-message="Preencha o Celular">
+						</div>
+						<div class="col-12 col-md-2 mt-2">
+							<span>Cep<label for="cep"></label></span>
+							<input type="text"
+								name="cep" 
+								id="cep" 
+								class="form-control" 
+								required data-parsley-required-message="Preencha o CEP" 
+								value="<?=$cep;?>" 
+								placeholder="Digite o CEP da Sua Cidade">
+						</div>
+						<div class="col-12 col-md-2 mt-2" style="display: none;">
 							<label for="cidade_id">ID Cidade</label>
-							<input type="text" name="cidade_id" id="cidade_id" class="form-control" required data-parsley-required-message="Preencha a Cidade" readonly value="<?=$cidade_id;?>">
+							<input type="text" 
+								name="cidade_id" 
+								id="cidade_id" 
+								class="form-control"
+								required data-parsley-required-message="Preencha a Cidade" 
+								readonly 
+								value="<?=$cidade_id;?>">
 						</div>
-
-						<div>
-							<span>CIDADE<label for="cidade"></label></span>
-							<input type="text" id="cidade" name="cidade" class="form-control"	value="<?=$cidade;?>" placeholder="Nome da Cidade">
+						<div class="col-12 col-md-2 mt-2">
+							<span>Cidade<label for="cidade"></label></span>
+							<input type="text"
+								id="cidade" 
+								name="cidade" 
+								class="form-control"	
+								value="<?=$cidade;?>" 
+								placeholder="Nome da Cidade">
 						</div>
-
-						<div>
-							<span>ESTADO<label for="estado"></label></span>
-							<input type="text" id="estado" name="estado" class="form-control" value="<?=$estado;?>" placeholder="UF">
+						<div class="col-12 col-md-2 mt-2">
+							<span>Estado<label for="estado"></label></span>
+							<input type="text" 
+								id="estado" 
+								name="estado"
+								class="form-control" 
+								value="<?=$estado;?>" 
+								placeholder="UF">
 						</div>
-
-						<div>
-							<span>ENDEREÇO<label for="endereco"></label></span>
-							<input type="text" name="endereco" id="endereco" class="form-control" value="<?=$endereco;?>" placeholder="Av. Gopouva, Alameda Yayá">
+						<div class="col-12 col-md-4 mt-2">
+							<span>Endereço<label for="endereco"></label></span>
+							<input type="text" 
+								name="endereco"
+								id="endereco"
+								class="form-control" 
+								value="<?=$endereco;?>" 
+								placeholder="Avenida, Rua, Viela, ...">
 						</div>
-
-						<div>
-							<span>BAIRRO<label for="bairro"></label></span>
-							<input type="text" name="bairro" id="bairro" class="form-control" value="<?=$bairro;?>" placeholder="Nome do bairro">
+						<div class="col-12 col-md-4 mt-2">
+							<span>Bairro<label for="bairro"></label></span>
+							<input type="text"
+								name="bairro"
+								id="bairro"
+								class="form-control"
+								value="<?=$bairro;?>" 
+								placeholder="Nome do bairro">
 						</div>
-
-						<div>
-							<span>NUMERO RESIDENCIA<label for="numero_resid"></label></span>
-							<input type="text" name="numero_resid" id="numero_resid" class="form-control" value="<?=$numero_resid;?>" placeholder="Numero da Residencia">
+						<div class="col-12 col-md-2 mt-2">
+							<span>N° Residencia<label for="numero_resid"></label></span>
+							<input type="text" 
+								name="numero_resid" 
+								id="numero_resid" 
+								class="form-control" 
+								value="<?=$numero_resid;?>" 
+								placeholder="Numero da Residencia">
 						</div>
-
-						<div>
-							<span>COMPLEMENTO<label for="complemento"></label></span>
-							<input type="text" name="complemento" id="complemento" class="form-control" value="<?=$complemento;?>" placeholder="Apartamento, Andar, Sala, Conjunto, etc">
+						<div class="col-12 col-md-2 mt-2">
+							<span>Complemento<label for="complemento"></label></span>
+							<input type="text"
+								name="complemento" 
+								id="complemento" 
+								class="form-control" 
+								value="<?=$complemento;?>" 
+								placeholder="Apartamento, Andar, Sala, Conjunto, etc">
 						</div>		
+						<div class="col-12 col-md-3 mt-2">
+							<span>E-mail<label for="email"></label></span>
+							<input type="email" 
+								name="email" 
+								id="email"
+								class="form-control" 
+								required data-parsley-required-message="Preencha o e-mail" 
+								data-parsley-type-message="Digite um E-mail válido" 
+								placeholder="exemple@hotmail.com" 
+								value="<?=$email;?>" 
+								onblur="confirmarEmail(this.value)">
+						</div>
+						<div class="col-12 col-md-3 mt-2">
+							<span>Senha<label for="senha"></label></span>
+							<input type="password" 
+								name="senha" 
+								id="senha"
+								class="form-control" 
+								value="<?=$senha?>" 
+								placeholder="Digite sua Senha Min:5 Max: 20"
+								minlength="5"
+								maxlength="20">
+						</div>
+						<div class="col-12 col-md-3 mt-2">
+							<span>Redigite sua Senha<label for="senha2"></label></span>
+							<input type="password" 
+								name="redigite" 
+								id="redigite" 
+								class="form-control"  
+								data-parsley-equalto="#senha" 
+								value="<?=$senha?>"
+								placeholder="Redigite sua Senha"
+								data-parsley-equalto="#senha"
+        						data-parsley-equalto-message="As senhas devem ser iguais">
+						</div>
+						<div class="col-12 col-md-5 mt-2">
+                            <?php
+                                $required = ' required data-parsley-required-message="Selecione um arquivo" ';
+                                $link = NULL;
+                                //verificar se a imagem não esta em branco
+                                if ( !empty ( $foto ) ) {
+                                    //caminho para a imagem
+                                    $img = "../fotos/{$foto}m.jpg";
+                                    //criar um link para abrir a imagem
+                                    $link = "<a href='{$img}' data-lightbox='foto' class='badge badge-success'>Abrir imagem</a>";
+                                    $required = NULL;
+                                }
+                            ?>
+                            <label for="foto">Imagem (JPG)* <?=$link?>:</label>
+                            <input type="file" 
+								name="foto" 
+								id="foto" 
+								class="form-control"
+								<?=$required?>
+								accept="image/jpeg">
+                        </div>
+						<div class="col-12 col-md-2 mt-2">
+							<label for="ativo">Ativo</label>
+							<select name="ativo" id="ativo" class="form-control" 
+								required data-parsley-required-message="Selecione uma opção">
+								<option value="1" <?= $ativo == '1' ? "selected" : "" ?>>Ativo</option>
+							</select>
+                        </div>
+						<div class="col-12 col-md-2 mt-2">
+							<label for="pessoaFJ">Pessoa Fisica Juridica</label>
+							<select name="pessoaFJ" id="pessoaFJ" class="form-control" 
+								required data-parsley-required-message="Selecione uma opção">
+								<option value="F" <?= $pessoaFJ == 'F' ? "selected" : "" ?>>Pessoa Fisica</option>
+							</select>
+                        </div>
 					</div>
-					<div class="clear"> </div>
-					<div class="register-bottom-grid">
-						<h3 class="mt-4 mb-4">INFORMAÇÕES DE LOGIN</h3>
-                    		<div>
-								<span>ENDEREÇO DE E-MAIL<label for="email"></label></span>
-								<input type="email" name="email" id="email" class="form-control" required data-parsley-required-message="Preencha o e-mail" 
-							      data-parsley-type-message="Digite um E-mail válido" placeholder="exemple@hotmail.com" value="<?=$email;?>" onblur="confirmarEmail(this.value)">
-							</div>
-							<div>
-								<span>SENHA<label for="senha"></label></span>
-								<input type="password" name="senha" id="senha" class="form-control" value="<?=$senha?>" placeholder="Digite sua Senha">
-							</div>
-							<div>
-								<span>CONFIRME A SENHA<label for="senha2"></label></span>
-								<input type="password" name="senha2" id="senha2" class="form-control"  data-parsley-equalto="#senha" data-parsley-trigger="keyup" data-parsley-error-message="Senha não confere" value="<?=$senha?>"
-								placeholder="Redigite sua Senha">
-							</div>
-						<div class="clear"> </div>
+					<div class="float-end">
+						<button type="reset" class="btn btn-danger margin">
+							Apagar Tudo
+						</button>
+						<button type="submit" class="btn btn-success margin">
+							Salvar
+						</button>
 					</div>
-					<div class="clear"> </div>		
-                </div>
-                <button type="submit" class="btn btn-success margin">
-					Enviar
-				</button>
-			</form>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>
@@ -219,54 +296,17 @@
 		$('#cep').mask('00000-000');
 		$('#cpf').mask('000.000.000-00');
 		$("#data_nascimento").mask("00/00/0000");
-		$("#telefone").mask("(00) 0000-0000");
 		$("#celular").mask("(00) 00000-0000");
-
-	
 	});
 
-	// $("#cpf").blur(function(){
-    //     //recuperar o id e o cpf
-    //     var id = $("#id").val();
-    //     var cpf = $("#cpf").val();
-
-    //     if ( cpf != "" ){
-    //         //console.log(cpf);
-    //         $.post("verificarCpf.php",
-    //             {cpf:cpf,id:id},
-    //             function(dados){
-    //                 //console.log(dados);
-    //                 if (dados != "") {
-    //                     // Swal.fire(
-    //                     //   'Erro', //titulo
-    //                     //   dados, //mensagem
-	// 					// )
-	// 					alert(dados);
-	// 				}
-	// 			}
-	// 		)}
-	// });
-	// function verificarCpf(cpf) {
-	// 	$.get("verificarCpf.php", {cpf:cpf, id:<?//=$id;?>}, function(dados){
-	// 		if(dados != ""){
-	// 			//mostrar erro retornado
-	// 		//echo ($dados);
-	// 			alert(dados);
-	// 			//zerar cpf
-	// 			$("#cpf").val("");
-	// 		}
-	// 	})
-	// }
-
-	// function confirmarEmail(email){
-	// 	   $.get("validacao/verificaEmail.php", {email:email,id:<?//=$id;?>}, function(dados){
-	// 		   if(dados != ""){
-	// 			   alert(dados);
-	// 			   $("#email").val("");
-	// 		   }
-	// 	   }) 
-	// }
-
+	function confirmarEmail(email){
+		   $.get("validacao/verificaEmailCliente.php", {email:email,id:<?=$id;?>}, function(dados){
+			   if(dados != ""){
+				   alert(dados);
+				   $("#email").val("");
+			   }
+		   }) 
+	}
 
 	$("#cep").blur(function(){
 		//pegar o cep
@@ -296,28 +336,3 @@
         }
     });	
 </script>
-</div>
-<!--  
-<script>
-	/**
-	*  método para trocar a máscara do campo CPF/CNPJ quando o usuário alterar o tipo da pessoa. 
-	* @param evt evento de alteração do valor do campo
-	*/
-	public void trocarMascara(ValueChangeEvent evt){
-		itemSelecionado.setValue(evt.getNewValue());
-		if(itemSelecionado.getValue() != null){
-			mascaraCpfCnpj(itemSelecionado.getValue().toString());
-		}
-	}
-
-	// método para setar a máscara
-	/** * método para setar a máscara de CPF/CNPJ e o tpPessoa * @param tipoPessoa */
- 	public void mascaraCpfCnpj(String tipoPessoa){ 
-	 	if (tipoPessoa.equalsIgnoreCase("PJ")) {
-			this.setMascaraCpfCnpj("99.999.999/9999-99"); 
-			this.getPessoa().setTpPessoa("PJ"); 
-		} else { 
-			this.setMascaraCpfCnpj("999.999.999-99"); 
-			this.getPessoa().setTpPessoa("PJ"); } 
-		} 
-</script>-->

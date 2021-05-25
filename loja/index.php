@@ -84,6 +84,7 @@
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<script src="vendor/js/jquery.min.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script type="text/javascript">
         $(document).ready(function() {
             $(".dropdown img.flag").addClass("flagvisibility");
@@ -133,84 +134,50 @@
 								<li><a href="pages/home">Home</a></li>
 								<li><a href="pages/shop">Shop</a></li>
 								<li><a href="pages/sobre">Sobre</a></li>
-								<li><a href="pages/contact">Contato</a></li>	
-								
+								<li><a href="pages/contact">Contato</a></li>
+								<li><a href="pages/carrinho"><i class="fa fa-cart-plus" aria-hidden="true"></i></a></li>
+								<li><ul class="icon1 sub-icon1 ">
 								<?php
 									if(!isset($_SESSION["quanticshop"]["id"])){
-										echo 	'<li><ul class="icon1 sub-icon1 ">
-													<li><a href="login/login">Login</a></li>
-												</ul></li>';
+										echo '<li><a href="login/login">Login</a></li>';
 									}else{
-										echo '<li><ul class="icon1 sub-icon1 ">
-										<li><a href="#">Conta</a>
-											<ul class="list">
-												<div class="check_button dropdown-item"><a href="login/perfil">Perfil</a></div>
-												<div class="check_button dropdown-item"><a href="login/sair?token='.SHA1(session_id()).'">Sair</a></div>
-												<div class="check_button dropdown-item"><a href="login/configuracoesConta">Configurações de Conta</a></div>             
-											</ul>
-										</li>
-									</ul></li>';
+										echo '<li><a href="#">Conta</a>
+												<ul class="list">
+													<div class="check_button dropdown-item"><a href="login/perfil">Perfil</a></div>
+													<div class="check_button dropdown-item"><a href="login/sair">Sair</a></div>
+													<div class="check_button dropdown-item"><a href="login/configuracoesConta">Configurações de Conta</a></div>             
+												</ul>
+											</li>';
 									}
 								?>
-								<li><a href="pages/carrinho"><i class="fa fa-cart-plus" aria-hidden="true"></i></a></li>
-							</ul>	
-
+								</ul></li>
+							</ul>
 								<script type="text/javascript" src="vendor/js/responsive-nav.js"></script>
-								
 							</div>	
-							
-						
 						<div class="clear"></div>
-						
-					</div>
-								
-						<div class="clear"></div>
-								
-		        		<div class="clear"></div>
-						
+					</div>		
 	        	</div>
 	      	</div>
 		</div>
 	</div>
-	
   	<main>
 		<?php
-			//adicionar a programação para abrir a página desejada
 			$pagina = "pages/home.php";
-			//verificar se o parametro existe
 			if ( isset ( $_GET["parametro"])){
-				//recuperar o parametro
 				$p = trim ( $_GET["parametro"] );
-				//separar por /
 				$p = explode("/", $p);
 				$pasta 		= $p[0];
 				$arquivo  = $p[1];
-				//configurar nome do arquivo
 				$pagina = "$pasta/$arquivo.php";
-				//verificar se o id ou o 3 item existe
 				if ( isset ( $p[2] ) )
 					$id = $p[2];
 			}
-			//verificar se a pagina existe
 			if ( file_exists($pagina) ){
-				// echo $pagina;
 				include $pagina;
 
 			}else{
 				include "error/404.php";
 			}	
-
-
-
-
-			// configurar a pagina que ira ser incluida
-			// $pagina = "pages/".$pagina.".php";
-			// //verificar se a página existe
-			// if ( file_exists($pagina) ) {
-			// 	include $pagina;
-			// } else {
-			// 	include "pages/error/404.php";
-			// }
 		?>
   	</main>
 	<div class="footer">

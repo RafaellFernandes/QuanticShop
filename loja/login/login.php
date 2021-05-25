@@ -57,7 +57,7 @@
         //redirecionar para o home
         $msg = 'Deu certo!';
         //javascript para redirecionar
-        echo '<script>location.href="home";</script>';
+        echo '<script>location.href="pages/home";</script>';
         exit;
       }
       //mostrar erros
@@ -76,7 +76,7 @@
           <p>Não possui uma conta? cadastre-se ja!</p>
           <br><br><br><br><br>
 					<div class="button1 mt-4">
-					  <a href="register"><input type="submit" name="Submit" value="Criar uma Conta"></a>
+					  <a href="login/register"><input type="submit" name="Submit" value="Criar uma Conta"></a>
 					</div>
 					<div class="clear"></div>
 				</div>
@@ -98,7 +98,7 @@
 						    </p>
 						    <div class="remember">
 							    <p id="login-form-remember">
-							      <label for="modlgn_remember"><a href="pages-reset-password.html">Esqueceu sua senha? </a></label>
+							      <label for="modlgn_remember"><a href="login/resetPassword.php">Esqueceu sua senha? </a></label>
 							    </p>
 							    <input type="submit" class="button" value="Entrar"></div>
 							  </div>
