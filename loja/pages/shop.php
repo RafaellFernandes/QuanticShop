@@ -41,7 +41,7 @@
 								//var,casas decimais,sep decimal,sep milhares
 
 								echo "<div class='col-3 text-center'>
-								<img src='fotos/$foto' class='w-65'>
+								<img src='../fotos/$foto' class='w-65'>
 								<p>$nome_produto</p>
 								<p class='valor'>R$ $venda_unitaria</p>
 								<a href='pages/produto/$id'
