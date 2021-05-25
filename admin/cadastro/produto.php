@@ -155,7 +155,7 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
                         </div>
                         <div type="text" class="col-12 col-md-4 mt-2">
                             <label >Valor de Venda</label>
-                            <input type="number" id="venda_unitario" name="venda_unitaria" class="form-control" required data-parsley-required-message="Preencha este campo" 
+                            <input type="number" id="venda_unitaria" name="venda_unitaria" class="form-control" required data-parsley-required-message="Preencha este campo" 
                             class="form-control" readonly value="<?=$venda_unitaria;?>" placeholder="R$ 0,00">         
                         </div>
                        
@@ -215,11 +215,19 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
                                 <a href="processoCompra/produtoCompra" class="btn btn-danger">Item Compra</a> 
                             </div> 
                         </div>
-                        <div class="col-sm-4 mt-4">
+                        <div class="col-sm-2 mt-4">
+                            <div class="float-end ">
+                            <button type="reset" class="btn btn-danger margin">
+                                    Apagar tudo
+							</button>
+                            </div> 
+                        </div>
+                        <div class="col-sm-2 mt-4">
                             <div class="float-end">
                                 <a href="listagem/produto" class="btn btn-primary">Listar Registros</a> 
                             </div> 
                         </div>
+                        
                         
                     </div>
                 </form>
@@ -228,7 +236,9 @@ $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto 
     </div>
 </div>
 
-<script>$("#valor_unitario").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});</script>
+<!-- <script>$("#venda_unitaria").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});</script>
+<script>$("#promocao").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});</script>
+<script>$("#custo_unitario").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});</script> -->
 
 <script>
     $('#summernote').summernote({
@@ -271,7 +281,7 @@ $(document).ready(function(){
  var custo = document.getElementById("custo_unitario").value;
  var porcentagem = document.getElementById("porcentagem_lucro").value;
  var venda = parseInt(custo) * parseInt(porcentagem)/100;
- document.getElementById("venda_unitario").value = venda;
+ document.getElementById("venda_unitaria").value = venda;
  console.log(porcentagem);
  console.log(custo);
  console.log(venda);
