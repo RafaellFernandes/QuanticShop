@@ -24,7 +24,7 @@ include "validacao/functions.php";
     if ( !isset ( $id ) ) $id = "";
 
     //iniciar as variaveis
-    $produto_id = $nome_produto = $lote = $fornecedor_id = $razaoSocial = $data_cadastro = $ativo = $qtd_produto =  "";
+    $produto_id = $nome_produto = $lote = $fornecedor_id = $razaoSocial = $data_cadastro = $ativo = $qtdprodutoComprado =  "";
 
     //verificar se existe um id
     if ( !empty ( $id ) ) {
@@ -51,9 +51,9 @@ include "validacao/functions.php";
             $fornecedor_id            = $dados->fornecedor_id;
             $razaoSocial              = $dados->razaoSocial;
             $data_cadastro            = $dados->data_cadastro;
-            $qtd_produto              = $dados->qtd_produto;
             $lote                     = $dados->lote;
             $ativo                    = $dados->ativo;
+            $qtdprodutoComprado       = $dados->qtdprodutoComprado;
             // $pativo                   = $dados->pativo;
         }
     }
@@ -133,8 +133,8 @@ include "validacao/functions.php";
                         </div>
                             <div type="text" class="col-12 col-md-4 mt-2 ">
                             <label >Quantidade comprada</label>
-                            <input type="number" id="qtd_produto" name="qtd_produto" class="form-control number_format" required data-parsley-required-message="Preencha este campo" 
-                                class="form-control" value="<?=$qtd_produto;?>">
+                            <input type="number" id="qtdprodutoComprado" name="qtdprodutoComprado" class="form-control number_format" required data-parsley-required-message="Preencha este campo" 
+                                class="form-control" value="<?=$qtdprodutoComprado;?>">
                         </div>       
                         <div class="row g-2">
                             <div class="col-sm-4 mt-4">

@@ -27,7 +27,7 @@ if ( $_POST ) {
     include "config/conexao.php";
 
     //recuperar dados do formulario
-    $id = $produto_id = $nome_produto = $lote = $fornecedor_id = $razaoSocial = $data_cadastro = $ativo = $qtd_produto =  "";
+    $id = $produto_id = $nome_produto = $lote = $fornecedor_id = $razaoSocial = $data_cadastro = $ativo = $qtdprodutoComprado =  "";
 
     foreach ($_POST as $key => $value) {
         $$key = trim ( $value );
@@ -42,7 +42,7 @@ if ( $_POST ) {
         echo "<script>alert('Preencha o fornecedor!');history.back();</script>";
     } else if( empty($lote) ){
         echo "<script>alert('Preencha o lote');history.back();</script>";
-    } else if( empty($qtd_produto) ){
+    } else if( empty($qtdprodutoComprado) ){
         echo "<script>alert('Preencha a quantida de produtos');history.back();</script>";    
 
     }    
@@ -52,26 +52,26 @@ if ( $_POST ) {
 
     if(empty($id)){
 
-        $sql = "INSERT INTO item_compra( data_cadastro, lote, fornecedor_id, produto_id, qtd_produto, ativo)
-        VALUES (:data_cadastro, :lote, :fornecedor_id, :produto_id, :qtd_produto, :ativo)";
+        $sql = "INSERT INTO item_compra( data_cadastro, lote, fornecedor_id, produto_id, qtdprodutoComprado, ativo)
+        VALUES (:data_cadastro, :lote, :fornecedor_id, :produto_id, :qtdprodutoComprado, :ativo)";
         $consulta = $pdo->prepare($sql);
         $consulta->bindParam(':data_cadastro', $data_cadastro);
         $consulta->bindParam(':lote', $lote);
         $consulta->bindParam(':fornecedor_id', $fornecedor_id);
         $consulta->bindParam(':produto_id', $produto_id);
-        $consulta->bindParam(':qtd_produto', $qtd_produto);
+        $consulta->bindParam(':qtdprodutoComprado', $qtdprodutoComprado);
         $consulta->bindParam(':ativo', $ativo);
   
     } else { 
     
         $sql = "UPDATE item_compra SET data_cadastro = :data_cadastro, lote = :lote, 
-        fornecedor_id = :fornecedor_id, produto_id = :produto_id, qtd_produto = :qtd_produto, ativo = :ativo WHERE id = :id ";
+        fornecedor_id = :fornecedor_id, produto_id = :produto_id, qtdprodutoComprado= :qtdprodutoComprado, ativo = :ativo WHERE id = :id ";
         $consulta = $pdo->prepare($sql);
         $consulta->bindParam(':data_cadastro', $data_cadastro);
         $consulta->bindParam(':lote', $lote);
         $consulta->bindParam(':fornecedor_id', $fornecedor_id);
         $consulta->bindParam(':produto_id', $produto_id);
-        $consulta->bindParam(':qtd_produto', $qtd_produto);
+        $consulta->bindParam(':qtdprodutoComprado', $qtdprodutoComprado);
         $consulta->bindParam(':ativo', $ativo);
         $consulta->bindParam(":id", $id);
     }
