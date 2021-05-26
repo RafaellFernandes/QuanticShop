@@ -35,7 +35,7 @@ $html = "
                     <td>{$pessoa["pid"]}</td>
                     <td>".($pessoa["nome_produto"])."</td>
                     <td>".($pessoa["codigo"])."</td>
-                    <td>R$ ".($pessoa["valor_unitario"])."</td>
+                    <td>R$ ".($pessoa["venda_unitaria"])."</td>
                     <td>".($pessoa["vezesVendido"])."</td>
                     <td>".($pessoa["marca_id"])."-".($pessoa["nome_marca"])."</td>
                     <td>".($pessoa["departamento_id"])."-".($pessoa["nome_dept"])."</td>
