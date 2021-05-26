@@ -6,7 +6,7 @@
 
 		//recuperar as variáveis
 		$id = trim ( $_POST['id'] ?? NULL );
-		$quantidade = trim ( $_POST['quantidade'] ?? 1 );
+		$quantidadeCarrinho = trim ( $_POST['quantidadeCarrinho'] ?? 1 );
 
 		//verificar se o id está vazio
 		if ( empty ( $id ) ) {
@@ -42,7 +42,7 @@
 		$_SESSION["carrinho"][$id] = array("id"=>$id, 
 										"nome_produto"=>$nome_produto,
 										"venda_unitaria"=>$valorProduto,
-										"quantidade"=>$quantidade,
+										"quantidadeCarrinho"=>$quantidadeCarrinho,
 										"total"=>$total);
 		//print_r ( $_SESSION['carrinho'] );
 
