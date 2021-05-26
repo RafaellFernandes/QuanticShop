@@ -42,51 +42,48 @@ exit;
 					</thead>
 					<tbody><br>
 						<?php
-                            $sql =  "SELECT p.id pid, p.ativo pativo, p.*, count(p.vezesVendido) as vezes, 
-                                            ic.id icid, ic.status icstatus, ic.*, count(ic.qtd_produto) as quantidade, date_format(ic.data_cadastro, '%d/%m/%Y') datacad, 
-                                            e.id eid, e.* 
-                                            FROM item_compra ic 
-                                            INNER JOIN produto p ON (p.id = ic.produto_id) 
-                                            INNER JOIN estoque e ON (p.id = e.produto_id) 
-                                            WHERE ic.status = 1 ORDER BY p.id DESC";
 
+
+                            // $sql =  "SELECT p.id pid, p.ativo pativo, p.*, count(p.vezesVendido) as vezes, 
+                            //                 ic.id icid, ic.status icstatus, ic.*, count(ic.qtd_produto) as quantidade, date_format(ic.data_cadastro, '%d/%m/%Y') datacad, 
+                            //                 e.id eid, e.* 
+                            //                 FROM item_compra ic 
+                            //                 INNER JOIN produto p ON (p.id = ic.produto_id) 
+                            //                 INNER JOIN estoque e ON (p.id = e.produto_id) 
+                            //                 WHERE ic.status = 1 ORDER BY p.id DESC";
+
+                            $sql = "SELECT e.id eid, e.*,p.id pid, p.*,ic.id icid, ic.*  
+                                    FROM estoque e 
+                                    INNER JOIN produto p ON (p.id = e.produto_id) 
+                                    INNER JOIN item_compra ic ON (p.id = ic.produto_id)
+                                    WHERE ativo = 1 DESC";
                             $consulta = $pdo->prepare($sql);
 							$consulta->execute();
                            
 							while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
 								//separar os dados
+                                $custo_unitario     = $dados->custo_unitario;
+                                $custo_unitario     = number_format($custo_unitario,2, '.' , ',');	
+                                                        
 
-                                $eid 		                 = $dados->eid;
-                                $icid 		                 = $dados->icid;
-                                $pid 		                 = $dados->pid;
-                                $codigo                      = $dados->codigo;
-                                $nome_produto                = $dados->nome_produto;
-                                $qtd_estoque                 = $dados->qtd_estoque;  
-                                $datacad                     = $dados->datacad;
-                                $quantidade                  = $dados->quantidade;
-                                $custo_unitario              = $dados->custo_unitario;
-                                $custo_unitario              = number_format($custo_unitario,2, '.' , ',');	
-                                $vezes                       = $dados->vezes;
-                                $vezesVendido                = $dados->vezesVendido;
-                                $pativo                      = $dados->pativo;
-                                
-                                $qtd_produto                 = $dados->qtd_produto;                             
 
 								//mostrar na tela
 								if ($pativo == "1"){
-									echo '<tr>
-                                            <td>'.$pid.'</td>
-                                            <td>'.$codigo.'</td>
-                                            <td>'.$nome_produto.'</td>
-                                            <td>'.$qtd_estoque.'</td>
-                                            <td>'.$datacad.'</td>
-                                            <td>'.$qtd_produto.'</td>
-                                            <td>R$ '.$custo_unitario.'</td>
-                                            <td>'.$vezesVendido.'</td>
-                                            <td>'.$quantidade.'</td>
-                                            <td>'.$vezes.'</td>
-                                           
-									     </tr>';
+                                ?>
+									<tr>
+                                        <td>pid</td>
+                                        <td>codigo</td>
+                                        <td>nome_produto</td>
+                                        <td>qtd_estoque</td>
+                                        <td>datacad</td>
+                                        <td>qtd_produto</td>
+                                        <td>R$ custo_unitario</td>
+                                        <td>vezesVendido</td>
+                                        <td>quantidade</td>
+                                        <td>vezes</td>
+									</tr>
+
+                            <?php
 								}
 								
 							}
