@@ -25,7 +25,8 @@ include "validacao/functions.php";
 if ( !isset ( $id ) ) $id = "";
 
 //iniciar as variaveis
-$nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto = $promocao = $custo_unitario = $venda_unitaria = $ativo = $departamento_id = $marca_id =  $estoque_id = "";
+$nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto = $promocao = $custo_unitario = $venda_unitaria = 
+$ativo = $departamento_id = $marca_id =  $estoque_id = $porcentagem_lucro = "";
 
   //verificar se existe um id
   if (!empty ( $id ) ) {
@@ -278,13 +279,20 @@ $(document).ready(function(){
 </script>
 <script>
     function valorVenda(){
- var custo = document.getElementById("custo_unitario").value;
- var porcentagem = document.getElementById("porcentagem_lucro").value;
- var venda = custo + (custo/porcentagem); //parseFloat(custo/porcentagem)*100;
- document.getElementById("venda_unitaria").value = venda;
- console.log(porcentagem);
- console.log(custo);
- console.log(venda);
+        var custo = document.getElementById('custo_unitario').value;
+        var porcentagem = document.getElementById('porcentagem_lucro').value;
 
+        var maior = (parseFloat(custo) > parseFloat(porcentagem)? custo : porcentagem);
+        var menor = (parseFloat(custo) < parseFloat(porcentagem)? custo : porcentagem);
+        // var porcentagem = porcentagem/100;
+        var venda = (menor/maior)*100;
+ 
+        // var venda = custo * (porcentagem / 0.01);
+        
+        document.getElementById('venda_unitaria').value = venda;
+        
+        console.log(porcentagem);
+        
+        console.log(venda);
     }
 </script>
