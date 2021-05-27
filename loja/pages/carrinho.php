@@ -91,10 +91,10 @@
 	</tfoot>
 </table>
 
-<a href="javascript:excluir(<?=$id?>)" class="btn btn-danger btn-lg float-left">
+<a href="pages/excluir(<?=$id?>)" class="btn btn-danger btn-lg float-left">
 	Limpar Carrinho
 </a>
-<a href="pages/finalizar" class="btn btn-success btn-lg float-right">
+<a href="login/login" class="btn btn-success btn-lg float-right">
 	Finalizar Pedido
 </a>
 
