@@ -1,6 +1,6 @@
 
 body {
-    font-family: 'Open Sans';
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
 }
 table {
     border-collapse: collapse;
@@ -33,8 +33,18 @@ td {
     border: 2px solid gray;
 }
 
-h2,p {
+h2 {
     text-align: center;
+}
+.h2 {
+    text-align: center;
+}
+
+.p1{
+    text-align: left;
+}
+.p2{
+    text-align: right;
 }
 
 .nome{

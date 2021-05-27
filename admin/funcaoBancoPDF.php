@@ -7,16 +7,14 @@ function abrirBanco(){
 
 function selectAllMarca(){
     $banco = abrirBanco();
-    $sql = "SELECT ic.id icid, ic.status icstatus, ic.*,
-                m.id mid, m.*, 
-                f.id fid, f.*, 
-                p.id pid, p.ativo pativo, p.*  
-            FROM item_compra ic
-            INNER JOIN produto p ON (p.id = ic.produto_id)
-            INNER JOIN fornecedor f ON (f.id = ic.fornecedor_id)
+    $sql = "SELECT m.id mid, m.nome_marca, f.id fid, f.*, c.id cid, p.id pid, v.vezesVendido
+            FROM item_compra c
+            INNER JOIN produto p ON (p.id = c.produto_id)
+            INNER JOIN fornecedor f ON (f.id = c.fornecedor_id)
             INNER JOIN marca m ON (m.id = p.marca_id)
-            WHERE ic.status = 1
-            ORDER BY p.vezesVendido DESC";
+            INNER JOIN item_venda v ON (v.produto_id = p.id)
+            WHERE c.ativo = 1
+            ORDER BY v.vezesVendido DESC";
 
     $resultado = $banco->query($sql);
     $banco->close();
@@ -39,12 +37,14 @@ function selectAllPessoa(){
 
 function selectAllProdutoMaisVend(){
     $banco = abrirBanco();
-    $sql = "SELECT p.id pid, p.ativo pativo, p.*, m.id mid, m.*, d.id did, d.*  
-            FROM produto p 
-            INNER JOIN departamento d ON (d.id = p.departamento_id)
-            INNER JOIN marca m ON (m.id = p.marca_id)
-            WHERE p.ativo = 1
-            ORDER BY p.vezesVendido ASC ";
+    $sql = "SELECT p.id pid, p.ativo pativo, p.*, m.id mid, m.*, d.id did, d.*,v.id vid, v.vezesVendido, c.venda_unitaria  
+    FROM produto p 
+    INNER JOIN departamento d ON (d.id = p.departamento_id)
+    INNER JOIN marca m ON (m.id = p.marca_id) 
+    INNER JOIN item_venda v ON (v.produto_id = p.id) 
+    INNER JOIN item_compra c ON (c.produto_id = p.id)
+    WHERE p.ativo = 0
+    ORDER BY v.vezesVendido DESC";
 
     $resultado = $banco->query($sql);
     $banco->close();
@@ -56,15 +56,36 @@ function selectAllProdutoMaisVend(){
 
 function selectAllProdutoMenosVend(){
     $banco = abrirBanco();
-    $sql = "SELECT p.id pid, p.ativo pativo, p.*, m.id mid, m.*, d.id did, d.*  
-            FROM produto p 
-            INNER JOIN departamento d ON (d.id = p.departamento_id)
-            INNER JOIN marca m ON (m.id = p.marca_id)
-            WHERE p.ativo = 1
-            ORDER BY p.vezesVendido DESC ";
+    $sql = "SELECT p.id pid, p.ativo pativo, p.*, m.id mid, m.*, d.id did, d.*,v.id vid, v.vezesVendido, c.venda_unitaria  
+    FROM produto p 
+    INNER JOIN departamento d ON (d.id = p.departamento_id)
+    INNER JOIN marca m ON (m.id = p.marca_id) 
+    INNER JOIN item_venda v ON (v.produto_id = p.id) 
+    INNER JOIN item_compra c ON (c.produto_id = p.id)
+    WHERE p.ativo = 0
+    ORDER BY v.vezesVendido ASC";
 
     $resultado = $banco->query($sql);
     $banco->close();
+    while ($row = mysqli_fetch_array($resultado)) {
+        $grupo[] = $row;
+    }
+    return $grupo;
+}
+
+function selectAllEstoque(){
+    $banco = abrirBanco();
+    $sql = "SELECT p.id pid, p.ativo pativo, p.*,e.id eid, e.*, c.id cid, c.ativo cativo, date_format(c.data_cadastro, '%d/%m/%Y') dataCadastro, c.*, v.vezesVendido 
+    FROM produto p 
+    INNER JOIN estoque e ON (p.id = e.produto_id) 
+    INNER JOIN item_compra c ON (p.id = c.produto_id) 
+    INNER JOIN item_venda v ON (v.produto_id = p.id) 
+    WHERE c.ativo = 1
+    ORDER BY p.id";
+
+    $resultado = $banco->query($sql);
+    $banco->close();
+
     while ($row = mysqli_fetch_array($resultado)) {
         $grupo[] = $row;
     }

@@ -20,7 +20,7 @@ exit;
 			<div class="card">
 				<div class="card-header">
 					<div class="float-end">
-						<a class="btn btn-danger mt-3" target="_blank" href="relatorioFornecedorMarca.php">Gerar PDF</a>
+						<a class="btn btn-danger mt-3" target="_blank" href="relatorioGerencialEstoque.php">Gerar PDF</a>
 					</div>
 					<h4>RELATÓRIO</h4>
 					<h6 style="color: blue;"><strong>Gerencia de Estoque</strong></h6>
@@ -28,83 +28,48 @@ exit;
 				<table class="table table-bordered table-hover table-striped">
 					<thead>
 						<tr>
-                            <th>ID PRODUTO</th>
+                            <th>ID<br>PRDT</th>
 							<th>CODIGO</th>
 							<th>PRODUTO</th>
-							<th>QUANTIDADE<br>ESTOQUE</th>
+                            <th>ID<br>ETQ</th>
+							<th>QTDE<br>ESTOQUE</th>
+                            <th>LOTE</th>
                             <th>DATA CADASTRO</th>
-							<th>QUANTIDADE<br>COMPRA</th>
+							<th>QTDE<br>COMPRA</th>
                             <th>CUSTO<br>UNITARIO</th>
-                            <th>QUANTIDADE<br>VENDIDA</th>
-                            <th>TOTAL<br>COMPRADO</th>
-                            <th>TOTAL<br>VENDIDO</th>
+                            <th>QTDE<br>VENDIDA</th>
 						</tr>
 					</thead>
-					<tbody><br>
+					<tbody>
 						<?php
-
-
-                            // $sql =  "SELECT p.id pid, p.ativo pativo, p.*, count(p.vezesVendido) as vezes, 
-                            //                 ic.id icid, ic.status icstatus, ic.*, count(ic.qtd_produto) as quantidade, date_format(ic.data_cadastro, '%d/%m/%Y') datacad, 
-                            //                 e.id eid, e.* 
-                            //                 FROM item_compra ic 
-                            //                 INNER JOIN produto p ON (p.id = ic.produto_id) 
-                            //                 INNER JOIN estoque e ON (p.id = e.produto_id) 
-                            //                 WHERE ic.status = 1 ORDER BY p.id DESC";
-
-                            $sql = "SELECT e.id eid, e.*,p.id pid, p.*,ic.id icid, ic.*  
-                                    FROM estoque e 
-                                    INNER JOIN produto p ON (p.id = e.produto_id) 
-                                    INNER JOIN item_compra ic ON (p.id = ic.produto_id)
-                                   ";
+                            $sql = "SELECT p.id pid, p.ativo pativo, p.*,e.id eid, e.*, c.id cid, c.ativo cativo, date_format(c.data_cadastro, '%d/%m/%Y') dataCadastro, c.*, v.vezesVendido 
+                                    FROM produto p 
+                                    INNER JOIN estoque e ON (p.id = e.produto_id) 
+                                    INNER JOIN item_compra c ON (p.id = c.produto_id) 
+                                    INNER JOIN item_venda v ON (v.produto_id = p.id) 
+                                    WHERE c.ativo = 1
+                                    ORDER BY p.id";
                             $consulta = $pdo->prepare($sql);
 							$consulta->execute();
-
-                            $dados = $consulta->fetch(PDO::FETCH_OBJ);
-                            var_dump($dados );
-
-							while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
+              
+							while ( $dados = $consulta->fetch(PDO::FETCH_OBJ)){ 
 								//separar os dados
-                                $custo_unitario     = $dados->custo_unitario;
-                                $custo_unitario     = number_format($custo_unitario,2, '.' , ',');	
-                                                        
-
-								//mostrar na tela
-								if ($pativo == "1"){
-                                
-								echo " 	<tr>
-                                        <td>'$pid'</td>
-                                        <td>codigo</td>
-                                        <td>nome_produto</td>
-                                        <td>qtd_estoque</td>
-                                        <td>datacad</td>
-                                        <td>qtd_produto</td>
-                                        <td>R$ custo_unitario</td>
-                                        <td>vezesVendido</td>
-                                        <td>quantidade</td>
-                                        <td>vezes</td>
-									</tr>";
-
-                            
-								}
-								
-							}
-
-
-                            echo " 	<tr>
-                                        <td>pid</td>
-                                        <td>codigo</td>
-                                        <td>nome_produto</td>
-                                        <td>qtd_estoque</td>
-                                        <td>datacad</td>
-                                        <td>qtd_produto</td>
-                                        <td>R$ custo_unitario</td>
-                                        <td>vezesVendido</td>
-                                        <td>quantidade</td>
-                                        <td>vezes</td>
-									</tr>";
+                                // $custo_unitario     = $dados->custo_unitario;
+                                $custo_unitario     = number_format($dados->custo_unitario,2, '.' , ',');
+								echo "<tr>
+                                        <td>$dados->pid</td>
+                                        <td>$dados->codigo</td>
+                                        <td>$dados->nome_produto</td>
+                                        <td>$dados->eid</td>
+                                        <td>$dados->qtd_estoque</td>
+                                        <td>$dados->lote</td>
+                                        <td>$dados->dataCadastro</td>
+                                        <td>$dados->qtdProdutoComprado</td>
+                                        <td>R$ $custo_unitario</td>
+                                        <td>$dados->vezesVendido</td>
+								    </tr>";
+                            }
 						?>
-                        
 					</tbody>
 				</table>
 			</div>

@@ -82,12 +82,12 @@ include "config/conexao.php";
                     
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title mb-4">Produtos Vendidos</h4>
+                            <h5 class="card-title mb-4">Produtos Vendidos</h5>
                             <h2 class="mt-1 mb-3">
                                 <?php
                                     $conn = mysqli_connect('localhost','root','','quanticshop');
  
-                                    $resultado = mysqli_query($conn, "SELECT sum(vezesVendido) FROM produto");
+                                    $resultado = mysqli_query($conn, "SELECT sum(vezesVendido) FROM item_venda");
                                     $linhas = mysqli_num_rows($resultado);
                                  
                                     while($linhas = mysqli_fetch_array($resultado)){
@@ -96,10 +96,6 @@ include "config/conexao.php";
                                  
                                 ?>
                             </h2>
-                            <div class="mb-1">
-                                <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> +25 </span>
-                                <span class="text-muted"> desde a semana passada</span>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -127,12 +123,18 @@ include "config/conexao.php";
                     </div>
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title mb-4">Empty</h5>
-                            <h1 class="mt-1 mb-3">00</h1>
-                            <div class="mb-1">
-                                <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i> 00.00% </span>
-                                <span class="text-muted"> desde a semana passada</span>
-                            </div>
+                            <h5 class="card-title mb-4">Produtos Cadastrados</h5>
+                            <h2 class="mt-1 mb-3">
+                                <?php
+                                    $total = 0;
+                                    // $n = 1;
+                                    $sql = "SELECT count(*) as p FROM produto";
+                                    $sql = $pdo->query($sql);
+                                    $sql = $sql->fetch();
+                                    $total = $sql['p'];
+                                    echo $total;
+                                ?>
+                            </h2>
                         </div>
                     </div> 
                 </div>

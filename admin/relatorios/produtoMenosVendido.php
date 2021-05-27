@@ -39,43 +39,35 @@ exit;
                             <th>ID - DEPARTAMENTO</th>
 						</tr>
 					</thead>
-					<tbody><br>
+					<tbody>
 						<?php
-                            $sql = "SELECT p.id pid, p.ativo pativo, p.*, m.id mid, m.*, d.id did, d.*  
-                                    FROM produto p 
-                                    INNER JOIN departamento d ON (d.id = p.departamento_id)
-                                    INNER JOIN marca m ON (m.id = p.marca_id) ORDER BY p.vezesVendido ASC";
+                           $sql = "SELECT p.id pid, p.ativo pativo, p.*, m.id mid, m.*, d.id did, d.*,v.id vid, v.vezesVendido, c.venda_unitaria  
+						   FROM produto p 
+						   INNER JOIN departamento d ON (d.id = p.departamento_id)
+						   INNER JOIN marca m ON (m.id = p.marca_id) 
+						   INNER JOIN item_venda v ON (v.produto_id = p.id) 
+						   INNER JOIN item_compra c ON (c.produto_id = p.id)
+						   WHERE p.ativo = 0
+						   ORDER BY v.vezesVendido ASC";
 
-                            $consulta = $pdo->prepare($sql);
+							$consulta = $pdo->prepare($sql);
 							$consulta->execute();                            
 
 							while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
-								//separar os dados
-								$pid 		                 = $dados->pid;
-                                $nome_produto 		         = $dados->nome_produto;
-                                $codigo                      = $dados->codigo;
-                                $venda_unitaria              = $dados->venda_unitaria;
-                                $venda_unitaria             = number_format($venda_unitaria,2, '.' , ',');
-                                $vezesVendido                = $dados->vezesVendido;
-								$marca_id                    = $dados->marca_id;
-                                $nome_marca                  = $dados->nome_marca;
-                                $departamento_id             = $dados->departamento_id;
-							 	$nome_dept 	                 = $dados->nome_dept;
-                                $pativo					     = $dados->pativo;
+							
+								$venda_unitaria              = $dados->venda_unitaria;
+								$venda_unitaria              = number_format($venda_unitaria,2, '.' , ',');
 
-								//mostrar na tela
-								if ($pativo == "1"){
-                                    echo '<tr>
-                                        <td>'.$pid.'</td>
-                                        <td>'.$nome_produto.'</td>
-                                        <td>'.$codigo.'</td>
-                                        <td>R$ '.$valor_unitario.'</td>
-                                        <td>'.$vezesVendido.'</td>
-                                        <td>'.$marca_id.' - '.$nome_marca.'</td>
-                                        <td>'.$departamento_id.' - '.$nome_dept.'</td>
-								    </tr>';
-                                }
-							 }
+								echo "<tr>
+									<td>$dados->pid</td>
+									<td>$dados->nome_produto</td>
+									<td>$dados->codigo</td>
+									<td>R$ $venda_unitaria</td>
+									<td>$dados->vezesVendido</td>
+									<td>$dados->marca_id - $dados->nome_marca</td>
+									<td>$dados->departamento_id - $dados->nome_dept</td>
+								</tr>";
+							}
 						?>
 					</tbody>
 				</table>

@@ -13,9 +13,10 @@ $mpdf->SetDisplayMode("fullpage");
 $stylesheet = file_get_contents('stylepdf.css');
 
 $html = "
+<h1 class='h2'><img src='img/saturno.png' width='50' height='50'> Quantic Shop ☄</h1>
 <h2>Relatório de Marca Mais Comprada por Fornecedor</h2>
-<p>Data de Emissão: ". $data ."</p>
-<p>Gerado Por: ". $nome ."</p><hr/>
+<p>Data de Emissão: ". $data ."</p><hr/>
+
     <div>
         <table>
             <thead>
@@ -25,7 +26,7 @@ $html = "
                 <th>CNPJ</th>
                 <th>EMAIL<br>SITE</th>
                 <th class='numero'>TELEFONE<br>CELULAR</th>
-                <th>CIDADE-UF</th>
+                <th>ID<br>CIDADE-UF</th>
                 </tr>
             </thead>
             <tbody>";
@@ -42,8 +43,11 @@ $html = "
                  </tr>";
              }
                
-          $html = $html ."  </tbody>
-        </table></div>";
+          $html = $html ." 
+         </tbody>
+        </table>
+    </div><hr/>
+    <p class='p2'>Gerado Por: ". $nome ."</p>";
 
 $mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
 $mpdf->WriteHTML($html,\Mpdf\HTMLParserMode::HTML_BODY);
