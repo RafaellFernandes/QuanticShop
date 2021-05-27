@@ -49,9 +49,9 @@
 			foreach ( $_SESSION['carrinho'] as $dados ) {
 				//recuperar os dados do array carrinho
 				$id = $dados["id"];
-				$produto = $dados["nome_produto"];
-				$valor = $dados["venda_unitaria"];
-				$quantidade = $dados["quantidadeCarrinho"];
+				$nome_produto = $dados["nome_produto"];
+				$venda_unitaria = $dados["venda_unitaria"];
+				$quantidadeCarrinho = $dados["quantidadeCarrinho"];
 				$total = $dados["total"];
 
 				//somar o totalGeral
@@ -64,16 +64,17 @@
 				//tr - linha
 				//td - célula ou coluna
 				echo "<tr>
-					<td>{$nome_produto}</td>
-					<td>{$quantidadeCarrinho}</td>
-					<td>R$ {$venda_unitaria}</td>
-					<td>R$ {$total}</td>
-					<td>
-						<button type='button' class='btn btn-danger btn-sm' onclick='excluirProduto({$id})'>
-							<i class='fas fa-trash'></i>
-						</button>
-					</td>
-				</tr>";			
+						<td>{$nome_produto}</td>
+						<td>{$quantidadeCarrinho}</td>
+						<td>R$ {$venda_unitaria}</td>
+						<td>R$ {$total}</td>
+						<td>
+							<button type='button' class='btn btn-danger btn-sm' onclick='excluirProduto($id)'>
+								<i class='fas fa-trash'></i>
+							</button>
+						</td>
+					</tr>";		
+				
 			}
 
 		}
@@ -90,10 +91,10 @@
 	</tfoot>
 </table>
 
-<a href="index.php?pagina=limpar" class="btn btn-danger btn-lg float-left">
+<a href="javascript:excluir(<?=$id?>)" class="btn btn-danger btn-lg float-left">
 	Limpar Carrinho
 </a>
-<a href="index.php?pagina=finalizar" class="btn btn-success btn-lg float-right">
+<a href="pages/finalizar" class="btn btn-success btn-lg float-right">
 	Finalizar Pedido
 </a>
 
@@ -105,7 +106,7 @@
 		//perguntar se deseja excluir
 		if ( confirm ("Deseja realmente excluir este item?") ) {
 			//envio para página que irá excluir com o id do produto
-			location.href="index.php?pagina=excluir&id="+id;
+			location.href="pages/excluir/"+id;
 		}
 	}
 </script>

@@ -38,19 +38,18 @@
 			<p>Código do Produto: <?=$dados->codigo?></p>
 			<h5 class="venda_unitaria mt-5"><strong>Valor: R$ <?=$dados->venda_unitaria;?></strong></h5>
 		
-
-		<form name="formProduto" method="post" action="index.php?pagina=adicionar">
-			<input type="hidden" name="id" value="<?=$id?>">
-			<div class="input-group">
-				<input type="number" name="quantidadeCarrinho" value="1" class="form-control form-control-lg" placeholder="Quantidade" required
-				inputmode="numeric">
-				<div class="input-group-append">
-					<button type="submit" class="btn btn-success btn-lg">
-						<i class="fas fa-check"></i> Adicionar ao Carrinho
-					</button>
+			<form name="formProduto" method="post" action="pages/adicionar">
+				<input type="hidden" name="id" value="<?=$dados->id?>">
+				<div class="input-group">
+					<input type="number" name="quantidadeCarrinho" value="1" class="form-control form-control-lg" placeholder="Quantidade" required
+					inputmode="numeric">
+					<div class="input-group-append">
+						<button type="submit" class="btn btn-success btn-lg">
+							<i class="fas fa-check"></i> Adicionar ao Carrinho
+						</button>
+					</div>
 				</div>
-			</div>
-		</form>
+			</form>
 		</div>
     </div>
   </div>

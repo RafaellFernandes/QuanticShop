@@ -14,19 +14,21 @@
 			exit;
 		}
 
-		//selecionar os dados do banco
-		$sql = "select id, nome_produto, venda_unitaria, promocao 
-			from produto 
-			where id = ".(int)$id." limit 1";
+		//selecionar os dados do banco id, nome_produto, venda_unitaria, promocao 
+		$sql = "SELECT *
+			FROM produto 
+			WHERE id = :id limit 1";
 
-		$result = mysqli_query($con, $sql);
-		$dados = mysqli_fetch_array($result);
+$consulta = $pdo->prepare($sql);
+$consulta->bindParam(':id', $id);
+$consulta->execute();
+$dados = $consulta->fetch(PDO::FETCH_OBJ);
 
 		//separar os dados
-		$id = $dados["id"];
-		$nome_produto = $dados["nome_produto"];
-		$venda_unitaria = $dados["venda_unitaria"];
-		$promocao = $dados["promocao"];
+		// $id = $dados["id"];
+		$nome_produto = $dados->nome_produto;
+		$venda_unitaria = $dados->venda_unitaria;
+		$promocao = $dados->promocao;
 
 		//o valorProduto sempre será o valor do produto
 		$valorProduto = $venda_unitaria;
@@ -36,7 +38,7 @@
 		}
 
 		//valor total
-		$total = $valorProduto * $quantidade;
+		$total = $valorProduto * $quantidadeCarrinho;
 
 		//guardar esses valores na sessao
 		$_SESSION["carrinho"][$id] = array("id"=>$id, 
@@ -47,7 +49,7 @@
 		//print_r ( $_SESSION['carrinho'] );
 
 		//redirecionar para o carrinho
-		echo "<script>location.href='index.php?pagina=carrinho';</script>";
+		echo "<script>location.href='index.php?pages=carrinho';</script>";
 
 		exit;
 
