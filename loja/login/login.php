@@ -100,12 +100,23 @@
 							    <p id="login-form-remember">
 							      <label for="modlgn_remember"><a href="login/resetPassword.php">Esqueceu sua senha? </a></label>
 							    </p>
+                  <?php
+                  //efetuar o login
+                  $_SESSION["cliente"] = array("id"=>$dados["id"],
+                    "nome"=>$dados["nome"],
+                    "email"=>$dados["email"]);
+                  //redirecionar
+                  echo "<script>location.href='index.php?pagina=carrinho';</script>";
+                  exit;
+                  ?>
 							    <input type="submit" class="button" value="Entrar"></div>
 							  </div>
 						  </fieldset>
 						</form>
 					</div>
 			  </div>
+      
+
 			
 			</div>
 		</div>

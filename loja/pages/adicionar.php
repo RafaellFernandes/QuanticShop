@@ -49,7 +49,7 @@ $dados = $consulta->fetch(PDO::FETCH_OBJ);
 		//print_r ( $_SESSION['carrinho'] );
 
 		//redirecionar para o carrinho
-		echo "<script>location.href='index.php?pages=carrinho';</script>";
+		echo "<script>location.href='pages/carrinho';</script>";
 
 		exit;
 
