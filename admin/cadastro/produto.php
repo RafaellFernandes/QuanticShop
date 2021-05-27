@@ -280,7 +280,7 @@ $(document).ready(function(){
     function valorVenda(){
  var custo = document.getElementById("custo_unitario").value;
  var porcentagem = document.getElementById("porcentagem_lucro").value;
- var venda = parseInt(custo) * parseInt(porcentagem)/100;
+ var venda = custo + (custo/porcentagem) * 0.1; //parseFloat(custo/porcentagem)*100;
  document.getElementById("venda_unitaria").value = venda;
  console.log(porcentagem);
  console.log(custo);
