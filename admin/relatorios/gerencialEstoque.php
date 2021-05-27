@@ -56,21 +56,42 @@ exit;
                                     FROM estoque e 
                                     INNER JOIN produto p ON (p.id = e.produto_id) 
                                     INNER JOIN item_compra ic ON (p.id = ic.produto_id)
-                                    WHERE ativo = 1 DESC";
+                                   ";
                             $consulta = $pdo->prepare($sql);
 							$consulta->execute();
-                           
+
+                            $dados = $consulta->fetch(PDO::FETCH_OBJ);
+                            var_dump($dados );
+
 							while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
 								//separar os dados
                                 $custo_unitario     = $dados->custo_unitario;
                                 $custo_unitario     = number_format($custo_unitario,2, '.' , ',');	
                                                         
 
-
 								//mostrar na tela
 								if ($pativo == "1"){
-                                ?>
-									<tr>
+                                
+								echo " 	<tr>
+                                        <td>'$pid'</td>
+                                        <td>codigo</td>
+                                        <td>nome_produto</td>
+                                        <td>qtd_estoque</td>
+                                        <td>datacad</td>
+                                        <td>qtd_produto</td>
+                                        <td>R$ custo_unitario</td>
+                                        <td>vezesVendido</td>
+                                        <td>quantidade</td>
+                                        <td>vezes</td>
+									</tr>";
+
+                            
+								}
+								
+							}
+
+
+                            echo " 	<tr>
                                         <td>pid</td>
                                         <td>codigo</td>
                                         <td>nome_produto</td>
@@ -81,13 +102,9 @@ exit;
                                         <td>vezesVendido</td>
                                         <td>quantidade</td>
                                         <td>vezes</td>
-									</tr>
-
-                            <?php
-								}
-								
-							}
+									</tr>";
 						?>
+                        
 					</tbody>
 				</table>
 			</div>
