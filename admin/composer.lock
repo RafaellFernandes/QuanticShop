@@ -1,9 +1,14 @@
 {
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "b51f4c2f2200e1f690b7b5dc9812400e",
     "packages": [
         {
             "name": "mpdf/mpdf",
             "version": "v8.0.11",
-            "version_normalized": "8.0.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mpdf/mpdf.git",
@@ -36,9 +41,7 @@
                 "ext-xml": "Needed mainly for SVG manipulation",
                 "ext-zlib": "Needed for compression of embedded resources, such as fonts"
             },
-            "time": "2021-05-12T14:18:06+00:00",
             "type": "library",
-            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Mpdf\\": "src/"
@@ -76,12 +79,11 @@
                     "type": "custom"
                 }
             ],
-            "install-path": "../mpdf/mpdf"
+            "time": "2021-05-12T14:18:06+00:00"
         },
         {
             "name": "myclabs/deep-copy",
             "version": "1.10.2",
-            "version_normalized": "1.10.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
@@ -104,9 +106,7 @@
                 "doctrine/common": "^2.6",
                 "phpunit/phpunit": "^7.1"
             },
-            "time": "2020-11-13T09:40:50+00:00",
             "type": "library",
-            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "DeepCopy\\": "src/DeepCopy/"
@@ -137,12 +137,11 @@
                     "type": "tidelift"
                 }
             ],
-            "install-path": "../myclabs/deep-copy"
+            "time": "2020-11-13T09:40:50+00:00"
         },
         {
             "name": "paragonie/random_compat",
             "version": "v9.99.100",
-            "version_normalized": "9.99.100.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
@@ -164,9 +163,7 @@
             "suggest": {
                 "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
             },
-            "time": "2020-10-15T08:29:30+00:00",
             "type": "library",
-            "installation-source": "dist",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
@@ -190,12 +187,11 @@
                 "issues": "https://github.com/paragonie/random_compat/issues",
                 "source": "https://github.com/paragonie/random_compat"
             },
-            "install-path": "../paragonie/random_compat"
+            "time": "2020-10-15T08:29:30+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
             "version": "v6.4.1",
-            "version_normalized": "6.4.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
@@ -229,9 +225,7 @@
                 "stevenmaguire/oauth2-microsoft": "Needed for Microsoft XOAUTH2 authentication",
                 "symfony/polyfill-mbstring": "To support UTF-8 if the Mbstring PHP extension is not enabled (^1.2)"
             },
-            "time": "2021-04-29T12:25:04+00:00",
             "type": "library",
-            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "PHPMailer\\PHPMailer\\": "src/"
@@ -269,12 +263,11 @@
                     "type": "github"
                 }
             ],
-            "install-path": "../phpmailer/phpmailer"
+            "time": "2021-04-29T12:25:04+00:00"
         },
         {
             "name": "psr/log",
             "version": "1.1.4",
-            "version_normalized": "1.1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
@@ -289,14 +282,12 @@
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "2021-05-03T11:20:27+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
                     "dev-master": "1.1.x-dev"
                 }
             },
-            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Psr\\Log\\": "Psr/Log/"
@@ -322,12 +313,11 @@
             "support": {
                 "source": "https://github.com/php-fig/log/tree/1.1.4"
             },
-            "install-path": "../psr/log"
+            "time": "2021-05-03T11:20:27+00:00"
         },
         {
             "name": "setasign/fpdi",
             "version": "v2.3.6",
-            "version_normalized": "2.3.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Setasign/FPDI.git",
@@ -356,9 +346,7 @@
             "suggest": {
                 "setasign/fpdf": "FPDI will extend this class but as it is also possible to use TCPDF or tFPDF as an alternative. There's no fixed dependency configured."
             },
-            "time": "2021-02-11T11:37:01+00:00",
             "type": "library",
-            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "setasign\\Fpdi\\": "src/"
@@ -397,8 +385,16 @@
                     "type": "tidelift"
                 }
             ],
-            "install-path": "../setasign/fpdi"
+            "time": "2021-02-11T11:37:01+00:00"
         }
     ],
-    "dev": true
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
 }
