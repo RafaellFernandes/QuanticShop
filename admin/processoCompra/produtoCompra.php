@@ -24,7 +24,7 @@ include "validacao/functions.php";
     if ( !isset ( $id ) ) $id = "";
 
     //iniciar as variaveis
-    $produto_id = $nome_produto = $lote = $fornecedor_id = $razaoSocial = $data_cadastro = $ativo = $qtdprodutoComprado =  "";
+    $produto_id = $nome_produto = $lote = $fornecedor_id = $razaoSocial = $data_cadastro = $ativo = $qtdprodutoComprado = $venda_unitaria = $custo_unitario = $porcentagem_lucro = "";
 
     //verificar se existe um id
     if ( !empty ( $id ) ) {
@@ -34,6 +34,11 @@ include "validacao/functions.php";
                 INNER JOIN fornecedor f ON (ic.fornecedor_id = f.id ) 
                 INNER JOIN produto p ON (ic.produto_id = p.id ) 
                 WHERE ic.id = :id LIMIT 1";
+
+        $sql="SELECT ic.id id, ic.*,  p.id pid, p.valor_unitario, p.* 
+        FROM item_compra ic 
+        INNER JOIN produto p on (p.id = item_compra.produto.id)
+        UPDATE id p.venda_unitaria = : valor_unitario WHERE ic.id = :id LIMIT 1";
         $consulta = $pdo->prepare($sql);
         $consulta->bindParam(":id", $id);
         $consulta->execute();
@@ -54,6 +59,9 @@ include "validacao/functions.php";
             $lote                     = $dados->lote;
             $ativo                    = $dados->ativo;
             $qtdprodutoComprado       = $dados->qtdprodutoComprado;
+            $venda_unitaria           = $dados->venda_unitaria;
+            $custo_unitario           = $dados->custo_unitario;
+            $porcentagem_lucro        = $dados->porcentagem_lucro;
             // $pativo                   = $dados->pativo;
         }
     }
@@ -116,6 +124,22 @@ include "validacao/functions.php";
                                         }
                                     ?>
                             </select>
+                        </div>
+                        <div type="text" class="col-12 col-md-4 mt-2 ">
+                        <label >Valor de Custo</label>
+                        <input type="number" id="custo_unitario" name="custo_unitario" class="form-control number_format" required data-parsley-required-message="Preencha este campo" 
+                            class="form-control" value="<?=$custo_unitario;?>" placeholder="R$ 0,00">
+                        </div>         
+                      
+                        <div type="text" class="col-12 col-md-4 mt-2">
+                            <label >Margem(%)</label>
+                            <input type="number" id="porcentagem_lucro" name="porcentagem_lucro" class="form-control"  required data-parsley-required-message="Preencha este campo" 
+                            class="form-control" onblur="valorVenda()" value="<?=$porcentagem_lucro;?>" placeholder="%">
+                        </div>
+                        <div type="text" class="col-12 col-md-4 mt-2">
+                            <label >Valor de Venda</label>
+                            <input type="number" id="venda_unitaria" name="venda_unitaria" class="form-control" required data-parsley-required-message="Preencha este campo" 
+                            class="form-control" readonly value="<?=$venda_unitaria;?>" placeholder="R$ 0,00">         
                         </div>
                         <div type="text" class="col-12 col-md-4 mt-2">
                             <label for="data_cadastro">Data</label>
@@ -197,6 +221,25 @@ $(document).ready(function(){
  console.log(custo);
  console.log(venda);
 
+    }
+</script>
+<script>
+    function valorVenda(){
+        var custo = document.getElementById('custo_unitario').value;
+        var porcentagem = document.getElementById('porcentagem_lucro').value;
+
+        var maior = (parseFloat(custo) > parseFloat(porcentagem)? custo : porcentagem);
+        var menor = (parseFloat(custo) < parseFloat(porcentagem)? custo : porcentagem);
+        // var porcentagem = porcentagem/100;
+        var venda = (menor/maior)*100;
+ 
+        // var venda = custo * (porcentagem / 0.01);
+        
+        document.getElementById('venda_unitaria').value = venda;
+        
+        console.log(porcentagem);
+        
+        console.log(venda);
     }
 </script>
 

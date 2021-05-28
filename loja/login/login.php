@@ -57,7 +57,7 @@
         //redirecionar para o home
         $msg = 'Deu certo!';
         //javascript para redirecionar
-        echo '<script>location.href="pages/home";</script>';
+        echo '<script>location.href="pages/carrinho";</script>';
         exit;
       }
       //mostrar erros
@@ -86,7 +86,7 @@
 	        <h4 class="title">Entrar</h4>
 					<div id="loginbox" class="loginbox">
           <?=$msg;?>
-						<form class="user" method="post" name="email" id="login-form" data-parsley-validate>
+            <form name="formLogin" method="post" action="login/logar" data-parsley-validate="">
 						  <fieldset class="input">
 						    <p id="login-form-username">
 						      <label for="modlgn_username">Email</label>
@@ -100,15 +100,7 @@
 							    <p id="login-form-remember">
 							      <label for="modlgn_remember"><a href="login/resetPassword.php">Esqueceu sua senha? </a></label>
 							    </p>
-                  <?php
-                  //efetuar o login
-                  $_SESSION["cliente"] = array("id"=>$dados["id"],
-                    "nome"=>$dados["nome"],
-                    "email"=>$dados["email"]);
-                  //redirecionar
-                  echo "<script>location.href='index.php?pagina=carrinho';</script>";
-                  exit;
-                  ?>
+
 							    <input type="submit" class="button" value="Entrar"></div>
 							  </div>
 						  </fieldset>
