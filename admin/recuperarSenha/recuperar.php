@@ -1,5 +1,5 @@
 <?php
-      include('config/conexao.php');
+      include('../config/conexao.php');
       include('Email.php');
 
        //mostrar erros
@@ -23,7 +23,7 @@
 
             $mail->enviarPara($_POST['email'], $info['primeiro_nome']);
 
-            $url = 'http://localhost//QuanticShop/admin/redefinir.php';
+            $url = 'http://localhost//QuanticShop/admin/recuperarSenha/redefinir.php';
 
             $corpo = 'Olá '.$info['primeiro_nome'].', <br>
             Foi solicitada uma redefinição da sua senha na "Nome do site". Acesse o link abaixo para redefinir sua senha.<br>
@@ -41,7 +41,7 @@
                  $data['erro'] = true;
             }
             
-            die('As orientações para criar uma nova senha no site tal foram enviadas ao seu e-mail.');
+            die('As orientações para criar uma nova senha foram enviadas ao seu e-mail.');
         
            
        }else{
