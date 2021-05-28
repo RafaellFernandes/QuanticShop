@@ -14,46 +14,56 @@
         use PHPMailer\PHPMailer\Exception;
 
         //Load Composer's autoloader
-        require './vendor/autoload.php';
+        require 'vendor/autoload.php';
 
-        //Instantiation and passing `true` enables exceptions
-        $mail = new PHPMailer(true);
 
-        try {
-            //Server settings
-            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output - Mostra as informaçoes na pagina quando manda
-            $mail->CharSet = 'UTF-8';
-            $mail->isSMTP();                                            //Send using SMTP
-            $mail->Host       = 'smtp.mailtrap.io';                     //Set the SMTP server to send through
-            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = 'ae95358d525848';                     //SMTP username
-            $mail->Password   = 'f3e3c343a8f934';                               //SMTP password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         //Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-            $mail->Port       = 2525;                                    //TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
-
-            //Destinatario
-            $mail->setFrom('raphaelldff@gmail.com', 'Teste');
-            $mail->addAddress('raphaelldff@gmail.com', 'Rafael');     //Add a recipient
-          
-            $mail->addReplyTo('rafaeldf_fernandes@hotmail.com', 'teste do Mailer');
+        class Email {
             
+            private $mail;
 
-            //Attachments
-            // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-            // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+            public function __construct($host = null, $username = null, $senha = null, $nome = null){
+                
+                //Instantiation and passing `true` enables exceptions
+                $this->mail = new PHPMailer;
 
-            //Content
-            $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = "Titulo do Email";
-            $mail->Body    = "Texto em HTML";
-            $mail->AltBody = "Texto SEM HTML";
+                //Server settings
+                $this->mail->isSMTP();                                              //Send using SMTP
+                $this->mail->SMTPDebug = SMTP::DEBUG_SERVER;                         //Enable verbose debug output - Mostra as informaçoes na pagina quando manda
+                $this->mail->Host       = $host;                                    //Set the SMTP server to send through
+                $this->mail->SMTPAuth   = true;                                     //Enable SMTP authentication
+                $this->mail->Username   = $username;                                //SMTP username
+                $this->mail->Password   = $senha;                                   //SMTP password
+                $this->mail->Port       = 587;                                        //TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+               // $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;           //Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+               $this->mail->SMTPSecure = 'ssl';
+                                                 
 
-            $mail->send();
-            echo "Message has been sent";
-        } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                //Destinatario
+                $this->mail->setFrom($username, $nome);
+                $this->mail->isHTML(true); 
+                $this->mail->addReplyTo($username, $nome);
+                $this->mail->CharSet = 'UTF-8';
+            
+            }
+
+            public function enviarPara($email, $nome){
+                $this->mail->addAddress($email, $nome);     // Endereço da sua empresa
+            }
+    
+            public function formatarEmail($info){
+                $this->mail->Subject = $info['Assunto'];
+                $this->mail->Body    = $info['Corpo'];
+                $this->mail->AltBody = strip_tags($info['Corpo']); //Não lembro pq adicionar de novo, mas adiciona pra garantir.
+            }
+    
+            public function enviarEmail(){ //enviando o email
+                if($this->mail->send()){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
         }
-        
-        ?>
+    ?>
 </body>
 </html>

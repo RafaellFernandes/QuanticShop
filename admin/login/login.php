@@ -115,7 +115,7 @@ if ($_POST) {
                                         placeholder="Digite sua Senha" required
                                         data-parsley-validate="Preencha a Senha" />
                                     <small>
-                                        <a class="link" href="recuperarSenha/esqueci-a-senha.php">Esqueceu a Senha?</a>
+                                        <a class="link" href="esqueci-a-senha.php">Esqueceu a Senha?</a>
                                     </small>
                                 </div>
 
