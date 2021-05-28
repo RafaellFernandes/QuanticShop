@@ -32,7 +32,7 @@ $produto_id = $qtd_estoque = $produto = NULL;
     include "validacao/functions.php";
    
   	//selecionar os dados do banco para poder editar
-      $sql = "SELECT * FROM estoque WHERE id = :id LIMIT 1";
+      $sql = "SELECT * FROM estoque WHERE  id = :id LIMIT 1";
       $consulta = $pdo->prepare($sql);
       $consulta->bindParam(":id", $id);
       $consulta->execute();

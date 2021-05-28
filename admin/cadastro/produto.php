@@ -25,8 +25,8 @@ include "validacao/functions.php";
 if ( !isset ( $id ) ) $id = "";
 
 //iniciar as variaveis
-$nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto = $promocao = $custo_unitario = $venda_unitaria = 
-$ativo = $departamento_id = $marca_id =  $estoque_id = $porcentagem_lucro = "";
+$nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto = $promocao =  $venda_unitaria = 
+$ativo = $departamento_id = $marca_id =  $estoque_id = "";
 
   //verificar se existe um id
   if (!empty ( $id ) ) {
@@ -58,7 +58,6 @@ $ativo = $departamento_id = $marca_id =  $estoque_id = $porcentagem_lucro = "";
     $descricao                = $dados->descricao;
     $codigo                   = $dados->codigo;
     $departamento_id          = $dados->departamento_id;
-    $custo_unitario           = $dados->custo_unitario;
     $venda_unitaria           = $dados->venda_unitaria;
     $promocao                 = $dados->promocao;
     $nome_dept                = $dados->nome_dept;
@@ -143,17 +142,6 @@ $ativo = $departamento_id = $marca_id =  $estoque_id = $porcentagem_lucro = "";
                             </select>
                         </div>
 
-                        <div type="text" class="col-12 col-md-4 mt-2 ">
-                        <label >Valor de Custo</label>
-                        <input type="number" id="custo_unitario" name="custo_unitario" class="form-control number_format" required data-parsley-required-message="Preencha este campo" 
-                            class="form-control" value="<?=$custo_unitario;?>" placeholder="R$ 0,00">
-                        </div>         
-                      
-                        <div type="text" class="col-12 col-md-4 mt-2">
-                            <label >Margem(%)</label>
-                            <input type="number" id="porcentagem_lucro" name="porcentagem_lucro" class="form-control"  required data-parsley-required-message="Preencha este campo" 
-                            class="form-control" onblur="valorVenda()" value="<?=$porcentagem_lucro;?>" placeholder="%">
-                        </div>
                         <div type="text" class="col-12 col-md-4 mt-2">
                             <label >Valor de Venda</label>
                             <input type="number" id="venda_unitaria" name="venda_unitaria" class="form-control" required data-parsley-required-message="Preencha este campo" 
@@ -277,22 +265,4 @@ $(document).ready(function(){
 	$("#ativo").val("<?=$ativo?>");
 	});
 </script>
-<script>
-    function valorVenda(){
-        var custo = document.getElementById('custo_unitario').value;
-        var porcentagem = document.getElementById('porcentagem_lucro').value;
 
-        var maior = (parseFloat(custo) > parseFloat(porcentagem)? custo : porcentagem);
-        var menor = (parseFloat(custo) < parseFloat(porcentagem)? custo : porcentagem);
-        // var porcentagem = porcentagem/100;
-        var venda = (menor/maior)*100;
- 
-        // var venda = custo * (porcentagem / 0.01);
-        
-        document.getElementById('venda_unitaria').value = venda;
-        
-        console.log(porcentagem);
-        
-        console.log(venda);
-    }
-</script>

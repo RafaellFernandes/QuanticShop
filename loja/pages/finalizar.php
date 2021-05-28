@@ -4,7 +4,7 @@
 
 	//verificar se a pessoa não está logada
 	if ( !isset ( $_SESSION['cliente']['id'] ) ) {
-		echo "<script>alert('Por favor, efetue o login');location.href='index.php?pagina=login';</script>";
+		echo "<script>alert('Por favor, efetue o login');location.href='login/login';</script>";
 		exit;
 	}
 ?>
@@ -19,7 +19,7 @@ action="https://pagseguro.uol.com.br/v2/checkout/payment.html">
 		<input type="hidden" name="encoding" value="UTF-8">
 		<!-- Dados do comprador (opcionais) -->  
         <input name="senderName" type="text" 
-        value="<?=$_SESSION['cliente']['nome'];?>"
+        value="<?=$_SESSION['cliente']['primeiro_nome'];?>"
         class="form-control" required>   
 
         <input name="senderEmail" type="text" 
@@ -64,15 +64,15 @@ action="https://pagseguro.uol.com.br/v2/checkout/payment.html">
 						$i++;
 						//recuperar os dados do array carrinho
 						$id = $dados["id"];
-						$produto = $dados["nome_produto"];
+						$nome_produto = $dados["nome_produto"];
 						$venda_unitaria = $dados["venda_unitaria"];
-						$quantidade = $dados["quantidade"];
+						$quantidadeCarrinho = $dados["quantidadeCarrinho"];
 						$total = $dados["total"];
 
 						//somar o totalGeral
 						$totalGeral = $total + $totalGeral;
 						//formatar os valores
-						$valor = number_format($valor, 2, "," , ".");
+						$venda_unitaria = number_format($venda_unitaria, 2, "," , ".");
 						$total = number_format($total, 2, ",", ".");
 
 						//mostrar os resultados em uma linha da tabela
@@ -80,7 +80,7 @@ action="https://pagseguro.uol.com.br/v2/checkout/payment.html">
 						//td - célula ou coluna
 						echo "<tr>
 							<td>{$nome_produto}</td>
-							<td>{$quantidade}</td>
+							<td>{$quantidadeCarrinho}</td>
 							<td>R$ {$venda_unitaria}</td>
 							<td>R$ {$total}</td>
 						</tr>";	
@@ -92,7 +92,7 @@ action="https://pagseguro.uol.com.br/v2/checkout/payment.html">
 						echo "<input name=\"itemId{$i}\" type=\"hidden\" value=\"000{$i}\">  
 				        <input name=\"itemDescription{$i}\" type=\"hidden\" value=\"{$nome_produto}\">  
 				        <input name=\"itemAmount{$i}\" type=\"hidden\" value=\"{$valorPagseguro}\">  
-				        <input name=\"itemQuantity{$i}\" type=\"hidden\" value=\"{$quantidade}\">  
+				        <input name=\"itemQuantity{$i}\" type=\"hidden\" value=\"{$quantidadeCarrinho}\">  
 				        <input name=\"itemWeight{$i}\" type=\"hidden\" value=\"1000\">";		
 					}
 

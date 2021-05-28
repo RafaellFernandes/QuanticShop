@@ -10,6 +10,7 @@
 
 		echo "<p><strong>Olá ".$_SESSION['cliente']['primeiro_nome']." - <a href='sair.php'>Efetuar Logout</a></strong></p>";
 	}
+	
 
 	//iniciar uma variavel chamada $produtos com o valor
 	$produtos = 0;
@@ -77,6 +78,9 @@
 				
 			}
 
+		} else {
+			echo "<script> window.alert('Nenhum produto adicionado no carrinho');location.href='pages/home';</script>";
+			exit;
 		}
 	?>
 	</tbody>
@@ -94,7 +98,7 @@
 <a href="pages/excluir(<?=$id?>)" class="btn btn-danger btn-lg float-left">
 	Limpar Carrinho
 </a>
-<a href="login/login" class="btn btn-success btn-lg float-right">
+<a href='pages/finalizar' class="btn btn-success btn-lg float-right">
 	Finalizar Pedido
 </a>
 
