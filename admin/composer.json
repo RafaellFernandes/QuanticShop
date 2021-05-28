@@ -2,6 +2,6 @@
     "require": {
         "mpdf/mpdf": "^8.0",
         "phpmailer/phpmailer": "^6.4",
-        "sendgrid/sendgrid": "^7.9"
+        "sendgrid/sendgrid": "~7"
     }
 }
