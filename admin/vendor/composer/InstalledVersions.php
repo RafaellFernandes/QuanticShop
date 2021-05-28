@@ -19,7 +19,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '6c00edcb41ab7a6324c4738c7a1f7794171b81c9',
+    'reference' => 'dfc19976e60572bd4f93f36611e14fd80d2e05af',
     'name' => '__root__',
   ),
   'versions' => 
@@ -31,7 +31,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '6c00edcb41ab7a6324c4738c7a1f7794171b81c9',
+      'reference' => 'dfc19976e60572bd4f93f36611e14fd80d2e05af',
     ),
     'mpdf/mpdf' => 
     array (
