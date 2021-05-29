@@ -24,7 +24,8 @@ include "validacao/functions.php";
     if ( !isset ( $id ) ) $id = "";
 
     //iniciar as variaveis
-    $cliente_id = $venda_id = $status = $valorTotal = "";
+    $cliente_id = $venda_id = $status = $valorTotal = 
+    $cliente = NULL;
 
     //verificar se existe um id
     if ( !empty ( $id ) ) {
@@ -91,7 +92,7 @@ include "validacao/functions.php";
                             </select>
                         </div>
 
-                <div class="col-10">
+                        <div class="col-12 col-md-4 mt-2">
                     <label for="cliente">Selecione o Cliente</label>
                     <input type="text" name="cliente"
                     id="cliente" required
@@ -114,11 +115,7 @@ include "validacao/functions.php";
                         ?>
                     </datalist>
                 </div> <!-- col -->
-                        <div type="text" class="col-12 col-md-4 mt-2">
-                            <label for="data_cadastro">Data</label>
-                            <input type="date" name="data_cadastro" id="data_cadastro" class="form-control"
-                            required data-parsley-required-message="Preencha a data" value="<?=$data_cadastro?>">
-                        </div>
+                      
                         <div class="col-12 col-md-6">
                     <label for="status">Status:</label>
                     <select name="status" id="status"
