@@ -46,7 +46,7 @@
 
     	} else {
         
-    		$sql = "update venda set data = :data, status = :status, cliente_id = :cliente_id
+    		$sql = "UPDATE venda set data = :data, status = :status, cliente_id = :cliente_id
     			WHERE id = :id LIMIT 1";
     		$consulta = $pdo->prepare($sql);
     		$consulta->bindParam(":data", $data);

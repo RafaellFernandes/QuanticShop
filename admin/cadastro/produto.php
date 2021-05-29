@@ -25,7 +25,7 @@ include "validacao/functions.php";
 if ( !isset ( $id ) ) $id = "";
 
 //iniciar as variaveis
-$nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto = $promocao =  $venda_unitaria = 
+$nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto = $promocao =  $valorUnitario = 
 $ativo = $departamento_id = $marca_id =  $estoque_id = "";
 
   //verificar se existe um id
@@ -53,8 +53,8 @@ $ativo = $departamento_id = $marca_id =  $estoque_id = "";
   	//separar os dados
     $id         	          = $dados->id;
     $nome_produto 	          = $dados->nome_produto; 
-    $valor_unitario           = $dados->valor_unitario;
-    $valor_unitario           = number_format($valor_unitario,2,",",".");
+    $valorUnitario            = $dados->valorUnitario;
+    $valorUnitario            = number_format($valorUnitario,2,",",".");
     $descricao                = $dados->descricao;
     $codigo                   = $dados->codigo;
     $departamento_id          = $dados->departamento_id;
@@ -144,8 +144,8 @@ $ativo = $departamento_id = $marca_id =  $estoque_id = "";
 
                         <div type="text" class="col-12 col-md-4 mt-2">
                             <label >Valor de Venda</label>
-                            <input type="number" id="venda_unitaria" name="venda_unitaria" class="form-control" required data-parsley-required-message="Preencha este campo" 
-                            class="form-control" readonly value="<?=$venda_unitaria;?>" placeholder="R$ 0,00">         
+                            <input type="number" id="valorUnitario" name="vendaUnitaria" class="form-control" required data-parsley-required-message="Preencha este campo" 
+                            class="form-control" readonly value="<?=$valorUnitario;?>" placeholder="R$ 0,00">         
                         </div>
                        
                         <div class="col-12 col-md-4 mt-2">

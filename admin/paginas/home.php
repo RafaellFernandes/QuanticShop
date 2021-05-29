@@ -30,117 +30,120 @@ include "config/conexao.php";
             <div class="row">
                 <div class="col-sm-6">
                     <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title mb-4">TCC</h5>
-                            <h4 class="mt-1 mb-3">
+                        <!-- <div class="card-body"> -->
+                            <!-- <h5 class="card-title mb-4">TCC</h5>
+                            <h4 class="mt-1 mb-3"> -->
                                 <?php
-                                    $date = strtotime("June 24, 2021 7:00 PM");
-                                    $remaining = $date - time();
-                                    $days_remaining = floor($remaining / 86400);
-                                    $hours_remaining = floor(($remaining % 86400) / 3600);
-                                    echo "Faltam $days_remaining Dias e $hours_remaining Horas Restantes";
+                                    // $date = strtotime("June 24, 2021 7:00 PM");
+                                    // $remaining = $date - time();
+                                    // $days_remaining = floor($remaining / 86400);
+                                    // $hours_remaining = floor(($remaining % 86400) / 3600);
+                                    // echo "Faltam $days_remaining Dias e $hours_remaining Horas Restantes";
 								?>
                             </h4>
-                            <div class="mb-1">
+                            <!-- <div class="mb-1">
                                 <span>Documentação: </span>
                                 <span class=" text-danger "> <i class="mdi mdi-arrow-bottom-right"></i>
-                                    <?php $rem = strtotime('2021-06-07 19:00:00') - time();
-                                        $day = floor($rem / 86400);
-                                        $hr = floor(($rem % 86400) / 3600);
-                                        $min = floor(($rem % 3600) / 60);
-                                        $sec = ($rem % 60);
-                                        if ($day) echo "$day Dias ";
-                                        if ($hr) echo "$hr Horas ";
-                                        if ($min) echo "$min Minutos ";
-                                        if ($sec) echo "$sec Segundos ";
-                                        echo "Restantes...";
+                                    <?php 
+                                    // $rem = strtotime('2021-06-07 19:00:00') - time();
+                                    //     $day = floor($rem / 86400);
+                                    //     $hr = floor(($rem % 86400) / 3600);
+                                    //     $min = floor(($rem % 3600) / 60);
+                                    //     $sec = ($rem % 60);
+                                    //     if ($day) echo "$day Dias ";
+                                    //     if ($hr) echo "$hr Horas ";
+                                    //     if ($min) echo "$min Minutos ";
+                                    //     if ($sec) echo "$sec Segundos ";
+                                    //     echo "Restantes...";
                                     ?>
                                 </span>
-                            </div>
-                        </div>
+                            </div> -->
+                        </div> 
                     </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h3 class="card-title mb-4">Clientes Cadastrados</h3>
-                            <h2 class="mt-1 mb-3">
-                                <?php
-                                    $total = 0;
-                                    $n = 1;
-                                    $sql = "SELECT count(*) as t FROM cliente";
-                                    $sql = $pdo->query($sql);
-                                    $sql = $sql->fetch();
-                                    $total = $sql['t'];
-                                    echo $total;
-                                ?>
-                            </h2>
-                            <div class="mb-1">
-                                <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i>+<?=$total; ?> </span>
-                                <span class="text-muted"> desde a semana passada</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title mb-4">Produtos Vendidos</h5>
-                            <h2 class="mt-1 mb-3">
-                                <?php
-                                    $conn = mysqli_connect('localhost','root','','quanticshop');
- 
-                                    $resultado = mysqli_query($conn, "SELECT sum(vezesVendido) FROM item_venda");
-                                    $linhas = mysqli_num_rows($resultado);
-                                 
-                                    while($linhas = mysqli_fetch_array($resultado)){
-                                         echo $linhas['sum(vezesVendido)'].'<br/>';
-                                    }
-                                 
-                                ?>
-                            </h2>
-                        </div>
-                    </div>
+                </div> 
+    <!-- Content Row -->
+    <div class="row">
+
+<!-- Earnings (Monthly) Card Example -->
+<div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-dark shadow h-100 py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
+                        Menu 1</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">1</div>
                 </div>
-                <div class="col-sm-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title mb-4">Ganhos</h5>
-                            <h1 class="mt-1 mb-3">$21.300</h1>
-                            <div class="mb-1">
-                                <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>
-                                <span class="text-muted"> desde a semana passada</span>
-                            </div>
-                        </div>
-                    </div>
-                   
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title mb-4">Pedidos</h5>
-                            <h1 class="mt-1 mb-3">64</h1>
-                            <div class="mb-1">
-                                <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -2.25% </span>
-                                <span class="text-muted"> desde a semana passada</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title mb-4">Produtos Cadastrados</h5>
-                            <h2 class="mt-1 mb-3">
-                                <?php
-                                    $total = 0;
-                                    // $n = 1;
-                                    $sql = "SELECT count(*) as p FROM produto";
-                                    $sql = $pdo->query($sql);
-                                    $sql = $sql->fetch();
-                                    $total = $sql['p'];
-                                    echo $total;
-                                ?>
-                            </h2>
-                        </div>
-                    </div> 
+                <div class="col-auto">
+                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<!-- Earnings (Monthly) Card Example -->
+<div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-dark shadow h-100 py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
+                        Menu 2</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">2</div>
+                </div>
+                <div class="col-auto">
+                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Earnings (Monthly) Card Example -->
+<div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-dark shadow h-100 py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">Menu 3
+                    </div>
+                    <div class="row no-gutters align-items-center">
+                        <div class="col-auto">
+                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">3</div>
+                        </div>
+                        <div class="col">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <i class="fas fa-user fa-2x text-gray-300"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Pending Requests Card Example -->
+<div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-dark shadow h-100 py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
+                        Menu 4</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">4</div>
+                </div>
+                <div class="col-auto">
+                    <i class="fas fa-users fa-2x text-gray-300"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Content Row -->
 
     <!-- <div class="col-xl-12 col-xxl-7">
         <div class="card flex-fill w-100">

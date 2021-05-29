@@ -63,17 +63,17 @@ exit;
 								$nome_marca                     = $dados->nome_marca;
 								$departamento_id                = $dados->departamento_id;
 								$nome_dept                      = $dados->nome_dept;
-								$venda_unitaria                 = $dados->venda_unitaria;
-								$venda_unitaria                 = number_format($venda_unitaria,2, '.' , ',');	
+								$valorUnitario                  = $dados->valorUnitario;
+								$valorUnitario                  = number_format($valorUnitario,2, '.' , ',');	
 								$imagem                         = "../fotos/".$foto."p.jpg";
-                                $pativo                          = $dados->pativo;
+                                $pativo                         = $dados->pativo;
 												
 								//mostrar na tela
                                 if ( $pativo == "0" ) {
 									echo '<tr>	
 											<td><img src="'.$imagem.'" alt="'.$nome_produto.'"  width="48" height="48" class="rounded-circle mr-2"></td>
 											<td>'.$nome_produto.'</td>
-											<td>R$ '.$venda_unitaria.'</td>
+											<td>R$ '.$valorUnitario.'</td>
 											<td>'.$nome_marca.'</td>
 											<td>'.$nome_dept.'</td>
 											<td class="table-action text-center">

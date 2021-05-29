@@ -102,14 +102,14 @@ exit;
     if(empty($id)){
         //inserir
        
-        $sql= "INSERT INTO produto (nome_produto, codigo, descricao, venda_unitaria, espec_tecnica, foto,  departamento_id, marca_id, ativo) 
-        values(:nome_produto, :codigo, :descricao, :venda_unitaria, :espec_tecnica, :foto, :departamento_id, :marca_id, :ativo)";
+        $sql= "INSERT INTO produto (nome_produto, codigo, descricao, vendaUnitaria, espec_tecnica, foto,  departamento_id, marca_id, ativo) 
+        values(:nome_produto, :codigo, :descricao, :valorUnitario, :espec_tecnica, :foto, :departamento_id, :marca_id, :ativo)";
 
         $consulta = $pdo->prepare($sql);
         $consulta->bindParam(':nome_produto',$nome_produto);
         $consulta->bindParam(':codigo',$codigo);
         $consulta->bindParam(':descricao',$descricao);
-        $consulta->bindParam(':venda_unitaria', $venda_unitaria);
+        $consulta->bindParam(':valorUnitario', $valorUnitario);
         $consulta->bindParam(':espec_tecnica',$espec_tecnica);
         $consulta->bindParam(':foto',$foto);
         $consulta->bindParam(':ativo',$ativo);
@@ -118,7 +118,7 @@ exit;
        
     } else if (empty($foto)){
 
-        $sql= "UPDATE produto SET nome_produto = :nome_produto, codigo = :codigo,  venda_unitaria =:venda_unitaria,
+        $sql= "UPDATE produto SET nome_produto = :nome_produto, codigo = :codigo, valorUnitario = :valorUnitario,
         descricao = :descricao, espec_tecnica = :espec_tecnica, promocao = :promocao, ativo = :ativo, departamento_id = :departamento_id,
         marca_id = :marca_id WHERE id = :id";
 
@@ -126,7 +126,7 @@ exit;
         $consulta->bindParam(':nome_produto',$nome_produto);
         $consulta->bindParam(':codigo',$codigo);
         $consulta->bindParam(':descricao',$descricao);
-        $consulta->bindParam(':venda_unitaria', $venda_unitaria);
+        $consulta->bindParam(':valorUnitario', $valorUnitario);
         $consulta->bindParam(':espec_tecnica',$espec_tecnica);
         $consulta->bindParam(':promocao', $promocao);
         $consulta->bindParam(':ativo',$ativo);
@@ -136,7 +136,7 @@ exit;
     }
     else {
         
-        $sql= "UPDATE produto SET nome_produto = :nome_produto, codigo = :codigo, promocao = :promocao, venda_unitaria =:venda_unitaria,
+        $sql= "UPDATE produto SET nome_produto = :nome_produto, codigo = :codigo, promocao = :promocao, valorUnitario = :valorUnitario,
         descricao = :descricao, espec_tecnica = :espec_tecnica, foto = :foto, ativo = :ativo, departamento_id = :departamento_id,
         marca_id = :marca_id WHERE id = :id";
 
@@ -144,7 +144,7 @@ exit;
         $consulta->bindParam(':nome_produto',$nome_produto);
         $consulta->bindParam(':codigo',$codigo);
         $consulta->bindParam(':descricao',$descricao);
-        $consulta->bindParam(':venda_unitaria', $venda_unitaria);
+        $consulta->bindParam(':valorUnitario', $valorUnitario);
         $consulta->bindParam(':espec_tecnica',$espec_tecnica);
         $consulta->bindParam(':promocao', $promocao);
         $consulta->bindParam(':foto',$foto);

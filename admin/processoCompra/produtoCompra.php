@@ -34,11 +34,6 @@ include "validacao/functions.php";
                 INNER JOIN fornecedor f ON (ic.fornecedor_id = f.id ) 
                 INNER JOIN produto p ON (ic.produto_id = p.id ) 
                 WHERE ic.id = :id LIMIT 1";
-
-        $sql="SELECT ic.id id, ic.*,  p.id pid, p.valor_unitario, p.* 
-        FROM item_compra ic 
-        INNER JOIN produto p on (p.id = item_compra.produto.id)
-        UPDATE id p.venda_unitaria = : valor_unitario WHERE ic.id = :id LIMIT 1";
         $consulta = $pdo->prepare($sql);
         $consulta->bindParam(":id", $id);
         $consulta->execute();

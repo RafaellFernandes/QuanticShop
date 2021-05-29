@@ -64,6 +64,15 @@ if ( $_POST ) {
         $consulta->bindParam(':qtdprodutoComprado', $qtdprodutoComprado);
         $consulta->bindParam(':ativo', $ativo);
         $consulta->bindParam(':venda_unitaria', $venda_unitaria);
+        
+        //SQL que vai pega o id do produto e dar um update nele se o ativo for 1
+
+        if($ativo = 1){
+            $sqlProduto = "UPDATE produto set ativo = 1 WHERE id = $produto_id";
+            $ativaProduto = $pdo->prepare($sqlProduto);
+            $ativaProduto->execute();
+
+        }
      
 
   
@@ -81,6 +90,12 @@ if ( $_POST ) {
         $consulta->bindParam(':venda_unitaria', $venda_unitaria);
         $consulta->bindParam(':custo_unitario', $custo_unitario);
         $consulta->bindParam(":id", $id);
+
+        if($ativo = 0){
+            $sqlProduto = "UPDATE produto set ativo = 0 WHERE id = $produto_id";
+            $ativaProduto - $pdo->prepare($sqlProduto);
+            $ativaProduto->execute();
+        }
     }
 
     if ( $consulta->execute() ) {
@@ -90,6 +105,16 @@ if ( $_POST ) {
         $icone = "success";
         mensagem($titulo, $mensagem, $icone);
         exit;
+
+
+        if ( $ativaProduto->execute() ) {
+            $pdo->commit();
+            $titulo = "Sucesso";
+            $mensagem = "Produto Ativo";
+            $icone = "success";
+            mensagem($titulo, $mensagem, $icone);
+            exit;   
+        }
 
     } else {
         $titulo = "Erro";
