@@ -11,6 +11,8 @@
 			charset=utf8",
 			$usuario,
 			$senha);
+
+		$conn = mysqli_connect($servidor, $usuario, $senha, $banco);
 	} catch (PDOException $erro) {
 		//mensagem de erro
 		$msg = $erro->getMessage();
