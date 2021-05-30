@@ -21,7 +21,7 @@
 
         try {
             //Server settings
-            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output - Mostra as informaçoes na pagina quando manda
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Mostra as informaçoes na pagina quando manda
             $mail->CharSet = 'UTF-8';
             $mail->isSMTP();                                            //Send using SMTP
             $mail->Host       = 'smtp.mailtrap.io';                     //Set the SMTP server to send through

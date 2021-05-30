@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'dfc19976e60572bd4f93f36611e14fd80d2e05af',
+    'reference' => 'f1951baabf10c614274817e9c4f8d9d8aa89a43d',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'dfc19976e60572bd4f93f36611e14fd80d2e05af',
+      'reference' => 'f1951baabf10c614274817e9c4f8d9d8aa89a43d',
     ),
     'mpdf/mpdf' => 
     array (
@@ -69,31 +69,6 @@
       ),
       'reference' => 'd49695b909c3b7628b6289db5479a1c204601f11',
     ),
-    'sendgrid/php-http-client' => 
-    array (
-      'pretty_version' => '3.14.0',
-      'version' => '3.14.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '7880d5aecc53856802130ba83af1dfcf942e9767',
-    ),
-    'sendgrid/sendgrid' => 
-    array (
-      'pretty_version' => '7.9.2',
-      'version' => '7.9.2.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'ab0023a6233f39e408b5eb8c4299f20790f5f5a7',
-    ),
-    'sendgrid/sendgrid-php' => 
-    array (
-      'replaced' => 
-      array (
-        0 => '*',
-      ),
-    ),
     'setasign/fpdi' => 
     array (
       'pretty_version' => 'v2.3.6',
@@ -102,15 +77,6 @@
       array (
       ),
       'reference' => '6231e315f73e4f62d72b73f3d6d78ff0eed93c31',
-    ),
-    'starkbank/ecdsa' => 
-    array (
-      'pretty_version' => '0.0.4',
-      'version' => '0.0.4.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '9369d35ed9019321adb4eb9fd3be21357d527c74',
     ),
   ),
 );

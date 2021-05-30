@@ -98,7 +98,7 @@
 						    </p>
 						    <div class="remember">
 							    <p id="login-form-remember">
-							      <label for="modlgn_remember"><a href="login/resetPassword.php">Esqueceu sua senha? </a></label>
+							      <label for="modlgn_remember"><a href="esqueci-a-senha.php">Esqueceu sua senha? </a></label>
 							    </p>
 
 							    <input type="submit" class="button" value="Entrar"></div>
