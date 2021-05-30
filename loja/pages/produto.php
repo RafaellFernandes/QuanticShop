@@ -11,18 +11,18 @@
 		$promocao             = $dados->promocao;
 		$foto      = "../fotos/{$dados->foto}m.jpg"; 
 		$fotog     = "../fotos/{$dados->foto}g.jpg"; 
-		$venda_unitaria 	  = $dados->venda_unitaria;
+		$valorUnitario 	  = $dados->valorUnitario;
 		$id = "";
 	}	
     if ( empty ( $promocao ) ) {
 		//1499.99 -> 1.499,99
-		$venda_unitaria = "R$ " . number_format($venda_unitaria, 2, ",", ".");
+		$valorUnitario = "R$ " . number_format($valorUnitario, 2, ",", ".");
 		$desc = "";
 	} else {
 		//valor normal
-		$desc = "R$ " . number_format($venda_unitaria, 2, ",", ".");
+		$desc = "R$ " . number_format($valorUnitario, 2, ",", ".");
 		//valor promocional
-		$venda_unitaria = "R$ " . number_format($promocao, 2, ",", ".");
+		$valorUnitario = "R$ " . number_format($promocao, 2, ",", ".");
 	}
 ?>
 <div class="card">
@@ -36,7 +36,7 @@
       	<div class="card-body">
 			<h4 class="card-title venda_unitaria"><strong><?=$dados->nome_produto?></strong></h4>
 			<p>Código do Produto: <?=$dados->codigo?></p>
-			<h5 class="venda_unitaria mt-5"><strong>Valor: R$ <?=$dados->venda_unitaria;?></strong></h5>
+			<h5 class="venda_unitaria mt-5"><strong>Valor: R$ <?=$dados->valorUnitario;?></strong></h5>
 		
 			<form name="formProduto" method="post" action="pages/adicionar">
 				<input type="hidden" name="id" value="<?=$dados->id?>">

@@ -35,10 +35,10 @@
 								//recuperar as variaveis
 								$id 	            = $linha["id"];
 								$nome_produto       = $linha["nome_produto"];
-								$venda_unitaria     = $linha["venda_unitaria"];
+								$valorUnitario     = $linha["valorUnitario"];
 								$foto            	= $linha["foto"] ."p.jpg";
 								//formatar o valor
-								$venda_unitaria = number_format($venda_unitaria, 2, ",", ".");
+								$valorUnitario = number_format($valorUnitario, 2, ",", ".");
 								//var,casas decimais,sep decimal,sep milhares
 
 								echo "
@@ -47,7 +47,7 @@
 											<img src='../fotos/$foto' class='card-img-top' width='40' height='auto' alt='$nome_produto'>
 											<div class='card-body'>
 												<p class='card-title'>$nome_produto</p>
-												<p class='card-text' style='color: green;'>R$ $venda_unitaria</p>
+												<p class='card-text' style='color: green;'>R$ $valorUnitario</p>
 												<a href='pages/produto/$id' class='btn btn-primary'>Detalhes</a><br>
 											</div>
 										</div>
