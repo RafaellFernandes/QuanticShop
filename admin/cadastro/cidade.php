@@ -12,6 +12,7 @@ if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
     $mensagem = "Erro na Requisição da Página";
     $icone = "error";
     mensagem($titulo, $mensagem, $icone);
+    echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
     exit;
 }
 

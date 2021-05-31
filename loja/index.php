@@ -155,24 +155,24 @@
 								<div class="header_right">
 									<div class="search-box">
 										<div class="sb-search">
-											<form method="POST" action="">
+											<form method="POST" action="pages/home">
 												<input type="text" name="nome" placeholder="PESQUISAR">
 												<input style="background-color:#fff" name="SendPesqUser" type="submit" value="ENVIAR">
 											</form>
 											<?php
-												$SendPesqUser = filter_input(INPUT_POST, 'SendPesqUser', FILTER_SANITIZE_STRING);
-												if($SendPesqUser){
-													$nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
-													$result_usuario = "SELECT * FROM produto WHERE nome_produto LIKE '%$nome%'";
-													$resultado_usuario = mysqli_query($conn, $result_usuario);
-													while($row_usuario = mysqli_fetch_assoc($resultado_usuario)){
-														echo "ID: " . $row_usuario['id'] . "<br>";
-														echo "Nome: " . $row_usuario['nome_produto'] . "<br>";
-														echo "E-mail: " . $row_usuario['valor_unitario'] . "<br>";
-														echo "<a href='edit_usuario.php?id=" . $row_usuario['id'] . "'>Editar</a><br>";
-														echo "<a href='proc_apagar_usuario.php?id=" . $row_usuario['id'] . "'>Apagar</a><br><hr>";
-													}
-												}
+												// $SendPesqUser = filter_input(INPUT_POST, 'SendPesqUser', FILTER_SANITIZE_STRING);
+												// if($SendPesqUser){
+												// 	$nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
+												// 	$result_usuario = "SELECT * FROM produto WHERE nome_produto LIKE '%$nome%'";
+												// 	$resultado_usuario = mysqli_query($conn, $result_usuario);
+												// 	while($row_usuario = mysqli_fetch_assoc($resultado_usuario)){
+												// 		echo "ID: " . $row_usuario['id'] . "<br>";
+												// 		echo "Nome: " . $row_usuario['nome_produto'] . "<br>";
+												// 		echo "E-mail: " . $row_usuario['valor_unitario'] . "<br>";
+												// 		echo "<a href='edit_usuario.php?id=" . $row_usuario['id'] . "'>Editar</a><br>";
+												// 		echo "<a href='proc_apagar_usuario.php?id=" . $row_usuario['id'] . "'>Apagar</a><br><hr>";
+												// 	}
+												// }
 											?>
 										</div>
 										<!-- https://celke.com.br/artigo/como-pesquisar-com-php-e-mysqli -->

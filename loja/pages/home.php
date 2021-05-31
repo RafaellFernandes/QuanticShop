@@ -38,48 +38,27 @@
 </div>
  <!-- ============================================== -->
 
-<!-- <div class="main">
+<div class="main">
 	<div class="content-top">
 		<h2>Destaques</h2>
-	
-		<div class="close_but"><i class="close1"> </i></div>
-		<ul id="flexiselDemo3">
-			<li><img src="vendor/images/board1.jpg" /></li>
-			<li><img src="vendor/images/board2.jpg" /></li>
-			<li><img src="vendor/images/board3.jpg" /></li>
-			<li><img src="vendor/images/board4.jpg" /></li>
-			<li><img src="vendor/images/board5.jpg" /></li>
-		</ul>
-		<h3>Produtos em Destaque</h3>
-		<script type="text/javascript">
-      $(window).load(function() {
-        $("#flexiselDemo3").flexisel({
-          visibleItems: 5,
-          animationSpeed: 1000,
-          autoPlay: true,
-          autoPlaySpeed: 3000,    		
-          pauseOnHover: true,
-          enableResponsiveBreakpoints: true,
-          responsiveBreakpoints: { 
-            portrait: { 
-              changePoint:480,
-              visibleItems: 1
-            }, 
-            landscape: { 
-              changePoint:640,
-              visibleItems: 2
-            },
-            tablet: { 
-              changePoint:768,
-              visibleItems: 3
-            }
-          }
-        }); 
-		  });
-		</script>
-		<script type="text/javascript" src="vendor/js/jquery.flexisel.js"></script>
+        <?php
+			$SendPesqUser = filter_input(INPUT_POST, 'SendPesqUser', FILTER_SANITIZE_STRING);
+			if($SendPesqUser){
+				$nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
+				$result_usuario = "SELECT * FROM produto WHERE nome_produto LIKE '%$nome%' ";
+				$resultado_usuario = mysqli_query($conn, $result_usuario);
+				while($row_usuario = mysqli_fetch_assoc($resultado_usuario)){
+					echo "ID: " . $row_usuario['id'] . "<br>";
+					echo "Nome: " . $row_usuario['nome_produto'] . "<br>";
+					echo "E-mail: " . $row_usuario['valor_unitario'] . "<br>";
+					echo "<a href='edit_usuario.php?id=" . $row_usuario['id'] . "'>Editar</a><br>";
+					echo "<a href='proc_apagar_usuario.php?id=" . $row_usuario['id'] . "'>Apagar</a><br><hr>";
+                    
+				}
+			}
+		?>
 	</div>
-</div> -->
+</div>
 
 <div class="content-bottom prod">
     <div class="container-fluid">
