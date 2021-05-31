@@ -42,6 +42,7 @@
         $consulta->bindParam(":status", $status);
         $consulta->bindParam("cliente_id", $cliente_id);
         
+      
     		
 
     	} else {

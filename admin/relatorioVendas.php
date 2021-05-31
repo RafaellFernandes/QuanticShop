@@ -1,8 +1,20 @@
 <?php
+if (!isset($_SESSION["quanticshop"]["id"])) {
+    $titulo = "Erro";
+    $mensagem = "Usuário Não Logado";
+    $icone = "error";
+    mensagem($titulo, $mensagem, $icone);
+exit;
+}
 
-
-	if ( ! isset ( $_SESSION['quanticshop']['id'] ) ) exit;
-?>
+if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+    $titulo = "Erro";
+    $mensagem = "Erro na Requisição da Página";
+    $icone = "error";
+    mensagem($titulo, $mensagem, $icone);
+exit;
+}
+?>						
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,11 +43,39 @@
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-	
+	<?php 
 
-	<h1 class="text-center">Listagem Pedido</h1>
+		//incluir conexao com o banco
+		include "validacao/functions.php";
+        include "config/conexao.php";
 
-	<table class="table table-hover table-striped table-bordered">
+		//recuperar os dados digitados
+		$dataInicial = trim ( $_POST["dataInicial"] ?? NULL);
+		$dataFinal = trim ( $_POST["dataFinal"] ?? NULL );
+		$filtro = trim ( $_POST["filtro"] ?? NULL );
+
+		//verificar se as datas foram preenchidas
+		if ( ( empty ( $dataInicial ) ) or ( empty ( $dataFinal ) ) ) {
+
+			mensagem("Erro", "Digite as datas", "error");
+			exit;
+
+		}
+		else if ( strtotime( $dataInicial ) > strtotime( $dataFinal ) ) {
+
+			mensagem("Erro","Data final menor que a data inicial","error");
+			exit;
+
+		}
+		
+		
+
+	?>
+
+   <h4>RELATÓRIO</h4>
+   <h6 style="color: blue;"><strong>Vendas</strong></h6>
+
+   <table class="table table-bordered table-hover table-striped">
 		<thead>
 			<th width="5%">ID</th>
 			<th width="45%">Nome do Cliente</th>
@@ -49,13 +89,15 @@
 				//sql para selecionar as vendas
 				//data maior que a dataInicial
 				//dataFinal seja menor que a data
-				$sql = "select v.id, c.primeiro_nome, iv.status, 
-				from item_venda iv 
+				$sql = "select v.id, c.primeiro_nome, v.status, 
+				date_format(v.data, '%d/%m/%Y') data 
+				from venda v 
 				inner join cliente c on (c.id = v.cliente_id)
-				where 
-				order by ";
+				where v.data >= :dataInicial AND v.data <= :dataFinal 
+				order by v.data";
 				$consulta = $pdo->prepare($sql);
-				$consulta->bindParam(":id", $id);
+				$consulta->bindParam(":dataInicial", $dataInicial);
+				$consulta->bindParam(":dataFinal", $dataFinal);
 				$consulta->execute();
 
 				while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
@@ -84,7 +126,8 @@
 					?>
 					<tr>
 						<td><?=$dados->id?></td>
-						<td><?=$dados->primeiro_nome?></td>
+						<td><?=$dados->nome?></td>
+						<td><?=$dados->data?></td>
 						<td><?=$status?></td>
 						<td class="text-center">R$ <?=getTotal($pdo,$dados->id)?></td>
 					</tr>
@@ -97,34 +140,3 @@
 	</table>
 </body>
 </html>
-
-
-
-
-
-<?php
-
-
-	/***************************************
-	* Pegar o total da venda
-	************************************** */
-	function getTotal($pdo, $venda_id) {
-
-		$sql = "select sum(valor * quantidade) total 
-		from venda_produto
-		where venda_id = :venda_id limit 1";
-		$consulta = $pdo->prepare($sql);
-		$consulta->bindParam(":venda_id", $venda_id);
-		$consulta->execute();
-
-		$total = $consulta->fetch(PDO::FETCH_OBJ)->total;
-
-		//$dados = $consulta->fetch(PDO::FETCH_OBJ);
-		//$total = $dados->total;
-
-		return number_format($total,2,",",".");
-	} 
-
-
-
-?>

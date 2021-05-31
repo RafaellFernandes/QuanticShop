@@ -31,7 +31,7 @@
 		<tr>
 			<td>Nome do Produto</td>
 			<td>Quantidade</td>
-			<td>Vlr Unit.</td>
+			<td>Vlr Unit</td>
 			<td>Vlr Total</td>
 			<td></td>
 		</tr>
@@ -51,14 +51,14 @@
 				//recuperar os dados do array carrinho
 				$id = $dados["id"];
 				$nome_produto = $dados["nome_produto"];
-				$venda_unitaria = $dados["venda_unitaria"];
+				$valorUnitario= $dados["valorUnitario"];
 				$quantidadeCarrinho = $dados["quantidadeCarrinho"];
 				$total = $dados["total"];
 
 				//somar o totalGeral
 				$totalGeral = $total + $totalGeral;
 				//formatar os valores
-				$venda_unitaria = number_format($venda_unitaria, 2, "," , ".");
+				$valorUnitario = number_format($valorUnitario, 2, "," , ".");
 				$total = number_format($total, 2, ",", ".");
 
 				//mostrar os resultados em uma linha da tabela
@@ -67,7 +67,7 @@
 				echo "<tr>
 						<td>{$nome_produto}</td>
 						<td>{$quantidadeCarrinho}</td>
-						<td>R$ {$venda_unitaria}</td>
+						<td>R$ {$valorUnitario}</td>
 						<td>R$ {$total}</td>
 						<td>
 							<button type='button' class='btn btn-danger btn-sm' onclick='excluirProduto($id)'>
@@ -95,8 +95,8 @@
 	</tfoot>
 </table>
 
-<a href="pages/excluir(<?=$id?>)" class="btn btn-danger btn-lg float-left">
-	Limpar Carrinho
+<a href="carrinho/limpar" class="btn btn-danger btn-lg float-left">
+  <i class="fas fa-check"></i> Limpar Carrinho
 </a>
 <a href='pages/finalizar' class="btn btn-success btn-lg float-right">
 	Finalizar Pedido

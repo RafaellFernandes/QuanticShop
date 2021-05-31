@@ -65,14 +65,14 @@ action="https://pagseguro.uol.com.br/v2/checkout/payment.html">
 						//recuperar os dados do array carrinho
 						$id = $dados["id"];
 						$nome_produto = $dados["nome_produto"];
-						$venda_unitaria = $dados["venda_unitaria"];
+						$valorUnitario = $dados["valorUnitario"];
 						$quantidadeCarrinho = $dados["quantidadeCarrinho"];
 						$total = $dados["total"];
 
 						//somar o totalGeral
 						$totalGeral = $total + $totalGeral;
 						//formatar os valores
-						$venda_unitaria = number_format($venda_unitaria, 2, "," , ".");
+						$valorUnitario = number_format($valorUnitario, 2, "," , ".");
 						$total = number_format($total, 2, ",", ".");
 
 						//mostrar os resultados em uma linha da tabela
@@ -81,12 +81,12 @@ action="https://pagseguro.uol.com.br/v2/checkout/payment.html">
 						echo "<tr>
 							<td>{$nome_produto}</td>
 							<td>{$quantidadeCarrinho}</td>
-							<td>R$ {$venda_unitaria}</td>
+							<td>R$ {$valorUnitario}</td>
 							<td>R$ {$total}</td>
 						</tr>";	
 
 						//formatar o valor com 2 casas decimais
-						$valorPagseguro = number_format($dados['venda_unitaria'],2,".","");
+						$valorPagseguro = number_format($dados['valorUnitario'],2,".","");
 						//1.9 => 1.90
 
 						echo "<input name=\"itemId{$i}\" type=\"hidden\" value=\"000{$i}\">  

@@ -27,11 +27,11 @@ $dados = $consulta->fetch(PDO::FETCH_OBJ);
 		//separar os dados
 		// $id = $dados["id"];
 		$nome_produto = $dados->nome_produto;
-		$venda_unitaria = $dados->venda_unitaria;
+		$valorUnitario = $dados->valorUnitario;
 		$promocao = $dados->promocao;
 
 		//o valorProduto sempre será o valor do produto
-		$valorProduto = $venda_unitaria;
+		$valorProduto = $valorUnitario;
 		//se existir um valor promo, valorProduto será o valor Promo
 		if ( !empty ( $promocao ) ) {
 			$valorProduto = $promocao;
@@ -43,7 +43,7 @@ $dados = $consulta->fetch(PDO::FETCH_OBJ);
 		//guardar esses valores na sessao
 		$_SESSION["carrinho"][$id] = array("id"=>$id, 
 										"nome_produto"=>$nome_produto,
-										"venda_unitaria"=>$valorProduto,
+										"valorUnitario"=>$valorProduto,
 										"quantidadeCarrinho"=>$quantidadeCarrinho,
 										"total"=>$total);
 		//print_r ( $_SESSION['carrinho'] );

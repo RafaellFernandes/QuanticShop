@@ -81,8 +81,8 @@ $produto_id = $qtd_estoque = $produto = NULL;
 
                     <datalist id="produtos">
                         <?php
-                            $sql = "select id, nome_produto, marca_id, departamento_id from produto
-                                order by nome_produto";
+                            $sql = "SELECT id, nome_produto, marca_id, departamento_id FROM produto WHERE ativo = 1
+                                ORDER BY nome_produto";
                             $consulta = $pdo->prepare($sql);
                             $consulta->execute();
 

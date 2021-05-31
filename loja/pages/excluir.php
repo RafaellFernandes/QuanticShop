@@ -6,7 +6,7 @@
 	$id = trim ( $_GET['id'] ?? NULL );
 
 	//verificar se esta vazio
-	if ( empty ( $id ) ) {
+	if (empty ( $id ) ) {
 		//mensagem de erro e voltar á página anterior
 		echo "<script>alert('Produto inválido');history.back();</script>";
 		exit;

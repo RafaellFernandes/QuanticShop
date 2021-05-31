@@ -136,6 +136,7 @@ include "validacao/functions.php";
                             <input type="number" id="venda_unitaria" name="venda_unitaria" class="form-control" required data-parsley-required-message="Preencha este campo" 
                             class="form-control" readonly value="<?=$venda_unitaria;?>" placeholder="R$ 0,00">         
                         </div>
+                        
                         <div type="text" class="col-12 col-md-4 mt-2">
                             <label for="data_cadastro">Data</label>
                             <input type="date" name="data_cadastro" id="data_cadastro" class="form-control"
@@ -207,33 +208,25 @@ $(document).ready(function(){
 </script>
 
 <script>
-    function valorVenda(){
- var custo = document.getElementById("custo_unitario").value;
- var porcentagem = document.getElementById("porcentagem_lucro").value;
- var venda = parseInt(custo) * parseInt(porcentagem/100);
- document.getElementById("venda_unitario").value = venda;
- console.log(porcentagem);
- console.log(custo);
- console.log(venda);
 
-    }
 </script>
 <script>
     function valorVenda(){
         var custo = document.getElementById('custo_unitario').value;
         var porcentagem = document.getElementById('porcentagem_lucro').value;
-
-        var maior = (parseFloat(custo) > parseFloat(porcentagem)? custo : porcentagem);
-        var menor = (parseFloat(custo) < parseFloat(porcentagem)? custo : porcentagem);
         // var porcentagem = porcentagem/100;
-        var venda = (menor/maior)*100;
+        var valor = custo/porcentagem ;
+        custo += valor;
+        // var venda = custo=valor;
  
         // var venda = custo * (porcentagem / 0.01);
         
-        document.getElementById('venda_unitaria').value = venda;
+        document.getElementById('venda_unitaria').value = custo;
         
         console.log(porcentagem);
-        
+        console.log(custo);
+        console.log(valor);
+
         console.log(venda);
     }
 </script>
