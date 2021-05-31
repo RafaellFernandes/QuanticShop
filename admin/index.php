@@ -299,7 +299,7 @@
 						if ( file_exists($pagina) )
 						include $pagina;
 						else
-						include "paginas/erros/404.php";
+						 echo "<script>location.href='http://localhost//QuanticShop/erros/404.php'</script>";
 
 					?>
 				</div>

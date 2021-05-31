@@ -15,8 +15,8 @@
 		$conn = mysqli_connect($servidor, $usuario, $senha, $banco);
 	} catch (PDOException $erro) {
 		//mensagem de erro
-		$msg = $erro->getMessage();
-		include ("pages/error/500.php");
+		// $msg = $erro->getMessage();
+		echo "<script>location.href='http://localhost//QuanticShop/error/500.php'</script>";
 		// echo "<p> Erro ao conectar no banco de dados: $msg </p>";
     }
 ?>

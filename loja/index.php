@@ -202,7 +202,7 @@
 				include $pagina;
 
 			}else{
-				include "error/404.php";
+				echo "<script>location.href='http://localhost//QuanticShop/error/404.php'</script>";
 			}	
 		?>
   	</main>

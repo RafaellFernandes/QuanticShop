@@ -1,4 +1,5 @@
 <?php
+include "validacao/functions.php";
 if (!isset($_SESSION["quanticshop"]["id"])) {
     $titulo = "Erro";
     $mensagem = "Usuário Não Logado";
