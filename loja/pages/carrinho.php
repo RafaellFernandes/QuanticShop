@@ -95,7 +95,7 @@
 	</tfoot>
 </table>
 
-<a href="carrinho/limpar" class="btn btn-danger btn-lg float-left">
+<a href="pages/excluir" class="btn btn-danger btn-lg float-left">
   <i class="fas fa-check"></i> Limpar Carrinho
 </a>
 <a href='pages/finalizar' class="btn btn-success btn-lg float-right">
