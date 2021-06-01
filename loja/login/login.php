@@ -57,7 +57,7 @@
         //redirecionar para o home
         $msg = 'Deu certo!';
         //javascript para redirecionar
-        echo '<script>location.href="pages/carrinho";</script>';
+        echo '<script>location.href="pages/home";</script>';
         exit;
       }
       //mostrar erros
@@ -86,7 +86,7 @@
 	        <h4 class="title">Entrar</h4>
 					<div id="loginbox" class="loginbox">
           <?=$msg;?>
-            <form name="formLogin" method="post" action="login/logar" data-parsley-validate="">
+            <form name="formLogin" method="post" action="login/login" data-parsley-validate="">
 						  <fieldset class="input">
 						    <p id="login-form-username">
 						      <label for="modlgn_username">Email</label>

@@ -8,7 +8,7 @@
 	
 	if ( isset ( $_SESSION['cliente']['primeiro_nome'] ) ) {
 
-		echo "<p><strong>Olá ".$_SESSION['cliente']['primeiro_nome']." - <a href='sair.php'>Efetuar Logout</a></strong></p>";
+		echo "<p><strong>Olá ".$_SESSION['cliente']['primeiro_nome']." - <a href='login/sair.php'>Efetuar Logout</a></strong></p>";
 	}
 	
 
@@ -45,7 +45,7 @@
 
 		//se existem produtos no carrinho
 		if ( $produtos > 0 ) {	
-
+			$disabled=NULL;
 			//percorrer o array e mostrar os produtos
 			foreach ( $_SESSION['carrinho'] as $dados ) {
 				//recuperar os dados do array carrinho
@@ -70,18 +70,14 @@
 						<td>R$ {$valorUnitario}</td>
 						<td>R$ {$total}</td>
 						<td>
-							<button type='button' class='btn btn-danger btn-sm' onclick='excluirProduto($id)'>
+							<a type='button' class='btn btn-danger btn-sm' onclick='excluirProduto({$id})'>
 								<i class='fas fa-trash'></i>
-							</button>
+							</a>
 						</td>
 					</tr>";		
-				
 			}
-
-		} else {
-			echo "<script> window.alert('Nenhum produto adicionado no carrinho');location.href='pages/home';</script>";
-			exit;
-		}
+		} 
+		$disabled="disabled";
 	?>
 	</tbody>
 	<tfoot>
@@ -95,12 +91,14 @@
 	</tfoot>
 </table>
 
-<a href="pages/excluir" class="btn btn-danger btn-lg float-left">
+
+<a href="pages/limpar" class="btn btn-danger float-left">
   <i class="fas fa-check"></i> Limpar Carrinho
 </a>
-<a href='pages/finalizar' class="btn btn-success btn-lg float-right">
+<button onclick="window.location.href='pages/finalizar'" class="btn btn-success float-end " $disabled >Finalizar Pedido</button>
+<!-- <a href='pages/finalizar' class="btn btn-success btn-lg float-right" $disabled>
 	Finalizar Pedido
-</a>
+</a> -->
 
 <div class="clearfix"></div>
 
@@ -108,9 +106,10 @@
 	//funcao para perguntar se quer realmente excluir o produto
 	function excluirProduto(id) {
 		//perguntar se deseja excluir
+		console.log(id);
 		if ( confirm ("Deseja realmente excluir este item?") ) {
 			//envio para página que irá excluir com o id do produto
-			location.href="pages/excluir/"+id;
+			location.href="pages/excluir&id="+id;
 		}
 	}
 </script>

@@ -177,9 +177,9 @@ $ativo = $departamento_id = $marca_id =  $estoque_id = "";
                                 }
                             ?>
                             <label for="foto">Imagem (JPG)* <?=$link?>:</label>
-                            <input type="file" name="foto[]" 
-                            id="foto" class="form-control" 
-                            <?=$required?> accept="image/jpeg" multiple="multiple">
+                            <input type="file" name="foto" 
+                            id="foto" class="form-control"
+                            <?=$required?> accept="image/jpeg">
                         </div>
 
                         <div class="col-12 col-md-12 mt-2">
@@ -265,3 +265,4 @@ $(document).ready(function(){
 	$("#ativo").val("<?=$ativo?>");
 	});
 </script>
+

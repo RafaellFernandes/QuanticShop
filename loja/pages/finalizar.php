@@ -3,7 +3,7 @@
 	if ( !isset ( $pagina ) ) exit;
 
 	//verificar se a pessoa não está logada
-	if ( !isset ( $_SESSION['cliente']['id'] ) ) {
+	if ( !isset ( $_SESSION['quanticshop']['id'] ) ) {
 		echo "<script>alert('Por favor, efetue o login');location.href='login/login';</script>";
 		exit;
 	}
@@ -19,11 +19,11 @@ action="https://pagseguro.uol.com.br/v2/checkout/payment.html">
 		<input type="hidden" name="encoding" value="UTF-8">
 		<!-- Dados do comprador (opcionais) -->  
         <input name="senderName" type="text" 
-        value="<?=$_SESSION['cliente']['primeiro_nome'];?>"
+        value="<?=$_SESSION['quanticshop']['primeiro_nome'];?>"
         class="form-control" required>   
 
         <input name="senderEmail" type="text" 
-        value="<?=$_SESSION['cliente']['email']?>"
+        value="<?=$_SESSION['quanticshop']['email']?>"
         class="form-control" required>  
 	</div>
 	<div class="col-12 col-md-8">

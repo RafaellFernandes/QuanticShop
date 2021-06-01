@@ -63,7 +63,9 @@ include "validacao/functions.php";
 
 ?>
 
-<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>                       -->
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>   -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>    
+
 <div class="container-fluid p-0">
 	<div class="col-md-12">
 		<div class="card"> 
@@ -82,7 +84,7 @@ include "validacao/functions.php";
                     <div class="col-12 col-md-4 mt-2">
                             <label for="produto_id">Produto</label>
                             <select name="produto_id" id="produto_id" class="form-control" required data-parsley-required-message="Selecione um Produto">
-                                <option value="<?=$produto_id;?>"></option>
+                                <option value="<?=$produto_id;?>">Selecione o Produto</option>
                                     <?php
                                         $sql = "SELECT * FROM produto WHERE ativo = 0 
                                         ORDER BY nome_produto  ";
@@ -111,10 +113,10 @@ include "validacao/functions.php";
                                         $consulta = $pdo->prepare($sql);
                                         $consulta->execute();
 
-                                        while ($d = $consulta->fetch(PDO::FETCH_OBJ) ) {
+                                        while ($f = $consulta->fetch(PDO::FETCH_OBJ) ) {
                                         //separar os dados
-                                            $id        = $d->id;
-                                            $razaoSocial  = $d->razaoSocial;
+                                            $id        = $f->id;
+                                            $razaoSocial  = $f->razaoSocial;
                                             echo '<option value="'.$id.'">'.$razaoSocial.'</option>';
                                         }
                                     ?>
@@ -122,19 +124,22 @@ include "validacao/functions.php";
                         </div>
                         <div type="text" class="col-12 col-md-4 mt-2 ">
                         <label >Valor de Custo</label>
-                        <input type="number" id="custo_unitario" name="custo_unitario" class="form-control number_format" required data-parsley-required-message="Preencha este campo" 
-                            class="form-control" value="<?=$custo_unitario;?>" placeholder="R$ 0,00">
+                        <input type="text" id="custo_unitario" onblur="valorVenda()" name="custo_unitario" class="form-control number_format" 
+                            required data-parsley-required-message="Preencha este campo" 
+                             value="<?=$custo_unitario;?>" placeholder="R$ 0,00">
                         </div>         
                       
                         <div type="text" class="col-12 col-md-4 mt-2">
                             <label >Margem(%)</label>
-                            <input type="number" id="porcentagem_lucro" name="porcentagem_lucro" class="form-control"  required data-parsley-required-message="Preencha este campo" 
-                            class="form-control" onblur="valorVenda()" value="<?=$porcentagem_lucro;?>" placeholder="%">
+                            <input type="text" id="porcentagem_lucro" name="porcentagem_lucro" class="form-control"  
+                            required data-parsley-required-message="Preencha este campo" 
+                             onblur="valorVenda()" value="<?=$porcentagem_lucro;?>" placeholder="%">
                         </div>
                         <div type="text" class="col-12 col-md-4 mt-2">
                             <label >Valor de Venda</label>
-                            <input type="number" id="venda_unitaria" name="venda_unitaria" class="form-control" required data-parsley-required-message="Preencha este campo" 
-                            class="form-control" readonly value="<?=$venda_unitaria;?>" placeholder="R$ 0,00">         
+                            <input type="text" id="venda_unitaria" name="venda_unitaria" class="form-control" 
+                            required data-parsley-required-message="Preencha este campo" 
+                             readonly value="<?=$venda_unitaria;?>" placeholder="R$ 0,00">         
                         </div>
                         
                         <div type="text" class="col-12 col-md-4 mt-2">
@@ -179,6 +184,20 @@ include "validacao/functions.php";
         </div>
     </div>
 </div>
+
+<script>
+    function valorVenda(){
+        var custo = document.getElementById('custo_unitario').value.replace(/\D/gim, '');;
+        var porcentagem = document.getElementById('porcentagem_lucro').value.replace(/\D/gim, '');;
+        var valor = parseFloat(custo*(porcentagem*0.01));
+        var venda = parseInt(custo) + parseInt(valor);
+        document.getElementById('venda_unitaria').value = venda;
+    }
+
+    $("#custo_unitario").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+    $("#venda_unitaria").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+</script>
+
 <script type="text/javascript">
     $("#produto").blur(function(){
 
@@ -194,40 +213,16 @@ include "validacao/functions.php";
     })
 </script>
 
-<!-- <script>$("#valor_unitario").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});</script> -->
 <script type="text/javascript">
-$(document).ready(function(){ 
-	$("#data_cadastro").mask("00/00/0000");
+
+    $(document).ready(function(){ 
+	    $("#data_cadastro").mask("00/00/0000");
+	});
+
+    $(document).ready(function(){ 
+	    $("#status").val("<?=$status?>");
 	});
 </script>
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-	$("#status").val("<?=$status?>");
-	});
-</script>
 
-<script>
-
-</script>
-<script>
-    function valorVenda(){
-        var custo = document.getElementById('custo_unitario').value;
-        var porcentagem = document.getElementById('porcentagem_lucro').value;
-        // var porcentagem = porcentagem/100;
-        var valor = custo/porcentagem ;
-        custo += valor;
-        // var venda = custo=valor;
- 
-        // var venda = custo * (porcentagem / 0.01);
-        
-        document.getElementById('venda_unitaria').value = custo;
-        
-        console.log(porcentagem);
-        console.log(custo);
-        console.log(valor);
-
-        console.log(venda);
-    }
-</script>
 

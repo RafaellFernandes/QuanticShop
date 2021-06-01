@@ -24,10 +24,10 @@ exit;
 
     include "validacao/functions.php";
     include "config/conexao.php";
-    // include "validacao/imagem.php";
+    include "validacao/imagem.php";
 
     //recuperar variaveis
-    $id = $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto = $ativo = $departamento_id = $marca_id = "";
+    // $id = $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto = $ativo = $departamento_id = $marca_id = "";
 
     foreach ($_POST as $key => $value) {
         //guardar as variaveis
@@ -45,69 +45,64 @@ exit;
     } else if( empty($espec_tecnica) ){
         echo "<>alert('Preencha a especificação tecnica');history.back();</>";
     } 
+    
+//programação para copiar uma imagem
+//no insert envio da foto é obrigatório
+//no update só se for selecionada uma nova imagem
+//se o id estiver em branco e o imagem tbém - erro
 
-    if(isset($_FILES['foto'])){
-        // informações da imagens
-        $imagem = $_FILES['foto'];   
-        $numArquivo = count(array_filter($imagem['name']));
-        // Local de upload
-        $pasta = "../_arquivos/produtos/";
-        // Permissões de arquivos
-        $tipo       = array('image/jpeg', 'image/png');
-        $maxsize    = 1024 * 1024 * 10;
-        // mensagens
-        $msg        = array();
-        $errorMsg   = array(
-                                1 => 'Arquivos no upload é maior qye o limite definido de upload_max_filesize, por favor reduza suas imagens',
-                                2 => 'O arquivo ultrapassa o limite de tamanho em MAX_FILE_SIZE',
-                                3 => 'Upload feito parcialmente, e pode conter erros',
-                                4 => 'Upload de arquivo não realizado'
-                            );
+    if ( ( empty ( $id ) ) and ( empty ( $_FILES['foto']['name'] ) ) ) {
+        mensagem("Erro ao enviar imagem", 
+            "Selecione um arquivo JPG válido", 
+            "error");
+    } 
 
-        if($numArquivo <= 0)
-                echo 'Selecione uma imagem';
-            else{
-                for($i = 0; $i < $numArquivo; $i++){
-                    $name = $imagem['name'][$i];
-                    $type = $imagem['type'][$i];
-                    $size = $imagem['size'][$i];
-                    $error = $imagem['error'][$i];
-                    $tmp = $imagem['tmp_name'][$i];
+    //se existir imagem - copia para o servidor
+    if ( !empty ( $_FILES['foto']['name'] ) ) {
+        //calculo para saber quantos mb tem o arquivo
+        $tamanho = $_FILES['foto']['size'];
+        $t = 8 * 1024 * 1024; //byte - kbyte - megabyte
 
-                    $extensao = @end(explode('.', $name));
-                    $nomes[]=$nomeUnico = rand().".$extensao";
+        $foto = time();
+        $usuario = $_SESSION['quanticshop']['id'];
 
-                    if($error != 0)
-                        $msg[] = "<b>$name :</b> ".$errorMsg[$error];
-                    else if(!in_array($type, $tipo))
-                        $msg[] = "<b>$name :</b> Erro tipo imagem não permitida!";
-                    else if($size > $maxsize)
-                        $msg[] = "<b>$name :</b> Tamanho do(s) arquivo(s) maior que o limite 10MB!";
-                    else {
-                        if(move_uploaded_file($tmp, $pasta."/".$nomeUnico))
-                            $msg[] = "<b>$name :</b> Upload realizado com sucesso!";
-                        else
-                            $msg[] = "<b>$name :</b> Erro! Ocorreu um erro, tente novamente!";
-                        }
-                }
-                    $nomeimagem = implode(',', $nomes);
-                    // $result_produtos = "INSERT INTO produto (imagem) VALUES ('{$nomeimagem}'NOW())";
-                    // $resultado_produtos = mysqli_query($conn, $result_produtos);                        
- // fecha else
-            }
+        //definir um nome para a imagem
+        $foto = "produto_{$foto}_{$usuario}";
+
+        //validar se é jpg
+        if ( $_FILES['foto']['type'] != 'image/jpeg' ) {
+            mensagem("Erro ao enviar imagem", 
+            "O arquivo enviado não é um JPG válido, selecione um arquivo JPG", 
+            "error");
+        } else if ( $tamanho > $t ) {
+            mensagem("Erro ao enviar imagem", 
+            "O arquivo é muito grande e não pode ser enviado. Tente arquivos menores que 8 MB", 
+            "error");
+        } else if ( !copy ( $_FILES['foto']['tmp_name'], '../fotos/'.$_FILES['foto']['name'] ) ) {
+            mensagem("Erro ao enviar imagem", 
+            "Não foi possível copiar o arquivo para o servidor", 
+            "error");
         }
+
+            //redimensionar a imagem
+            $pastaFotos = '../fotos/';
+            loadImg($pastaFotos.$_FILES['foto']['name'], 
+                    $foto, 
+                    $pastaFotos);
+
+    } //fim da verificação da foto
 
     //iniciar uma transacao
     // $pdo->beginTransaction();
     
-    // $venda_unitaria = formatarValor($venda_unitaria);
+    $venda_unitaria = formatarValor($venda_unitaria);
     
     // $arquivo = time()."-".$_SESSION["quanticshop"]["id"];
     
     if(empty($id)){
         //inserir
        
-        $sql= "INSERT INTO produto (nome_produto, codigo, descricao, valorUnitario, espec_tecnica, foto,  departamento_id, marca_id, ativo) 
+        $sql= "INSERT INTO produto (nome_produto, codigo, descricao, vendaUnitaria, espec_tecnica, foto,  departamento_id, marca_id, ativo) 
         values(:nome_produto, :codigo, :descricao, :valorUnitario, :espec_tecnica, :foto, :departamento_id, :marca_id, :ativo)";
 
         $consulta = $pdo->prepare($sql);
@@ -116,7 +111,7 @@ exit;
         $consulta->bindParam(':descricao',$descricao);
         $consulta->bindParam(':valorUnitario', $valorUnitario);
         $consulta->bindParam(':espec_tecnica',$espec_tecnica);
-        $consulta->bindParam(':foto',$nomeimagem);
+        $consulta->bindParam(':foto',$foto);
         $consulta->bindParam(':ativo',$ativo);
         $consulta->bindParam(':departamento_id',$departamento_id);
         $consulta->bindParam(':marca_id',$marca_id); 
@@ -142,8 +137,8 @@ exit;
     else {
         
         $sql= "UPDATE produto SET nome_produto = :nome_produto, codigo = :codigo, promocao = :promocao, valorUnitario = :valorUnitario,
-        descricao = :descricao, espec_tecnica = :espec_tecnica, ativo = :ativo, departamento_id = :departamento_id,
-        marca_id = :marca_id, foto =:foto WHERE id = :id";
+        descricao = :descricao, espec_tecnica = :espec_tecnica, foto = :foto, ativo = :ativo, departamento_id = :departamento_id,
+        marca_id = :marca_id WHERE id = :id";
 
         $consulta = $pdo->prepare($sql);
         $consulta->bindParam(':nome_produto',$nome_produto);
@@ -152,7 +147,7 @@ exit;
         $consulta->bindParam(':valorUnitario', $valorUnitario);
         $consulta->bindParam(':espec_tecnica',$espec_tecnica);
         $consulta->bindParam(':promocao', $promocao);
-        $consulta->bindParam(':foto',$nomeImagem);
+        $consulta->bindParam(':foto',$foto);
         $consulta->bindParam(':ativo',$ativo);
         $consulta->bindParam(':departamento_id',$departamento_id);
         $consulta->bindParam(':marca_id',$marca_id);  
@@ -165,7 +160,7 @@ exit;
             // $pdo->commit();
             $titulo = "Sucesso";
             $mensagem = "Produto Salvo/Alterado!";
-            $icone = "success";
+            $icone = "sucess";
             mensagem($titulo, $mensagem, $icone);
             
     } else {

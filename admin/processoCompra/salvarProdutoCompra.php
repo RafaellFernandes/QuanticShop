@@ -44,18 +44,18 @@ if ( $_POST ) {
         echo "<script>alert('Preencha o lote');history.back();</script>";
     } else if( empty($qtdprodutoComprado) ){
         echo "<script>alert('Preencha a quantida de produtos');history.back();</script>";    
-    } else if( empty($qtdprodutoComprado) ){
-        echo "<script>alert('Preencha a quantida de produtos');history.back();</script>";    
-
     }    
 
     //iniciar uma transacao
     $pdo->beginTransaction();
 
+    $venda_unitaria = formatarValor($venda_unitaria);
+    $custo_unitario = formatarValor($custo_unitario);
+
     if(empty($id)){
 
-        $sql = "INSERT INTO item_compra( data_cadastro, lote, fornecedor_id, produto_id, qtdprodutoComprado, ativo, venda_unitaria)
-        VALUES (:data_cadastro, :lote, :fornecedor_id, :produto_id, :qtdprodutoComprado, :ativo, :venda_unitaria)";
+        $sql = "INSERT INTO item_compra( data_cadastro, lote, fornecedor_id, produto_id, qtdprodutoComprado, ativo, venda_unitaria, custo_unitario, porcentagem_lucro)
+        VALUES (:data_cadastro, :lote, :fornecedor_id, :produto_id, :qtdprodutoComprado, :ativo, :venda_unitaria, :custo_unitario, :porcentagem_lucro)";
         $consulta = $pdo->prepare($sql);
         $consulta->bindParam(':data_cadastro', $data_cadastro);
         $consulta->bindParam(':lote', $lote);
@@ -64,6 +64,8 @@ if ( $_POST ) {
         $consulta->bindParam(':qtdprodutoComprado', $qtdprodutoComprado);
         $consulta->bindParam(':ativo', $ativo);
         $consulta->bindParam(':venda_unitaria', $venda_unitaria);
+        $consulta->bindParam(':custo_unitario', $custo_unitario);
+        $consulta->bindParam(':porcentagem_lucro', $porcentagem_lucro);
         
         //SQL que vai pega o id do produto e dar um update nele se o ativo for 1
 
