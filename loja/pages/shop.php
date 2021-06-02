@@ -30,29 +30,30 @@
 							$consulta = $pdo->prepare($sql);
 							$consulta->execute();
 
-							while ( $linha = $consulta->fetch(PDO::FETCH_ASSOC) ) {
+							while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
 
 								//recuperar as variaveis
-								$id 	            = $linha["id"];
-								$nome_produto       = $linha["nome_produto"];
-								$valorUnitario     = $linha["valorUnitario"];
-								$foto            	= $linha["foto"] ."p.jpg";
+								$id 	            = $dados->id;
+								$nome_produto       = $dados->nome_produto;
+								$valorUnitario       = $dados->valorUnitario;
+								$foto                = $dados->foto;
+								$imagem              = explode(",", $foto);
 								//formatar o valor
 								$valorUnitario = number_format($valorUnitario, 2, ",", ".");
 								//var,casas decimais,sep decimal,sep milhares
 
-								echo "
+								?>
 								<div class='col-sm-2 text-center m-3'>
 										<div class='card'>
-											<img src='../fotos/$foto' class='card-img-top' width='40' height='auto' alt='$nome_produto'>
+											<img src='../_arquivos/produtos/<?=$imagem[0]?>' class='card-img-top' width='40' height='auto' alt='<?=$nome_produto?>'>
 											<div class='card-body'>
-												<p class='card-title'>$nome_produto</p>
-												<p class='card-text' style='color: green;'>R$ $valorUnitario</p>
-												<a href='pages/produto/$id' class='btn btn-primary'>Detalhes</a><br>
+												<p class='card-title'><?=$nome_produto?></p>
+												<p class='card-text' style='color: green;'>R$ <?=$valorUnitario?> </p>
+												<a href='pages/produto/<?=$id?>$id' class='btn btn-primary'>Detalhes</a><br>
 											</div>
 										</div>
 									</div>
-									";
+								<?php
 							}
 						?>	
 			+

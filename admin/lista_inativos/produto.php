@@ -49,6 +49,7 @@ exit;
 									FROM produto p 
 							 		LEFT JOIN departamento d ON (d.id = p.departamento_id)
                 					LEFT JOIN marca m ON(m.id = p.marca_id) 
+									WHERE p.ativo = 0
 									ORDER BY p.id";
 
 							$consulta = $pdo->prepare($sql);
@@ -65,13 +66,12 @@ exit;
 								$nome_dept                      = $dados->nome_dept;
 								$valorUnitario                  = $dados->valorUnitario;
 								$valorUnitario                  = number_format($valorUnitario,2, '.' , ',');	
-								$imagem                         = "../fotos/".$foto."p.jpg";
-                                $pativo                         = $dados->pativo;
-												
+								$imagem                    		 = explode(",", $foto);
+                              
 								//mostrar na tela
-                                if ( $pativo == "0" ) {
+                              
 									echo '<tr>	
-											<td><img src="'.$imagem.'" alt="'.$nome_produto.'"  width="48" height="48" class="rounded-circle mr-2"></td>
+											<td><img src="../_arquivos/produtos/'.$imagem[0].'" alt="'.$nome_produto.'"  width="48" height="48" class="rounded-circle mr-2"></td>
 											<td>'.$nome_produto.'</td>
 											<td>R$ '.$valorUnitario.'</td>
 											<td>'.$nome_marca.'</td>
@@ -83,7 +83,7 @@ exit;
 											</td>
 										</tr>';
                                 }
-							}
+							
 						?>
 					</tbody>
 				</table>

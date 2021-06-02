@@ -51,18 +51,18 @@ exit;
         $imagem = $_FILES['foto'];   
         $numArquivo = count(array_filter($imagem['name']));
         // Local de upload
-        $pasta = "../_arquivos/produtos/";
+        $pasta = "../fotos/";
         // Permissões de arquivos
         $tipo       = array('image/jpeg', 'image/png');
         $maxsize    = 1024 * 1024 * 10;
         // mensagens
         $msg        = array();
         $errorMsg   = array(
-                                1 => 'Arquivos no upload é maior qye o limite definido de upload_max_filesize, por favor reduza suas imagens',
-                                2 => 'O arquivo ultrapassa o limite de tamanho em MAX_FILE_SIZE',
-                                3 => 'Upload feito parcialmente, e pode conter erros',
-                                4 => 'Upload de arquivo não realizado'
-                            );
+                    1 => 'Arquivos no upload é maior qye o limite definido de upload_max_filesize, por favor reduza suas imagens',
+                    2 => 'O arquivo ultrapassa o limite de tamanho em MAX_FILE_SIZE',
+                    3 => 'Upload feito parcialmente, e pode conter erros',
+                    4 => 'Upload de arquivo não realizado'
+                );
 
         if($numArquivo <= 0)
                 echo 'Selecione uma imagem';
@@ -91,22 +91,19 @@ exit;
                         }
                 }
                     $nomeimagem = implode(',', $nomes);
+
                     // $result_produtos = "INSERT INTO produto (imagem) VALUES ('{$nomeimagem}'NOW())";
                     // $resultado_produtos = mysqli_query($conn, $result_produtos);                        
- // fecha else
+                    // fecha else
             }
         }
 
     //iniciar uma transacao
     // $pdo->beginTransaction();
-    
     // $venda_unitaria = formatarValor($venda_unitaria);
-    
     // $arquivo = time()."-".$_SESSION["quanticshop"]["id"];
     
     if(empty($id)){
-        //inserir
-       
         $sql= "INSERT INTO produto (nome_produto, codigo, descricao, valorUnitario, espec_tecnica, foto,  departamento_id, marca_id, ativo) 
         values(:nome_produto, :codigo, :descricao, :valorUnitario, :espec_tecnica, :foto, :departamento_id, :marca_id, :ativo)";
 
@@ -122,7 +119,6 @@ exit;
         $consulta->bindParam(':marca_id',$marca_id); 
        
     } else if (empty($foto)){
-
         $sql= "UPDATE produto SET nome_produto = :nome_produto, codigo = :codigo, valorUnitario = :valorUnitario,
         descricao = :descricao, espec_tecnica = :espec_tecnica, promocao = :promocao, ativo = :ativo, departamento_id = :departamento_id,
         marca_id = :marca_id WHERE id = :id";
@@ -138,9 +134,8 @@ exit;
         $consulta->bindParam(':departamento_id',$departamento_id);
         $consulta->bindParam(':marca_id',$marca_id);
         $consulta->bindParam(':id',$id);
-    }
-    else {
         
+    } else {
         $sql= "UPDATE produto SET nome_produto = :nome_produto, codigo = :codigo, promocao = :promocao, valorUnitario = :valorUnitario,
         descricao = :descricao, espec_tecnica = :espec_tecnica, ativo = :ativo, departamento_id = :departamento_id,
         marca_id = :marca_id, foto =:foto WHERE id = :id";
@@ -160,16 +155,15 @@ exit;
     }
     
     if($consulta->execute()){
-           
-            //gravar no banco 
-            // $pdo->commit();
-            $titulo = "Sucesso";
-            $mensagem = "Produto Salvo/Alterado!";
-            $icone = "success";
-            mensagem($titulo, $mensagem, $icone);
+        //gravar no banco 
+        // $pdo->commit();
+        $titulo = "Sucesso";
+        $mensagem = "Produto Salvo/Alterado!";
+        $icone = "success";
+        mensagem($titulo, $mensagem, $icone);
             
     } else {
-         //erro ao gravar
+        //erro ao gravar
         echo $erro = $consulta->errorInfo()[2];
         $titulo = "Erro";
 		$mensagem = "Erro ao Gravar/Alterar Produto";

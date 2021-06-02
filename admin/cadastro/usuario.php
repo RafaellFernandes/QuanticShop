@@ -211,7 +211,7 @@ if(!empty($id)){
 							value="<?=$cep;?>" placeholder="Código Postal">
 						</div>
 
-						<div class="col-12 col-md-2 mt-2">
+						<div class="col-12 col-md-2 mt-2" style="display: none;">
 							<label for="cidade_id">ID Cidade</label>
 							<input type="text" name="cidade_id" id="cidade_id" class="form-control" required data-parsley-required-message="Preencha a Cidade" readonly
 							value="<?=$cidade_id;?>">

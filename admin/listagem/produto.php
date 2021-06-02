@@ -8,17 +8,17 @@ exit;
 }
 
 if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-$titulo = "Erro";
-$mensagem = "Erro na Requisição da Página";
-$icone = "error";
-mensagem($titulo, $mensagem, $icone);
-exit;
+	$titulo = "Erro";
+	$mensagem = "Erro na Requisição da Página";
+	$icone = "error";
+	mensagem($titulo, $mensagem, $icone);
+	exit;
 }
 
-	//mostrar erros
-	ini_set('display_errors',1);
-	ini_set('display_startup_erros',1);
-	error_reporting(E_ALL);
+//mostrar erros
+ini_set('display_errors',1);
+ini_set('display_startup_erros',1);
+error_reporting(E_ALL);
 	
 ?>
 <div class="container-fluid p-0">
@@ -49,6 +49,7 @@ exit;
 									FROM produto p 
 									LEFT JOIN departamento d ON (d.id = p.departamento_id)
 									LEFT JOIN marca m ON (m.id = p.marca_id) 
+									WHERE p.ativo = 1
 									ORDER BY p.id";
 							$consulta = $pdo->prepare($sql);
 							$consulta->execute();
@@ -64,26 +65,26 @@ exit;
 								$nome_dept                      = $dados->nome_dept;
 								$valorUnitario                  = $dados->valorUnitario;
 								$valorUnitario                  = number_format($valorUnitario,2, '.' , ',');	
-								$imagem                         = "../fotos/".$foto."p.jpg";
-								$pativo 							= $dados->pativo;
-												
+								$foto                           = $dados->foto;
+								$imagem                    		 = explode(",", $foto);
 								//mostrar na tela
-								if ($pativo == "1") {
-									echo '<tr>	
-											<td><img src="'.$imagem.'" alt="'.$nome_produto.'"  width="48" height="48" class="rounded-circle mr-2"></td>
-											<td>'.$nome_produto.'</td>
-											<td>R$ '.$valorUnitario.'</td>
-											<td>'.$nome_marca.'</td>
-											<td>'.$nome_dept.'</td>
-											<td class="table-action text-center">
-												<a href="cadastro/produto/'.$id.'" alt="Editar" title="Editar">
-													<i class="align-middle"  data-feather="edit-2"></i>				
-												</a>
-												
-											</td>
-										</tr>';
+								?>
+								<tr>	
+									<td><img src="../_arquivos/produtos/<?=$imagem[0]?>" alt="<?=$nome_produto;?>"  width="48" height="48" class="rounded-circle mr-2"></td>
+							
+									<td><?=$nome_produto;?></td>
+									<td>R$ <?=$valorUnitario;?></td>
+									<td><?=$nome_marca;?></td>
+									<td><?=$nome_dept;?></td>
+									<td class="table-action text-center">
+										<a href="cadastro/produto/<?=$id;?>" alt="Editar" title="Editar">
+											<i class="align-middle"  data-feather="edit-2"></i>				
+										</a>
+										
+									</td>
+								</tr>
+								<?php
 								}
-							}
 						?>
 					</tbody>
 				</table>

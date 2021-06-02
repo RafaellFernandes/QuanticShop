@@ -9,10 +9,17 @@
     	$dados = $consulta->fetch(PDO::FETCH_OBJ);
 
 		$promocao             = $dados->promocao;
-		$foto      = "../fotos/{$dados->foto}m.jpg"; 
-		$fotog     = "../fotos/{$dados->foto}g.jpg"; 
+		// $foto      			= "../fotos/{$dados->foto}m.jpg"; 
+		// $fotog     = "../fotos/{$dados->foto}g.jpg"; 
 		$valorUnitario 	  = $dados->valorUnitario;
 		$id = "";
+
+		$foto            = $dados->foto;
+		$imagem          = "../$foto";
+		$imagem          = explode(",", $foto);
+							
+		
+								
 	}	
     if ( empty ( $promocao ) ) {
 		//1499.99 -> 1.499,99
@@ -28,10 +35,22 @@
 <div class="card">
   <div class=" mt-3">
     <div class="col-md-5" >
-		<a href="<?=$fotog?>" data-lightbox="foto" title="<?=$dados->nome_produto?>">
-        	<img src="<?=$foto?>" alt="<?=$dados->nome_produto?>" width="100%" height="100%">
+		<a href="../_arquivos/produtos/<?=$imagem[0]?>" data-lightbox="foto" title="<?=$dados->nome_produto?>">
+        	<img src="../_arquivos/produtos/<?=$imagem[0]?>" alt="<?=$dados->nome_produto?>" width="100%" height="100%">
       	</a>
     </div>
+<?php
+// //$imagem = a variavel que recebe do banco  --- FAZER FRONTEND !!!
+	 foreach ($imagem as $nomeImagem) {
+		 ?>
+			<div class="col-md-5" >
+				<a href="../_arquivos/produtos/<?=$nomeImagem?>" data-lightbox="foto" title="<?=$dados->nome_produto?>">
+					<img src="../_arquivos/produtos/<?=$nomeImagem?>" alt="<?=$dados->nome_produto?>" width="20%" height="20%">
+				</a>
+			</div>
+			<?php
+			}
+	?>
     <div class="col-md-7 mb-5">
       	<div class="card-body">
 			<h4 class="card-title venda_unitaria"><strong><?=$dados->nome_produto?></strong></h4>

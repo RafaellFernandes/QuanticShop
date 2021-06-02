@@ -158,7 +158,7 @@ exit;
 							<label for="cep">CEP:</label>
 							<input type="text" name="cep" id="cep" class="form-control" required data-parsley-required-message="Preencha o CEP" value="<?=$cep;?>" placeholder="Digite o CEP da Sua Cidade">
 						</div>
-						<div class="mb-3 col-12 col-md-2">
+						<div class="mb-3 col-12 col-md-2" style="display: none;">
 							<label for="cidade_id">ID Cidade</label>
 							<input type="text" name="cidade_id" id="cidade_id" class="form-control" required data-parsley-required-message="Preencha a Cidade" readonly value="<?=$cidade_id;?>">
 						</div>
