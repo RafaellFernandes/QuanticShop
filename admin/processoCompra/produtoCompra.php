@@ -53,7 +53,7 @@ include "validacao/functions.php";
             $data_cadastro            = $dados->data_cadastro;
             $lote                     = $dados->lote;
             $ativo                    = $dados->ativo;
-            $qtdprodutoComprado       = $dados->qtdprodutoComprado;
+            //$qtdprodutoComprado       = $dados->qtdprodutoComprado;
             $venda_unitaria           = $dados->venda_unitaria;
             $custo_unitario           = $dados->custo_unitario;
             $porcentagem_lucro        = $dados->porcentagem_lucro;

@@ -80,8 +80,8 @@
 								$sql = "SELECT v.id, v.status, date_format(v.data, '%d/%m/%Y') datav, c.primeiro_nome  
 								FROM venda v 
 								INNER JOIN cliente c ON (c.id = v.cliente_id)
-								WHERE v.data >= :dataInicial AND v.data <= :dataFinal 
-								ORDER BY v.data";
+								where v.data >= :dataInicial AND v.data <= :dataFinal 
+								ORDER BY datav";
 								$consulta = $pdo->prepare($sql);
 								$consulta->bindParam(":dataInicial", $dataInicial);
 								$consulta->bindParam(":dataFinal", $dataFinal);
@@ -108,6 +108,8 @@
 									} else if ( $dados->status == "T" ) {
 										$status = '<span class="span badge badge-andrey">Troca</span>';
 									} 
+
+								
 							?>
 								<tr>
 									<td><?=$dados->id?></td>
@@ -119,7 +121,6 @@
 								<?php
 
 								}
-
 							?>
 						</tbody>
 					</table>
@@ -128,5 +129,39 @@
 		</div>
 	</div>	
 </body>
+<?php
+
+function getTotal($pdo, $venda_id) {
+
+	$sql = "SELECT sum(valor*quantidade) total 
+	FROM item_venda
+	WHERE venda_id = :venda_id LIMIT 1";
+	$consulta = $pdo->prepare($sql);
+	$consulta->bindParam(":venda_id", $venda_id);
+	$consulta->execute();
+
+	$total = $consulta->fetch(PDO::FETCH_OBJ)->total;
+
+	//$dados = $consulta->fetch(PDO::FETCH_OBJ);
+	//$total = $dados->total;
+
+	return number_format($total,2,",",".");
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
 </html>
