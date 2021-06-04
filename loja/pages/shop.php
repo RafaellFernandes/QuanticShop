@@ -2,7 +2,6 @@
 	<div class="btn-group btn-group-sm btn-sm">
   		<ul class="nav" id="nav">	
             <li><a class="dropdown-item" href="departamento/eletrodomesticos">Eletrodomésticos</a></li>
-            <li><a class="dropdown-item" href="departamento/eletronicos">Eletrônicos</a></li>
             <li><a class="dropdown-item" href="departamento/eletroportateis">Eletroportáteis</a></li>
             <li><a class="dropdown-item" href="departamento/gamer">Gamer</a></li>
             <li><a class="dropdown-item" href="departamento/hardware">Hardware</a></li>
@@ -45,18 +44,18 @@
 								?>
 								<div class='col-sm-2 text-center m-3'>
 										<div class='card'>
-											<img src='../_arquivos/produtos/<?=$imagem[0]?>' class='card-img-top' width='40' height='auto' alt='<?=$nome_produto?>'>
+											<img src='../fotos/produtos/<?=$imagem[0]?>' class='card-img-top' width='40' height='auto' alt='<?=$nome_produto?>'>
 											<div class='card-body'>
 												<p class='card-title'><?=$nome_produto?></p>
 												<p class='card-text' style='color: green;'>R$ <?=$valorUnitario?> </p>
-												<a href='pages/produto/<?=$id?>$id' class='btn btn-primary'>Detalhes</a><br>
+												<a href='pages/produto/<?=$id?>' class='btn btn-primary'>Detalhes</a><br>
 											</div>
 										</div>
 									</div>
 								<?php
 							}
 						?>	
-			+
+			
 					</div>
 				</div>
 			</div>			

@@ -8,10 +8,7 @@ exit;
 }
 
 if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-    $titulo = "Erro";
-    $mensagem = "Erro na Requisição da Página";
-    $icone = "error";
-    mensagem($titulo, $mensagem, $icone);
+    echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
 exit;
 }
 
@@ -193,15 +190,17 @@ if ( $_POST ) {
     }
 
     if ( $consulta->execute() ) {
-        mensagem("OK", 
-            "Registro salvo/alterado com sucesso!", 
-            "ok");
+        $titulo = "Sucesso";
+		$mensagem = "Usuário Salvo/Alterado!";
+		$icone = "success";
+		mensagem($titulo, $mensagem, $icone);
     } else {
         echo $erro = $consulta->errorInfo()[2];
 
-        mensagem("Erro", 
-            "Erro ao salvar ou alterar registro", 
-            "error");
+        $titulo = "Erro";
+		$mensagem = "Erro ao Salvar/Alterar!";
+		$icone = "error";
+		mensagem($titulo, $mensagem, $icone);
     }
 
 }

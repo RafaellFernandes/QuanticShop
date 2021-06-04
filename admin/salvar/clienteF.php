@@ -8,10 +8,7 @@ exit;
 }
 
 if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-    $titulo = "Erro";
-    $mensagem = "Erro na Requisição da Página";
-    $icone = "error";
-    mensagem($titulo, $mensagem, $icone);
+    echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
 exit;
 }
 
@@ -26,8 +23,8 @@ if ( $_POST ) {
     $id = $primeiro_nome = $sobrenome = $cpf  = $data_nascimento = $email = $senha = $cep = $telefone = $celular = $foto = 
     $pessoaFJ = $estado = $cidade = $endereco = $bairro = $complemento = $numero_resid = $cidade_id = $ativo = $genero_id = "";
        
-    print_r($_POST);
-    print_r($_FILES);
+    // print_r($_POST);
+    // print_r($_FILES);
       
   	foreach ($_POST as $key => $value) {
         //guardar as variaveis
@@ -196,10 +193,12 @@ if ( !empty ( $_FILES['foto']['name'] ) ) {
     //executar e verificar se deu certo
     if ( $consulta->execute() ) {
         //erro ao gravar
+       
         $titulo = "Sucesso";
         $mensagem = "Cliente Salvo/Alterado!";
-        $icone = "sucess";
+        $icone = "success";
         mensagem($titulo, $mensagem, $icone);
+        echo "<script>location.href='listagem/cliente';</script>";
         exit;
     } else {
         $titulo = "Erro";

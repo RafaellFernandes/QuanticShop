@@ -35,22 +35,24 @@
 <div class="card">
   <div class=" mt-3">
     <div class="col-md-5" >
-		<a href="../_arquivos/produtos/<?=$imagem[0]?>" data-lightbox="foto" title="<?=$dados->nome_produto?>">
-        	<img src="../_arquivos/produtos/<?=$imagem[0]?>" alt="<?=$dados->nome_produto?>" width="100%" height="100%">
+		<a href="../fotos/produtos/<?=$imagem[0]?>" data-lightbox="foto" title="<?=$dados->nome_produto?>">
+        	<img src="../fotos/produtos/<?=$imagem[0]?>" alt="<?=$dados->nome_produto?>" width="100%" height="100%">
       	</a>
-    </div>
+		  	
 <?php
 // //$imagem = a variavel que recebe do banco  --- FAZER FRONTEND !!!
 	 foreach ($imagem as $nomeImagem) {
 		 ?>
 			<div class="col-md-5" >
-				<a href="../_arquivos/produtos/<?=$nomeImagem?>" data-lightbox="foto" title="<?=$dados->nome_produto?>">
-					<img src="../_arquivos/produtos/<?=$nomeImagem?>" alt="<?=$dados->nome_produto?>" width="20%" height="20%">
+				<a href="../fotos/produtos/<?=$nomeImagem?>" data-lightbox="foto" title="<?=$dados->nome_produto?>">
+					<img src="../fotos/produtos/<?=$nomeImagem?>" alt="<?=$dados->nome_produto?>" width="15%" height="15%">
 				</a>
 			</div>
 			<?php
 			}
 	?>
+    </div>
+
     <div class="col-md-7 mb-5">
       	<div class="card-body">
 			<h4 class="card-title venda_unitaria"><strong><?=$dados->nome_produto?></strong></h4>

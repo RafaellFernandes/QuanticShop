@@ -8,10 +8,7 @@ exit;
 }
 
 if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-$titulo = "Erro";
-$mensagem = "Erro na Requisição da Página";
-$icone = "error";
-mensagem($titulo, $mensagem, $icone);
+    echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
 exit;
 }
   //mostrar erros

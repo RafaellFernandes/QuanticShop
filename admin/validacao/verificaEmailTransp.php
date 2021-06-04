@@ -2,12 +2,12 @@
 	session_start();
 
 	//verificar se não está logado
-	if ( !isset ( $_SESSION["bancotcc"]["id"] ) ){
+	if ( !isset ( $_SESSION["quanticshop"]["id"] ) ){
 		exit;
 	}
 
 	//recuperar o email
-	$Email = $_GET["email"] ?? "";
+	$email = $_GET["email"] ?? "";
 	$id  = $_GET["id"] ?? "";
 
 	//incluir o arquivo de conexao

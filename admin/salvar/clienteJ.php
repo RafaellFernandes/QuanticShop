@@ -8,10 +8,7 @@ exit;
 }
 
 if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-  $titulo = "Erro";
-  $mensagem = "Erro na Requisição da Página";
-  $icone = "error";
-  mensagem($titulo, $mensagem, $icone);
+  echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
 exit;
 }
 
@@ -132,11 +129,12 @@ exit;
         if ( $consulta->execute() ) {
           //gravar no banco 
           $pdo->commit();
+          echo "<script>location.href='listagem/cliente';</script>";
           $titulo = "Sucesso";
           $mensagem = "Cliente Salvo!";
           $icone = "success";
           mensagem($titulo, $mensagem, $icone);
-          echo "<script>location.href='listagem/cliente';</script>";
+         
         }
 
         //erro ao gravar

@@ -8,10 +8,7 @@ exit;
 }
 
 if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-    $titulo = "Erro";
-    $mensagem = "Erro na Requisição da Página";
-    $icone = "error";
-    mensagem($titulo, $mensagem, $icone);
+    echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
 exit;
 }
   //mostrar erros
@@ -51,7 +48,7 @@ exit;
         $imagem = $_FILES['foto'];   
         $numArquivo = count(array_filter($imagem['name']));
         // Local de upload
-        $pasta = "../fotos/";
+        $pasta = "../fotos/produtos/";
         // Permissões de arquivos
         $tipo       = array('image/jpeg', 'image/png');
         $maxsize    = 1024 * 1024 * 10;

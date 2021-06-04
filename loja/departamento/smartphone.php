@@ -2,7 +2,7 @@
 	<div class="btn-group btn-group-sm btn-sm">
   		<ul class="nav" id="nav">	
             <li><a class="dropdown-item" href="departamento/eletrodomesticos">Eletrodomésticos</a></li>
-            <li><a class="dropdown-item" href="departamento/eletronicos">Eletrônicos</a></li>
+            <!-- <li><a class="dropdown-item" href="departamento/eletronicos">Eletrônicos</a></li> -->
             <li><a class="dropdown-item" href="departamento/eletroportateis">Eletroportáteis</a></li>
             <li><a class="dropdown-item" href="departamento/gamer">Gamer</a></li>
             <li><a class="dropdown-item" href="departamento/hardware">Hardware</a></li>

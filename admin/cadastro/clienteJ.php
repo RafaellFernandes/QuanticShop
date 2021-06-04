@@ -8,10 +8,7 @@ exit;
 }
 
 if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-$titulo = "Erro";
-$mensagem = "Erro na Requisição da Página";
-$icone = "error";
-mensagem($titulo, $mensagem, $icone);
+	echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
 exit;
 }
 
@@ -24,7 +21,7 @@ exit;
   
   if ( !isset ( $id ) ) $id = "";
 
-   $email = $senha = $cep = $telefone = $celular = $pessoaFJ = $nomeFantasia = $razaoSocial = $cnpj = $inscricao_estadual = 
+   $email = $senha = $cep = $telefone = $celular = $pessoaFJ = $nomeFantasia = $razaoSocial = $cnpj = $inscricao_estadual = $siteClienteJuridico =
     $estado = $cidade = $endereco = $bairro = $numero_resid = $cidade_id = $ativo = $siteJ = $complemento =  $genero_id = "";
 
   if ( !empty ( $id ) ) {
@@ -62,9 +59,10 @@ exit;
 	  $complemento             = $dados->complemento;
 	  $numero_resid            = $dados->numero_resid;
 	  $cidade_id               = $dados->cidade_id;
-      $siteclienteJuridico     = $dados->siteclienteJuridico;
+      $siteClienteJuridico     = $dados->siteClienteJuridico;
 	  $ativo                   = $dados->ativo;
 	  $genero_id               = $dados->genero_id;
+	
 	  
 
   }
@@ -87,9 +85,15 @@ exit;
 							<label for="id">ID:</label>
 							<input type="text" name="id" id="id" class="form-control" readonly value="<?=$id;?>" placeholder="Automatico">
 						</div>
-                        <div class="mb-3 col-12 col-md-2">
-							<label for="pessoaFJ">pessoaF/J:</label>
-							<input type="text" name="pessoaFJ" id="pessoaFJ" class="form-control"  value="<?=$pessoaFJ;?>" placeholder="F ou J">
+						<div class="mb-3 col-12 col-md-2 mt-2" > style="display: none;" 
+							<label for="pessoaFJ">Pessoa F/J: ocultar</label>
+							<select name="pessoaFJ" id="pessoaFJ" class="form-control" 
+								required data-parsley-required-message="Selecione uma opção">
+								<!-- <option value="">...</option> -->
+								<!-- <option value="F" <?//= $pessoaFJ == 'F' ? "selected" : "" ?>>Fisica</option>  style="display: none;" -->
+								<option value="J"  <?= $pessoaFJ == 'J' ? "selected" : "" ?>>Juridica</option>
+							</select>
+						
 						</div>
                         <div class="mb-3 col-12 col-md-10">
 							<label for="razaoSocial">Razão Social: </label>
@@ -141,9 +145,9 @@ exit;
 							data-parsley-type-message="Digite um E-mail válido" placeholder="exemple@hotmail.com" value="<?=$email;?>" onblur="confirmarEmail(this.value)">
 						</div>
                         <div class="mb-3 col-12 col-md-4 mt-2">
-							<label for="siteclienteJuridico">Site:</label>
-							<input type="text" name="siteclienteJuridico" id="siteclienteJuridico" class="form-control" required data-parsley-required-message="Preencha o site" 
-							 placeholder="www.exemplo.com" value="<?=$siteclienteJuridico;?>">
+							<label for="siteClienteJuridico">Site:</label>
+							<input type="text" name="siteClienteJuridico" id="siteClienteJuridico" class="form-control" required data-parsley-required-message="Preencha o site" 
+							 placeholder="www.exemplo.com" value="<?=$siteClienteJuridico;?>">
 						</div>
 						<div class="mb-3 col-12 col-md-4 mt-2">
 							<label for="senha">Senha:</label>

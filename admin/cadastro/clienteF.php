@@ -8,10 +8,7 @@ exit;
 }
 
 if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-$titulo = "Erro";
-$mensagem = "Erro na Requisição da Página";
-$icone = "error";
-mensagem($titulo, $mensagem, $icone);
+	echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
 exit;
 }
 
@@ -85,7 +82,7 @@ exit;
 			<form name="formCadastro" method="post" action="salvar/clienteF" data-parsley-validate enctype="multipart/form-data">
 				<p class="card-subtitle text-muted">Todos os Campos são Obrigatórios</p><br>
 					<div class="row">
-						<div class="mb-3 col-12 col-md-2 mt-2">
+						<div class="mb-3 col-12 col-md-2 mt-2" style="display: none;" >
 							<label for="pessoaFJ">Pessoa F/J: ocultar</label>
 							<select name="pessoaFJ" id="pessoaFJ" class="form-control" 
 								required data-parsley-required-message="Selecione uma opção">
@@ -99,12 +96,12 @@ exit;
 							<label for="id">ID:</label>
 							<input type="text" name="id" id="id" class="form-control" readonly value="<?=$id;?>" placeholder="Automatico">
 						</div>
-						<div class="mb-3 col-12 col-md-5 mt-2">
+						<div class="mb-3 col-12 col-md-6 mt-2">
 							<label for="primeiro_nome">Primeiro Nome:</label>
 							<input type="text" name="primeiro_nome" id="primeiro_nome" class="form-control" required data-parsley-required-message="Preencha o Primeiro Nome" 
 							value="<?=$primeiro_nome;?>" placeholder="Digite o Primeiro Nome">
 						</div>
-						<div class="mb-3 col-12 col-md-5 mt-2">
+						<div class="mb-3 col-12 col-md-6 mt-2">
 							<label for="sobrenome">Sobrenome:</label>
 							<input type="text" name="sobrenome" id="sobrenome" class="form-control" required data-parsley-required-message="Preencha o Sobrenome" 
 							value="<?=$sobrenome;?>" placeholder="Digite o Sobrenome">
@@ -118,7 +115,7 @@ exit;
 						<div class="mb-3 col-12 col-md-4">
 							<label class="form-label" for="genero_id">Gênero:</label>
 							<select name="genero_id" id="genero_id" class="form-control" required data-parsley-required-message="selecione uma opção">
-                                <option value="<?=$genero_id;?>">Selecione o Gênero</option>
+                                <option value="<?=$genero_id;?>">Selecione seu Gênero</option>
                                     <?php
                                         $sql = "SELECT * FROM genero ORDER BY id";
                                         $consulta = $pdo->prepare($sql);
@@ -228,6 +225,13 @@ exit;
 							<button type="submit" class="btn btn-success margin">
 								Salvar/Alterar Dados
 							</button>
+                        </div>
+						<div class="col-sm-2 mt-4">
+                            <div class="float-end ">
+                            <button type="reset" class="btn btn-danger margin">
+                                    Apagar tudo
+							</button>
+                            </div> 
                         </div>
                         <div class="col-sm">
                             <div class="float-end mt-3 ">

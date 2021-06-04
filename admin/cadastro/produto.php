@@ -8,10 +8,7 @@ exit;
 }
 
 if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-$titulo = "Erro";
-$mensagem = "Erro na Requisição da Página";
-$icone = "error";
-mensagem($titulo, $mensagem, $icone);
+    echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
 exit;
 }
   //mostrar erros
@@ -110,7 +107,7 @@ $ativo = $departamento_id = $marca_id =  $estoque_id = "";
                             <select name="marca_id" id="marca_id" class="form-control" required data-parsley-required-message="selecione uma opção">
                                 <option value="<?=$marca_id;?>">Selecione a Marca</option>
                                     <?php
-                                        $sql = "SELECT * FROM marca WHERE ativo = 1 ORDER BY id";
+                                        $sql = "SELECT * FROM marca WHERE ativo = 1 ORDER BY nome_marca";
                                         $consulta = $pdo->prepare($sql);
                                         $consulta->execute();
 
@@ -170,13 +167,13 @@ $ativo = $departamento_id = $marca_id =  $estoque_id = "";
                                 //verificar se a imagem não esta em branco
                                 if ( !empty ( $foto ) ) {
                                     //caminho para a imagem
-                                    $img = "../fotos/{$foto}m.jpg";
+                                    $img = "../fotos/{$foto}";
                                     //criar um link para abrir a imagem
                                     $link = "<a href='{$img}' data-lightbox='foto' class='badge badge-success'>Abrir imagem</a>";
                                     $required = NULL;
                                 }
                             ?>
-                            <label for="foto">Imagem (JPG)* <?=$link?>:</label>
+                            <label for="foto">Imagens (JPG)* <?=$link?>:</label>
                             <input type="file" name="foto[]" 
                             id="foto" class="form-control" 
                             <?=$required?> accept="image/jpeg" multiple="multiple">

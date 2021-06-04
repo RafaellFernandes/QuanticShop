@@ -8,10 +8,7 @@ exit;
 }
 
 if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-$titulo = "Erro";
-$mensagem = "Erro na Requisição da Página";
-$icone = "error";
-mensagem($titulo, $mensagem, $icone);
+	echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
 exit;
 }
 
@@ -61,6 +58,7 @@ if(!empty($id)){
     }
 }
 ?>
+<script src="vendor/jqueryMask/src/jquery.mask.js"></script>
 <div class="container-fluid p-0">
 	<div class="col-md-12">
 		<div class="card">
@@ -90,16 +88,29 @@ if(!empty($id)){
 							<input type="text" name="razaoSocial" id="razaoSocial" class="form-control" required data-parsley-required-message="Preencha o nome" 
 							value="<?=$razaoSocial;?>" placeholder="Digite a Razão Social">
 						</div>
-						<div class="col-12 col-md-12 mt-2">
+						<div class="col-12 col-md-6 mt-2">
 							<label for="nomeFantasia">Nome Fantasia:</label>
 							<input type="text" name="nomeFantasia" id="nomeFantasia" class="form-control" required data-parsley-required-message="Preencha o nome" 
 							value="<?=$nomeFantasia;?>" placeholder="Digite o Nome Fantasia da Transportadora">
 						</div>
-						<div class="col-12 col-md-4 mt-2">
+						<div class="col-12 col-md-6 mt-2">
 							<label for="cnpj">CNPJ:</label>
 							<input type="text" name="cnpj" id="cnpj" class="form-control" required data-parsley-required-message="Preencha o CNPJ" 
 							value="<?=$cnpj;?>"  placeholder="CNPJ da Empresa">
 						</div>
+						<!-- onblur="validaCnpj(this.value)" -->
+						<div class="col-12 col-md-6 mt-2">
+							<label for="email">E-mail:</label>
+							<input type="email" name="email" id="email" class="form-control" required data-parsley-required-message="Preencha o E-mail"  placeholder="email@exemplo.com.br"
+							 value="<?=$email;?>">
+						</div>
+						<!-- onblur="confirmarEmail(this.value)" -->
+						<div class="col-12 col-md-6 mt-2">
+							<label for="siteFornecedor">Site:</label>
+							<input type="text" name="siteFornecedor" id="siteFornecedor" class="form-control" required data-parsley-required-message="Preencha o site" 
+							 placeholder="www.exemplo.com" value="<?=$siteFornecedor;?>">
+						</div>
+						
 						<div class="col-12 col-md-4 mt-2">
 							<label for="inscricaoEstadual">Inscrição Estadual:</label>
 							<input type="text" name="inscricaoEstadual" id="inscricaoEstadual" class="form-control" required data-parsley-required-message="Preencha o Numero de Inscrição Estadual" 
@@ -112,25 +123,17 @@ if(!empty($id)){
 						</div>
 						<div class="col-12 col-md-4 mt-2">
 							<label for="celular">Celular:</label>
-							<input type="text" name="celular" id="celular" class="form-control" placeholder="Celular com DDD" required data-parsley-required-message="Preencha o Celular" 
+							<input type="text" name="celular" id="celular" class="form-control" placeholder="Celular com DDD" 
 							value="<?=$celular;?>">
 						</div>
-						<div class="col-12 col-md-4 mt-2">
-							<label for="email">E-mail:</label>
-							<input type="email" name="email" id="email" class="form-control" required data-parsley-required-message="Preencha o E-mail"  placeholder="email@exemplo.com.br"
-							onblur="confirmarEmail(this.value)" value="<?=$email;?>">
-						</div>
-						<div class="mb-3 col-12 col-md-4 mt-2">
-							<label for="siteFornecedor">Site:</label>
-							<input type="text" name="siteFornecedor" id="siteFornecedor" class="form-control" required data-parsley-required-message="Preencha o site" 
-							 placeholder="www.exemplo.com" value="<?=$siteFornecedor;?>">
-						</div>
+						
 						<div class="col-12 col-md-4 mt-2">
 							<label for="cep">CEP:</label>
 							<input type="text" name="cep" id="cep" class="form-control" required data-parsley-required-message="Preencha o CEP" 
 							value="<?=$cep;?>" placeholder="Digite o CEP">
 						</div>
-						<div class="col-12 col-md-2 mt-2" style="display: none;">
+						<!-- style="display: none;" -->
+						<div class="col-12 col-md-2 mt-2" >
 							<label for="cidade_id">ID Cidade</label>
 							<input type="text" name="cidade_id" id="cidade_id" class="form-control" required data-parsley-required-message="Preencha a Cidade" 
 							readonly value="<?=$cidade_id;?>">		
@@ -167,6 +170,13 @@ if(!empty($id)){
 								Salvar Dados
 							</button>
                         </div>
+						<div class="col-sm-2 mt-4">
+                            <div class="float-center ">
+								<button type="reset" class="btn btn-danger margin">
+										Apagar tudo
+								</button>
+                            </div> 
+                        </div>
                         <div class="col-sm">
                             <div class="float-end mt-3 ">
                                 <a href="listagem/fornecedor" class="btn btn-primary">Listar Registros</a> 
@@ -178,67 +188,66 @@ if(!empty($id)){
 		</div>
 	</div>
 </div> 
-<?php
-	//verificar se o id é vazio
-	if ( empty ( $id ) ) $id = 0;
-?>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$("#cnpj").mask("00.000.000/0000-00");
-		$("#telefone").mask("(00) 0000-0000");
-		$("#celular").mask("(00) 00000-0000");
-        $("#cep").mask("00000-000");      
-	});
+	<?php
+		//verificar se o id é vazio
+		if ( empty ( $id ) ) $id = 0;
+	?>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#cnpj").mask("00.000.000/0000-00");
+			$("#telefone").mask("(00) 0000-0000");
+			$("#celular").mask("(00) 00000-0000");
+			$("#cep").mask("00000-000");       
+		});
 
-	//  function validaCnpj() {
-	// 	let cnpj = document.getElementById('cnpj').value;
-	// 	cnpj = cnpj.replace('/','').replace('-','').replace('.','').replace('.','');
-    //         $.get("validacao/validaCnpj.php", {cnpj:cnpj, id:<?//=$id;?>}, function(dados){
-    //             if(dados != "1"){
-    //                 //mostrar erro retornado
-    //                 alert(dados);
-    //                 //zerar Cnpj
-    //                 $("#cnpj").val("");
-    //             }
-	// 		})
+        function validaCnpj() {
+			let cnpj = document.getElementById('cnpj').value;
+			cnpj = cnpj.replace('/','').replace('-','').replace('.','').replace('.','');
+            $.get("validacao/validaCnpj.php", {cnpj:cnpj, id:<?=$id;?>}, function(dados){
+                if(dados != "1"){
+                    //mostrar erro retornado
+                    alert(dados);
+                    //zerar Cnpj
+                    $("#cnpj").val("");
+                }
+			})
 		
-    //       }
-                 
-    function confirmarEmail(email){
-        $.get("validacao/verificaEmail.php", {email:email,id:<?=$id;?>}, function(dados){
-            if(dados != ""){
-                alert(dados);
-                $("#email").val("");
+          }
+                
+        function confirmarEmail(email){
+               $.get("validacao/verificaEmailForn.php", {email:email,id:<?=$id;?>}, function(dados){
+                   if(dados != ""){
+                       alert(dados);
+                       $("#email").val("");
+                   }
+               }) 
             }
-        }) 
-    }
                   
-	$("#cep").blur(function(){
-		//pegar o cep
-        cep = $("#cep").val();
-        cep = cep.replace(/\D/g, '');
-        //alert(cep);
-		//verificar se esta em branco
-        if(cep == ""){
-            alert("Preencha o cep");
-        } else {
-            //consultar o cep no viacep.com.br
-            $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados){
-                $("#endereco").val(dados.logradouro);
-                $("#cidade").val(dados.localidade);
-                $("#estado").val(dados.uf);
-				$("#bairro").val(dados.bairro);
+		 $("#cep").blur(function(){
+                cep = $("#cep").val();
+                cep = cep.replace(/\D/g, '');
+                //alert(cep);
+                if(cep == ""){
+                    alert("Preencha o cep");
+                } else{
+                    //consultar o cep no viacep.com.br
+                     $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados){
+                        $("#endereco").val(dados.logradouro);
+						$("#cidade").val(dados.localidade);
+						$("#estado").val(dados.uf);
+						$("#bairro").val(dados.bairro)
+                         //buscar id da cidade
                          
-                //buscar id da cidade 
-                $.get("buscarCidade.php", {cidade: dados.localidade, estado: dados.uf}, function(dados){
-                    if(dados != "Erro")
-                        $("#cidade_id").val(dados);
-					else 
-                        alert(dados);		 
-                })
-                //focar no complemento
-                $("#endereco").focus();
+                         $.get("buscarCidade.php", {cidade: dados.localidade, estado: dados.uf}, function(dados){
+                             if(dados != "Erro")
+                                 $("#cidade_id").val(dados);
+                             else
+                                alert(dados);
+                         })
+                         //focar no complemento
+                         $("#endereco").focus();
+                     })
+                }
             })
-        }
-    })
-</script>
+        
+	</script>

@@ -42,7 +42,7 @@ if ($_POST) {
     //verificar se a senha esta correta
     else if (!password_verify($senha, $dados->senha))
       $msg = '<p class="alert alert-danger">Senha incorreta</p>';
-    else if ($nivelAcesso == 'admin')
+    else if ($nivelAcesso == 'cliente')
       $msg = '<p class="alert alert-danger"> Acesso Restrito!</p>';
     //se deu tudo certo
     else {
@@ -143,11 +143,6 @@ if ($_POST) {
 </div>
 <script>
 $(document).ready(function() {
-    //var nome = 'Robson Pereira Vieira Jr';
-    //localStorage.setItem('nome', nome);
-    //var texto = localStorage.getItem('nome');
-    //alert(texto);
-
     $('#customCheck').click(function() {
         if ($('#customCheck').is(':checked')) {
 
