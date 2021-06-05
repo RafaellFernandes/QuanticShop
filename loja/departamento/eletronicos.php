@@ -9,7 +9,7 @@
             <li><a class="dropdown-item" href="departamento/impressora">Impressora</a></li>
             <li><a class="dropdown-item" href="departamento/notebooks">Notebooks</a></li>
             <li><a class="dropdown-item" href="departamento/perifericos">Periféricos</a></li>
-            <li><a class="dropdown-item" href="departamento/redeinternet">Rede e Internet</a></li>
+            <!-- <li><a class="dropdown-item" href="departamento/redeinternet">Rede e Internet</a></li> -->
             <li><a class="dropdown-item" href="departamento/smartHome">Smart Home</a></li>
             <li><a class="dropdown-item" href="departamento/smartphone">Smartphones</a></li>
 			<li><a class="dropdown-item" href="departamento/computadores">Computadores</a></li>	  

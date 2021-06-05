@@ -43,7 +43,7 @@ exit;
                                     INNER JOIN marca m ON (m.id = p.marca_id) 
 									INNER JOIN item_venda v ON (v.produto_id = p.id) 
 									INNER JOIN item_compra c ON (c.produto_id = p.id)
-									WHERE p.ativo = 0
+									WHERE p.ativo = 1
 									ORDER BY v.vezesVendido DESC";
                             $consulta = $pdo->prepare($sql);
 							$consulta->execute();                            

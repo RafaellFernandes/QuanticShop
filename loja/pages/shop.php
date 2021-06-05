@@ -8,7 +8,7 @@
             <li><a class="dropdown-item" href="departamento/impressora">Impressora</a></li>
             <li><a class="dropdown-item" href="departamento/notebooks">Notebooks</a></li>
             <li><a class="dropdown-item" href="departamento/perifericos">Periféricos</a></li>
-            <li><a class="dropdown-item" href="departamento/redeinternet">Rede e Internet</a></li>
+            <!-- <li><a class="dropdown-item" href="departamento/redeinternet">Rede e Internet</a></li> -->
             <li><a class="dropdown-item" href="departamento/smartHome">Smart Home</a></li>
             <li><a class="dropdown-item" href="departamento/smartphone">Smartphones</a></li>
 			<li><a class="dropdown-item" href="departamento/computadores">Computadores</a></li>	  
@@ -25,7 +25,7 @@
 			<!-- <div class="col-sm-3 text-center"> -->
 						<?php
 							//selecionar 1 produto aleatorios
-							$sql = "SELECT * FROM produto ORDER BY rand() LIMIT 20";
+							$sql = "SELECT * FROM produto WHERE ativo = 1 ORDER BY rand() LIMIT 30";
 							$consulta = $pdo->prepare($sql);
 							$consulta->execute();
 

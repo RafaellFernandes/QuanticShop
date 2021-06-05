@@ -9,7 +9,7 @@
             <li><a class="dropdown-item" href="departamento/impressora">Impressora</a></li>
             <li><a class="dropdown-item" href="departamento/notebooks">Notebooks</a></li>
             <li><a class="dropdown-item" href="departamento/perifericos">Periféricos</a></li>
-            <li><a class="dropdown-item" href="departamento/redeinternet">Rede e Internet</a></li>
+            <!-- <li><a class="dropdown-item" href="departamento/redeinternet">Rede e Internet</a></li> -->
             <li><a class="dropdown-item" href="departamento/smartHome">Smart Home</a></li>
             <li><a class="dropdown-item" href="departamento/smartphone">Smartphones</a></li>
 			<li><a class="dropdown-item" href="departamento/computadores">Computadores</a></li>	  
@@ -24,7 +24,7 @@
 			<div class="row container-fluid">
 				<?php
 					//selecionar 1 produto aleatorios
-					$sql = "SELECT id, nome_produto, venda_unitaria, foto, departamento_id FROM produto WHERE departamento_id IN (4)";
+					$sql = "SELECT id, nome_produto, venda_unitaria, foto, departamento_id FROM produto WHERE departamento_id = 4";
 					$consulta = $pdo->prepare($sql);
 					$consulta->execute();
 
