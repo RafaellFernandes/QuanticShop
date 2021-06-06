@@ -12,6 +12,12 @@ if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
 exit;
 }
 ?>
+<style>
+	.span{
+		color: black;
+		
+	}
+</style>
 <div class="container-fluid p-0">
 	<div class="row">
 		<div class="col-12 col-xl-12">
@@ -37,7 +43,7 @@ exit;
     		</thead>
     		<tbody>
     			<?php
-    				$sql = "select v.id, c.primeiro_nome, c.sobrenome, c.razaoSocial cliente,
+    				$sql = "SELECT v.id, c.primeiro_nome, c.sobrenome, c.celular, c.telefone, c.razaoSocial,
     				date_format(v.data, '%d/%m/%Y') data, v.status
     				from venda v 
     				inner join cliente c on (c.id = v.cliente_id)
@@ -47,23 +53,23 @@ exit;
 
     			    while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
 
-    			    	$status = "<span class='badge badge-success'>Pago</span>";
+    			    	$status = "<span class='span badge badge-success'>Pago</span>";
 
     			    	if ( $dados->status == "C" )
-    			    		$status = "<span class='badge badge-danger'>Cancelado</span>";
+    			    		$status = "<span class='span badge badge-danger'>Cancelado</span>";
     			    	else if ($dados->status == "A")
-    			    		$status = "<span class='badge badge-info'>Aguardando<br> Pagamento</span>";
+    			    		$status = "<span class='span badge badge-info'>Aguardando<br> Pagamento</span>";
     			    	else if ($dados->status == "T")
-    			    		$status = "<span class='badge badge-warning'>Troca</span>";
+    			    		$status = "<span class='span badge badge-warning'>Troca</span>";
     			    	else if ($dados->status == "E")
-    			    		$status = "<span class='badge badge-warning'>Extraviado</span>";
+    			    		$status = "<span class='span badge badge-warning'>Extraviado</span>";
     			    	else if ($dados->status == "D")
-    			    		$status = "<span class='badge badge-danger'>Devolvido</span>";
+    			    		$status = "<span class='span badge badge-danger'>Devolvido</span>";
 
     			    	?>
     			    	<tr>
     			    		<td><?=$dados->id?></td>
-    			    		<td><?=$dados->cliente?></td>
+    			    		<td><?=$dados->razaoSocial?><?=$dados->primeiro_nome?> <?=$dados->sobrenome?> - <?=$dados->celular?> / <?=$dados->telefone?></td>
     			    		<td><?=$dados->data?></td>
     			    		<td><?=$status?></td>
     			    		<td>Total</td>

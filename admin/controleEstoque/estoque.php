@@ -78,14 +78,17 @@ $produto_id = $qtd_estoque = $produto = NULL;
 
                     <datalist id="produtos">
                         <?php
-                            $sql = "SELECT id, nome_produto, marca_id, departamento_id FROM produto WHERE ativo = 1
-                                ORDER BY nome_produto";
+                            $sql = "SELECT p.id, p.nome_produto, p.marca_id, p.departamento_id, c.qtdProdutoComprado 
+                                    FROM produto p 
+                                    INNER  JOIN item_compra c ON (c.produto_id = p.id) 
+                                    WHERE p.ativo = 1 AND c.ativo = 1
+                                    ORDER BY nome_produto";
                             $consulta = $pdo->prepare($sql);
                             $consulta->execute();
 
                             while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ){
 
-                                echo "<option value='{$dados->id} - {$dados->nome_produto} - {$dados->marca_id} - {$dados->departamento_id}'>";
+                                echo "<option value='{$dados->id} - {$dados->nome_produto} - M:{$dados->marca_id} - D:{$dados->departamento_id} - E:{$dados->qtdProdutoComprado}'>";
 
                             }
                         ?>

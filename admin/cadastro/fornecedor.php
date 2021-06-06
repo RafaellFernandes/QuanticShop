@@ -91,14 +91,14 @@ if(!empty($id)){
 						<div class="col-12 col-md-6 mt-2">
 							<label for="nomeFantasia">Nome Fantasia:</label>
 							<input type="text" name="nomeFantasia" id="nomeFantasia" class="form-control" required data-parsley-required-message="Preencha o nome" 
-							value="<?=$nomeFantasia;?>" placeholder="Digite o Nome Fantasia da Transportadora">
+							value="<?=$nomeFantasia;?>" placeholder="Digite o Nome Fantasia da Empresa">
 						</div>
 						<div class="col-12 col-md-6 mt-2">
 							<label for="cnpj">CNPJ:</label>
 							<input type="text" name="cnpj" id="cnpj" class="form-control" required data-parsley-required-message="Preencha o CNPJ" 
-							value="<?=$cnpj;?>"  placeholder="CNPJ da Empresa">
+							value="<?=$cnpj;?>" onblur="validaCnpj(this.value)" placeholder="CNPJ da Empresa">
 						</div>
-						<!-- onblur="validaCnpj(this.value)" -->
+						<!--  -->
 						<div class="col-12 col-md-6 mt-2">
 							<label for="email">E-mail:</label>
 							<input type="email" name="email" id="email" class="form-control" required data-parsley-required-message="Preencha o E-mail"  placeholder="email@exemplo.com.br"
@@ -132,8 +132,8 @@ if(!empty($id)){
 							<input type="text" name="cep" id="cep" class="form-control" required data-parsley-required-message="Preencha o CEP" 
 							value="<?=$cep;?>" placeholder="Digite o CEP">
 						</div>
-						<!-- style="display: none;" -->
-						<div class="col-12 col-md-2 mt-2" >
+						<!--  -->
+						<div class="col-12 col-md-2 mt-2" style="display: none;" >
 							<label for="cidade_id">ID Cidade</label>
 							<input type="text" name="cidade_id" id="cidade_id" class="form-control" required data-parsley-required-message="Preencha a Cidade" 
 							readonly value="<?=$cidade_id;?>">		

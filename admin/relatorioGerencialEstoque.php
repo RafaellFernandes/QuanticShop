@@ -29,7 +29,7 @@ $html = "
                     <th>DATA CADASTRO</th>
                     <th>QTDE<br>COMPRA</th>
                     <th>CUSTO<br>UNITARIO</th>
-                    <th>QTDE<br>VENDIDA</th>
+                   
                 </tr>
             </thead>
             <tbody>";
@@ -45,7 +45,7 @@ $html = "
                         <td>{$estoque["dataCadastro"]}</td>
                         <td>R$ ".($estoque["qtdProdutoComprado"])."</td>
                         <td>".($estoque["custo_unitario"])."</td>
-                        <td>".($estoque["vezesVendido"])."</td>
+                        
                     </tr>";
                 }
                    

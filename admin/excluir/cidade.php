@@ -43,4 +43,4 @@
   }
 //***************************** */
   //redirecionar para a listagem de editoras
-  echo "<script>location.href='listar/cidade';</script>";
+  echo "<script>location.href='listagem/cidade';</script>";

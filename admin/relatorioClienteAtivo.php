@@ -35,7 +35,7 @@ $html = "
                     $html = $html ."    <tr>
 
                     <td>{$pessoa["id"]}</td>
-                    <td>".($pessoa["primeiro_nome"]).($pessoa["sobrenome"]).($pessoa["razaoSocial"])."</td>
+                    <td>".($pessoa["primeiro_nome"])." ".($pessoa["sobrenome"]).($pessoa["razaoSocial"])."</td>
                     <td>".($pessoa["cpf"]).($pessoa["cnpj"])."</td>
                     <td>".($pessoa["email"])."<br>".($pessoa["siteClienteJuridico"])."</td>
                     <td>".($pessoa["telefone"])."<br>".($pessoa["celular"])."</td>

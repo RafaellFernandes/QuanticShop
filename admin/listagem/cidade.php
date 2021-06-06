@@ -51,7 +51,9 @@ exit;
 											<a href="cadastro/cidade/'.$id.'" alt="Editar" title="Editar">
 												<i class="align-middle"  data-feather="edit-2"></i>
 											</a>
-											
+											<a href="javascript:excluir('.$id.')"  alt="Excluir" title="Excluir">
+												<i class="fas fa-trash"  data-feather="trash-2"></i>
+											</a>
 										</td>
 									</tr>';
 								}

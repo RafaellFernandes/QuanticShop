@@ -198,7 +198,7 @@ $ativo = $departamento_id = $marca_id =  $estoque_id = "";
                         </div>
                         <div class="col-sm-4 mt-4">
                             <div class="float-center text-center">
-                                <a href="processoCompra/produtoCompra" class="btn btn-danger">Item Compra</a> 
+                                <a href="processoCompra/produtoCompra" class="btn btn-warning">Item Compra</a> 
                             </div> 
                         </div>
                         <div class="col-sm-2 mt-4">

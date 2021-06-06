@@ -27,13 +27,18 @@ exit;
 					<thead>
 						<tr>
 							<th>ID Produto</th>
+							<th>Produto</th>
                             <th>Quantidade em Estoque</th>
 							<th>Ações</th>
 						</tr>
 					</thead>
 					<tbody>
 						<?php
-                            $sql = "SELECT id, produto_id, qtd_estoque FROM estoque";
+                            // $sql = "SELECT id, produto_id, qtd_estoque FROM estoque";
+							$sql = "SELECT e.*, p.nome_produto
+							FROM estoque e
+							INNER JOIN produto p ON (p.id = e.produto_id)
+							";
                             $consulta = $pdo->prepare($sql);
                             $consulta->execute();
 
@@ -41,19 +46,19 @@ exit;
 								//separar os dados
 								$id 	        = $dados->id;
 								$produto_id 	= $dados->produto_id;
+								$nome_produto 	= $dados->nome_produto;
                                 $qtd_estoque    = $dados->qtd_estoque;
 
 								//mostrar na tela
 								echo '<tr>
 										<td>'.$produto_id.'</td>
+										<td>'.$nome_produto.'</td>
                                         <td>'.$qtd_estoque.'</td>
 										<td class="table-action text-center">
 											<a href="controleEstoque/estoque/'.$id.'" alt="Editar" title="Editar">
 												<i class="align-middle"  data-feather="edit-2"></i>
 											</a>
-											<a href="javascript:excluir('.$id.')" alt="Excluir" title="Excluir">
-												<i class="align-middle" data-feather="trash"></i>				
-											</a>
+											
 										</td>
 									</tr>';
 							}
@@ -64,6 +69,9 @@ exit;
 		</div>
 	</div>
 </div>
+<!-- <a href="javascript:excluir('.$id.')" alt="Excluir" title="Excluir">
+												<i class="align-middle" data-feather="trash"></i>				
+											</a> -->
 <script>
 	function excluir(id){
 

@@ -42,8 +42,8 @@ exit;
                                     INNER JOIN fornecedor f ON (f.id = c.fornecedor_id)
                                     INNER JOIN marca m ON (m.id = p.marca_id)
                                     INNER JOIN item_venda v ON (v.produto_id = p.id)
-                                    WHERE c.ativo = 1
-                                    ORDER BY v.vezesVendido DESC";
+                                    WHERE c.ativo = 1 AND p.ativo = 1
+                                    ORDER BY v.vezesVendido ASC";
 
                             $consulta = $pdo->prepare($sql);
                             $consulta->execute();

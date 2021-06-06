@@ -137,12 +137,12 @@ exit;
 							<input type="text" name="cep" id="cep" class="form-control" required data-parsley-required-message="Preencha o CEP" 
 							value="<?=$cep;?>" placeholder="Digite o CEP">
 						</div>
-						<div class="col-12 col-md-2 mt-2" >
+						<div class="col-12 col-md-2 mt-2" style="display: none;" >
 							<label for="cidade_id">ID Cidade</label>
 							<input type="text" name="cidade_id" id="cidade_id" class="form-control" required data-parsley-required-message="Preencha a Cidade" 
 							readonly value="<?=$cidade_id;?>">		
 						</div> 
-						<!-- style="display: none;" -->
+						<!--  -->
 						<div class="col-12 col-md-3 mt-2">
 							<label for="cidade">Cidade:</label>
 							<input type="text" name="cidade" id="cidade" class="form-control" value="<?=$cidade;?>" placeholder="Nome da Cidade">

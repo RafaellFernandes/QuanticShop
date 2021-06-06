@@ -121,8 +121,8 @@ exit;
 
                     <datalist id="clientes">
                         <?php
-                            $sql = "select id, primeiro_nome, sobrenome, razaoSocial, celular from cliente
-                                order by primeiro_nome";
+                            $sql = "SELECT id, primeiro_nome, sobrenome, razaoSocial, celular FROM cliente
+                                ORDER BY primeiro_nome";
                             $consulta = $pdo->prepare($sql);
                             $consulta->execute();
                             while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ){
@@ -193,12 +193,12 @@ exit;
 
                             <datalist id="listProdutos"> 
                             <?php
-                            $sql = "select id, nome_produto, venda_unitaria from produto where ativo = 'S' order by nome_produto";
+                            $sql = "SELECT id, nome_produto, valorUnitario FROM produto WHERE ativo = 1 ORDER BY nome_produto";
                             $consulta = $pdo->prepare($sql);
                             $consulta->execute();
 
                             while ( $d = $consulta->fetch(PDO::FETCH_OBJ) ){
-                                echo "<option value='{$d->id} - {$d->nome_produto} - {$d->venda_unitaria}'>";
+                                echo "<option value='{$d->id} - {$d->nome_produto} - {$d->valorUnitario}'>";
                             }
                             ?>
                             </datalist>

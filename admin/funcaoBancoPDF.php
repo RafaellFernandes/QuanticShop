@@ -13,7 +13,7 @@ function selectAllMarca(){
             INNER JOIN fornecedor f ON (f.id = c.fornecedor_id)
             INNER JOIN marca m ON (m.id = p.marca_id)
             INNER JOIN item_venda v ON (v.produto_id = p.id)
-            WHERE c.ativo = 1
+            WHERE c.ativo = 1 AND p.ativo = 1
             ORDER BY v.vezesVendido DESC";
 
     $resultado = $banco->query($sql);
@@ -43,7 +43,7 @@ function selectAllProdutoMaisVend(){
     INNER JOIN marca m ON (m.id = p.marca_id) 
     INNER JOIN item_venda v ON (v.produto_id = p.id) 
     INNER JOIN item_compra c ON (c.produto_id = p.id)
-    WHERE p.ativo = 0
+    WHERE p.ativo = 1
     ORDER BY v.vezesVendido DESC";
 
     $resultado = $banco->query($sql);
@@ -62,7 +62,7 @@ function selectAllProdutoMenosVend(){
     INNER JOIN marca m ON (m.id = p.marca_id) 
     INNER JOIN item_venda v ON (v.produto_id = p.id) 
     INNER JOIN item_compra c ON (c.produto_id = p.id)
-    WHERE p.ativo = 0
+    WHERE p.ativo = 1
     ORDER BY v.vezesVendido ASC";
 
     $resultado = $banco->query($sql);
@@ -75,13 +75,12 @@ function selectAllProdutoMenosVend(){
 
 function selectAllEstoque(){
     $banco = abrirBanco();
-    $sql = "SELECT p.id pid, p.ativo pativo, p.*,e.id eid, e.*, c.id cid, c.ativo cativo, date_format(c.data_cadastro, '%d/%m/%Y') dataCadastro, c.*, v.vezesVendido 
-    FROM produto p 
-    INNER JOIN estoque e ON (p.id = e.produto_id) 
-    INNER JOIN item_compra c ON (p.id = c.produto_id) 
-    INNER JOIN item_venda v ON (v.produto_id = p.id) 
-    WHERE c.ativo = 1
-    ORDER BY p.id";
+    $sql = "SELECT e.id eid, e.*,p.id pid, p.*, date_format(c.data_cadastro, '%d/%m/%Y') dataCadastro,c.*
+    FROM estoque e
+    INNER JOIN produto p ON (p.id = e.produto_id)
+    INNER JOIN item_compra c ON (c.produto_id = p.id)
+    WHERE c.ativo = 1 AND p.ativo = 1
+    ORDER BY e.id";
 
     $resultado = $banco->query($sql);
     $banco->close();

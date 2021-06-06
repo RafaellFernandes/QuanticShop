@@ -77,7 +77,7 @@
 								//sql para selecionar as vendas
 								//data maior que a dataInicial
 								//dataFinal seja menor que a data
-								$sql = "SELECT v.id, v.status, date_format(v.data, '%d/%m/%Y') datav, c.primeiro_nome  
+								$sql = "SELECT v.id, v.status, date_format(v.data, '%d/%m/%Y') datav, c.primeiro_nome, c.sobrenome, c.celular  
 								FROM venda v 
 								INNER JOIN cliente c ON (c.id = v.cliente_id)
 								where v.data >= :dataInicial AND v.data <= :dataFinal 
@@ -113,7 +113,7 @@
 							?>
 								<tr>
 									<td><?=$dados->id?></td>
-									<td><?=$dados->primeiro_nome?></td>
+									<td><?=$dados->primeiro_nome?> <?=$dados->sobrenome?> - <?=$dados->celular?></td>
 									<td><?=$dados->datav?></td>
 									<td><?=$status?></td>
 									<td class="text-center">R$ <?=getTotal($pdo,$dados->id)?></td>

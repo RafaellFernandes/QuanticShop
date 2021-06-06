@@ -62,7 +62,7 @@ exit;
 								if ($ativo == "1"){
 									echo '<tr>
 										<td>'.$id.'</td>
-										<td>'.$primeiro_nome.''.$sobrenome.'<br>'.$razaoSocial.'</td>
+										<td>'.$primeiro_nome.' '.$sobrenome.'<br>'.$razaoSocial.'</td>
 										<td>'.$cpf.'<br>'.$cnpj.'</td>
 										<td>'.$email.'<br>'.$siteClienteJuridico.'</td>
 										<td>'.$telefone.'<br>'.$celular.'</td>

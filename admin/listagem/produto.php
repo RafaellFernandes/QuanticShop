@@ -67,7 +67,7 @@ error_reporting(E_ALL);
 								//mostrar na tela
 								?>
 								<tr>	
-									<td><img src="../_arquivos/produtos/<?=$imagem[0]?>" alt="<?=$nome_produto;?>"  width="48" height="48" class="rounded-circle mr-2"></td>
+									<td><img src="../fotos/produtos/<?=$imagem[0]?>" alt="<?=$nome_produto;?>"  width="70" height="70" class="mr-2"></td>
 							
 									<td><?=$nome_produto;?></td>
 									<td>R$ <?=$valorUnitario;?></td>

@@ -85,7 +85,7 @@ exit;
 							<label for="id">ID:</label>
 							<input type="text" name="id" id="id" class="form-control" readonly value="<?=$id;?>" placeholder="Automatico">
 						</div>
-						<div class="mb-3 col-12 col-md-2 mt-2" > style="display: none;" 
+						<div class="mb-3 col-12 col-md-2 mt-2" style="display: none;" >  
 							<label for="pessoaFJ">Pessoa F/J: ocultar</label>
 							<select name="pessoaFJ" id="pessoaFJ" class="form-control" 
 								required data-parsley-required-message="Selecione uma opção">
@@ -95,11 +95,11 @@ exit;
 							</select>
 						
 						</div>
-                        <div class="mb-3 col-12 col-md-10">
+                        <div class="mb-3 col-12 col-md-6">
 							<label for="razaoSocial">Razão Social: </label>
 							<input type="text" class="form-control" id="razaoSocial" name="razaoSocial" required>
 						</div>
-						<div class="mb-3 col-12 col-md-12">
+						<div class="mb-3 col-12 col-md-6">
 							<label for="nomeFantasia">Nome Fantasia: </label>
 							<input type="text" class="form-control" id="nomeFantasia" required name="nomeFantasia">
 						</div>

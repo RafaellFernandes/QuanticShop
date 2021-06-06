@@ -34,18 +34,25 @@ exit;
                             <th>DATA CADASTRO</th>
 							<th>QTDE<br>COMPRA</th>
                             <th>CUSTO<br>UNITARIO</th>
-                            <th>QTDE<br>VENDIDA</th>
 						</tr>
 					</thead>
 					<tbody>
 						<?php
-                            $sql = "SELECT p.id pid, p.ativo pativo, p.*,e.id eid, e.*, c.id cid, c.ativo cativo, date_format(c.data_cadastro, '%d/%m/%Y') dataCadastro, c.*, v.vezesVendido 
-                                    FROM produto p 
-                                    INNER JOIN estoque e ON (p.id = e.produto_id) 
-                                    INNER JOIN item_compra c ON (p.id = c.produto_id) 
-                                    INNER JOIN item_venda v ON (v.produto_id = p.id) 
-                                    WHERE c.ativo = 1
-                                    ORDER BY p.id";
+                            // $sql = "SELECT p.id pid, p.ativo pativo, p.*,e.id eid, e.*, c.id cid, c.ativo cativo, date_format(c.data_cadastro, '%d/%m/%Y') dataCadastro, c.*, v.vezesVendido 
+                            //         FROM produto p 
+                            //         INNER JOIN estoque e ON (p.id = e.produto_id) 
+                            //         INNER JOIN item_compra c ON (p.id = c.produto_id) 
+                            //         INNER JOIN item_venda v ON (v.produto_id = p.id) 
+                            //         WHERE c.ativo = 1
+                            //         ORDER BY c.id";
+
+                            $sql = "SELECT e.id eid, e.*,p.id pid, p.*, date_format(c.data_cadastro, '%d/%m/%Y') dataCadastro,c.*
+                                    FROM estoque e
+                                    INNER JOIN produto p ON (p.id = e.produto_id)
+                                    INNER JOIN item_compra c ON (c.produto_id = p.id)
+                                    WHERE c.ativo = 1 AND p.ativo = 1
+                                    ORDER BY e.id
+                                    ";
                             $consulta = $pdo->prepare($sql);
 							$consulta->execute();
               
@@ -53,6 +60,7 @@ exit;
 								//separar os dados
                                 // $custo_unitario     = $dados->custo_unitario;
                                 $custo_unitario     = number_format($dados->custo_unitario,2, '.' , ',');
+                                
 								echo "<tr>
                                         <td>$dados->pid</td>
                                         <td>$dados->codigo</td>
@@ -63,7 +71,7 @@ exit;
                                         <td>$dados->dataCadastro</td>
                                         <td>$dados->qtdProdutoComprado</td>
                                         <td>R$ $custo_unitario</td>
-                                        <td>$dados->vezesVendido</td>
+                                      
 								    </tr>";
                             }
 						?>
