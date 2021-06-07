@@ -38,7 +38,7 @@
 	        $j = ($j == 2) ? 9 : $j - 1;
 	    }
 	    $resto = $soma % 11;
-	    if ($cnpj."12" != ($resto < 2 ? 0 : 11 - $resto))
+	    if ($cnpj[12] != ($resto < 2 ? 0 : 11 - $resto))
 	        return "CNPJ inválido";
 	    // Valida segundo dígito verificador
 	    for ($i = 0, $j = 6, $soma = 0; $i < 13; $i++)

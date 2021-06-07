@@ -36,29 +36,6 @@
         <span class="visually-hidden">Next</span>
     </button>
 </div>
- <!-- ============================================== -->
-
-<div class="main">
-	<div class="content-top">
-		<h2>Destaques</h2>
-        <?php
-			$SendPesqUser = filter_input(INPUT_POST, 'SendPesqUser', FILTER_SANITIZE_STRING);
-			if($SendPesqUser){
-				$nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
-				$result_usuario = "SELECT * FROM produto WHERE nome_produto LIKE '%$nome%' ";
-				$resultado_usuario = mysqli_query($conn, $result_usuario);
-				while($row_usuario = mysqli_fetch_assoc($resultado_usuario)){
-					echo "ID: " . $row_usuario['id'] . "<br>";
-					echo "Nome: " . $row_usuario['nome_produto'] . "<br>";
-					echo "E-mail: " . $row_usuario['valor_unitario'] . "<br>";
-					echo "<a href='edit_usuario.php?id=" . $row_usuario['id'] . "'>Editar</a><br>";
-					echo "<a href='proc_apagar_usuario.php?id=" . $row_usuario['id'] . "'>Apagar</a><br><hr>";
-                    
-				}
-			}
-		?>
-	</div>
-</div>
 
 <div class="content-bottom prod">
     <div class="container-fluid">
@@ -69,9 +46,11 @@
                 <div class="container">
                     <div class="row justify-content-center">
                       <?php
-                        $sql = "SELECT p.id pid, p.ativo pativo, p.*
+                        $sql = "SELECT p.id pid, p.ativo pativo, p.*, v.*
                                 FROM produto p 
-                                ORDER BY p.vezesVendido DESC";
+                                INNER JOIN item_venda v ON (v.produto_id = p.id)
+                                WHERE p.ativo = 1 
+                                ORDER BY v.vezesVendido DESC";
 
                         $consulta = $pdo->prepare($sql);
                         $consulta->execute();                            
@@ -79,13 +58,12 @@
                           while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
                           //separar
                           $pid 		                     = $dados->pid;
-                          $foto                        = $dados->foto;
-                          $nome_produto 		           = $dados->nome_produto;
-                          $venda_unitaria              = $dados->venda_unitaria;
-                        
-                          $vezesVendido                = $dados->vezesVendido;
-                          $foto                        = "../fotos/".$foto."p.jpg";
-                          $pativo					             = $dados->pativo;
+                          $nome_produto 		         = $dados->nome_produto;
+                          $valorUnitario                = $dados->valorUnitario;
+                          $vezesVendido                  = $dados->vezesVendido;
+                          $foto                          = $dados->foto;
+                          $imagem                        = explode(",", $foto);
+                          $pativo			             = $dados->pativo;
                         
                     
                           //se tiver promo - valor = valor da promo
@@ -94,27 +72,27 @@
                           //se a promo esta vazio - valor = valor do produto
                           if ( empty ( $promocao ) ) {
                               //1499.99 -> 1.499,99
-                              $venda_unitaria = "R$ " . number_format($venda_unitaria, 2, ",", ".");
+                              $valorUnitario = "R$ " . number_format($valorUnitario, 2, ",", ".");
                               $desc = "";
                           } else {
                               //valor normal
-                              $desc = "R$ " . number_format($venda_unitaria, 2, ",", ".");
+                              $desc = "R$ " . number_format($valorUnitario, 2, ",", ".");
                               //valor promocional
-                              $venda_unitaria = "R$ " . number_format($promocao, 2, ",", ".");
+                              $valorUnitario = "R$ " . number_format($promocao, 2, ",", ".");
                           }
                           //mostrar na tela
-                          if ($pativo == "1"){
+                         
                               echo "<div class='col-3 text-center'>
-                              <img src='fotos/$foto' class='w-65'>
+                              <img src='../fotos/produtos/$imagem[0]' class='card-img-top' width='40' height='auto'>
                               <p>$nome_produto</p>
                               
-                              <p class='valor'>R$ $venda_unitaria</p>
+                              <p class='valor'>R$ $valorUnitario</p>
                               <a href='pages/produto/$pid'
                               class='btn btn-info'>Detalhes</a><br>
                               </div>";
             
                         }
-                        }
+                        
                       ?>
                     </div>
                 </div>

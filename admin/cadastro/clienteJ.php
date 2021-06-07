@@ -62,11 +62,12 @@ exit;
       $siteClienteJuridico     = $dados->siteClienteJuridico;
 	  $ativo                   = $dados->ativo;
 	  $genero_id               = $dados->genero_id;
-	
+	 
 	  
 
   }
 ?>
+<script src="vendor/jqueryMask/src/jquery.mask.js"></script>
 <div class="container-fluid p-0">
 <div class="col-md-12">
 	<div class="card">
@@ -104,12 +105,12 @@ exit;
 							<input type="text" class="form-control" id="nomeFantasia" required name="nomeFantasia">
 						</div>
                         
-						<div class="mb-3 col-12 col-md-4">
+						<div class="mb-3 col-12 col-md-4" style="display: none;">
 							<label class="form-label" for="genero_id">Gênero:</label>
 							<select name="genero_id" id="genero_id" class="form-control" required data-parsley-required-message="selecione uma opção">
-                                <option value="<?=$genero_id;?>">Selecione o Gênero</option>
+                                <option value="<?=$genero_id;?>"></option>
                                     <?php
-                                        $sql = "SELECT * FROM genero ORDER BY id";
+                                        $sql = "SELECT * FROM genero WHERE id = 9";
                                         $consulta = $pdo->prepare($sql);
                                         $consulta->execute();
 
@@ -117,7 +118,7 @@ exit;
                                         //separar os dados
                                             $id   = $d->id;
                                             $genero = $d->genero;
-                                            echo '<option value="'.$id.'">'.$genero.'</option>';
+                                            echo '<option value="'.$id.'" selected="" >'.$genero.'</option>';
                                         }                    
                                     ?>
                             </select>
@@ -125,7 +126,8 @@ exit;
 
 						<div class="mb-3 col-12 col-md-4 mt-2">
 							<label for="cnpj">CNPJ:</label>
-							<input type="text" name="cnpj" id="cnpj" class="form-control" value="<?=$cnpj;?>" onblur="validaCNPJ(this.value)">
+							<input type="text" name="cnpj" id="cnpj" class="form-control" value="<?=$cnpj;?>" required data-parsley-required-message="Preencha o Cnpj" 
+							 onblur="validaCNPJ()" placeholder="CNPJ da Empresa">
 						</div> 
 						<div class="mb-3 col-12 col-md-4 mt-2">
 							<label for="inscricao_estadual"> Inscrição Estadual (IE): </label>
@@ -142,7 +144,7 @@ exit;
 						<div class="mb-3 col-12 col-md-4 mt-2">
 							<label for="email">E-mail:</label>
 							<input type="email" name="email" id="email" class="form-control" required data-parsley-required-message="Preencha o e-mail" 
-							data-parsley-type-message="Digite um E-mail válido" placeholder="exemple@hotmail.com" value="<?=$email;?>" onblur="confirmarEmail(this.value)">
+							data-parsley-type-message="Digite um E-mail válido" placeholder="exemple@hotmail.com" value="<?=$email;?>" onblur="confirmarEmailClienteJ(this.value)">
 						</div>
                         <div class="mb-3 col-12 col-md-4 mt-2">
 							<label for="siteClienteJuridico">Site:</label>
@@ -214,7 +216,7 @@ exit;
                     </div>
 					<!-- <button type="button" id="teste" class="btn btn-info margin">
 							<i class="fas fa-check"></i> teste style="display: none;"
-					</button>  -->						
+					</button>  						 -->
 			</form>
 			<br><div class="clearfix"></div>
 		</div>
@@ -233,24 +235,28 @@ exit;
 		$("#cnpj").mask("00.000.000/0000-00");
 
 		//mostra se o jquery esta funcionando ou nao
-		/* $('#teste').click(function(){
-			 console.log("Funcionando o Jquery");
-		})*/
+		//  $('#teste').click(function(){
+		// 	 console.log("Funcionando o Jquery");
+		// })
 	});
 
-	function validaCNPJ(cnpj) {
-		$.get("validacao/validaCnpj.php", {cnpj:cnpj, id:<?=$id;?>}, function(dados){
-			if(dados != ""){
-				//mostrar erro retornado
-				alert(dados);
-				//zerar Cnpj
-				$("#cnpj").val("");
-			}
+	function validaCNPJ() {
+		let cnpj = document.getElementById('cnpj').value;
+		cnpj = cnpj.replace('/','').replace('-','').replace('.','').replace('.','');
+        $.get("validacao/validaCnpj.php", {cnpj:cnpj, id:<?=$id;?>}, function(dados){
+            if(dados != "1"){
+                //mostrar erro retornado
+                alert(dados);
+                //zerar Cnpj
+                $("#cnpj").val("");
+            }
 		})
-	}
+		
+    }
 
-	function confirmarEmail(email){
-		   $.get("validacao/verificaEmail.php", {email:email,id:<?=$id;?>}, function(dados){
+
+	function confirmarEmailClienteJ(email){
+		   $.get("validacao/verificaEmailCliente.php", {email:email,id:<?=$id;?>}, function(dados){
 			   if(dados != ""){
 				   alert(dados);
 				   $("#email").val("");

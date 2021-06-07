@@ -86,6 +86,8 @@
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<script src="vendor/js/jquery.min.js"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	
+
 	<script type="text/javascript">
         $(document).ready(function() {
             $(".dropdown img.flag").addClass("flagvisibility");
@@ -116,6 +118,64 @@
             });
         });
      </script>
+	 <script type="text/javascript">
+			$(document).ready(function(){
+		
+			//Aqui a ativa a imagem de load
+			function loading_show(){
+				$('#loading').html("<img src='img/loading.gif'/>").fadeIn('fast');
+			}
+			
+			//Aqui desativa a imagem de loading
+			function loading_hide(){
+				$('#loading').fadeOut('fast');
+			}       
+			
+			
+			// aqui a função ajax que busca os dados em outra pagina do tipo html, não é json
+			function load_dados(valores, page, div)
+			{
+				$.ajax
+					({
+						type: 'POST',
+						dataType: 'html',
+						url: page,
+						beforeSend: function(){//Chama o loading antes do carregamento
+							loading_show();
+						},
+						data: valores,
+						success: function(msg)
+						{
+							loading_hide();
+							var data = msg;
+							$(div).html(data).fadeIn();             
+						}
+					});
+			}
+			
+			//Aqui eu chamo o metodo de load pela primeira vez sem parametros para pode exibir todos
+			load_dados(null, 'pesquisa.php', '#MostraPesq');
+			
+			
+			//Aqui uso o evento key up para começar a pesquisar, se valor for maior q 0 ele faz a pesquisa
+			$('#pesquisaCliente').keyup(function(){
+				
+				var valores = $('#form_pesquisa').serialize()//o serialize retorna uma string pronta para ser enviada
+				
+				//pegando o valor do campo #pesquisaCliente
+				var $parametro = $(this).val();
+				
+				if($parametro.length >= 1)
+				{
+					load_dados(valores, 'pesquisa.php', '#MostraPesq');
+				}else
+				{
+					load_dados(null, 'pesquisa.php', '#MostraPesq');
+				}
+			});
+		
+			});
+    </script>
 
 	 <style>a{text-decoration: none;}</style>
 
@@ -152,32 +212,7 @@
 									}
 								?></ul></li>
 							</ul>
-								<div class="header_right">
-									<div class="search-box">
-										<div class="sb-search">
-											<form method="POST" action="pages/home">
-												<input type="text" name="nome" placeholder="PESQUISAR">
-												<input style="background-color:#fff" name="SendPesqUser" type="submit" value="ENVIAR">
-											</form>
-											<?php
-												// $SendPesqUser = filter_input(INPUT_POST, 'SendPesqUser', FILTER_SANITIZE_STRING);
-												// if($SendPesqUser){
-												// 	$nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
-												// 	$result_usuario = "SELECT * FROM produto WHERE nome_produto LIKE '%$nome%'";
-												// 	$resultado_usuario = mysqli_query($conn, $result_usuario);
-												// 	while($row_usuario = mysqli_fetch_assoc($resultado_usuario)){
-												// 		echo "ID: " . $row_usuario['id'] . "<br>";
-												// 		echo "Nome: " . $row_usuario['nome_produto'] . "<br>";
-												// 		echo "E-mail: " . $row_usuario['valor_unitario'] . "<br>";
-												// 		echo "<a href='edit_usuario.php?id=" . $row_usuario['id'] . "'>Editar</a><br>";
-												// 		echo "<a href='proc_apagar_usuario.php?id=" . $row_usuario['id'] . "'>Apagar</a><br><hr>";
-												// 	}
-												// }
-											?>
-										</div>
-										<!-- https://celke.com.br/artigo/como-pesquisar-com-php-e-mysqli -->
-									</div>
-								</div>
+								
 								<script type="text/javascript" src="vendor/js/responsive-nav.js"></script>
 							</div>	
 						<div class="clear"></div>
@@ -262,5 +297,9 @@
   	</div>  
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
 	<script>var purecookieTitle="Cookies.",purecookieDesc="Ao usar este site, você aceita automaticamente o uso de Cookies.",purecookieLink='<a href="https://www.cssscript.com/privacy-policy/" target="_blank">O que é?</a>',purecookieButton="Aceito";function pureFadeIn(e,o){var i=document.getElementById(e);i.style.opacity=0,i.style.display=o||"block",function e(){var o=parseFloat(i.style.opacity);(o+=.02)>1||(i.style.opacity=o,requestAnimationFrame(e))}()}function pureFadeOut(e){var o=document.getElementById(e);o.style.opacity=1,function e(){(o.style.opacity-=.02)<0?o.style.display="none":requestAnimationFrame(e)}()}function setCookie(e,o,i){var t="";if(i){var n=new Date;n.setTime(n.getTime()+24*i*60*60*1e3),t="; expires="+n.toUTCString()}document.cookie=e+"="+(o||"")+t+"; path=/"}function getCookie(e){for(var o=e+"=",i=document.cookie.split(";"),t=0;t<i.length;t++){for(var n=i[t];" "==n.charAt(0);)n=n.substring(1,n.length);if(0==n.indexOf(o))return n.substring(o.length,n.length)}return null}function eraseCookie(e){document.cookie=e+"=; Max-Age=-99999999;"}function cookieConsent(){getCookie("purecookieDismiss")||(document.body.innerHTML+='<div class="cookieConsentContainer" id="cookieConsentContainer"><div class="cookieTitle"><a style="color: white;">'+purecookieTitle+'</a></div><div class="cookieDesc"><p>'+purecookieDesc+" "+purecookieLink+'</p></div><div class="cookieButton"><a style="color: white;" onClick="purecookieDismiss();">'+purecookieButton+"</a></div></div>",pureFadeIn("cookieConsentContainer"))}function purecookieDismiss(){setCookie("purecookieDismiss","1",1),pureFadeOut("cookieConsentContainer")}window.onload=function(){cookieConsent()};</script>
+
+	
+
+
 </body>
 </html>

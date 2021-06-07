@@ -103,7 +103,7 @@ exit;
 						<div class="col-12 col-md-6 mt-2">
 							<label for="cnpj">CNPJ:</label>
 							<input type="text" name="cnpj" id="cnpj" class="form-control" required data-parsley-required-message="Preencha o CNPJ" 
-							value="<?=$cnpj;?>"  placeholder="CNPJ da Empresa">
+							value="<?=$cnpj;?>"  placeholder="CNPJ da Empresa" onblur="validaCNPJ()">
 						</div>
 						<div class="col-12 col-md-4 mt-2">
 							<label for="inscricaoEstadual">Inscrição Estadual:</label>
@@ -113,9 +113,9 @@ exit;
 						<div class="col-12 col-md-8 mt-2">
 							<label for="email">E-mail:</label>
 							<input type="email" name="email" id="email" class="form-control" required data-parsley-required-message="Preencha o E-mail"  placeholder="email@exemplo.com.br"
-							 value="<?=$email;?>">
+							 value="<?=$email;?>" onblur="confirmarEmailTransport(this.value)">
 						</div>
-						<!-- onblur="confirmarEmail(this.value)" -->
+						<!--  -->
 						<div class="mb-3 col-12 col-md-8 mt-2">
 							<label for="siteTransp">Site:</label>
 							<input type="text" name="siteTransp" id="siteTransp" class="form-control" required data-parsley-required-message="Preencha o site" 
@@ -142,7 +142,7 @@ exit;
 							<input type="text" name="cidade_id" id="cidade_id" class="form-control" required data-parsley-required-message="Preencha a Cidade" 
 							readonly value="<?=$cidade_id;?>">		
 						</div> 
-						<!--  -->
+				
 						<div class="col-12 col-md-3 mt-2">
 							<label for="cidade">Cidade:</label>
 							<input type="text" name="cidade" id="cidade" class="form-control" value="<?=$cidade;?>" placeholder="Nome da Cidade">
@@ -205,28 +205,27 @@ exit;
 			$("#cep").mask("00000-000");       
 		});
 
-        function validaCnpj() {
+        function validaCNPJ() {
 			let cnpj = document.getElementById('cnpj').value;
 			cnpj = cnpj.replace('/','').replace('-','').replace('.','').replace('.','');
-            $.get("validacao/validaCnpj.php", {cnpj:cnpj, id:<?=$id;?>}, function(dados){
-                if(dados != "1"){
-                    //mostrar erro retornado
-                    alert(dados);
-                    //zerar Cnpj
-                    $("#cnpj").val("");
-                }
+			$.get("validacao/validaCnpj.php", {cnpj:cnpj, id:<?=$id;?>}, function(dados){
+				if(dados != "1"){
+					//mostrar erro retornado
+					alert(dados);
+					//zerar Cnpj
+					$("#cnpj").val("");
+				}
 			})
-		
-          }
+        }
                 
-        function confirmarEmail(email){
-               $.get("validacao/verificaEmailTransp.php", {email:email,id:<?=$id;?>}, function(dados){
-                   if(dados != ""){
-                       alert(dados);
-                       $("#email").val("");
-                   }
-               }) 
-            }
+        function confirmarEmailTransport(email){
+			$.get("validacao/verificaEmailTransp.php", {email:email,id:<?=$id;?>}, function(dados){
+			   if(dados != ""){
+				   alert(dados);
+				   $("#email").val("");
+			   }
+		   }) 
+        }
                   
 		 $("#cep").blur(function(){
                 cep = $("#cep").val();

@@ -175,7 +175,7 @@ include "config/conexao.php";
               $consulta->execute();
               while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {        
           ?>
-          ['<?=$dados->data?>',  <?=$dados->total?>],
+          ['<?=$dados->dataM?>',  <?=$dados->total?>],
           <?php } ?>
         ]);
    

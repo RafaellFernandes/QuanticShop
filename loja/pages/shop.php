@@ -15,6 +15,25 @@
   		</ul>
 	</div>
 </nav>
+
+<article>
+												<form name="form_pesquisa" id="form_pesquisa" method="post" action="">
+													<fieldset>
+													
+															<div class="input-prepend">
+																<span class="add-on"><i class="icon-search"></i></span>
+																<input type="text" name="pesquisaCliente" id="pesquisaCliente" value="" tabindex="1" placeholder="Pesquisar cliente..." />
+															</div>
+													</fieldset>
+												</form>
+												<div id="contentLoading">
+													<div id="loading"></div>
+												</div>
+												<section class="jumbotron">
+													<div id="MostraPesq"></div>
+												</section>
+											</article>
+										
 <div class="content-top">
 	<h2>Produtos em Destaque</h2>
 	<div class="close_but"><i class="close1"></i></div>

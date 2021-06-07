@@ -58,8 +58,27 @@ exit;
       echo "<script>alert('Digite o Cep!');history.back();</script>";
     }
 
+    if ( !filter_var($email, FILTER_VALIDATE_EMAIL) ) {
+      $titulo = "Erro";
+      $mensagem = "Digite um e-mail válido";
+      $icone = "error";
+      mensagem($titulo, $mensagem, $icone);
+      exit;
+    } else if ( validaCnpj($cnpj) != 1 ) {
+          //se não for verdadeiro
+          $mensagem = validaCnpj($cpf);
+          $titulo = "Erro";
+          $icone = "error";
+          mensagem($titulo, $mensagem, $icone);
+          exit;
+      }
+
+      
     //iniciar uma transacao
     $pdo->beginTransaction();
+
+   
+   
          
       if(empty($id)){
           
@@ -89,7 +108,7 @@ exit;
           $consulta->bindParam(":siteClienteJuridico", $siteClienteJuridico);
           $consulta->bindParam(":complemento", $complemento);
           $consulta->bindParam(":genero_id", $genero_id);
-        
+          
           
           
       } else {
@@ -129,11 +148,12 @@ exit;
         if ( $consulta->execute() ) {
           //gravar no banco 
           $pdo->commit();
-          echo "<script>location.href='listagem/cliente';</script>";
+         
           $titulo = "Sucesso";
           $mensagem = "Cliente Salvo!";
           $icone = "success";
           mensagem($titulo, $mensagem, $icone);
+          echo "<script>location.href='listagem/cliente';</script>";
          
         }
 

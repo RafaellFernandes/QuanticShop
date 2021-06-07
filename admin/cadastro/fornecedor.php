@@ -96,15 +96,15 @@ if(!empty($id)){
 						<div class="col-12 col-md-6 mt-2">
 							<label for="cnpj">CNPJ:</label>
 							<input type="text" name="cnpj" id="cnpj" class="form-control" required data-parsley-required-message="Preencha o CNPJ" 
-							value="<?=$cnpj;?>" onblur="validaCnpj(this.value)" placeholder="CNPJ da Empresa">
+							value="<?=$cnpj;?>" onblur="validaCNPJ(this.value)" placeholder="CNPJ da Empresa">
 						</div>
-						<!--  -->
+						
 						<div class="col-12 col-md-6 mt-2">
 							<label for="email">E-mail:</label>
 							<input type="email" name="email" id="email" class="form-control" required data-parsley-required-message="Preencha o E-mail"  placeholder="email@exemplo.com.br"
-							 value="<?=$email;?>">
+							 value="<?=$email;?>" onblur="confirmarEmailForn(this.value)">
 						</div>
-						<!-- onblur="confirmarEmail(this.value)" -->
+						
 						<div class="col-12 col-md-6 mt-2">
 							<label for="siteFornecedor">Site:</label>
 							<input type="text" name="siteFornecedor" id="siteFornecedor" class="form-control" required data-parsley-required-message="Preencha o site" 
@@ -200,21 +200,20 @@ if(!empty($id)){
 			$("#cep").mask("00000-000");       
 		});
 
-        function validaCnpj() {
+		function validaCNPJ() {
 			let cnpj = document.getElementById('cnpj').value;
 			cnpj = cnpj.replace('/','').replace('-','').replace('.','').replace('.','');
-            $.get("validacao/validaCnpj.php", {cnpj:cnpj, id:<?=$id;?>}, function(dados){
-                if(dados != "1"){
-                    //mostrar erro retornado
-                    alert(dados);
-                    //zerar Cnpj
-                    $("#cnpj").val("");
-                }
+			$.get("validacao/validaCnpj.php", {cnpj:cnpj, id:<?=$id;?>}, function(dados){
+				if(dados != "1"){
+					//mostrar erro retornado
+					alert(dados);
+					//zerar Cnpj
+					$("#cnpj").val("");
+				}
 			})
-		
-          }
+        }
                 
-        function confirmarEmail(email){
+        function confirmarEmailForn(email){
                $.get("validacao/verificaEmailForn.php", {email:email,id:<?=$id;?>}, function(dados){
                    if(dados != ""){
                        alert(dados);
