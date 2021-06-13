@@ -80,13 +80,15 @@
 	 <!-- Ionicons -->
 	 <link  rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 	
-	<link rel="shortcut icon" href="vendor/images/saturno.png">
+	<link rel="shortcut icon" href="img/saturno1.png">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<script src="vendor/js/jquery.min.js"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	
+	<link href="pages/carrossel/carrossel.css" rel='stylesheet' type='text/css' />
+	<link href="pages/carrossel/owl.css" rel='stylesheet' type='text/css' />
 
 	<script type="text/javascript">
         $(document).ready(function() {
@@ -187,7 +189,7 @@
 			 	<div class="col-md-12">
 				 	<div class="header-left">
 						<div class="logo">
-							<a href="vendor/home"><img src="vendor/images/saturno.png" style="width: 70px; " alt="Quantic Shop - Home"/></a>
+							<a href="pages/home"><img src="vendor/images/logo_branco.png" style="width: 80px; " alt="Quantic Shop - Home"/></a>
 						</div>
 						<div class="menu">
 							<a class="toggleMenu" href="home"><img src="vendor/images/nav.png" alt="Menu" /></a>
@@ -265,7 +267,7 @@
 				<div class="col-md-3">
 					<ul class="footer_box">
 						<h4>Suporte ao Cliente</h4>
-						<li><a href="politicas/contact">Contate-Nos</a></li>
+						<li><a href="pages/contact">Contate-Nos</a></li>
 						<li><a href="politicas/politicaDevolucao">Politica de Devolução</a></li>
 						<li><a href="politicas/politicaPrivacidade">Politica de Privacidade</a></li>
 						<li><a href="politicas/termosCondicoes">Termos e Condições</a></li>
@@ -295,6 +297,8 @@
    			</div>
 		</div>
   	</div>  
+	<script src="pages/carrossel/owl.js"></script>
+	<script src="pages/carrossel/custom.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
 	<script>var purecookieTitle="Cookies.",purecookieDesc="Ao usar este site, você aceita automaticamente o uso de Cookies.",purecookieLink='<a href="https://www.cssscript.com/privacy-policy/" target="_blank">O que é?</a>',purecookieButton="Aceito";function pureFadeIn(e,o){var i=document.getElementById(e);i.style.opacity=0,i.style.display=o||"block",function e(){var o=parseFloat(i.style.opacity);(o+=.02)>1||(i.style.opacity=o,requestAnimationFrame(e))}()}function pureFadeOut(e){var o=document.getElementById(e);o.style.opacity=1,function e(){(o.style.opacity-=.02)<0?o.style.display="none":requestAnimationFrame(e)}()}function setCookie(e,o,i){var t="";if(i){var n=new Date;n.setTime(n.getTime()+24*i*60*60*1e3),t="; expires="+n.toUTCString()}document.cookie=e+"="+(o||"")+t+"; path=/"}function getCookie(e){for(var o=e+"=",i=document.cookie.split(";"),t=0;t<i.length;t++){for(var n=i[t];" "==n.charAt(0);)n=n.substring(1,n.length);if(0==n.indexOf(o))return n.substring(o.length,n.length)}return null}function eraseCookie(e){document.cookie=e+"=; Max-Age=-99999999;"}function cookieConsent(){getCookie("purecookieDismiss")||(document.body.innerHTML+='<div class="cookieConsentContainer" id="cookieConsentContainer"><div class="cookieTitle"><a style="color: white;">'+purecookieTitle+'</a></div><div class="cookieDesc"><p>'+purecookieDesc+" "+purecookieLink+'</p></div><div class="cookieButton"><a style="color: white;" onClick="purecookieDismiss();">'+purecookieButton+"</a></div></div>",pureFadeIn("cookieConsentContainer"))}function purecookieDismiss(){setCookie("purecookieDismiss","1",1),pureFadeOut("cookieConsentContainer")}window.onload=function(){cookieConsent()};</script>
 

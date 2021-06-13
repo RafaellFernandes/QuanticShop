@@ -1,4 +1,4 @@
-<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-touch="false" data-bs-pause="false">
+<!-- <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-touch="false" data-bs-pause="false">
     <div class="carousel-inner">
         <div class="carousel-item active"  data-bs-interval="8000">
             <img src="vendor/images/produtos_slide/geladeiraEvolution.webp" class="d-block w-100" alt="Geladeira Samsung Evolution" width="1400px" height="600px">
@@ -35,7 +35,33 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
-</div>
+</div> -->
+
+<!-- Banner Starts Here -->
+<div class="banner header-text">
+    <div class="owl-banner owl-carousel">
+      <div class="banner-item-01">
+        <!-- <div class="text-content">
+          <h4>Encontre seu carro hoje!</h4>
+          <h2>Lorem ipsum dolor sit amet</h2>
+        </div> -->
+      </div>
+      <div class="banner-item-02">
+        <!-- <div class="text-content">
+           <h4>Fugiat Aspernatur</h4>
+          <h2>Laboriosam reprehenderit ducimus</h2>
+        </div> -->
+      </div>
+      <div class="banner-item-03">
+        <!-- <div class="text-content">
+          <h4>Saepe Omnis</h4>
+          <h2>Quaerat suscipit unde minus dicta</h2>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <!-- Banner Ends Here -->
+
 
 <div class="content-bottom prod">
     <div class="container-fluid">
@@ -50,7 +76,7 @@
                                 FROM produto p 
                                 INNER JOIN item_venda v ON (v.produto_id = p.id)
                                 WHERE p.ativo = 1 
-                                ORDER BY v.vezesVendido DESC";
+                                ORDER BY v.vezesVendido DESC LIMIT 8";
 
                         $consulta = $pdo->prepare($sql);
                         $consulta->execute();                            

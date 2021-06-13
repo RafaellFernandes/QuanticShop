@@ -1,5 +1,6 @@
 <div class="container mt-5 mb-5">
   <div class="section-title text-center">
+  <a href="pages/home"><img src="vendor/images/logo_200x200.png"  alt="Quantic Shop - Home"/></a>
     <h2>Sobre nós</h2>
   </div>
 

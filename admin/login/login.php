@@ -85,9 +85,10 @@ if ($_POST) {
   }
 }
 ?>
-<div class="wrapper bodyLogin">
+
+<div class="wrapper bodylogin">
 <div class="container d-flex flex-column fonte mb-5 ">
-    <div class="row vh-100">
+    <div class="row vh-100 ">
         <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
             <div class="d-table-cell align-middle">
                 <div class="text-center mt-5 ">
@@ -99,7 +100,7 @@ if ($_POST) {
                         <div class="m-sm-4">
                             <div class="text-center">
                                 <p class="lead fonte1"><b>Sistema Quantic</b></p>
-                                <img src="img/saturno.png" alt="Entre" class="img-fluid " width="80" height="80" />
+                                <img src="../loja/vendor/images/logo_200x200.png" alt="Entre" class="img-fluid "  />
                                 <?= $msg; ?>
                             </div>
                             <form class="user" name="login" method="post" data-parsley-validate>

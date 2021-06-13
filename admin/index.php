@@ -37,7 +37,7 @@
 	<meta name="author" content="Rafael e Juliana">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link rel="shortcut icon" href="static/img/icons/icon-48x48.png" />
+	<link rel="shortcut icon" href="img/saturno1.png" />
 
 	<base href="<?=$base;?>">
 	<title>Sistema Quantic</title>
@@ -90,7 +90,7 @@
 		<nav id="sidebar" class="sidebar" >
 			<div class="sidebar-content js-simplebar" >
 				<a class="sidebar-brand" href="paginas/home" style="text-decoration: none;">
-					<span class="align-middle"><img src="img/saturno.png" width="60" height="60"> Quantic Shop</span>
+					<span class="align-middle"><img src="img/saturno1.png" width="60" height="60"> Quantic Shop</span>
 				</a>
 
 				<ul class="sidebar-nav">
@@ -222,7 +222,7 @@
 
 				<div class="sidebar-cta">
 					<div class="sidebar-cta-content text-center">
-						<strong class="d-inline-block mb-2">Quantic Shop</strong>
+						<strong class="d-inline-block mb-2"><img src="img/saturno1.png" width="30" height="30"> Quantic Shop</strong>
 						<div class="mb-3 text-sm">
 							Fazer Logout
 						</div>
@@ -330,7 +330,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Quantic Shop</h5>
+					<h5 class="modal-title" id="exampleModalLabel"><img src="img/saturno1.png" width="30" height="30"> Quantic Shop</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">

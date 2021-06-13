@@ -1,11 +1,18 @@
-.bodyLogin {
+body{
     font-family: "Open Sans", sans-serif;
     background-image: url("../img/background/gradiente.png");
     background-attachment: fixed;
     background-position: top right, center;
-    background-size: cover;
+    background-size: 100%;
 }
 
+.bodylogin{
+    font-family: "Open Sans", sans-serif;
+    background-image: url("../img/background/gradiente.png");
+    background-attachment: fixed;
+    background-position: top right, center;
+    background-size: 100%;
+}
 .fonte {
     color: rgb(255, 255, 255);
     font-family: "Open Sans", Arial, Helvetica, sans-serif;

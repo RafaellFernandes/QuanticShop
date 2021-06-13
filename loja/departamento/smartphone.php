@@ -22,28 +22,35 @@
 	<div class="container-fluid">
 		<div class="row shop_box">
 			<div class="row container-fluid">
-				<?php
+			<?php
 					//selecionar 1 produto aleatorios
-					$sql = "SELECT id, nome_produto, venda_unitaria, foto, departamento_id FROM produto WHERE departamento_id IN (5)";
+					$sql = "SELECT * FROM produto WHERE ativo = 1 AND departamento_id IN (5)";
 					$consulta = $pdo->prepare($sql);
 					$consulta->execute();
 
-					while ( $linha = $consulta->fetch(PDO::FETCH_ASSOC) ) {
+					while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
 
-						//separar os campos
-						$id              	= $linha["id"];
-						$nome_produto       = $linha["nome_produto"];
-						$venda_unitaria    	= $linha["venda_unitaria"];
-						$foto           	= $linha["foto"]."p.jpg";
-	
-						$venda_unitaria = number_format($venda_unitaria, 2, ",", ".");
-	
-						echo "<div class='col-4 mt-3 text-center'>
-								<img src='../fotos/$foto' class='w-100 '>
-								<p>$nome_produto</p>
-								<p class='valor'>R$ $venda_unitaria</p>
-								<a href='pages/produto/$id' class='btn btn-danger'>Detalhes</a>
-							</div>";
+					//recuperar as variaveis
+					$id 	            = $dados->id;
+					$nome_produto       = $dados->nome_produto;
+					$valorUnitario       = $dados->valorUnitario;
+					$foto                = $dados->foto;
+					$imagem              = explode(",", $foto);
+					//formatar o valor
+					$valorUnitario = number_format($valorUnitario, 2, ",", ".");
+					//var,casas decimais,sep decimal,sep milhares
+					?>
+						<div class='col-sm-2 text-center m-3'>
+							<div class='card'>
+								<img src='../fotos/produtos/<?=$imagem[0]?>' class='card-img-top' width='40' height='auto' alt='<?=$nome_produto?>'>
+								<div class='card-body'>
+									<p class='card-title'><?=$nome_produto?></p>
+									<p class='card-text' style='color: green;'>R$ <?=$valorUnitario?> </p>
+									<a href='pages/produto/<?=$id?>' class='btn btn-primary'>Detalhes</a><br>
+								</div>
+							</div>
+						</div>
+					<?php
 					}
 				?>
 			</div>

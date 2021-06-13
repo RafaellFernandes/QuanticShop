@@ -13,7 +13,7 @@ $mpdf->SetDisplayMode("fullpage");
 $stylesheet = file_get_contents('stylepdf.css');
 
 $html = "
-<h1 class='h2'><img src='img/saturno.png' width='50' height='50'> Quantic Shop ☄</h1>
+<h1 class='h2'><img src='img/saturno1.png' width='60' height='60'> Quantic Shop</h1>
 <h2>Relatório Gerencial de Estoque</h2>
 <p class='p1'>Data de Emissão: ".$data."</p><hr/>
     <div>
