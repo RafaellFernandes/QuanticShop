@@ -45,13 +45,13 @@
 
                 while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
                     //separar
-                    $pid 		                     = $dados->pid;
-                    $nome_produto 		         = $dados->nome_produto;
-                    $valorUnitario                = $dados->valorUnitario;
-                    $vezesVendido                  = $dados->vezesVendido;
-                    $foto                          = $dados->foto;
-                    $imagem                        = explode(",", $foto);
-                    $pativo			             = $dados->pativo;
+                    $pid 		        = $dados->pid;
+                    $nome_produto 	    = $dados->nome_produto;
+                    $valorUnitario      = $dados->valorUnitario;
+                    $vezesVendido       = $dados->vezesVendido;
+                    $foto               = $dados->foto;
+                    $imagem             = explode(",", $foto);
+                    $pativo			    = $dados->pativo;
                         
                     //se tiver promo - valor = valor da promo
                     //senao valor = valor do produto
@@ -70,7 +70,7 @@
                     //mostrar na tela
                     echo "<div class='col-md-4'>
                             <div class='product-item'>
-                                <a href='pages/produto/$pid'><img src='../fotos/produtos/$imagem[0]' width='5' height='auto' alt='$nome_produto' title='Produto: $nome_produto'></a>
+                                <a href='pages/produto/$pid'><img align='right' src='../fotos/produtos/$imagem[0]' class='img' alt='$nome_produto' title='Produto: $nome_produto'></a>
                                 <div class='down-content'>
                                     <a href='pages/produto/$pid'><h4>$nome_produto</h4></a>
                                     <h6>$valorUnitario</h6>
@@ -137,4 +137,3 @@
 </div>
 <!-- Fim: Marcas Parceiras  -->
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>

@@ -37,7 +37,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="section-heading">
-                    <h2>Produtos em Destaque : diminuir o tamanho da foto</h2>
+                    <h2>Produtos em Destaque:</h2>
                 </div>
             </div>
             <?php
@@ -55,7 +55,7 @@
 			?>
             <div class='col-md-4'>
                 <div class='product-item'>
-                    <a href='pages/produto/<?=$id?>'><img src='../fotos/produtos/<?=$imagem[0]?>' width='100' height='auto' alt='<?=$nome_produto?>' title='Produto: <?=$nome_produto?>'></a>
+                    <a href='pages/produto/<?=$id?>'><img align='right' src='../fotos/produtos/<?=$imagem[0]?>' class='img' alt='<?=$nome_produto?>' title='Produto: <?=$nome_produto?>'></a>
                     <div class='down-content'>
                         <a href='pages/produto/<?=$id?>'><h4><?=$nome_produto?></h4></a>
                         <h6>R$ <?=$valorUnitario?></h6>

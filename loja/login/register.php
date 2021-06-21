@@ -13,7 +13,7 @@ $pessoaFJ =  $estado = $cidade = $endereco = $bairro = $complemento = $numero_re
 
 if ( !empty ( $id ) ) {
 	//selecionar os dados do cliente
-	$sql =  "SELECT c.*, DATE_FORMAT(c.DataNascimento,'%d/%m/%Y') DataNascimento,
+	$sql =  "SELECT c.*, DATE_FORMAT(c.data_nascimento,'%d/%m/%Y') data_nascimento,
 	ci.cidade, ci.estado FROM cliente c 
 	INNER JOIN cidade ci ON ( ci.id = c.cidade_id ) WHERE c.id = :id LIMIT 1";
 	$consulta = $pdo->prepare( $sql);
@@ -57,7 +57,6 @@ if ( !empty ( $id ) ) {
             <div class="card-body">
 				<form name="formCadastro" method="post" action="login/salvarCliente" data-parsley-validate enctype="multipart/form-data" > 
 					<div class="row">
-						<h5>INFORMAÇÕES PESSOAIS</h5>
 						<div style="display: none;">
 							<label for="id">ID:</label>
 							<input type="text" name="id" id="id" class="form-control" readonly value="<?=$id;?>" placeholder="id">
@@ -237,7 +236,7 @@ if ( !empty ( $id ) ) {
 								data-parsley-equalto="#senha"
         						data-parsley-equalto-message="As senhas devem ser iguais">
 						</div>
-						<div class="col-12 col-md-5 mt-2">
+						<div class="col-12 col-md-3 mt-2">
                             <?php
                                 $required = ' required data-parsley-required-message="Selecione um arquivo" ';
                                 $link = NULL;
@@ -258,14 +257,14 @@ if ( !empty ( $id ) ) {
 								<?=$required?>
 								accept="image/jpeg">
                         </div>
-						<div class="col-12 col-md-2 mt-2">
+						<div class="col-12 col-md-2 mt-2" style="display: none;">
 							<label for="ativo">Ativo</label>
 							<select name="ativo" id="ativo" class="form-control" 
 								required data-parsley-required-message="Selecione uma opção">
 								<option value="1" <?= $ativo == '1' ? "selected" : "" ?>>Ativo</option>
 							</select>
                         </div>
-						<div class="col-12 col-md-2 mt-2">
+						<div class="col-12 col-md-2 mt-2" style="display: none;">
 							<label for="pessoaFJ">Pessoa Fisica Juridica</label>
 							<select name="pessoaFJ" id="pessoaFJ" class="form-control" 
 								required data-parsley-required-message="Selecione uma opção">
@@ -273,13 +272,17 @@ if ( !empty ( $id ) ) {
 							</select>
                         </div>
 					</div>
-					<div class="float-end">
+					<div class="container">
+					<div class="float-left mt-5">
 						<button type="reset" class="btn btn-danger margin">
 							Apagar Tudo
 						</button>
+					
+					<div class="float-end mt-4">
 						<button type="submit" class="btn btn-success margin">
 							Salvar
 						</button>
+					</div>
 					</div>
 				</form>
 			</div>
