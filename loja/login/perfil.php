@@ -18,7 +18,6 @@ $dados = $consulta->fetch(PDO::FETCH_OBJ);
 $primeiro_nome          = $dados->primeiro_nome;
 $sobrenome              = $dados->sobrenome;
 $email                  = $dados->email;
-$login                  = $dados->login;
 $senha                  = $dados->senha;
 $foto                   = $dados->foto;
 $cidade_id              = $dados->cidade_id;
@@ -30,17 +29,16 @@ $bairro                 = $dados->bairro;
 $numero_resid           = $dados->numero_resid;
 $endereco               = $dados->endereco;
 $ativo 		            = $dados->ativo;
-$dataNascimento         = $dados->dataNascimento;
+$data_nascimento        = $dados->data_nascimento;
 $genero_id              = $dados->genero_id;
 $cpf                    = $dados->cpf;
 $celular                = $dados->celular;
-$nivelAcesso            = $dados->nivelAcesso;
 
-$hoje = date_create($dataNascimento); 
+$hoje = date_create($data_nascimento); 
 
 ?>
-<div class="container-fluid p-0">
-	<h1 class="h3 mb-3">PERFIL</h1>
+<div class="container-fluid p-0 mt-4 mb-5 mr-2 ml-2">
+	<h1 class="h3 mb-3 text-center">PERFIL</h1>
 	<div class="row">
 		<div class="col-md-4 col-xl-3">
 			<div class="card mb-3">
@@ -55,10 +53,11 @@ $hoje = date_create($dataNascimento);
 				<hr class="my-0" />
 				<div class="card-body">
 					<h5 class="h6 card-title">Sobre</h5>
-					<ul class="list-unstyled mb-0">
-						<li class="mb-1"><h7><span data-feather="home" class="feather-sm me-1"></span>Mora em <?=$cidade;?> - <?=$estado;?></h7></li>
-						<li class="mb-1"><h7><span data-feather="mail" class="feather-sm me-1"></span>Email <?=$email;?></h7></li>
-						<li class="mb-1"><h7><span data-feather="heart" class="feather-sm me-1"></span>Nasceu em <?=date_format($hoje, 'd/m/Y');?></h7></li>
+					<hr class="my-0" />
+					<ul class="list-unstyled mb-0 mt-1">
+						<li class="mb-1"><h7><span data-feather="home" class="feather-sm me-1"></span><b>Mora em</b> <?=$cidade;?> - <?=$estado;?></h7></li>
+						<li class="mb-1"><h7><span data-feather="mail" class="feather-sm me-1"></span><b>Email</b> <?=$email;?></h7></li>
+						<li class="mb-1"><h7><span data-feather="heart" class="feather-sm me-1"></span><b>Nasceu em</b> <?=date_format($hoje, 'd/m/Y');?></h7></li>
 					</ul>
 				</div>
 				
@@ -73,42 +72,27 @@ $hoje = date_create($dataNascimento);
 					<div class="container">
 						<div class="row">
 
-							<div class="col-12 col-sm-2">
-								<span>ID</span>
-								<input class="form-control" type="text" placeholder="id" aria-label="readonly input example" value="<?=$id;?>" readonly>
-							</div>
-
-							<div class="col-12 col-sm-5">
+							<div class="col-12 col-sm-6">
 								<span>Primeiro Nome</span>
 								<input class="form-control" type="text" placeholder="Nome" aria-label="readonly input example" value="<?=$primeiro_nome;?>" readonly>
 							</div>
 
-							<div class="col-12 col-sm-5">
+							<div class="col-12 col-sm-6">
 								<span>Sobrenome</span>
 								<input class="form-control" type="text" placeholder="Sobrenome" aria-label="readonly input example" value="<?=$sobrenome;?>" readonly>
 							</div>
 
-							<div class="col-12 col-sm-4 mt-2">
+							<div class="col-12 col-sm-6 mt-2">
 								<span>Email</span>
 								<input class="form-control" type="text" placeholder="Email" aria-label="readonly input example" value="<?=$email;?>" readonly>
 							</div>
 
-							<div class="col-12 col-sm-4 mt-2">
-								<span>Login</span>
-								<input class="form-control" type="text" placeholder="Login" aria-label="readonly input example" value="<?=$login;?>" readonly>
-							</div>
-
-							<div class="col-12 col-sm-4 mt-2">
-								<span>Nivel de Acesso</span>
-								<input class="form-control" type="text" placeholder="Nivel Acesso" aria-label="readonly input example" value="<?=$nivelAcesso;?>" readonly>
-							</div>
-
-							<div class="col-12 col-sm-4 mt-2">
+							<div class="col-12 col-sm-3 mt-2">
 								<span>CPF</span> 
 								<input class="form-control" type="text" placeholder="Cpf" aria-label="readonly input example" value="<?=$cpf;?>" readonly>
 							</div>
 
-							<div class="col-12 col-sm-4 mt-2">
+							<div class="col-12 col-sm-3 mt-2">
 								<span>Celular</span>
 								<input class="form-control" type="text" placeholder="Celular" aria-label="readonly input example" value="<?=$celular;?>" readonly>
 							</div>
@@ -116,11 +100,6 @@ $hoje = date_create($dataNascimento);
 							<div class="col-12 col-sm-4 mt-2">
 								<span>Data de Nascimento</span>
 								<input class="form-control" type="text" placeholder="Data de Nascimento" aria-label="readonly input example" value="<?=date_format($hoje, 'd/m/Y');?>" readonly>
-							</div>
-
-							<div class="col-12 col-sm-4 mt-2">
-								<span>Cidade ID</span>
-								<input class="form-control" type="number" placeholder="Cidade ID" aria-label="readonly input example" value="<?=$cidade_id;?>" readonly>
 							</div>
 
 							<div class="col-12 col-sm-4 mt-2">

@@ -1,3 +1,28 @@
+#subirTopo {
+	text-decoration: none;
+	background: rgba(86, 1, 119, 0.9);
+	bottom: 30px;
+	right: 30px;
+	color: #fff;
+	text-align: center;
+	cursor: pointer;
+	padding: 15px;
+	font-size: 15px;
+	font-weight: bold;
+	text-transform: uppercase;
+	position: fixed;
+	border: 0;
+	font-family: sans-serif;
+	opacity: .8;
+	}
+	
+	#subirTopo:hover {
+	opacity:1;
+	}
+
+
+
+
 .clear{clear: both;}
 h4, h5, h6,
 h1, h2, h3 {margin-top: 0;}

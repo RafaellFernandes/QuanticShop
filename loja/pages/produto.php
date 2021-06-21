@@ -1,25 +1,24 @@
 <?php
     if ( !empty ( $id ) ) {
-    	$sql = "SELECT * 
-    	FROM produto
-    	WHERE id = :id LIMIT 1";
+    	$sql = "SELECT p.id pid, p.*, d.*, m.* 
+				FROM produto p 
+				INNER JOIN departamento d ON (d.id = p.departamento_id)
+				INNER JOIN marca m ON (m.id = p.marca_id)
+				WHERE p.id = :pid 
+				LIMIT 1";
+
     	$consulta = $pdo->prepare($sql);
-    	$consulta->bindParam(':id', $id);
+    	$consulta->bindParam(':pid', $id);
     	$consulta->execute();
+
     	$dados = $consulta->fetch(PDO::FETCH_OBJ);
 
 		$promocao             = $dados->promocao;
-		// $foto      			= "../fotos/{$dados->foto}m.jpg"; 
-		// $fotog     = "../fotos/{$dados->foto}g.jpg"; 
-		$valorUnitario 	  = $dados->valorUnitario;
-		$id = "";
-
-		$foto            = $dados->foto;
-		$imagem          = "../$foto";
-		$imagem          = explode(",", $foto);
-							
-		
-								
+		$valorUnitario 	      = $dados->valorUnitario;
+		$id                   = "";
+		$foto                 = $dados->foto;
+		$imagem               = "../$foto";
+		$imagem               = explode(",", $foto);								
 	}	
     if ( empty ( $promocao ) ) {
 		//1499.99 -> 1.499,99
@@ -32,57 +31,177 @@
 		$valorUnitario = "R$ " . number_format($promocao, 2, ",", ".");
 	}
 ?>
-<div class="card">
-  <div class=" mt-3">
-    <div class="col-md-5" >
-		<a href="../fotos/produtos/<?=$imagem[0]?>" data-lightbox="foto" title="<?=$dados->nome_produto?>">
-        	<img src="../fotos/produtos/<?=$imagem[0]?>" alt="<?=$dados->nome_produto?>" width="100%" height="100%">
-      	</a>
-		  	
-<?php
-// //$imagem = a variavel que recebe do banco  --- FAZER FRONTEND !!!
-	 foreach ($imagem as $nomeImagem) {
-		 ?>
-			<div class="col-md-5" >
-				<a href="../fotos/produtos/<?=$nomeImagem?>" data-lightbox="foto" title="<?=$dados->nome_produto?>">
-					<img src="../fotos/produtos/<?=$nomeImagem?>" alt="<?=$dados->nome_produto?>" width="15%" height="15%">
-				</a>
-			</div>
-			<?php
-			}
-	?>
-    </div>
+<!--product details start-->
+<div class="product_details mt-60 mb-60">
+	<div class="container">
+	    <div class="row">
+	        <div class="col-lg-6 col-md-6">
+	            <div class="product-details-tab">
+	                <div id="img-1" class="zoomWrapper single-zoom">
+	                    <a href="#">
+	                    	<img id="zoom1" src="../fotos/produtos/<?=$imagem[0]?>" data-zoom-image="../fotos/produtos/<?=$imagem[0]?>" alt="big-1">
+	                    </a>
+	                </div>
+	                <div class="single-zoom-thumb">
+	                    <ul class="s-tab-zoom owl-carousel single-product-active" id="gallery_01">			  	
+							<?php
+								foreach ($imagem as $nomeImagem) {
+							?>
+							<li>
+								<a href="#" class="elevatezoom-gallery active"  data-image="../fotos/produtos/<?=$nomeImagem?>" data-zoom-image="../fotos/produtos/<?=$nomeImagem?>" data-update="" title="<?=$dados->nome_produto?>">
+									<img src="../fotos/produtos/<?=$nomeImagem?>" alt="<?=$dados->nome_produto?>">
+								</a>
+							</li>
+							<?php
+								}
+							?>  
+	                    </ul>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="col-lg-6 col-md-6">
+	            <div class="product_d_right">
+	                <form name="formProduto" method="post" action="pages/adicionar">
+	                    <h1><?=$dados->nome_produto?></h1>
+	                    <div class=" product_ratting">
+	                        <ul>
+	                            <li><a href="#"><i class="fa fa-star"></i></a></li>
+	                            <li><a href="#"><i class="fa fa-star"></i></a></li>
+	                            <li><a href="#"><i class="fa fa-star"></i></a></li>
+	                            <li><a href="#"><i class="fa fa-star"></i></a></li>
+	                            <li><a href="#"><i class="fa fa-star"></i></a></li>
+	                            <li class="review"><a href="#"> (250 reviews) </a></li>
+	                        </ul>
+	                    </div>
+	                    <div class="price_box">
+	                        <span class="current_price">R$ <?=$dados->valorUnitario;?></span>
+	                    </div>
+	                    <div class="product_desc">
+	                        <ul>
+	                            <li>Em Estoque</li>
+	                        </ul>
+	                        <p>Código do Produto: <?=$dados->codigo?></p>
+	                    </div>
+						<div class="product_timing">
+	                        <div data-countdown="2021/06/24"></div>
+	                    </div>
+	                    <div class="product_variant quantity">
+							<label>Quantidade</label>
+							<input type="hidden" name="id" value="<?=$dados->id?>">
+							<input min="1" max="100" value="1" type="number"  name="quantidadeCarrinho" placeholder="Quantidade" required>
+							<button class="button" type="submit">Add ao Carrinho</button>
+	                    </div>
+	                    <div class="product_meta">
+							<span>Marca: <a href="pages/shop"><?=$dados->nome_marca;?></a></span><br>
+	                        <span>Departamento: <a href="departamento/<?=$dados->nome_dept;?>"><?=$dados->nome_dept;?></a></span>
+	                    </div>
+					</form>
+	            </div>
+	        </div>
+	    </div>
+	</div>    
+</div>
+<!--product details end-->
+    
+<!--product info start-->
+<div class="product_d_info mb-60">
+    <div class="container">   
+        <div class="row">
+            <div class="col-12">
+                <div class="product_d_inner">   
+                    <div class="product_info_button">    
+                        <ul class="nav" role="tablist">
+                            <li >
+                                <a class="active" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">Descrição</a>
+                            </li>
+                            <li>
+                                 <a data-toggle="tab" href="#sheet" role="tab" aria-controls="sheet" aria-selected="false">Especificação</a>
+                            </li>
+                            <!-- <li>
+                               <a data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews (1)</a>
+                            </li> -->
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="info" role="tabpanel" >
+                            <div class="product_info_content">
+								<p><?=$dados->descricao;?></p>
+                            </div>    
+                        </div>
+                        <div class="tab-pane fade" id="sheet" role="tabpanel" >
+                            <div class="product_info_content">
+							<p><?=$dados->espec_tecnica;?></p>
+                            </div>    
+                        </div>
+                        <!-- <div class="tab-pane fade" id="reviews" role="tabpanel" >
+                            <div class="reviews_wrapper">
+                                <h2>1 review for Donec eu furniture</h2>
+                                <div class="reviews_comment_box">
+                                    <div class="comment_thmb">
+                                        <img src="assets/img/blog/comment2.jpg" alt="">
+                                    </div>
+                                    <div class="comment_text">
+                                        <div class="reviews_meta">
+                                            <div class="star_rating">
+                                                <ul>
+                                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
+                                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
+                                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
+                                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
+                                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
+                                                </ul>   
+                                            </div>
+                                            <p><strong>admin </strong>- September 12, 2018</p>
+                                            <span>roadthemes</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="comment_title">
+                                    <h2>Add a review </h2>
+                                    <p>Your email address will not be published.  Required fields are marked </p>
+                                </div>
+                                <div class="product_ratting mb-10">
+                                   <h3>Your rating</h3>
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product_review_form">
+                                    <form action="#">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <label for="review_comment">Your review </label>
+                                                <textarea name="comment" id="review_comment" ></textarea>
+                                            </div> 
+                                            <div class="col-lg-6 col-md-6">
+                                                <label for="author">Name</label>
+                                                <input id="author"  type="text">
+                                            </div> 
+                                            <div class="col-lg-6 col-md-6">
+                                                <label for="email">Email </label>
+                                                <input id="email"  type="text">
+                                            </div>  
+                                        </div>
+                                        <button type="submit">Submit</button>
+                                     </form>   
+                                </div> 
+                            </div>     
+                        </div> -->
+                    </div>
+                </div>     
+            </div>
+        </div>
+    </div>    
+</div>  
+<!--product info end-->
 
-    <div class="col-md-7 mb-5">
-      	<div class="card-body">
-			<h4 class="card-title venda_unitaria"><strong><?=$dados->nome_produto?></strong></h4>
-			<p>Código do Produto: <?=$dados->codigo?></p>
-			<h5 class="venda_unitaria mt-5"><strong>Valor: R$ <?=$dados->valorUnitario;?></strong></h5>
-		
-			<form name="formProduto" method="post" action="pages/adicionar">
-				<input type="hidden" name="id" value="<?=$dados->id?>">
-				<div class="input-group">
-					<input type="number" name="quantidadeCarrinho" value="1" class="form-control form-control-lg" placeholder="Quantidade" required
-					inputmode="numeric">
-					<div class="input-group-append">
-						<button type="submit" class="btn btn-success btn-lg">
-							<i class="fas fa-check"></i> Adicionar ao Carrinho
-						</button>
-					</div>
-				</div>
-			</form>
-		</div>
-    </div>
-  </div>
-</div>
-<div class="container mt-5">
-	<div class="row">
-		<h3 class="text-center"><strong>Descrição do Produto:</strong></h3>
-		<p><?=$dados->descricao;?></p>	
-	</div>
-</div>
-<div class="container-fluid mt-4"> 
-	<div class="row">
-		<p><?=$dados->espec_tecnica;?></p>
-	</div>
-</div>
+<!-- Plugins JS -->
+<script src="pages/carrossel/plugins.js"></script>
+
+<!-- Main JS -->
+<script src="pages/carrossel/main.js"></script>
+

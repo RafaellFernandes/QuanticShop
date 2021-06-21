@@ -1,134 +1,115 @@
-<!-- <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-touch="false" data-bs-pause="false">
-    <div class="carousel-inner">
-        <div class="carousel-item active"  data-bs-interval="8000">
-            <img src="vendor/images/produtos_slide/geladeiraEvolution.webp" class="d-block w-100" alt="Geladeira Samsung Evolution" width="1400px" height="600px">
-        </div>
-        <div class="carousel-item" data-bs-interval="5000">
-            <video class="bg_video" preload autobuffer autostart autoplay loop >
-                <source src="vendor/images/produtos_slide/galaxys21-videodisplay.webm" type="video/webm">
-            </video>
-        </div>
-        <div class="carousel-item"  data-bs-interval="8000">
-            <img src="vendor/images/produtos_slide/geladeiraEvolution.webp" class="d-block w-100" alt="..." width="1400px" height="600px">
-        </div>
-        <div class="carousel-item"  data-bs-interval="4000">
-            <video class="bg_video" autobuffer autostart autoplay loop name="video" >
-                <source src="vendor/images/produtos_slide/2021-windfree.webm" type="video/webm">
-            </video>
-        </div>
-        <div class="carousel-item"  data-bs-interval="8000">
-            <img src="vendor/images/produtos_slide/geladeiraEvolution.webp" class="d-block w-100" alt="..." width="1400px" height="600px">
-        </div>
-        
-        <div class="carousel-item"  data-bs-interval="6000">
-            <video class="bg_video" autobuffer autostart autoplay loop name="video" >
-                <source src="vendor/images/produtos_slide/windfreev.webm" type="video/webm">
-            </video>
-        </div>
-       
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div> -->
-
 <!-- Banner Starts Here -->
 <div class="banner header-text">
     <div class="owl-banner owl-carousel">
-      <div class="banner-item-01">
-        <!-- <div class="text-content">
-          <h4>Encontre seu carro hoje!</h4>
-          <h2>Lorem ipsum dolor sit amet</h2>
-        </div> -->
-      </div>
-      <div class="banner-item-02">
-        <!-- <div class="text-content">
-           <h4>Fugiat Aspernatur</h4>
-          <h2>Laboriosam reprehenderit ducimus</h2>
-        </div> -->
-      </div>
-      <div class="banner-item-03">
-        <!-- <div class="text-content">
-          <h4>Saepe Omnis</h4>
-          <h2>Quaerat suscipit unde minus dicta</h2>
-        </div> -->
-      </div>
+        <div class="banner-item-01">
+          <!-- <div class="text-content">
+            <h4>Find your car today!</h4>
+            <h2>Lorem ipsum dolor sit amet</h2>
+          </div> -->
+        </div>
+        <div class="banner-item-02">
+            <div class="text-content">
+                <h4>Fugiat Aspernatur</h4>
+                <h2>Laboriosam reprehenderit ducimus</h2>
+            </div>
+        </div>
+        <div class="banner-item-03">
+            <div class="text-content">
+                <h4>Saepe Omnis</h4>
+                <h2>Quaerat suscipit unde minus dicta</h2>
+            </div>
+        </div>
     </div>
-  </div>
-  <!-- Banner Ends Here -->
+</div>
+<!-- Banner Ends Here -->
 
+<!-- Inicio: Produtos em Destaque  -->
+<div class="latest-products">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading">
+                    <h2>Produtos em Destaque</h2>
+                    <a href="pages/shop">Ver Mais <i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+            <?php
+                $sql = "SELECT p.id pid, p.ativo pativo, p.*, v.*
+                        FROM produto p 
+                        INNER JOIN item_venda v ON (v.produto_id = p.id)
+                        WHERE p.ativo = 1 
+                        ORDER BY v.vezesVendido DESC LIMIT 6";
 
-<div class="content-bottom prod">
-    <div class="container-fluid">
-        <div class="row content_bottom-text">
-           <div class="col-md-12">
-                <h3 class="text-center">Produtos Mais Comprados</h3>
-                <h5 class="mb-5 text-center"><b>Esses são os Produtos Mais Comprados pelos Nossos Clientes, de uma olhada Tambem!<b></h5>
-                <div class="container">
-                    <div class="row justify-content-center">
-                      <?php
-                        $sql = "SELECT p.id pid, p.ativo pativo, p.*, v.*
-                                FROM produto p 
-                                INNER JOIN item_venda v ON (v.produto_id = p.id)
-                                WHERE p.ativo = 1 
-                                ORDER BY v.vezesVendido DESC LIMIT 8";
+                $consulta = $pdo->prepare($sql);
+                $consulta->execute();                            
 
-                        $consulta = $pdo->prepare($sql);
-                        $consulta->execute();                            
-
-                          while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
-                          //separar
-                          $pid 		                     = $dados->pid;
-                          $nome_produto 		         = $dados->nome_produto;
-                          $valorUnitario                = $dados->valorUnitario;
-                          $vezesVendido                  = $dados->vezesVendido;
-                          $foto                          = $dados->foto;
-                          $imagem                        = explode(",", $foto);
-                          $pativo			             = $dados->pativo;
+                while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
+                    //separar
+                    $pid 		                     = $dados->pid;
+                    $nome_produto 		         = $dados->nome_produto;
+                    $valorUnitario                = $dados->valorUnitario;
+                    $vezesVendido                  = $dados->vezesVendido;
+                    $foto                          = $dados->foto;
+                    $imagem                        = explode(",", $foto);
+                    $pativo			             = $dados->pativo;
                         
+                    //se tiver promo - valor = valor da promo
+                    //senao valor = valor do produto
                     
-                          //se tiver promo - valor = valor da promo
-                          //senao valor = valor do produto
-                    
-                          //se a promo esta vazio - valor = valor do produto
-                          if ( empty ( $promocao ) ) {
-                              //1499.99 -> 1.499,99
-                              $valorUnitario = "R$ " . number_format($valorUnitario, 2, ",", ".");
-                              $desc = "";
-                          } else {
-                              //valor normal
-                              $desc = "R$ " . number_format($valorUnitario, 2, ",", ".");
-                              //valor promocional
-                              $valorUnitario = "R$ " . number_format($promocao, 2, ",", ".");
-                          }
-                          //mostrar na tela
-                         
-                              echo "<div class='col-3 text-center'>
-                              <img src='../fotos/produtos/$imagem[0]' class='card-img-top' width='40' height='auto'>
-                              <p>$nome_produto</p>
-                              
-                              <p class='valor'>R$ $valorUnitario</p>
-                              <a href='pages/produto/$pid'
-                              class='btn btn-info'>Detalhes</a><br>
-                              </div>";
-            
-                        }
-                        
-                      ?>
+                    //se a promo esta vazio - valor = valor do produto
+                    if ( empty ( $promocao ) ) {
+                        //1499.99 -> 1.499,99
+                        $valorUnitario = "R$ " . number_format($valorUnitario, 2, ",", ".");
+                        $desc = "";
+                    } else {
+                        //valor normal
+                        $desc = "R$ " . number_format($valorUnitario, 2, ",", ".");
+                        //valor promocional
+                        $valorUnitario = "R$ " . number_format($promocao, 2, ",", ".");
+                    }
+                    //mostrar na tela
+                    echo "<div class='col-md-4'>
+                            <div class='product-item'>
+                                <a href='pages/produto/$pid'><img src='../fotos/produtos/$imagem[0]' width='5' height='auto' alt='$nome_produto' title='Produto: $nome_produto'></a>
+                                <div class='down-content'>
+                                    <a href='pages/produto/$pid'><h4>$nome_produto</h4></a>
+                                    <h6>$valorUnitario</h6>
+                                    <a href='pages/produto/$pid' class='btn btn-primary'>Detalhes</a><br>           
+                                </div>
+                            </div>
+                        </div>";
+                }
+            ?>
+        </div>
+    </div>
+</div>
+<!-- Fim: Produtos em Destaque  -->
+
+<!-- Inicio: Contate-Nos  -->
+<div class="call-to-action">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="inner-content">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4>Alguma Duvida?</h4>
+                            <p>Entre em Contato Conosco! :)</p>
+                        </div>
+                        <div class="col-lg-4 col-md-6 text-right">
+                            <a href="pages/contact" class="filled-button">Contate-Nos</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<!-- Fim: Contate-Nos  -->
 
-<div class="container-fluid">
-    <h3 class="text-center mt-3 mb-3"><strong>Marcas Parceiras</strong></h3>
+<!-- Inicio: Marcas Parceiras  -->
+<div class="container-fluid mt-5">
+    <h3 class="text-center mt-3 mb-3"><strong>Algumas Marcas Parceiras</strong></h3>
     <section id="clients" class="clients">
         <div class="row" data-aos="zoom-in">
             <div class="row d-flex align-items-center">
@@ -145,32 +126,15 @@
                   <img src="vendor/img/clients/client-2.png" class="img-fluid" alt="Samsung">
               </div>
               <div class="col-lg-2 col-md-2 col-2">
-                  <img src="vendor/img/clients/client-9.png" class="img-fluid" alt="Xiaomi">
+              <img src="vendor/img/clients/client-13.png" class="img-fluid" alt="HyperX">
               </div>
               <div class="col-lg-1 col-md-1 col-2">
                   <img src="vendor/img/clients/client-5.png" class="img-fluid" alt="Apple">
-              </div>
-              <div class="col-lg-2 col-md-2 col-2">
-                  <img src="vendor/img/clients/client-6.png" class="img-fluid" alt="Google">
-              </div>
-              <div class="col-lg-2 col-md-2 col-2">
-                  <img src="vendor/img/clients/client-22.png" class="img-fluid" alt="Microsoft">
-              </div>
-              <div class="col-lg-2 col-md-2 col-2">
-                 <img src="vendor/img/clients/client-13.png" class="img-fluid" alt="HyperX">
-              </div>
-              <div class="col-lg-2 col-md-2 col-2">
-                  <img src="vendor/img/clients/client-12.png" class="img-fluid" alt="Redragon">
-              </div>
-              <div class="col-lg-2 col-md-2 col-2">
-                  <img src="vendor/img/clients/client-19.png" class="img-fluid" alt="DxRacer">
-              </div>
-              <div class="col-lg-2 col-md-2 col-2">
-                  <img src="vendor/img/clients/client-7.png" class="img-fluid" alt="Lenovo">
               </div>
             </div>
         </div>
     </section>
 </div>
+<!-- Fim: Marcas Parceiras  -->
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>

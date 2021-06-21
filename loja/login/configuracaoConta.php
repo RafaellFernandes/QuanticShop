@@ -6,11 +6,6 @@ if (!isset($_SESSION["quanticshop"]["id"])) {
     mensagem($titulo, $mensagem, $icone);
 exit;
 }
+?>
 
-if ($_SESSION["quanticshop"]["nivelAcesso"] != "cliente") {
-    $titulo = "Erro";
-    $mensagem = "Erro na Requisição da Página";
-    $icone = "error";
-    mensagem($titulo, $mensagem, $icone);
-exit;
-}
+<h1 class="mt-5 mb-5">O que por aki?</h1>

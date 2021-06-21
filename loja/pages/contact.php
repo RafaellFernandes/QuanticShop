@@ -9,7 +9,7 @@
 				 	 	<p>Email: <span>sac@quanticshop.com</span></p>
 				   		<p>Siga-nos: <span>Instagram</span>, <span>Twitter</span></p>
 				   </div>
-				   <h5 class="m_8">Ou nos Envie um Email por aqui</h5>
+				   <h5 class="m_8 mt-5">Ou Nos Envie um Email por aqui</h5>
 				</div>
 			</div>
 			<div class="row">

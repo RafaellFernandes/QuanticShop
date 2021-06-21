@@ -45,6 +45,7 @@ $dados = $consulta->fetch(PDO::FETCH_OBJ);
 										"nome_produto"=>$nome_produto,
 										"valorUnitario"=>$valorProduto,
 										"quantidadeCarrinho"=>$quantidadeCarrinho,
+										"foto"=>$foto,
 										"total"=>$total);
 		//print_r ( $_SESSION['carrinho'] );
 

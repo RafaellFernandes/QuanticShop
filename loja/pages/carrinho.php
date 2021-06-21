@@ -1,10 +1,6 @@
 <?php
 	//verificar se a variável $pagina não existe
 	if ( !isset ( $pagina ) ) exit;
-?>
-<h1 class="text-center">Carrinho de Compras</h1>
-
-<?php
 	
 	if ( isset ( $_SESSION['cliente']['primeiro_nome'] ) ) {
 
@@ -21,86 +17,114 @@
 		$produtos = count( $_SESSION['carrinho'] );
 
 ?>
-
-<p class="alert alert-warning">
+<p class="alert alert-warning mt-4">
 	Existem <?=$produtos?> produto(s) diferente(s) no carrinho:
 </p>
+    <!--shopping cart area start -->
+    <div class="shopping_cart_area mt-40">
+        <div class="container">  
+            <form action="#"> 
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table_desc">
+                            <div class="cart_page table-responsive">
+                                <table>
+									<thead>
+										<tr>
+											<th class="product_thumb">Imagem</th>
+											<th class="product_name">Produto</th>
+											<th class="product-price">Preço</th>
+											<th class="product_quantity">Quantidade</th>
+											<th class="product_total">Total</th>
+											<th class="product_remove">Excluir</th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php
+											//mostrar o itens do $_SESSION['carrinho']
+											$totalGeral = 0;
+											//se existem produtos no carrinho
+											if ( $produtos > 0 ) {	
+												$disabled=NULL;
+												//percorrer o array e mostrar os produtos
+												foreach ( $_SESSION['carrinho'] as $dados ) {
+													//recuperar os dados do array carrinho
+													$id = $dados["id"];
+													$nome_produto = $dados["nome_produto"];
+													$valorUnitario= $dados["valorUnitario"];
+													$quantidadeCarrinho = $dados["quantidadeCarrinho"];
+													$foto = $dados["foto"];
+													$total = $dados["total"];
 
-<table class="table table-striped table-bordered table-hover">
-	<thead>
-		<tr>
-			<td>Nome do Produto</td>
-			<td>Quantidade</td>
-			<td>Vlr Unit</td>
-			<td>Vlr Total</td>
-			<td></td>
-		</tr>
-	</thead>
-	<tbody>
-	<?php
-		//mostrar o itens do $_SESSION['carrinho']
-		//print_r ( $_SESSION['carrinho'] );
+													//somar o totalGeral
+													$totalGeral = $total + $totalGeral;
+													//formatar os valores
+													$valorUnitario = number_format($valorUnitario, 2, "," , ".");
+													$total = number_format($total, 2, ",", ".");
 
-		$totalGeral = 0;
-
-		//se existem produtos no carrinho
-		if ( $produtos > 0 ) {	
-			$disabled=NULL;
-			//percorrer o array e mostrar os produtos
-			foreach ( $_SESSION['carrinho'] as $dados ) {
-				//recuperar os dados do array carrinho
-				$id = $dados["id"];
-				$nome_produto = $dados["nome_produto"];
-				$valorUnitario= $dados["valorUnitario"];
-				$quantidadeCarrinho = $dados["quantidadeCarrinho"];
-				$total = $dados["total"];
-
-				//somar o totalGeral
-				$totalGeral = $total + $totalGeral;
-				//formatar os valores
-				$valorUnitario = number_format($valorUnitario, 2, "," , ".");
-				$total = number_format($total, 2, ",", ".");
-
-				//mostrar os resultados em uma linha da tabela
-				//tr - linha
-				//td - célula ou coluna
-				echo "<tr>
-						<td>{$nome_produto}</td>
-						<td>{$quantidadeCarrinho}</td>
-						<td>R$ {$valorUnitario}</td>
-						<td>R$ {$total}</td>
-						<td>
-							<a type='button' class='btn btn-danger btn-sm' onclick='excluirProduto({$id})'>
-								<i class='fas fa-trash'></i>
-							</a>
-						</td>
-					</tr>";		
-			}
-		} 
-		$disabled="disabled";
-	?>
-	</tbody>
-	<tfoot>
-		<tr>
-			<td>Valor Total:</td>
-			<td></td>
-			<td></td>
-			<td>R$ <?=number_format($totalGeral, 2, "," , ".");?></td>
-			<td></td>
-		</tr>
-	</tfoot>
-</table>
-
-
-<a href="pages/limpar" class="btn btn-danger float-left">
-  <i class="fas fa-check"></i> Limpar Carrinho
-</a>
-<button onclick="window.location.href='pages/finalizar'" class="btn btn-success float-end " $disabled >Finalizar Pedido</button>
-<!-- <a href='pages/finalizar' class="btn btn-success btn-lg float-right" $disabled>
-	Finalizar Pedido
-</a> -->
-
-<div class="clearfix"></div>
+													//mostrar os resultados em uma linha da tabela
+													//tr - linha
+													//td - célula ou coluna
+													echo "<tr>
+															<td class='product_thumb'><img src='../fotos/produtos/{$foto}' alt='{$nome_produto}'></td>
+															<td class='product_name'>{$nome_produto}</td>
+															<td class='product-price'>R$ {$valorUnitario}</td>
+															<td class='product_quantity'>{$quantidadeCarrinho}</td>
+															<td class='product_total'>R$ {$total}</td>
+															<td class='product_remove'>
+																<a type='button' onclick='excluirProduto({$id})'>
+																	<i class='ion-android-close'></i>
+																</a>
+															</td>
+														</tr>";		
+												}
+											} 
+											$disabled="disabled";
+										?>
+									</tbody>
+                        		</table>   
+                    		</div>         
+               		 	</div>
+					</div>
+				</div>
+				<!--coupon code area start-->
+				<div class="coupon_area">
+					<div class="row">
+						<div class="col-lg-6 col-md-6">
+							<div class="coupon_code left">
+								<h3>Limpar</h3>
+								<div class="coupon_inner">   
+									<p>Deseja Limpar o Carrinho?</p> 
+									<a href="pages/limpar" type="button" class="btn btn-danger btn-sm">
+										<i class="fas fa-check"></i> Excluir Tudo
+									</a>
+								</div>    
+							</div>
+						</div>
+						<div class="col-lg-6 col-md-6">
+							<div class="coupon_code right">
+								<h3>Total Carrinho</h3>
+								<div class="coupon_inner">
+									<div class="cart_subtotal">
+										<p>Subtotal</p>
+										<p class="cart_amount">nao sei</p>
+									</div>
+									<div class="cart_subtotal">
+										<p>Total</p>
+										<p class="cart_amount">R$ <?=number_format($totalGeral, 2, "," , ".");?></p>
+									</div>
+									<div class="checkout_btn">
+										<button onclick="window.location.href='pages/finalizar'" class="btn btn-success" $disabled >Finalizar Pedido</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>     
+			</form> 
+		</div>     
+	</div>
+<!--shopping cart area end -->
 
 <script>
 	//funcao para perguntar se quer realmente excluir o produto

@@ -89,6 +89,10 @@
 	
 	<link href="pages/carrossel/carrossel.css" rel='stylesheet' type='text/css' />
 	<link href="pages/carrossel/owl.css" rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" href="pages/carrossel/style.css">
+	<link rel="stylesheet" href="pages/carrossel/styleProduto.css">
+<link rel="stylesheet" href="pages/carrossel/customProduto.css">
+
 
 	<script type="text/javascript">
         $(document).ready(function() {
@@ -183,6 +187,22 @@
 
 </head>
 <body>
+<!-- Botao de Subir a Pagina -->
+	<a id="subirTopo">
+		<i class="fas fa-rocket"></i><br>Subir
+	</a>
+<!-- ***** -->
+
+<!-- ***** Preloader Start ***** -->
+<div id="preloader">
+    <div class="jumper">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>  
+<!-- ***** Preloader End ***** -->
+
   	<div class="header">
 		<div class="container">
 			<div class="row">
@@ -208,7 +228,7 @@
 												<ul class="list">
 													<div class="check_button dropdown-item"><a href="login/perfil">Perfil</a></div>
 													<div class="check_button dropdown-item"><a href="login/sair">Sair</a></div>
-													<div class="check_button dropdown-item"><a href="login/configuracoesConta">Configurações de Conta</a></div>             
+													<div class="check_button dropdown-item"><a href="login/configuracaoConta">Configurações de Conta</a></div>             
 												</ul>
 											</li>';
 									}
@@ -290,7 +310,7 @@
 					</ul>
 				</div>
 			</div>
-			<div class="row footer_bottom ">
+			<div class="row footer_bottom">
 				<div class="copy">
 			    	<p class="text-center">© 2019 - 2021  <a href="pages/home" target="_blank">Quantic Shop™</a></p>
 		    	</div>
@@ -301,9 +321,27 @@
 	<script src="pages/carrossel/custom.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
 	<script>var purecookieTitle="Cookies.",purecookieDesc="Ao usar este site, você aceita automaticamente o uso de Cookies.",purecookieLink='<a href="https://www.cssscript.com/privacy-policy/" target="_blank">O que é?</a>',purecookieButton="Aceito";function pureFadeIn(e,o){var i=document.getElementById(e);i.style.opacity=0,i.style.display=o||"block",function e(){var o=parseFloat(i.style.opacity);(o+=.02)>1||(i.style.opacity=o,requestAnimationFrame(e))}()}function pureFadeOut(e){var o=document.getElementById(e);o.style.opacity=1,function e(){(o.style.opacity-=.02)<0?o.style.display="none":requestAnimationFrame(e)}()}function setCookie(e,o,i){var t="";if(i){var n=new Date;n.setTime(n.getTime()+24*i*60*60*1e3),t="; expires="+n.toUTCString()}document.cookie=e+"="+(o||"")+t+"; path=/"}function getCookie(e){for(var o=e+"=",i=document.cookie.split(";"),t=0;t<i.length;t++){for(var n=i[t];" "==n.charAt(0);)n=n.substring(1,n.length);if(0==n.indexOf(o))return n.substring(o.length,n.length)}return null}function eraseCookie(e){document.cookie=e+"=; Max-Age=-99999999;"}function cookieConsent(){getCookie("purecookieDismiss")||(document.body.innerHTML+='<div class="cookieConsentContainer" id="cookieConsentContainer"><div class="cookieTitle"><a style="color: white;">'+purecookieTitle+'</a></div><div class="cookieDesc"><p>'+purecookieDesc+" "+purecookieLink+'</p></div><div class="cookieButton"><a style="color: white;" onClick="purecookieDismiss();">'+purecookieButton+"</a></div></div>",pureFadeIn("cookieConsentContainer"))}function purecookieDismiss(){setCookie("purecookieDismiss","1",1),pureFadeOut("cookieConsentContainer")}window.onload=function(){cookieConsent()};</script>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script> -->
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
 
-	
+		jQuery("#subirTopo").hide();
 
+		jQuery('a#subirTopo').click(function () {
+				jQuery('body,html').animate({
+				scrollTop: 0
+				}, 200);
+				return false;
+		});
 
+		jQuery(window).scroll(function () {
+				if (jQuery(this).scrollTop() > 1000) {
+					jQuery('#subirTopo').fadeIn();
+				} else {
+					jQuery('#subirTopo').fadeOut();
+				}
+			});
+		});
+	</script>
 </body>
 </html>
