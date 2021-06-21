@@ -15,7 +15,7 @@
 
 		$promocao             = $dados->promocao;
 		$valorUnitario 	      = $dados->valorUnitario;
-		$id                   = "";
+		$id                   = $dados->pid;
 		$foto                 = $dados->foto;
 		$imagem               = "../$foto";
 		$imagem               = explode(",", $foto);								
@@ -62,6 +62,7 @@
 	        <div class="col-lg-6 col-md-6">
 	            <div class="product_d_right">
 	                <form name="formProduto" method="post" action="pages/adicionar">
+					<input hidden name="id" value="<?=$id?>">
 	                    <h1><?=$dados->nome_produto?></h1>
 	                    <div class=" product_ratting">
 	                        <ul>
@@ -87,7 +88,6 @@
 	                    </div>
 	                    <div class="product_variant quantity">
 							<label>Quantidade</label>
-							<input type="hidden" name="id" value="<?=$dados->id?>">
 							<input min="1" max="100" value="1" type="number"  name="quantidadeCarrinho" placeholder="Quantidade" required>
 							<button class="button" type="submit">Add ao Carrinho</button>
 	                    </div>

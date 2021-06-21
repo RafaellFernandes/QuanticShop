@@ -14,7 +14,6 @@
   		</ul>
 	</div>
 </nav>
-
 <!-- Inicio: Produtos em Destaque  -->
 <div class="latest-products">
     <div class="container">
