@@ -55,7 +55,7 @@ $ativo = $departamento_id = $marca_id =  $estoque_id = "";
     $descricao                = $dados->descricao;
     $codigo                   = $dados->codigo;
     $departamento_id          = $dados->departamento_id;
-    $venda_unitaria           = $dados->venda_unitaria;
+   
     $promocao                 = $dados->promocao;
     $nome_dept                = $dados->nome_dept;
     $marca_id                 = $dados->marca_id;

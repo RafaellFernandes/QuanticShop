@@ -24,7 +24,7 @@
 			<div class="row container-fluid">
 				<?php
 					//selecionar 1 produto aleatorios
-					$sql = "SELECT * FROM produto WHERE ativo = 1 AND departamento_id IN (2)";
+					$sql = "SELECT * FROM produto WHERE estoque > 0 AND departamento_id IN (2)";
 					$consulta = $pdo->prepare($sql);
 					$consulta->execute();
 

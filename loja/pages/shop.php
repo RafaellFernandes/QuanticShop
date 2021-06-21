@@ -41,7 +41,7 @@
                 </div>
             </div>
             <?php
-				$sql = "SELECT * FROM produto WHERE ativo = 1 ORDER BY rand() LIMIT 30";
+				$sql = "SELECT * FROM produto WHERE estoque > 0 ORDER BY rand() LIMIT 30";
 				$consulta = $pdo->prepare($sql);
 				$consulta->execute();
 
