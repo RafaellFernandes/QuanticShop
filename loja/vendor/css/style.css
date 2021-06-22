@@ -14,11 +14,12 @@
 	border: 0;
 	font-family: sans-serif;
 	opacity: .8;
-	}
+}
 	
-	#subirTopo:hover {
+#subirTopo:hover {
 	opacity:1;
-	}
+}
+
 
 
 
@@ -41,7 +42,7 @@ body a{
 }
 .header{
 	background:#000;
-	padding: 0.3% 0;
+	padding: 1.0% 0;
 }
 .header-left{
 	float:left;
@@ -49,11 +50,11 @@ body a{
 }
 .logo{
 	float:left;
-	margin-right: 0.3%;
+	margin-right: 5%;
 }
 .menu{
 	 float:left;
-	 margin: 15px 0 0;
+	 margin: 20px 0 0;
 }
   .menu li{
 	display:inline-block;
@@ -108,9 +109,9 @@ body a{
     }
     .nav {
 	    list-style: none;
-		width: 90%;
+		width: 95%;
 		position: absolute;
-		right: 15px;
+		right: 20px;
 		background: #222;
 		top: 72px;
 		z-index: 111;
@@ -157,22 +158,22 @@ body a{
  }
 .header_right{
 	float:right;
-	width:10%;
+	width:6%;
 	margin-top: 16px;
 }
 .sb-search {
 	position: absolute;
 	top:7px;
 	right:0px;
-	width: 10%;
+	width: 0%;
 	min-width: 45px;
 	height: 45px;
 	float: right;
-	/* overflow: hidden; */
-	/* -webkit-transition: width 0.3s;
+	overflow: hidden;
+	-webkit-transition: width 0.3s;
 	-moz-transition: width 0.3s;
-	transition: width 0.3s; */
-	/* -webkit-backface-visibility: hidden; */
+	transition: width 0.3s;
+	-webkit-backface-visibility: hidden;
 }
 .sb-search-input {
 	position: absolute;
@@ -180,7 +181,7 @@ body a{
 	left: 0px;
 	border: none;
 	outline: none;
-	background:rgb(247, 247, 247);
+	background:#333;
 	width: 100%;
 	height:45px;
 	margin: 0;
@@ -489,12 +490,12 @@ li.list_desc h4 a:hover{
 }
 /*--main--*/
 .content-top{
-	padding:3% 0;
+	padding:10% 0;
 }
 .content-top h2{
 	color: #000;
 	font-size:3em;
-	font-weight: 700;
+	font-weight: 800;
 	text-align: center;
 	text-transform: uppercase;
 	margin-bottom: 1.5%;
@@ -545,7 +546,7 @@ li.list_desc h4 a:hover{
 .nbs-flexisel-item > img {
 	width:100%;
 	cursor: pointer;
-	position: relative;
+	positon: relative;
 	margin-top: 10px;
 	margin-bottom: 10px;
 	max-width:210px;
@@ -569,7 +570,7 @@ li.list_desc h4 a:hover{
 }
 .content-bottom{
 	width:100%;
-	background-color:black;
+	background: url(../images/bg_image.jpg)no-repeat center top;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -579,21 +580,8 @@ li.list_desc h4 a:hover{
 	height:100%;
 	padding:15% 0;
 }
-.prod{
-	width:100%;
-	background-color:whitesmoke;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
-	background-position: center;
-	background-size: 100% 100%;
-	height:100%;
-	padding:15% 0;
-}
-
 .content_bottom-text h3{
-	color: rgb(0, 0, 0);
+	color: #FFF;
 	font-size: 3em;
 	font-weight: 800;
 	text-transform: uppercase;
@@ -601,13 +589,13 @@ li.list_desc h4 a:hover{
 	margin: 2% 0 10%;
 }
 p.m_1{
-	color: rgb(0, 0, 0);
+	color: #FFF;
 	font-size: 0.85em;
 	line-height: 2.2em;
 	margin-bottom:6%;
 }
 p.m_2{
-	color: rgb(0, 0, 0);
+	color: #FFF;
 	font-size: 0.85em;
 	line-height: 2.2em;
 }
@@ -679,7 +667,7 @@ i.close1{
    -moz-box-shadow: 0 0 1px #000;
    box-shadow: 0 0 1px #000;
 }
-.view a.info:hover {
+.view a.info: hover {
    -webkit-box-shadow: 0 0 5px #000;
    -moz-box-shadow: 0 0 5px #000;
    box-shadow: 0 0 5px #000;
@@ -1695,31 +1683,26 @@ fieldset.input input[type="submit"]:hover {
 	float: right;
 	margin-top: 8%;
 }
-.button11 {
-	text-align: center;
-	/* float: right; */
-	margin-top: 8%;
-}
 /*--register--*/
-.register-top-grid h3, .register-bottom-grid h3,  .register-center-grid h3  {
+.register-top-grid h3, .register-bottom-grid h3 {
 	color:#000;
 	font-size: 1em;
 	padding-bottom: 5px;
 	margin: 0;
 }
-.register-top-grid div, .register-bottom-grid div, .register-center-grid div {
+.register-top-grid div, .register-bottom-grid div {
 	width: 48%;
 	float: left;
 	margin: 10px 0;
 }
-.register-top-grid span, .register-bottom-grid span, .register-center-grid span {
+.register-top-grid span, .register-bottom-grid span {
 	color:#555;
 	font-size: 0.8125em;
 	padding-bottom: 0.2em;
 	display: block;
 	text-transform: uppercase;
 }
-.register-top-grid input[type="text"], .register-bottom-grid input[type="text"], .register-center-grid input[type="text"]{
+.register-top-grid input[type="text"], .register-bottom-grid input[type="text"] {
 	border: 1px solid #EEE;
 	outline-color:#00BFF0;
 	width: 96%;
@@ -1817,31 +1800,6 @@ fieldset.input input[type="submit"]:hover {
 .register-grids form input[type="submit"]:hover {
 	background:#555;
 }
-/*--------------------------------------------------------------
-  # Clients
-  --------------------------------------------------------------*/
-  .clients {
-    background: #f2f2f2;
-    padding: 10px 0;
-    text-align: center;
-  }
-  
-  .clients img {
-    width: 40%;
-    transition: all 0.4s ease-in-out;
-    display: inline-block;
-    padding: 10px 0;
-  }
-  
-  .clients img:hover {
-    transform: scale(1.2);
-  }
-  
-  @media (max-width: 768px) {
-    .clients img {
-      width: 40%;
-    }
-  }
 /*--responsive design--*/
 @media (max-width:1366px){
 .icon1 ul {
@@ -1959,7 +1917,7 @@ fieldset.input input[type="submit"]:hover {
 	margin-bottom:0;
  }
  .shop_box{
- 	margin-bottom:0px;
+ 	margin-bottom:20px;
  }
  .shop_desc {
 	padding: 10px;
@@ -2082,18 +2040,18 @@ h4.m_11 {
 	padding: 0 15px;
 	line-height: 1.5em;
 }
-.etalage_zoom_area div {
+ .etalage_zoom_area div {
 	 width:50px !important;
 	 height:50px !important;
   }
-.register-top-grid{
+  .register-top-grid(
   	margin-bottom:20px;
-}
- .nav {
+  )
+  .nav {
 	top: 66px;
 	right: 8px;
-}
-.register-top-grid div, .register-bottom-grid div {
+  }
+  .register-top-grid div, .register-bottom-grid div {
 	width: 100%;
 	float: none;
 	margin: 10px 0;

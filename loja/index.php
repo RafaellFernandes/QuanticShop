@@ -102,7 +102,7 @@
 </style>
 
 
-	<script type="text/javascript">
+<script type="text/javascript">
         $(document).ready(function() {
             $(".dropdown img.flag").addClass("flagvisibility");
 
@@ -127,11 +127,13 @@
                     $(".dropdown dd ul").hide();
             });
 
+
             $("#flagSwitcher").click(function() {
                 $(".dropdown img.flag").toggleClass("flagvisibility");
             });
         });
      </script>
+
 	 <script type="text/javascript">
 			$(document).ready(function(){
 		
@@ -210,47 +212,79 @@
     </div>
 </div>  
 <!-- ***** Preloader End ***** -->
-
-  	<div class="header">
+	<div class="header">
 		<div class="container">
 			<div class="row">
-			 	<div class="col-md-12">
-				 	<div class="header-left">
+				<div class="col-md-12">
+					<div class="header-left">
 						<div class="logo">
-							<a href="pages/home"><img src="vendor/images/logo_branco.png" style="width: 80px; " alt="Quantic Shop - Home"/></a>
-						</div>
+					 		<a href="pages/home"><img src="vendor/images/logo_branco.png" style="width: 90px; " alt="Quantic Shop - Home"/></a>
+					 	</div>
 						<div class="menu">
-							<a class="toggleMenu" href="home"><img src="vendor/images/nav.png" alt="Menu" /></a>
+							<a class="toggleMenu" href="#"><img src="vendor/images/nav.png" alt="" /></a>
 							<ul class="nav" id="nav">
 								<li><a href="pages/home">Home</a></li>
 								<li><a href="pages/shop">Shop</a></li>
 								<li><a href="pages/sobre">Sobre</a></li>
 								<li><a href="pages/contact">Contato</a></li>
-								<li><a href="pages/carrinho"><i class="fa fa-cart-plus" aria-hidden="true"></i></a></li>
-								<li><ul class="icon1 sub-icon1 ">
-								<?php
-									if(!isset($_SESSION["quanticshop"]["id"])){
-										echo '<li><a href="login/login">Login</a></li>';
-									}else{
-										echo '<li><a href="#">Conta</a>
-												<ul class="list">
-													<div class="check_button dropdown-item"><a href="login/perfil">Perfil</a></div>
-													<div class="check_button dropdown-item"><a href="login/sair">Sair</a></div>
-													<div class="check_button dropdown-item"><a href="login/configuracaoConta">Configurações de Conta</a></div>             
-												</ul>
-											</li>';
-									}
-								?></ul></li>
+								<li><a href="pages/carrinho">Carrinho <i class="fa fa-cart-plus" aria-hidden="true"></i></a></li>								
+								<div class="clear"></div>
 							</ul>
-								
-								<script type="text/javascript" src="vendor/js/responsive-nav.js"></script>
-							</div>	
-						<div class="clear"></div>
-					</div>		
-	        	</div>
-	      	</div>
-		</div>
+							<script type="text/javascript" src="vendor/js/responsive-nav.js"></script>
+						</div>							
+	    		    <div class="clear"></div>
+	    	    	</div>
+					<div class="header_right">
+						<div class="search-box">
+							<div id="sb-search" class="sb-search">
+								<form>
+									<input class="sb-search-input" placeholder="Enter your search term..." type="search" name="search" id="search">
+									<input class="sb-search-submit" type="submit" value="">
+									<span class="sb-icon-search"> </span>
+								</form>
+							</div>
+						</div>
+						<!----search-scripts---->
+						<script src="vendor/js/classie.js"></script>
+						<script src="vendor/js/uisearch.js"></script>
+						<script>
+							new UISearch( document.getElementById( 'sb-search' ) );
+						</script>
+						<!----//search-scripts---->
+						<ul class="icon1 sub-icon1 profile_img">
+							<li><a class=" c1" href="#"> </a>
+								<ul class="sub-icon1 list">
+									<?php
+										if(!isset($_SESSION["quanticshop"]["id"])){
+											echo ' 	<div class="product_control_buttons">
+														<a href="login/login">Login <i class="fa fa-user-plus"></i></a>
+													</div>
+													<div class="clear"></div>';										
+											}else{
+												echo '
+													<div class="product_control_buttons">
+														
+														<a href="login/perfil"><img src="../fotos/'.$_SESSION['quanticshop']['foto'].'p.jpg" alt=""/></a>
+													</div>
+													<div class="login_buttons">
+														<div class="check_button"><a href="login/perfil">Perfil</a></div>
+														<div class="check_button"><a href="login/configuracaoConta">Configurações de Conta</a></div>
+														<div class="login_button"><a href="login/sair">Sair</a></div>
+														<div class="clear"></div>
+													</div>';
+											}	
+									?>
+									<div class="clear"></div>
+								</ul>
+							</li>
+						</ul>
+					<div class="clear"></div>
+	       		</div>
+	      </div>
+		 </div>
+	    </div>
 	</div>
+
   	<main>
 		<?php
 			$pagina = "pages/home.php";

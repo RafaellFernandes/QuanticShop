@@ -8,7 +8,7 @@
 
 .banner-item-01 {
 	padding: 300px 0px;
-	background-image: url(../../vendor/images/produtos_slide/geladeiraEvolution.webp);
+	background-image: url(../../vendor/images/produtos_slide/banner1.png);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -16,7 +16,7 @@
 
 .banner-item-02 {
 	padding: 300px 0px;
-	background-image: url(../../vendor/images/produtos_slide/galaxys21-videodisplay.webm);
+	background-image: url(../../vendor/images/produtos_slide/geladeiraEvolution.webp);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -24,12 +24,27 @@
 
 .banner-item-03 {
 	padding: 300px 0px;
-	background-image: url(../../vendor/images/produtos_slide/geladeiraEvolution.webp);
+	background-image: url(../../vendor/images/produtos_slide/hx-cloud-2-wireless.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
 }
 
+.banner-item-04 {
+	padding: 300px 0px;
+	background-image: url(../../vendor/images/produtos_slide/banner2.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.banner-item-05 {
+	padding: 300px 0px;
+	background-image: url(../../vendor/images/produtos_slide/cozinha.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
 .banner .banner-item {
 	max-height: 600px;
 }

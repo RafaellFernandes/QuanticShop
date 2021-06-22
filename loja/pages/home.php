@@ -2,21 +2,29 @@
 <div class="banner header-text">
     <div class="owl-banner owl-carousel">
         <div class="banner-item-01">
-          <!-- <div class="text-content">
-            <h4>Find your car today!</h4>
-            <h2>Lorem ipsum dolor sit amet</h2>
-          </div> -->
+          <div class="text-content">
+            <h4>QuanticShop</h4>
+            <h2 style="color: black;">Nós Trazemos o Futuro.</h2>
+          </div>
         </div>
         <div class="banner-item-02">
-            <div class="text-content">
-                <h4>Fugiat Aspernatur</h4>
-                <h2>Laboriosam reprehenderit ducimus</h2>
-            </div>
+            <!--  -->
         </div>
         <div class="banner-item-03">
             <div class="text-content">
-                <h4>Saepe Omnis</h4>
-                <h2>Quaerat suscipit unde minus dicta</h2>
+                <h2>HyperX</h2>
+            </div>
+        </div>
+        <div class="banner-item-04">
+            <div class="text-content">
+                <h4>Quantic quis tellus.</h4>
+                <h2 style="color: black;">Da nobis Future.</h2>
+            </div>
+        </div>
+        <div class="banner-item-05">
+            <div class="text-content" style="background-color: rgba(128, 128, 128, 0.5); ">
+                <h4>QuanticShop</h4>
+                <h2 style="color: black; ">A Modernidade que sua Casa Precisa.</h2>
             </div>
         </div>
     </div>
@@ -86,7 +94,7 @@
 <!-- Fim: Produtos em Destaque  -->
 
 <!-- Inicio: Contate-Nos  -->
-<div class="call-to-action">
+<div class="call-to-action mb-5">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -108,7 +116,7 @@
 <!-- Fim: Contate-Nos  -->
 
 <!-- Inicio: Marcas Parceiras  -->
-<div class="container-fluid mt-5">
+<!-- <div class="container-fluid mt-5">
     <h3 class="text-center mt-3 mb-3"><strong>Algumas Marcas Parceiras</strong></h3>
     <section id="clients" class="clients">
         <div class="row" data-aos="zoom-in">
@@ -134,6 +142,6 @@
             </div>
         </div>
     </section>
-</div>
+</div> -->
 <!-- Fim: Marcas Parceiras  -->
 
