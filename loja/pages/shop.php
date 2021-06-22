@@ -41,12 +41,16 @@
                 </div>
             </div>
             <?php
-				$sql = "SELECT * FROM produto WHERE estoque > 0 ORDER BY rand() LIMIT 30";
+				$sql = "SELECT p.id pid, p.*, e.id eid, e.* 
+						FROM produto p
+						INNER JOIN estoque e ON (p.id = e.produto_id)
+						WHERE ativo = 1  AND qtd_estoque > 10
+						ORDER BY rand() LIMIT 30";
 				$consulta = $pdo->prepare($sql);
 				$consulta->execute();
 
 				while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
-					$id 	            = $dados->id;
+					$pid 	            = $dados->id;
 					$nome_produto       = $dados->nome_produto;
 					$valorUnitario       = $dados->valorUnitario;
 					$foto                = $dados->foto;
@@ -55,11 +59,11 @@
 			?>
             <div class='col-md-4'>
                 <div class='product-item'>
-                    <a href='pages/produto/<?=$id?>'><img align='right' src='../fotos/produtos/<?=$imagem[0]?>' class='img' alt='<?=$nome_produto?>' title='Produto: <?=$nome_produto?>'></a>
+                    <a href='pages/produto/<?=$pid?>'><img align='right' src='../fotos/produtos/<?=$imagem[0]?>' class='img' alt='<?=$nome_produto?>' title='Produto: <?=$nome_produto?>'></a>
                     <div class='down-content'>
-                        <a href='pages/produto/<?=$id?>'><h4><?=$nome_produto?></h4></a>
+                        <a href='pages/produto/<?=$pid?>'><h4><?=$nome_produto?></h4></a>
                         <h6>R$ <?=$valorUnitario?></h6>
-                        <a href='pages/produto/<?=$id?>' class='btn btn-primary'>Detalhes</a><br>           
+                        <a href='pages/produto/<?=$pid?>' class='btn btn-primary'>Detalhes</a><br>           
                     </div>
                 </div>
             </div>

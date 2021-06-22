@@ -97,8 +97,25 @@
 .img {
     max-width: 50%;
     max-height: 50%;
-	
 }
+
+a{
+	text-decoration: none;
+	color: #000;
+}
+
+.a1{
+	color: #fff;
+}
+
+.a2{
+	color: #000;
+}
+
+.a2:hover{
+	color: purple;
+}
+
 </style>
 
 
@@ -252,24 +269,34 @@
 						</script>
 						<!----//search-scripts---->
 						<ul class="icon1 sub-icon1 profile_img">
-							<li><a class=" c1" href="#"> </a>
+							<li class="li"><a class="a1" href="#">Conta</a>
 								<ul class="sub-icon1 list">
 									<?php
 										if(!isset($_SESSION["quanticshop"]["id"])){
 											echo ' 	<div class="product_control_buttons">
-														<a href="login/login">Login <i class="fa fa-user-plus"></i></a>
+														<a class="a2" href="login/login">Entre na sua Conta <i class="fa fa-user-plus"></i></a>
 													</div>
 													<div class="clear"></div>';										
 											}else{
+												
+												$id = $_SESSION["quanticshop"]["id"];
+												$sql = "SELECT foto, primeiro_nome FROM cliente WHERE id = $id";
+												$consulta = $pdo->prepare($sql);
+												$consulta->bindParam(":id", $id);
+												$consulta->execute();
+												$dados = $consulta->fetch(PDO::FETCH_OBJ);
+
 												echo '
 													<div class="product_control_buttons">
-														
-														<a href="login/perfil"><img src="../fotos/'.$_SESSION['quanticshop']['foto'].'p.jpg" alt=""/></a>
+														<a href="login/perfil"><img src="../fotos/'.$dados->foto.'p.jpg" alt="'.$dados->primeiro_nome.'" width=75 height=75/></a>
 													</div>
 													<div class="login_buttons">
+													<br>
+														<hr class="my-0" />
+														<p class="mt-2 mb-2">Olá '.$dados->primeiro_nome.', Seja Bem Vindo(a)!</p>
 														<div class="check_button"><a href="login/perfil">Perfil</a></div>
 														<div class="check_button"><a href="login/configuracaoConta">Configurações de Conta</a></div>
-														<div class="login_button"><a href="login/sair">Sair</a></div>
+														<div class="check_button"><a href="login/sair">Sair</a></div>
 														<div class="clear"></div>
 													</div>';
 											}	
@@ -345,9 +372,9 @@
 							</form>
 						</div>
 						<ul class="social">	
-							<li class="twitter"><a href="https://twitter.com/"><span> </span></a></li>
-							<li class="instagram"><a href="https://www.instagram.com/"><span> </span></a></li>	
-							<li class="facebook"><a href="https://www.facebook.com/"><span> </span></a></li>								  				
+							<li class="twitter"><a href="https://twitter.com/" target="_blank"><span> </span></a></li>
+							<li class="instagram"><a href="https://www.instagram.com/" target="_blank"><span> </span></a></li>	
+							<li class="facebook"><a href="https://www.facebook.com/" target="_blank"><span> </span></a></li>								  				
 						</ul>   					
 					</ul>
 				</div>

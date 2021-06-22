@@ -55,9 +55,9 @@ $hoje = date_create($data_nascimento);
 					<h5 class="h6 card-title">Sobre</h5>
 					<hr class="my-0" />
 					<ul class="list-unstyled mb-0 mt-1">
-						<li class="mb-1"><h7><span data-feather="home" class="feather-sm me-1"></span><b>Mora em</b> <?=$cidade;?> - <?=$estado;?></h7></li>
-						<li class="mb-1"><h7><span data-feather="mail" class="feather-sm me-1"></span><b>Email</b> <?=$email;?></h7></li>
-						<li class="mb-1"><h7><span data-feather="heart" class="feather-sm me-1"></span><b>Nasceu em</b> <?=date_format($hoje, 'd/m/Y');?></h7></li>
+						<li class="mb-1"><h7><span data-feather="home" class="feather-sm me-1"></span><b>Mora em:</b> <?=$cidade;?> - <?=$estado;?></h7></li>
+						<li class="mb-1"><h7><span data-feather="mail" class="feather-sm me-1"></span><b>Email:</b> <?=$email;?></h7></li>
+						<li class="mb-1"><h7><span data-feather="heart" class="feather-sm me-1"></span><b>Nasceu em:</b> <?=date_format($hoje, 'd/m/Y');?></h7></li>
 					</ul>
 				</div>
 				

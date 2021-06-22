@@ -157,9 +157,9 @@ body a{
      }
  }
 .header_right{
-	float:right;
+	float:left;
 	width:6%;
-	margin-top: 16px;
+	margin-top: 20px;
 }
 .sb-search {
 	position: absolute;

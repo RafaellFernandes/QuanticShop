@@ -42,11 +42,8 @@ if ( $_POST ) {
         echo "<script>alert('Digite o Numero da Residencia!');history.back();</script>";
   }
 
-    
-
     //iniciar uma transacao
-    // $pdo->beginTransaction();
-    
+    $pdo->beginTransaction();
     $data_nascimento = formatar($data_nascimento);
 
 if ( ( empty ( $id ) ) and ( empty ( $_FILES['foto']['name'] ) ) ) {
@@ -91,7 +88,6 @@ if ( !empty ( $_FILES['foto']['name'] ) ) {
 } //fim da verificação da foto
          
     if(empty($id)){
-        //$Senha = password_hash($Senha, PASSWORD_DEFAULT);
         $senha = password_hash($senha, PASSWORD_BCRYPT);
         //inserir se o id estiver em branco
         $sql = "INSERT INTO cliente (primeiro_nome, sobrenome, cpf, data_nascimento, email, senha, cep, endereco, complemento, bairro, cidade_id, foto, telefone, celular, numero_resid, pessoaFJ, cidade, estado, ativo, genero_id) 
@@ -160,7 +156,6 @@ if ( !empty ( $_FILES['foto']['name'] ) ) {
         $consulta->bindParam(":cpf", $cpf);
         $consulta->bindParam(":data_nascimento", $data_nascimento);
         $consulta->bindParam(":email", $email);
-        // $consulta->bindParam(":senha", $senha);
         $consulta->bindParam(":cep", $cep);
         $consulta->bindParam(":endereco", $endereco);
         $consulta->bindParam(":complemento", $complemento);
@@ -179,17 +174,10 @@ if ( !empty ( $_FILES['foto']['name'] ) ) {
     }
     //executar e verificar se deu certo
     if ( $consulta->execute() ) {
-        //erro ao gravar
-        $titulo = "Sucesso";
-        $mensagem = "Seus Dados Foram Salvos! Realize o Login para Continuar.";
-        $icone = "sucess";
-        mensagem($titulo, $mensagem, $icone);
-        exit;
+        $pdo->commit();
+        echo "<script>alert('Cadastro Efetuado com Sucesso!');location.href='pages/home';</script>";
+
     } else {
-        $titulo = "Erro";
-        $mensagem = "Erro ao Salvar!";
-        $icone = "error";
-        mensagem($titulo, $mensagem, $icone);
-        exit;
+        echo '<script>alert("Erro ao salvar");history.back();</script>';
     }
-  }
+}

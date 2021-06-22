@@ -42,10 +42,11 @@
                 </div>
             </div>
             <?php
-                $sql = "SELECT p.id pid, p.ativo pativo, p.*, v.*
+                $sql = "SELECT p.id pid, p.ativo pativo, p.*, v.*, e.id eid, e.*
                         FROM produto p 
                         INNER JOIN item_venda v ON (v.produto_id = p.id)
-                        WHERE p.ativo = 1 
+                        INNER JOIN estoque e ON (p.id = e.produto_id)
+                        WHERE p.ativo = 1 AND e.qtd_estoque > 10
                         ORDER BY v.vezesVendido DESC LIMIT 6";
 
                 $consulta = $pdo->prepare($sql);

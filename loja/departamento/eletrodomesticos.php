@@ -24,7 +24,10 @@
                 </div>
             </div>
             <?php
-				$sql = "SELECT * FROM produto WHERE ativo = 1 AND departamento_id IN (2)";
+				$sql = "SELECT p.*, e.* 
+                        FROM produto p
+                        INNER JOIN estoque e ON (p.id = e.produto_id) 
+                        WHERE ativo = 1 AND departamento_id IN (2) AND qtd_estoque > 10";
 				$consulta = $pdo->prepare($sql);
 				$consulta->execute();
 
