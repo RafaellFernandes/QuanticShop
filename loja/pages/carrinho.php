@@ -55,6 +55,8 @@
 													$quantidadeCarrinho = $dados["quantidadeCarrinho"];
 													$foto = $dados["foto"];
 													$total = $dados["total"];
+													$foto = explode(",",$foto);
+													$foto = $foto[0];
 
 													//somar o totalGeral
 													$totalGeral = $total + $totalGeral;

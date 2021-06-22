@@ -101,6 +101,17 @@ exit;
     // $arquivo = time()."-".$_SESSION["quanticshop"]["id"];
     
     if(empty($id)){
+
+        //verifica se já existe o mesmo codigo de produto cadastrado
+		$sql = "SELECT codigo from produto";
+		$consulta = $pdo->prepare($sql);
+		$consulta->execute();	
+		while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ){
+			if($codigo <> $dados->codigo) {
+				mensagem("Erro", "Já existe esse código de produto cadastrado", "error");
+				exit;
+			}
+		}
         $sql= "INSERT INTO produto (nome_produto, codigo, descricao, valorUnitario, espec_tecnica, foto,  departamento_id, marca_id, ativo) 
         values(:nome_produto, :codigo, :descricao, :valorUnitario, :espec_tecnica, :foto, :departamento_id, :marca_id, :ativo)";
 
@@ -116,6 +127,17 @@ exit;
         $consulta->bindParam(':marca_id',$marca_id); 
        
     } else if (empty($foto)){
+        //verifica se já existe o mesmo codigo de produto cadastrado
+		$sql = "SELECT codigo from produto";
+		$consulta = $pdo->prepare($sql);
+		$consulta->execute();	
+		while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ){
+			if($codigo <> $dados->codigo) {
+				mensagem("Erro", "Já existe esse código de produto cadastrado", "error");
+				exit;
+			}
+		}
+
         $sql= "UPDATE produto SET nome_produto = :nome_produto, codigo = :codigo, valorUnitario = :valorUnitario,
         descricao = :descricao, espec_tecnica = :espec_tecnica, promocao = :promocao, ativo = :ativo, departamento_id = :departamento_id,
         marca_id = :marca_id WHERE id = :id";
@@ -133,6 +155,17 @@ exit;
         $consulta->bindParam(':id',$id);
         
     } else {
+
+        //verifica se já existe o mesmo codigo de produto cadastrado
+		$sql = "SELECT codigo from produto";
+		$consulta = $pdo->prepare($sql);
+		$consulta->execute();	
+		while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ){
+			if($codigo <> $dados->codigo) {
+				mensagem("Erro", "Já existe esse código de produto cadastrado", "error");
+				exit;
+			}
+		}
         $sql= "UPDATE produto SET nome_produto = :nome_produto, codigo = :codigo, promocao = :promocao, valorUnitario = :valorUnitario,
         descricao = :descricao, espec_tecnica = :espec_tecnica, ativo = :ativo, departamento_id = :departamento_id,
         marca_id = :marca_id, foto =:foto WHERE id = :id";

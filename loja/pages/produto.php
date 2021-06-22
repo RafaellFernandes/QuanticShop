@@ -15,21 +15,23 @@
 
 		$promocao             = $dados->promocao;
 		$valorUnitario 	      = $dados->valorUnitario;
+		$valorUnitario       = number_format($valorUnitario, 2, ",", ".");		
 		$id                   = $dados->pid;
 		$foto                 = $dados->foto;
 		$imagem               = "../$foto";
-		$imagem               = explode(",", $foto);								
+		$imagem               = explode(",", $foto);
+								
 	}	
-    if ( empty ( $promocao ) ) {
-		//1499.99 -> 1.499,99
-		$valorUnitario = "R$ " . number_format($valorUnitario, 2, ",", ".");
-		$desc = "";
-	} else {
-		//valor normal
-		$desc = "R$ " . number_format($valorUnitario, 2, ",", ".");
-		//valor promocional
-		$valorUnitario = "R$ " . number_format($promocao, 2, ",", ".");
-	}
+    // if ( empty ( $promocao ) ) {
+	// 	//1499.99 -> 1.499,99
+	// 	$valorUnitario = "R$ " . number_format($valorUnitario, 2, ",", ".");
+	// 	$desc = "";
+	// } else {
+	// 	//valor normal
+	// 	$desc = "R$ " . number_format($valorUnitario, 2, ",", ".");
+	// 	//valor promocional
+	// 	$valorUnitario = "R$ " . number_format($promocao, 2, ",", ".");
+	// }
 ?>
 <!--product details start-->
 <div class="product_details mt-60 mb-60">

@@ -6,6 +6,7 @@
 
 		//recuperar as variáveis
 		$id = trim ( $_POST['id'] ?? NULL );
+		// echo "<script>window.alert('.$id.')</script>";
 		$quantidadeCarrinho = trim ( $_POST['quantidadeCarrinho'] ?? 1 );
 
 		//verificar se o id está vazio
@@ -19,16 +20,17 @@
 			FROM produto 
 			WHERE id = :id limit 1";
 
-$consulta = $pdo->prepare($sql);
-$consulta->bindParam(':id', $id);
-$consulta->execute();
-$dados = $consulta->fetch(PDO::FETCH_OBJ);
+		$consulta = $pdo->prepare($sql);
+		$consulta->bindParam(':id', $id);
+		$consulta->execute();
+		$dados = $consulta->fetch(PDO::FETCH_OBJ);
 
 		//separar os dados
-		// $id = $dados["id"];
+		$id = $dados->id;
 		$nome_produto = $dados->nome_produto;
 		$valorUnitario = $dados->valorUnitario;
 		$promocao = $dados->promocao;
+		$foto = $dados->foto;
 
 		//o valorProduto sempre será o valor do produto
 		$valorProduto = $valorUnitario;
@@ -39,7 +41,6 @@ $dados = $consulta->fetch(PDO::FETCH_OBJ);
 
 		//valor total
 		$total = $valorProduto * $quantidadeCarrinho;
-
 		//guardar esses valores na sessao
 		$_SESSION["carrinho"][$id] = array("id"=>$id, 
 										"nome_produto"=>$nome_produto,

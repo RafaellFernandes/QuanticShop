@@ -80,27 +80,7 @@
 		$dados = $consulta->fetch(PDO::FETCH_OBJ);
 		//$status = $dados->status;
 		if ( ( $dados->status == "P") ) {
-
-
-
-			
 			//Seleciona a quantidade e o id do produto vendido
-			$sql = "select iv.quantidade, iv.produto_id, v.status from item_venda iv inner join venda v on (v.id = iv.venda_id)";
-			$consulta = $pdo->prepare($sql);
-			$consulta->execute();
-			$dados = $consulta->fetch(PDO::FETCH_OBJ);
-			if($dados->status == "P"){
-				while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ){	
-				$quantidade = $dados->quantidade;
-				$produto_id = $dados->produto_id;
-				$sql = "UPDATE estoque SET qtd_estoque = qtd_estoque-$quantidade WHERE produto_id = $produto_id LIMIT 1";
-				$consulta = $pdo->prepare($sql);
-				$consulta->execute();
-				}
-			}
-
-
-
 			mensagem("Erro","Esta venda está paga  não sendo possível adicionar mais produtos!","error");
 			exit;
 		}
@@ -109,24 +89,24 @@
 			mensagem("Erro","Esta venda cancelada não sendo possível adicionar mais produtos!","error");
 			exit;
 		}
-
+		//recuperar o estoque do produto
+		$sql = "select qtd_estoque, produto_id from estoque where produto_id = $produto_id limit 1";
+		$consulta = $pdo->prepare($sql);
+		$consulta->execute();
+		$dados = $consulta->fetch(PDO::FETCH_OBJ);
+		$qtd_estoque = $dados->qtd_estoque;
 		if ( empty ( $produto_id ) ) {
 			mensagem("Erro","Selecione um produto","error");
 			exit;
 		} else if ( $quantidade <= 0 ) {
 			mensagem("Erro","A quantidade deve ser maior que 0","error");
 			exit;
+		} else if($quantidade >= $qtd_estoque) {
+			mensagem("Erro","Não existe essa quantidade de produto no estoque","error");
+			exit;
 		}
 
-
-
-
-
-
-
-
-
-
+		
 		//print_r ( $_POST );
 
 		//verificar se já existe no banco

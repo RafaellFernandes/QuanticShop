@@ -68,7 +68,19 @@ exit;
          if ( $consulta->execute() ) {
           //gravar no banco 
           $pdo->commit();
+          $sql = "select iv.quantidade, iv.produto_id, v.status from item_venda iv inner join venda v on (v.id = iv.venda_id)";
+          $consulta = $pdo->prepare($sql);
+          $consulta->execute();
+          while ($dados = $consulta->fetch(PDO::FETCH_OBJ) ){	
+          if($dados->status == "P"){
+            $sql = "UPDATE estoque SET qtd_estoque = qtd_estoque-$dados->quantidade WHERE produto_id = $dados->produto_id LIMIT 1";
+            $consulta = $pdo->prepare($sql);
+            $consulta->execute();
+            }
+          }
+
           echo "<script>alert('Salvo com Sucesso!');location.href='venda/vendaProduto';</script>";
+          
         }
   
         echo "<script>alert('Erro ao gravar no servidor');history.back();</script>";

@@ -25,6 +25,7 @@ action="https://pagseguro.uol.com.br/v2/checkout/payment.html">
         <input name="senderEmail" type="text" 
         value="<?=$_SESSION['quanticshop']['email']?>"
         class="form-control" required>  
+		
 	</div>
 	<div class="col-12 col-md-8">
 		<h3>Confira seu pedido:</h3>
@@ -44,8 +45,8 @@ action="https://pagseguro.uol.com.br/v2/checkout/payment.html">
 				<tr>
 					<td>Nome do Produto</td>
 					<td>Quantidade</td>
-					<td>Vlr Unit.</td>
-					<td>Vlr Total</td>
+					<td>Valor Unit.</td>
+					<td>Valor Total</td>
 				</tr>
 			</thead>
 			<tbody>

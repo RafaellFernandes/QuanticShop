@@ -46,6 +46,18 @@ if ( $_POST ) {
 		$consulta->bindParam(":produto_id", $produto_id);
         $consulta->bindParam(":qtd_estoque", $qtd_estoque);
 
+	} else if (empty($foto)){
+        //verifica se já existe o mesmo codigo de produto cadastrado
+		$sql = "SELECT nome_produto from produto";
+		$consulta = $pdo->prepare($sql);
+		$consulta->execute();	
+		while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ){
+			if($nome_produto <> $dados->nome_produto) {
+				mensagem("Erro", "Já existe esse código de produto cadastrado", "error");
+				exit;
+			}
+		}
+
   	} else {
 		
   		//atualizar os dados  	
