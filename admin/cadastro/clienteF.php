@@ -128,7 +128,7 @@ if (!empty($id)) {
 						</div>
 						<div class="mb-3 col-12 col-md-4 mt-2">
 							<label for="data_nascimento">Data de Nascimento:</label>
-							<input type="text" name="data_nascimento" id="data_nascimento" class="form-control" required data-parsley-required-message="Preencha a data de nascimento" placeholder="Ex: 11/12/1990" value="<?= $data_nascimento; ?>">
+							<input type="date" name="data_nascimento" id="data_nascimento" class="form-control" required data-parsley-required-message="Preencha a data de nascimento" placeholder="Ex: 11/12/1990" value="<?= $data_nascimento; ?>">
 						</div>
 						<div class="col-12 col-md-4 mt-2">
 							<?php
@@ -214,6 +214,7 @@ if (!empty($id)) {
 								Salvar/Alterar Dados
 							</button>
 						</div>
+
 						<div class="col-sm-2 mt-4">
 							<div class="float-end ">
 								<button type="reset" class="btn btn-danger margin">
