@@ -105,7 +105,7 @@ $ativo = $departamento_id = $marca_id =  $estoque_id = "";
                         <div class="col-12 col-md-4 mt-2">
                             <label for="marca_id">Marca</label>
                             <select name="marca_id" id="marca_id" class="form-control" required data-parsley-required-message="selecione uma opção">
-                                <option value="<?=$marca_id;?>">Selecione a Marca</option>
+                                <option>Selecione a Marca</option>
                                     <?php
                                         $sql = "SELECT * FROM marca WHERE ativo = 1 ORDER BY nome_marca";
                                         $consulta = $pdo->prepare($sql);
@@ -123,7 +123,7 @@ $ativo = $departamento_id = $marca_id =  $estoque_id = "";
                         <div class="col-12 col-md-4 mt-2">
                             <label for="departamento_id">Departamento</label>
                             <select name="departamento_id" id="departamento_id" class="form-control" required data-parsley-required-message="Selecione um Departamento">
-                                <option value="<?=$departamento_id;?>">Selecione o Departamento</option>
+                                <option>Selecione o Departamento</option>
                                     <?php
                                         $sql = "SELECT * FROM departamento WHERE ativo = 1 ORDER BY nome_dept ";
                                         $consulta = $pdo->prepare($sql);
@@ -154,9 +154,8 @@ $ativo = $departamento_id = $marca_id =  $estoque_id = "";
                         <div class="col-12 col-md-2 mt-2">
 							<label for="ativo">Status</label>
 							<select name="ativo" id="ativo" class="form-control" required data-parsley-required-message="Selecione uma opção">
-							    <!-- <option value="">Selecione</option>
-								<option value="S" <?//= $ativo == 'S' ? "selected" : "" ?>>Ativo</option> -->
-								<option value="0"  <?= $ativo == '0' ? "selected" : "" ?>>Inativo</option>
+								<!-- <option value="S" <?//= $ativo == 'S' ? "selected" : "" ?>>Ativo</option> -->
+								<option value="0" <?= $ativo == '0' ? "selected" : "" ?>>Inativo</option>
 							</select>
                         </div>
 
@@ -259,6 +258,9 @@ $ativo = $departamento_id = $marca_id =  $estoque_id = "";
 
 <script type="text/javascript">
 $(document).ready(function(){ 
-	$("#ativo").val("<?=$ativo?>");
+	
+    $("#marca_id").val(<?=$marca_id?>);
+    $("#departamento_id").val(<?=$departamento_id?>);
 	});
+
 </script>

@@ -25,7 +25,7 @@ $produto_id = $qtd_estoque = $produto = NULL;
 
   //verificar se existe um id
   if ( !empty ( $id ) ) {
-
+    $produto_id = $id;
     include "validacao/functions.php";
    
   	//selecionar os dados do banco para poder editar

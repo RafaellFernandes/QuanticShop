@@ -81,7 +81,7 @@ include "validacao/functions.php";
                     <div class="col-12 col-md-4 mt-2">
                             <label for="produto_id">Produto</label>
                             <select name="produto_id" id="produto_id" class="form-control" required data-parsley-required-message="Selecione um Produto">
-                                <option value="<?=$produto_id;?>">Selecione o Produto</option>
+                                <option>Selecione o Produto</option>
                                     <?php
                                         $sql = "SELECT * FROM produto WHERE ativo = 0 
                                         ORDER BY nome_produto  ";
@@ -104,7 +104,7 @@ include "validacao/functions.php";
                         <div class="col-12 col-md-4 mt-2">
                             <label for="forncedor_id">Fornecedor</label>
                             <select name="fornecedor_id" id="fornecedor_id" class="form-control" required data-parsley-required-message="Selecione um Fornecedor">
-                                <option value="<?=$fornecedor_id;?>">Selecione o Fornecedor</option>
+                                <option>Selecione o Fornecedor</option>
                                     <?php
                                         $sql = "SELECT id, razaoSocial FROM fornecedor ORDER BY razaoSocial";
                                         $consulta = $pdo->prepare($sql);

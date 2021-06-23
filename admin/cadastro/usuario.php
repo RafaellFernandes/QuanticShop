@@ -26,7 +26,7 @@ $estado = $bairro = $complemento = $numero_resid = $endereco = $ativo = $genero_
 
 if(!empty($id)){
     //selecionar dados
-    $sql = "SELECT u.id as idusuario, u.*, c.* FROM usuario u INNER JOIN cidade c ON (c.id = u.cidade_id)
+    $sql = "SELECT u.id as idusuario, u.*, c.*, date_format(u.dataNascimento, '%d/%m/%Y') FROM usuario u INNER JOIN cidade c ON (c.id = u.cidade_id)
             WHERE u.id = :id limit 1";
     $consulta = $pdo->prepare($sql);
     $consulta->bindParam(":id",$id);
@@ -63,7 +63,6 @@ if(!empty($id)){
 	$genero_id              = $dados->genero_id;
 	$cpf                    = $dados->cpf;
 	$celular                = $dados->celular;
-
 }
 ?>
 <div class="container-fluid p-0">
@@ -137,7 +136,7 @@ if(!empty($id)){
 						<div class="mb-3 col-12 col-md-4">
 							<label class="form-label" for="genero_id">Gênero:</label>
 							<select name="genero_id" id="genero_id" class="form-control" required data-parsley-required-message="selecione uma opção">
-                                <option value="<?=$genero_id;?>">Selecione o Gênero</option>
+                                <option>Selecione o Gênero</option>
                                     <?php
                                         $sql = "SELECT * FROM genero ORDER BY id";
                                         $consulta = $pdo->prepare($sql);
@@ -147,7 +146,9 @@ if(!empty($id)){
                                         //separar os dados
                                             $id   = $d->id;
                                             $genero = $d->genero;
-                                            echo '<option value="'.$id.'">'.$genero.'</option>';
+											?>
+                                            <option value="<?=$id?>"<?= $id == $genero_id ? "selected" : "" ?>><?=$genero?></option>
+											<?php
                                         }                    
                                     ?>
                             </select>
@@ -156,7 +157,7 @@ if(!empty($id)){
 						<div class="mb-3 col-12 col-md-4 mt-2">
 							<label for="dataNascimento">Data de Nascimento:</label>
 							<input type="date" name="dataNascimento" id="dataNascimento" class="form-control" required data-parsley-required-message="Preencha a data de nascimento" 
-							placeholder="Ex: 11/12/1990" value="<?=$dataNascimento;?>">
+							 value="<?=$dataNascimento?>">
 						</div>
 
 						<div class="mb-3 col-12 col-md-4 mt-2">
@@ -283,7 +284,9 @@ if(!empty($id)){
         $("#cep").mask("99999-999"); 
 		$('#cpf').mask('000.000.000-00');
 		$("#dataNascimento").mask("00/00/0000");
-		$("#celular").mask("(00) 00000-0000");     
+		$("#celular").mask("(00) 00000-0000");  
+		//$("#genero_id").val(<?=$genero_id?>);  
+ 
 	});
 
     function confirmarEmailUser(email){
