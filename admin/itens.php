@@ -14,7 +14,6 @@
 	exit;
 	}
 
-
     //mostrar erros
 	ini_set('display_errors',1);
 	ini_set('display_startup_erros',1);
@@ -46,15 +45,6 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
 
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<!-- <link rel="stylesheet" type="text/css" href="css/sb-admin-2.min.css"> -->
-	<!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
-    <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
-
-	<!-- <script src="vendor/jquery/jquery.min.js"></script> -->
-	<!-- <script src="js/sweetalert2.js"></script> -->
-
-    <!-- Custom fonts for this template-->
-    <!-- <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> -->
 </head>
 <body>
 
@@ -107,8 +97,6 @@
 		}
 
 		
-		//print_r ( $_POST );
-
 		//verificar se já existe no banco
 		$sql = "select produto_id from item_venda
 		where produto_id = :produto_id AND 
@@ -120,7 +108,7 @@
 
 		$dados = $consulta->fetch(PDO::FETCH_OBJ);
 
-		//formatar o valor - funcao no docs.php
+		//formatar o valor 
 		$valor= formatarValor($valor);
 
 		if ( empty ( $dados->produto_id ) ){
@@ -129,7 +117,6 @@
 
 		} else {
 			//se existir - atualizar
-			
 			$sql = "update item_venda set valor = :valor, quantidade = :quantidade where venda_id = :venda_id AND produto_id = :produto_id limit 1";
 
 		}
@@ -145,7 +132,6 @@
 			echo "<script>top.$('#formItens')[0].reset();</script>";
 		}
 		
-
 	}
 
 	//recuperar o venda_id
@@ -192,8 +178,7 @@
 					$disabled = "disabled";
 				}
 				
-
-				//seprar a variaveis
+				//formatação
 				$valor = number_format($d->valor,2,
 					",",
 					".");
@@ -229,7 +214,7 @@
 	</tbody>
 	<tfoot>
 		<tr>
-			<td colspan="4">TOTAL:</td>
+			<td colspan="4">Total:</td>
 			<td colspan="2">R$ <?=$geral?></td>
 		</tr>
 	</tfoot>
@@ -244,11 +229,10 @@
           confirmButtonText: `Sim`,
           cancelButtonText: `Não`,
         }).then((result) => {
-          /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
             //enviar para excluir
             location.href='excluirItem.php?venda_id='+venda_id+'&produto_id='+produto_id;
-            //excluirItem.php?venda_id=1&produto_id=2
+           
           } 
         })
     }

@@ -109,14 +109,14 @@
 								<div class="coupon_inner">
 									<div class="cart_subtotal">
 										<p>Subtotal</p>
-										<p class="cart_amount">nao sei</p>
+										<p class="cart_amount">R$ <?=number_format($totalGeral, 2, "," , ".");?></p>
 									</div>
 									<div class="cart_subtotal">
 										<p>Total</p>
 										<p class="cart_amount">R$ <?=number_format($totalGeral, 2, "," , ".");?></p>
 									</div>
 									<div class="checkout_btn">
-										<button onclick="window.location.href='pages/finalizar'" class="btn btn-success" $disabled >Finalizar Pedido</button>
+									<a href='pages/finalizar/<?=$id?>' class='btn btn-primary'>Finalizar Pedido</a><br>
 									</div>
 								</div>
 							</div>

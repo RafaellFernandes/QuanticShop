@@ -170,7 +170,7 @@ if ( $_POST ) {
         $consulta->bindParam(":sobrenome", $sobrenome);
         $consulta->bindParam(":login", $login);
         $consulta->bindParam(":email", $email);
-        // $consulta->bindParam(":senha", $senha);
+        $consulta->bindParam(":senha", $senha);
         $consulta->bindParam(":cidade_id", $cidade_id);
         $consulta->bindParam(":foto", $foto);
         $consulta->bindParam(":cidade", $cidade);

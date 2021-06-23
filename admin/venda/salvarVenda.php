@@ -50,9 +50,6 @@ exit;
         $consulta->bindParam(":status", $status);
         $consulta->bindParam("cliente_id", $cliente_id);
         
-      
-    		
-
     	} else {
         
     		$sql = "UPDATE venda set data = :data, status = :status, cliente_id = :cliente_id

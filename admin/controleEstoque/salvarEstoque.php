@@ -19,7 +19,7 @@ if ( $_POST ) {
     include "../admin/config/conexao.php";
 	
   	//recuperar os dados do formulario
-  	$id = $produto_id = $qtd_estoque = "";
+  	$id = $produto_id = $qtd_estoque = $nome_produto = "";
 
   	foreach ($_POST as $key => $value) {
   		//guardar as variaveis
@@ -52,7 +52,7 @@ if ( $_POST ) {
 		$consulta = $pdo->prepare($sql);
 		$consulta->execute();	
 		while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ){
-			if($nome_produto <> $dados->nome_produto) {
+			if($nome_produto == $dados->nome_produto) {
 				mensagem("Erro", "Já existe esse código de produto cadastrado", "error");
 				exit;
 			}
@@ -61,7 +61,7 @@ if ( $_POST ) {
   	} else {
 		
   		//atualizar os dados  	
-  		$sql = "UPDATE estoque SET produto_id = :produto_id, qtd_estoque = :qtd_estoque WHERE id = :id";	
+  		$sql = "UPDATE estoque SET produto_id = :produto_id, qtd_estoque = :qtd_estoque, nome_produto = :nome_produto WHERE id = :id";	
   		$consulta = $pdo->prepare($sql);
 		$consulta->bindParam(":produto_id", $produto_id);
 		$consulta->bindParam(":qtd_estoque", $qtd_estoque);

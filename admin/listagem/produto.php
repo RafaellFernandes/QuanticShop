@@ -42,7 +42,7 @@ error_reporting(E_ALL);
 					</thead>
 					<tbody>
 						<?php
-							$sql = "SELECT p.ativo pativo, p.* , m.*, d.*  
+							$sql = "SELECT p.ativo pativo, p.* , m.*, d.*, p.id idProduto  
 									FROM produto p 
 									LEFT JOIN departamento d ON (d.id = p.departamento_id)
 									LEFT JOIN marca m ON (m.id = p.marca_id) 
@@ -53,7 +53,7 @@ error_reporting(E_ALL);
 
 							while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
 								//separar os dados
-								$id         	                = $dados->id;
+								$id         	                = $dados->idProduto;
 								$foto                           = $dados->foto;
 								$nome_produto 	                = $dados->nome_produto;                
 								$marca_id                       = $dados->marca_id;

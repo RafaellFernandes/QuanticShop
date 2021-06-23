@@ -65,14 +65,12 @@ if ( $_POST ) {
         $consulta->bindParam(':porcentagem_lucro', $porcentagem_lucro);
         
         //SQL que vai pega o id do produto e dar um update nele se o ativo for 1
-
         if($ativo = 1){
             $sqlProduto = "UPDATE produto set ativo = 1, valorUnitario = $venda_unitaria WHERE id = $produto_id";
             $ativaProduto = $pdo->prepare($sqlProduto);
             $ativaProduto->execute();
 
         }
-     
 
   
     } else { 
@@ -90,6 +88,7 @@ if ( $_POST ) {
         $consulta->bindParam(':custo_unitario', $custo_unitario);
         $consulta->bindParam(":id", $id);
 
+        //ativa o produto no banco
         if($ativo = 0){
             $sqlProduto = "UPDATE produto set ativo = 1, valorUnitario = $venda_unitaria WHERE id = $produto_id";
             $ativaProduto - $pdo->prepare($sqlProduto);

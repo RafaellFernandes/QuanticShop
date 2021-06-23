@@ -107,7 +107,7 @@ exit;
 		$consulta = $pdo->prepare($sql);
 		$consulta->execute();	
 		while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ){
-			if($codigo <> $dados->codigo) {
+			if($codigo == $dados->codigo) {
 				mensagem("Erro", "Já existe esse código de produto cadastrado", "error");
 				exit;
 			}
@@ -132,7 +132,7 @@ exit;
 		$consulta = $pdo->prepare($sql);
 		$consulta->execute();	
 		while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ){
-			if($codigo <> $dados->codigo) {
+			if($codigo == $dados->codigo) {
 				mensagem("Erro", "Já existe esse código de produto cadastrado", "error");
 				exit;
 			}
@@ -161,7 +161,7 @@ exit;
 		$consulta = $pdo->prepare($sql);
 		$consulta->execute();	
 		while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ){
-			if($codigo <> $dados->codigo) {
+			if($codigo == $dados->codigo) {
 				mensagem("Erro", "Já existe esse código de produto cadastrado", "error");
 				exit;
 			}

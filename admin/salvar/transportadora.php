@@ -79,7 +79,7 @@ exit;
           //update se o id estiver preenchido
           //qual arquivo sera gravado
                     
-          $sql = "UPDATE transportadora SET nomeFantasia = :nomeFantasia, razaoSocial = :razaoSocial, cnpj = :cnpj, telefone = :telefone, celular = :celular, email = :email, cep = :cep,
+          $sql = "UPDATE transportadora SET nomeFantasia = :nomeFantasia, razaoSocial = :razaoSocial, cnpj = :cnpj, inscricaoEstadual = :inscricaoEstadual, telefone = :telefone, celular = :celular, email = :email, cep = :cep,
            endereco = :endereco, cidade_id = :cidade_id, cidade = :cidade, estado = :estado, bairro = :bairro, numero_resid = :numero_resid, ativo = :ativo, complemento = :complemento, siteTransp = :siteTransp WHERE id = :id ";
           $consulta = $pdo->prepare($sql);
           $consulta->bindParam(":nomeFantasia", $nomeFantasia);

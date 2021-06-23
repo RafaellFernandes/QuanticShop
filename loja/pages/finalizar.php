@@ -110,9 +110,7 @@ action="https://pagseguro.uol.com.br/v2/checkout/payment.html">
 			</tfoot>
 		</table>
 
-		<button type="submit" class="btn btn-success">
-			Efetuar Pagamento
-		</button>
+		<button type="submit" class="btn btn-info">Efetuar Pagamento</button>
 		
 	</div>
 </div>

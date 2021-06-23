@@ -155,7 +155,7 @@ if(!empty($id)){
 
 						<div class="mb-3 col-12 col-md-4 mt-2">
 							<label for="dataNascimento">Data de Nascimento:</label>
-							<input type="text" name="dataNascimento" id="dataNascimento" class="form-control" required data-parsley-required-message="Preencha a data de nascimento" 
+							<input type="date" name="dataNascimento" id="dataNascimento" class="form-control" required data-parsley-required-message="Preencha a data de nascimento" 
 							placeholder="Ex: 11/12/1990" value="<?=$dataNascimento;?>">
 						</div>
 

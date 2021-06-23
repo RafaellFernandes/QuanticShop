@@ -51,8 +51,6 @@ exit;
     $data = $dados->data;
     $cliente_id = $dados->cliente_id;
    
-   
-
     //formatar o nome do cliente
     $cliente = "{$cliente_id} - {$cliente} - {$celular}";
 }
@@ -132,25 +130,25 @@ exit;
                             }
                         ?>
                     </datalist>
-                </div> <!-- col -->
-            </div> <!-- row -->
+                </div> 
+            </div> 
             <br>
             <button type="submit" class="btn btn-success float-right">
-                Salvar
+                Salvar/Alterar
             </button>
-        </form> <!-- form -->
-    </div> <!-- card body -->
-</div> <!-- card -->
+        </form> 
+    </div> 
+</div> 
 <script type="text/javascript">
     $("#cliente").blur(function(){
 
         var cliente = $("#cliente").val();
 
         if ( cliente != "" ) {
-            //separar a string pelo -
+            //separar pelo -
             cliente = cliente.split(" - ");
-            //console.log(cliente);
-            //jogar o id para o cliente_i
+          
+            //jogar o id para o cliente_id
             $("#cliente_id").val(cliente[0]);
         } 
     })
