@@ -254,7 +254,8 @@
 						<!----//search-scripts---->
 						<ul class="icon1 sub-icon1 profile_img">
 							<li class="li"><a class="a1" href="#">Conta</a>
-								<ul class="sub-icon1 list">
+							<br>
+								<ul class="sub-icon1 list mt-4">
 									<?php
 										if(!isset($_SESSION["quanticshop"]["id"])){
 											echo ' 	<div class="product_control_buttons">

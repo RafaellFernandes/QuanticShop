@@ -404,7 +404,8 @@ li.list_desc h4 a:hover{
 	margin:2% 0;
 }
 .sub-icon1.list{
-	padding:20px;
+	padding:15px;
+	text-align: center;
 }
 .sub-icon1 ul li p a{
 	color: #00405d;
@@ -466,7 +467,8 @@ li.list_desc h4 a:hover{
 	background:#555;
 }
 .check_button{
-	float:left;
+	display: grid;
+	text-align: center;
 }
 .check_button a{
 	color:#fff;
