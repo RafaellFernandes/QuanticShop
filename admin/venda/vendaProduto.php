@@ -191,7 +191,11 @@ exit;
 
                             <datalist id="listProdutos"> 
                             <?php
-                            $sql = "SELECT id, nome_produto, valorUnitario FROM produto WHERE ativo = 1 ORDER BY nome_produto";
+                            $sql = "SELECT p.id pid, p.*, e.id eid, e.* 
+                            FROM produto p
+                            INNER JOIN estoque e ON (p.id = e.produto_id)
+                            WHERE ativo = 1  AND qtd_estoque > 10
+                            ORDER BY rand()";
                             $consulta = $pdo->prepare($sql);
                             $consulta->execute();
 
