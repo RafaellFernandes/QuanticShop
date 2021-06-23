@@ -12,6 +12,8 @@ if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
 exit;
 }
 
+include "validacao/functions.php";
+
   //verificar se existem dados no POST
   if ( $_POST ) {
 

@@ -30,7 +30,7 @@ exit;
 					<h6 style="color: green;"><strong>Vendas</strong></h6>
 				</div>
 
-				<table class="table table-hover table-bordered table-striped">
+				<table class="table table-hover table-bordered table-striped" id="tabela">
     		<thead>
     			<tr>
     				<td>ID</td>
@@ -84,7 +84,27 @@ exit;
     			?>
     		</tbody>
     	</table>
-
-
     </div> <!-- card-body -->
 </div> <!-- card -->
+<script>
+	//adicionar o dataTable 
+	$(document).ready(function(){
+		$('#tabela').DataTable({
+			"language": {
+				"lengthMenu": "Mostrando _MENU_ Registros por Pagina",
+				"zeroRecords": "Nenhum Registro Encontrado",
+				"info": "Mostrando Paginas de  _PAGE_ de _PAGES_",
+				"infoEmpty": "No records available",
+				"infoFiltered": "(filtered from _MAX_ total records)",
+				"search": "Procurar:",
+				"zeroRecords":  "Nenhum registro encontrado",
+		"paginate": {
+					"first":      "Primeiro",
+					"last":       "Último",
+					"next":       "Próximo",
+					"previous":   "Anterior"
+		}
+			}
+		} );
+	})
+</script>
