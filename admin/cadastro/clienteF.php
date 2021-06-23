@@ -21,15 +21,15 @@ error_reporting(E_ALL);
 
 if (!isset($id)) $id = "";
 
-$primeiro_nome = $sobrenome = $cpf = $data_nascimento = $email = $cep = $telefone = $celular = $foto =
+$primeiro_nome = $sobrenome = $cpf = $data_nascimento = $email = $senha = $cep = $telefone = $celular = $foto =
 	$pessoaFJ =  $estado = $cidade = $endereco = $bairro = $complemento = $numero_resid = $cidade_id = $ativo = $genero_id = "";
 
 //validação do require da senha
-$senha = "required data-parsley-required-message='Digite uma senha' ";
+//$senha = "required data-parsley-required-message='Digite uma senha' ";
 
 if (!empty($id)) {
 	//selecionar os dados do cliente
-	$sql =  "SELECT c.*, date_format(c.data_nascimento, '%d/%m/%Y') dt,
+	$sql =  "SELECT c.*, date_format(c.data_nascimento, '%d/%m/%Y') data_nascimento,
 			ci.cidade, ci.estado FROM cliente c 
 	  INNER JOIN cidade ci ON ( ci.id = c.cidade_id ) WHERE c.id = :id LIMIT 1";
 	$consulta = $pdo->prepare($sql);
@@ -110,7 +110,7 @@ if (!empty($id)) {
 						</div>
 						<div class="mb-3 col-12 col-md-4">
 							<label class="form-label" for="genero_id">Gênero:</label>
-							<select name="genero_id" id="genero_id" class="form-control" required data-parsley-required-message="selecione uma opção" value="<?= $genero_id; ?>">
+							<select name="genero_id" id="genero_id" class="form-control" required data-parsley-required-message="selecione uma opção" value="<?php if (!empty($genero_id)) echo "$genero_id"; ?>">
 								<option value="<?= $genero_id; ?>">Selecione seu Gênero</option>
 								<?php
 								$sql = "SELECT * FROM genero ORDER BY id";
@@ -128,7 +128,7 @@ if (!empty($id)) {
 						</div>
 						<div class="mb-3 col-12 col-md-4 mt-2">
 							<label for="data_nascimento">Data de Nascimento:</label>
-							<input type="date" name="data_nascimento" id="data_nascimento" class="form-control" required data-parsley-required-message="Preencha a data de nascimento" placeholder="Ex: 11/12/1990" value="<?= $data_nascimento; ?>">
+							<input type="text" name="data_nascimento" id="data_nascimento" class="form-control" required data-parsley-required-message="Preencha a data de nascimento" placeholder="Ex: 11/12/1990" value="<?= $data_nascimento; ?>">
 						</div>
 						<div class="col-12 col-md-4 mt-2">
 							<?php
@@ -139,11 +139,11 @@ if (!empty($id)) {
 								//caminho para a imagem
 								$img = "../fotos/{$foto}m.jpg";
 								//criar um link para abrir a imagem
-								$link = "<a href='{$img}' data-lightbox='foto' class='badge badge-success'>Abrir imagem</a>";
+								$link = "<a href='{$img}' data-lightbox='foto' class='badge badge-success' style='Color: blue;'>Abrir imagem</a>";
 								$required = NULL;
 							}
 							?>
-							<label for="foto">Imagem (JPG)* <?= $link ?>:</label>
+							<label for="foto">Imagem (JPG)* <?= $link ?></label>
 							<input type="file" name="foto" id="foto" class="form-control" <?= $required ?> accept="image/jpeg">
 						</div>
 						<div class="mb-3 col-12 col-md-4 mt-2">
@@ -160,11 +160,11 @@ if (!empty($id)) {
 						</div>
 						<div class="mb-3 col-12 col-md-4 mt-2">
 							<label for="senha">Senha:</label>
-							<input type="password" name="senha" id="senha" class="form-control" minlength="5" maxlength="20" placeholder="Min: 5 Max: 20" <?= $senha ?>>
+							<input type="password" name="senha" id="senha" class="form-control" value="<?= $senha ?>" placeholder="Digite sua Senha">
 						</div>
 						<div class="mb-3 col-12 col-md-4 mt-2">
-							<label for="redigite">Redigite a senha:</label>
-							<input type="password" name="redigite" id="redigite" class="form-control" <?= $senha ?> data-parsley-equalto="#senha" data-parsley-equalto-message="As senhas devem ser iguais" minlength="5" maxlength="20" placeholder="Min: 5 Max: 20">
+							<label for="senha2">Redigite a Senha:</label>
+							<input type="password" name="senha2" id="senha2" class="form-control" data-parsley-equalto="#senha" data-parsley-trigger="keyup" data-parsley-error-message="Senha não confere" value="<?= $senha ?>" placeholder="Redigite sua Senha">
 						</div>
 						<div class="mb-3 col-12 col-md-3 mt-2">
 							<label for="cep">CEP:</label>
