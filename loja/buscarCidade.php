@@ -1,10 +1,5 @@
 <?php
 
-/*//verificar se não está logado
-if ( !isset ( $_SESSION["quanticshop"]["id"] ) ){
-    exit;
-}
-*/
 $cidade = $_GET["cidade"] ?? "";
 $estado = $_GET["estado"] ?? "";
 

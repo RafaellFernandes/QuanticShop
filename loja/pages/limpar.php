@@ -7,3 +7,4 @@
 
 	//enviar a página para o carrinho
 	echo "<script>location.href='pages/carrinho';</script>";
+?>

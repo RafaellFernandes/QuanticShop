@@ -1,51 +1,53 @@
 <?php
-if ( isset ( $_SESSION["quanticshop"]["id"] ) )exit;
+	if ( isset ( $_SESSION["quanticshop"]["id"] ) )exit;
 
-//mostrar erros
-ini_set('display_errors',1);
-ini_set('display_startup_erros',1);
-error_reporting(E_ALL);
-  
-if ( !isset ( $id ) ) $id = "";
+	//mostrar erros
+	ini_set('display_errors',1);
+	ini_set('display_startup_erros',1);
+	error_reporting(E_ALL);
+	
+	if ( !isset ( $id ) ) $id = "";
 
-$primeiro_nome = $sobrenome = $cpf = $data_nascimento = $email = $senha = $cep = $telefone = $celular =
-$pessoaFJ =  $estado = $cidade = $endereco = $bairro = $complemento = $numero_resid = $cidade_id = $ativo = $genero_id = "";
+	$primeiro_nome = $sobrenome = $cpf = $data_nascimento = $email = $senha = $cep = $telefone = $celular =
+	$pessoaFJ =  $estado = $cidade = $endereco = $bairro = $complemento = $numero_resid = $cidade_id = $ativo = $genero_id = "";
 
-if ( !empty ( $id ) ) {
-	//selecionar os dados do cliente
-	$sql =  "SELECT c.*, DATE_FORMAT(c.data_nascimento,'%d/%m/%Y') data_nascimento,
-	ci.cidade, ci.estado FROM cliente c 
-	INNER JOIN cidade ci ON ( ci.id = c.cidade_id ) WHERE c.id = :id LIMIT 1";
-	$consulta = $pdo->prepare( $sql);
-	$consulta->bindParam(":id", $id);
-	$consulta->execute();
+	if ( !empty ( $id ) ) {
+		//selecionar os dados do cliente
+		$sql =  "SELECT c.*, DATE_FORMAT(c.data_nascimento,'%d/%m/%Y') data_nascimento,
+		ci.cidade, ci.estado FROM cliente c 
+		INNER JOIN cidade ci ON ( ci.id = c.cidade_id ) WHERE c.id = :id LIMIT 1";
+		$consulta = $pdo->prepare( $sql);
+		$consulta->bindParam(":id", $id);
+		$consulta->execute();
 
-	$dados = $consulta->fetch(PDO::FETCH_OBJ);
+		$dados = $consulta->fetch(PDO::FETCH_OBJ);
 
-	if ( empty ( $dados->id ) ) {
-		echo "<p class='alert alert-danger'>Cliente Não Existente</p>";
+		if ( empty ( $dados->id ) ) {
+			echo "<p class='alert alert-danger'>Cliente Não Existente</p>";
+		}
+
+		$id                      = $dados->id;
+		$primeiro_nome           = $dados->primeiro_nome;
+		$sobrenome               = $dados->sobrenome;
+		$cpf                     = $dados->cpf;
+		$data_nascimento         = $dados->data_nascimento;
+		$email                   = $dados->email;
+		$senha                   = $dados->senha;
+		$telefone                = $dados->telefone;
+		$celular                 = $dados->celular;
+		$pessoaFJ                = $dados->pessoaFJ;
+		$cep                     = $dados->cep;
+		$estado                  = $dados->estado;
+		$cidade                  = $dados->cidade;
+		$endereco                = $dados->endereco;
+		$bairro                  = $dados->bairro;
+		$complemento             = $dados->complemento;
+		$numero_resid            = $dados->numero_resid;
+		$cidade_id               = $dados->cidade_id;
+		$ativo                   = $dados->ativo;
+		$genero_id               = $dados->genero_id;
+
 	}
-	$id                      = $dados->id;
-	$primeiro_nome           = $dados->primeiro_nome;
-	$sobrenome               = $dados->sobrenome;
-	$cpf                     = $dados->cpf;
-	$data_nascimento         = $dados->data_nascimento;
-	$email                   = $dados->email;
-	$senha                   = $dados->senha;
-	$telefone                = $dados->telefone;
-	$celular                 = $dados->celular;
-	$pessoaFJ                = $dados->pessoaFJ;
-	$cep                     = $dados->cep;
-	$estado                  = $dados->estado;
-	$cidade                  = $dados->cidade;
-	$endereco                = $dados->endereco;
-	$bairro                  = $dados->bairro;
-	$complemento             = $dados->complemento;
-	$numero_resid            = $dados->numero_resid;
-	$cidade_id               = $dados->cidade_id;
-	$ativo                   = $dados->ativo;
-	$genero_id               = $dados->genero_id;
-}
 ?>
 <script src="assets/mask/jquery.mask.js"></script>
 <div class="container-fluid p-0 mt-3">
@@ -273,35 +275,33 @@ if ( !empty ( $id ) ) {
                         </div>
 					</div>
 					<div class="container">
-					<div class="float-left mt-5">
-						<button type="reset" class="btn btn-danger margin">
-							Apagar Tudo
-						</button>
-					
-					<div class="float-end mt-4">
-						<button type="submit" class="btn btn-success margin">
-							Salvar
-						</button>
-					</div>
+						<div class="float-left mt-5">
+							<button type="reset" class="btn btn-danger margin">
+								Apagar Tudo
+							</button>
+							<div class="float-end mt-4">
+								<button type="submit" class="btn btn-success margin">
+									Salvar
+								</button>
+							</div>
+						</div>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
 </div>
-    <?php
-		//verificar se o id é vazio
-		if ( empty ( $id ) ) $id = 0;
-	?>
+<?php
+	//verificar se o id é vazio
+	if ( empty ( $id ) ) $id = 0;
+?>
 <script type="text/javascript">
-
 	$(document).ready(function(){ 
 		$('#cep').mask('00000-000');
 		$('#cpf').mask('000.000.000-00');
 		$("#data_nascimento").mask("00/00/0000");
 		$("#celular").mask("(00) 00000-0000");
 	});
-
 	function confirmarEmail(email){
 		   $.get("validacao/verificaEmailCliente.php", {email:email,id:<?=$id;?>}, function(dados){
 			   if(dados != ""){
@@ -310,7 +310,6 @@ if ( !empty ( $id ) ) {
 			   }
 		   }) 
 	}
-
 	$("#cep").blur(function(){
 		//pegar o cep
         cep = $("#cep").val();

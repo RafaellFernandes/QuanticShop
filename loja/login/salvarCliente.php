@@ -9,14 +9,10 @@ if ( $_POST ) {
     //recuperar os dados do formulario
     $id = $primeiro_nome = $sobrenome = $cpf  = $data_nascimento = $email = $senha = $cep = $telefone = $celular = $foto = 
     $pessoaFJ = $estado = $cidade = $endereco = $bairro = $complemento = $numero_resid = $cidade_id = $ativo = $genero_id = "";
-       
-    // print_r($_POST);
-    // print_r($_FILES);
-      
+  
   	foreach ($_POST as $key => $value) {
         //guardar as variaveis
         $$key = trim ( $value );
-  		
     }
 
     include "validacao/functions.php";
@@ -40,53 +36,53 @@ if ( $_POST ) {
         echo "<script>alert('Preencha o Celular!');history.back();</script>";
     } else if( empty($numero_resid) ){
         echo "<script>alert('Digite o Numero da Residencia!');history.back();</script>";
-  }
+    }
 
     //iniciar uma transacao
     $pdo->beginTransaction();
     $data_nascimento = formatar($data_nascimento);
 
-if ( ( empty ( $id ) ) and ( empty ( $_FILES['foto']['name'] ) ) ) {
-    $titulo = "Erro ao enviar imagem";
-    $mensagem = "Selecione um arquivo JPG válido";
-    $icone = "error";
-    mensagem($titulo, $mensagem, $icone);
-    exit;
-} 
+    if ( ( empty ( $id ) ) and ( empty ( $_FILES['foto']['name'] ) ) ) {
+        $titulo = "Erro ao enviar imagem";
+        $mensagem = "Selecione um arquivo JPG válido";
+        $icone = "error";
+        mensagem($titulo, $mensagem, $icone);
+        exit;
+    } 
 
-//se existir imagem - copia para o servidor
-if ( !empty ( $_FILES['foto']['name'] ) ) {
-    //calculo para saber quantos mb tem o arquivo
-    $tamanho = $_FILES['foto']['size'];
-    $t = 8 * 1024 * 1024; //byte - kbyte - megabyte
+    //se existir imagem - copia para o servidor
+    if ( !empty ( $_FILES['foto']['name'] ) ) {
+        //calculo para saber quantos mb tem o arquivo
+        $tamanho = $_FILES['foto']['size'];
+        $t = 8 * 1024 * 1024; //byte - kbyte - megabyte
 
-    $foto = time();
-    $usuario = "clienteLoja_";
+        $foto = time();
+        $usuario = "clienteLoja_";
 
-    //definir um nome para a imagem
-    $foto = "cliente_{$foto}_{$usuario}";
+        //definir um nome para a imagem
+        $foto = "cliente_{$foto}_{$usuario}";
 
-    //validar se é jpg
-    if ( $_FILES['foto']['type'] != 'image/jpeg' ) {
-        mensagem("Erro ao enviar imagem", 
-        "O arquivo enviado não é um JPG válido, selecione um arquivo JPG", 
-        "error");
-    } else if ( $tamanho > $t ) {
-        mensagem("Erro ao enviar imagem", 
-        "O arquivo é muito grande e não pode ser enviado. Tente arquivos menores que 8 MB", 
-        "error");
-    } else if ( !copy ( $_FILES['foto']['tmp_name'], '../fotos/'.$_FILES['foto']['name'] ) ) {
-        mensagem("Erro ao enviar imagem", 
-        "Não foi possível copiar o arquivo para o servidor", 
-        "error");
-    }
-    //redimensionar a imagem
-    $pastaFotos = '../fotos/';
-    loadImg($pastaFotos.$_FILES['foto']['name'], 
-            $foto, 
-            $pastaFotos);
-} //fim da verificação da foto
-         
+        //validar se é jpg
+        if ( $_FILES['foto']['type'] != 'image/jpeg' ) {
+            mensagem("Erro ao enviar imagem", 
+            "O arquivo enviado não é um JPG válido, selecione um arquivo JPG", 
+            "error");
+        } else if ( $tamanho > $t ) {
+            mensagem("Erro ao enviar imagem", 
+            "O arquivo é muito grande e não pode ser enviado. Tente arquivos menores que 8 MB", 
+            "error");
+        } else if ( !copy ( $_FILES['foto']['tmp_name'], '../fotos/'.$_FILES['foto']['name'] ) ) {
+            mensagem("Erro ao enviar imagem", 
+            "Não foi possível copiar o arquivo para o servidor", 
+            "error");
+        }
+        //redimensionar a imagem
+        $pastaFotos = '../fotos/';
+        loadImg($pastaFotos.$_FILES['foto']['name'], 
+                $foto, 
+                $pastaFotos);
+    } //fim da verificação da foto
+            
     if(empty($id)){
         $senha = password_hash($senha, PASSWORD_BCRYPT);
         //inserir se o id estiver em branco
@@ -114,13 +110,14 @@ if ( !empty ( $_FILES['foto']['name'] ) ) {
         $consulta->bindParam(":ativo", $ativo);
         $consulta->bindParam(":genero_id", $genero_id);
 
-    } else if  (empty($foto)) {
+    } else if (empty($foto)) {
+
         $senha = password_hash($senha, PASSWORD_BCRYPT);
         //update se o id estiver preenchido         
         $sql = "UPDATE cliente SET primeiro_nome = :primeiro_nome, sobrenome = :sobrenome, cpf = :cpf, data_nascimento = :data_nascimento,
-         email = :email, senha = :senha, cep = :cep, endereco = :endereco, complemento = :complemento, bairro = :bairro, cidade_id = :cidade_id, 
-         telefone = :telefone, celular = :celular,numero_resid = :numero_resid, pessoaFJ = :pessoaFJ,
-          cidade = :cidade, estado = :estado, ativo = :ativo, genero_id = :genero_id WHERE id = :id";
+        email = :email, senha = :senha, cep = :cep, endereco = :endereco, complemento = :complemento, bairro = :bairro, cidade_id = :cidade_id, 
+        telefone = :telefone, celular = :celular,numero_resid = :numero_resid, pessoaFJ = :pessoaFJ,
+        cidade = :cidade, estado = :estado, ativo = :ativo, genero_id = :genero_id WHERE id = :id";
         $consulta = $pdo->prepare($sql);
         $consulta->bindParam(":primeiro_nome", $primeiro_nome);
         $consulta->bindParam(":sobrenome", $sobrenome);
@@ -142,14 +139,14 @@ if ( !empty ( $_FILES['foto']['name'] ) ) {
         $consulta->bindParam(":ativo", $ativo);
         $consulta->bindParam(":genero_id", $genero_id);
         $consulta->bindParam(":id", $id);
-        
-      } else {
+            
+    } else {
         //update sem senha
         //update se o id estiver preenchido
         $sql = "UPDATE cliente SET primeiro_nome = :primeiro_nome, sobrenome = :sobrenome, cpf = :cpf, data_nascimento = :data_nascimento,
         email = :email, cep = :cep, endereco = :endereco, complemento = :complemento, bairro = :bairro, cidade_id = :cidade_id, foto = :foto, 
         telefone = :telefone, celular = :celular,numero_resid = :numero_resid, pessoaFJ = :pessoaFJ,
-         cidade = :cidade, estado = :estado, ativo = :ativo, genero_id = :genero_id WHERE id = :id";
+        cidade = :cidade, estado = :estado, ativo = :ativo, genero_id = :genero_id WHERE id = :id";
         $consulta = $pdo->prepare($sql);
         $consulta->bindParam(":primeiro_nome", $primeiro_nome);
         $consulta->bindParam(":sobrenome", $sobrenome);
@@ -176,7 +173,6 @@ if ( !empty ( $_FILES['foto']['name'] ) ) {
     if ( $consulta->execute() ) {
         $pdo->commit();
         echo "<script>alert('Cadastro Efetuado com Sucesso!');location.href='pages/home';</script>";
-
     } else {
         echo '<script>alert("Erro ao salvar");history.back();</script>';
     }

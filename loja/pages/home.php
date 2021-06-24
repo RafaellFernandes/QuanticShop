@@ -115,34 +115,3 @@
     </div>
 </div>
 <!-- Fim: Contate-Nos  -->
-
-<!-- Inicio: Marcas Parceiras  -->
-<!-- <div class="container-fluid mt-5">
-    <h3 class="text-center mt-3 mb-3"><strong>Algumas Marcas Parceiras</strong></h3>
-    <section id="clients" class="clients">
-        <div class="row" data-aos="zoom-in">
-            <div class="row d-flex align-items-center">
-              <div class="col-lg-2 col-md-1 col-2">
-                  <img src="vendor/img/clients/client-1.png" class="img-fluid" alt="Nvidia">
-              </div>
-              <div class="col-lg-2 col-md-2 col-2">
-                  <img src="vendor/img/clients/client-3.png" class="img-fluid" alt="AMD">
-              </div>
-              <div class="col-lg-2 col-md-2 col-2">
-                  <img src="vendor/img/clients/client-4.png" class="img-fluid" alt="Intel">
-              </div>
-              <div class="col-lg-2 col-md-2 col-2">
-                  <img src="vendor/img/clients/client-2.png" class="img-fluid" alt="Samsung">
-              </div>
-              <div class="col-lg-2 col-md-2 col-2">
-              <img src="vendor/img/clients/client-13.png" class="img-fluid" alt="HyperX">
-              </div>
-              <div class="col-lg-1 col-md-1 col-2">
-                  <img src="vendor/img/clients/client-5.png" class="img-fluid" alt="Apple">
-              </div>
-            </div>
-        </div>
-    </section>
-</div> -->
-<!-- Fim: Marcas Parceiras  -->
-
