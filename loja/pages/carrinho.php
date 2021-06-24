@@ -87,13 +87,15 @@
 														<td class='product_total'>R$ {$total}</td>
 														<td class='product_remove'>
 															<a type='button' onclick='excluirProduto({$id})'>
-																<i class='ion-android-close'></i>
+																<i class='fas fa-times'></i>
 															</a>
 														</td>
 													</tr>";		
 											}
-										} 
-										$disabled="disabled";
+										} else {
+											$disabled="disabled";
+										}
+										// $disabled="disabled";
 									?>
 								</tbody>
                     		</table>   
@@ -128,7 +130,7 @@
 									<p class="cart_amount">R$ <?=number_format($totalGeral, 2, "," , ".");?></p>
 								</div>
 								<div class="checkout_btn">
-									<a href='pages/finalizar/<?=$id?>' class='btn btn-primary'>Finalizar Pedido</a><br>
+									<a href='pages/finalizar/<?=$id?>' class='btn btn-primary' <?=$disabled?> >Finalizar Pedido</a><br>
 								</div>
 							</div>
 						</div>
