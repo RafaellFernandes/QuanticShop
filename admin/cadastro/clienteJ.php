@@ -62,6 +62,7 @@ if (!empty($id)) {
 	$siteClienteJuridico     = $dados->siteClienteJuridico;
 	$ativo                   = $dados->ativo;
 	$genero_id               = $dados->genero_id;
+	// $senha = NULL;
 }
 ?>
 <script src="vendor/jqueryMask/src/jquery.mask.js"></script>

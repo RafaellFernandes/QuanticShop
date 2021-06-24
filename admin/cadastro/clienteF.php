@@ -29,7 +29,7 @@ $primeiro_nome = $sobrenome = $cpf = $data_nascimento = $email = $senha = $cep =
 
 if (!empty($id)) {
 	//selecionar os dados do cliente
-	$sql =  "SELECT c.*, date_format(c.data_nascimento, '%d/%m/%Y'),
+	$sql =  "SELECT c.*, date_format(c.data_nascimento, '%d/%m/%Y') data_nascimento,
 			ci.cidade, ci.estado FROM cliente c 
 	  INNER JOIN cidade ci ON ( ci.id = c.cidade_id ) WHERE c.id = :id LIMIT 1";
 	$consulta = $pdo->prepare($sql);
@@ -45,6 +45,7 @@ if (!empty($id)) {
 		$id                      = $dados->id;
 		$primeiro_nome           = $dados->primeiro_nome;
 		$sobrenome               = $dados->sobrenome;
+		$senha                   = $dados->senha;
 		$cpf                     = $dados->cpf;
 		$data_nascimento         = $dados->data_nascimento;
 		$email                   = $dados->email;
@@ -63,7 +64,7 @@ if (!empty($id)) {
 		$ativo                   = $dados->ativo;
 		$genero_id               = $dados->genero_id;
 		//retirar a validação da senha
-		$senha = NULL;
+		// $senha = NULL;
 	}
 }
 ?>
@@ -130,7 +131,7 @@ if (!empty($id)) {
 						</div>
 						<div class="mb-3 col-12 col-md-4 mt-2">
 							<label for="data_nascimento">Data de Nascimento:</label>
-							<input type="date" name="data_nascimento" id="data_nascimento" class="form-control" required data-parsley-required-message="Preencha a data de nascimento" placeholder="Ex: 11/12/1990" value="<?= $data_nascimento; ?>">
+							<input type="text" name="data_nascimento" id="data_nascimento" class="form-control" required data-parsley-required-message="Preencha a data de nascimento" placeholder="Ex: 11/12/1990" value="<?= $data_nascimento; ?>">
 						</div>
 						<div class="col-12 col-md-4 mt-2">
 							<?php

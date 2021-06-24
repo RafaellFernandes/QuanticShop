@@ -26,7 +26,7 @@ $estado = $bairro = $complemento = $numero_resid = $endereco = $ativo = $genero_
 
 if(!empty($id)){
     //selecionar dados
-    $sql = "SELECT u.id as idusuario, u.*, c.*, date_format(u.dataNascimento, '%d/%m/%Y') FROM usuario u INNER JOIN cidade c ON (c.id = u.cidade_id)
+    $sql = "SELECT u.id as idusuario, u.*, c.*, date_format(u.dataNascimento, '%d/%m/%Y') dataNascimento FROM usuario u INNER JOIN cidade c ON (c.id = u.cidade_id)
             WHERE u.id = :id limit 1";
     $consulta = $pdo->prepare($sql);
     $consulta->bindParam(":id",$id);
@@ -157,7 +157,7 @@ if(!empty($id)){
 
 						<div class="mb-3 col-12 col-md-4 mt-2">
 							<label for="dataNascimento">Data de Nascimento:</label>
-							<input type="date" name="dataNascimento" id="dataNascimento" class="form-control" required data-parsley-required-message="Preencha a data de nascimento" 
+							<input type="text" name="dataNascimento" id="dataNascimento" class="form-control" required data-parsley-required-message="Preencha a data de nascimento" 
 							 value="<?=$dataNascimento?>">
 						</div>
 
