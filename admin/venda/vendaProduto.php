@@ -195,7 +195,7 @@ exit;
 
                             while ( $d = $consulta->fetch(PDO::FETCH_OBJ) ){
                                 $valorUnitario = number_format($d->valorUnitario, 2, ",", ".");
-                                echo "<option value='{$d->id} - {$d->nome_produto} - {$valorUnitario}'>";
+                                echo "<option value='{$d->pid} - {$d->nome_produto} - {$valorUnitario}'>";
                             }
                             ?>
                             </datalist>
