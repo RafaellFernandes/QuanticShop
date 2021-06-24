@@ -186,7 +186,7 @@ exit;
 
                             <datalist id="listProdutos"> 
                             <?php
-                             $sql = "SELECT p.produto_id pproduto_id, p.nome_produto, p.valorUnitario, e.* 
+                             $sql = "SELECT p.id pid, p.nome_produto, p.valorUnitario, e.* 
                              FROM produto p
                              INNER JOIN estoque e ON (p.id = e.produto_id)
                              WHERE ativo = 1";

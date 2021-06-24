@@ -19,9 +19,8 @@
         
     include "validacao/functions.php";
 
-//iniciar as variaveis
-$nome_produto = $codigo = $descricao = $espec_tecnica = $foto = $promocao =  $valorUnitario = 
-$ativo = $departamento_id = $marca_id = "";
+    //se nao existe o id
+    if ( !isset ( $id ) ) $id = "";
 
     //iniciar as variaveis
     $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto = $promocao =  $valorUnitario = 
@@ -60,30 +59,8 @@ $ativo = $departamento_id = $marca_id = "";
     $nome_marca               = $dados->nome_marca;
     $foto                     = $dados->foto;
     $ativo 		              = $dados->ativo;
-  }
+  
 
-        if ( empty ( $dados->id ) ) {
-            $titulo = "Erro";
-            $mensagem = "Produto Não Existente";
-            $icone = "error";
-            mensagem($titulo, $mensagem, $icone);
-        }
-
-        //separar os dados
-        $id         	          = $dados->id;
-        $nome_produto 	          = $dados->nome_produto; 
-        $valorUnitario            = $dados->valorUnitario;
-        $valorUnitario            = number_format($valorUnitario,2,",",".");
-        $descricao                = $dados->descricao;
-        $codigo                   = $dados->codigo;
-        $departamento_id          = $dados->departamento_id;
-        $promocao                 = $dados->promocao;
-        $nome_dept                = $dados->nome_dept;
-        $marca_id                 = $dados->marca_id;
-        $nome_marca               = $dados->nome_marca;
-        $foto                     = $dados->foto;
-        $ativo 		              = $dados->ativo;
-    }
 ?>
 <script src="vendor/js/jquery-3.5.1.min.js"></script>
 <script src="vendor/popper/popper.min.js"></script>
