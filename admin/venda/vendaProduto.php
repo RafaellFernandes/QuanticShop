@@ -232,7 +232,7 @@ exit;
                     p = produto.split(" - ");
                     //console.log(p);
                     produto = p[0];
-                    valor = p[3];
+                    valor = p[2];
                     
                     $("#produto_id").val(produto);
                     $("#valor").val(valor);
@@ -245,5 +245,5 @@ exit;
     }
 ?>
 <script>
-     $("#valor").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+    //  $("#valor").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
 </script>

@@ -226,7 +226,7 @@ include "validacao/functions.php";
 	});
 
     $(document).ready(function(){ 
-	    $("#status").val("<?=$status?>");
+	    $("#ativo").val("<?=$status?>");
 	});
 </script>
 

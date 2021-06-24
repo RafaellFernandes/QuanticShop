@@ -19,7 +19,7 @@ if ( $_POST ) {
     include "../admin/config/conexao.php";
 	
   	//recuperar os dados do formulario
-  	$id = $produto_id = $qtd_estoque = "";
+  	$produto_id = $qtd_estoque = "";
 
   	foreach ($_POST as $key => $value) {
   		//guardar as variaveis
