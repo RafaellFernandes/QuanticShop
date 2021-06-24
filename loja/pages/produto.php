@@ -14,24 +14,23 @@
     	$dados = $consulta->fetch(PDO::FETCH_OBJ);
 
 		$promocao             = $dados->promocao;
-		$valorUnitario 	      = $dados->valorUnitario;
-		$valorUnitario       = number_format($valorUnitario, 2, ",", ".");		
+		$valorUnitario 	      = $dados->valorUnitario;		
 		$id                   = $dados->pid;
 		$foto                 = $dados->foto;
 		$imagem               = "../$foto";
 		$imagem               = explode(",", $foto);
 								
 	}	
-    // if ( empty ( $promocao ) ) {
-	// 	//1499.99 -> 1.499,99
-	// 	$valorUnitario = "R$ " . number_format($valorUnitario, 2, ",", ".");
-	// 	$desc = "";
-	// } else {
-	// 	//valor normal
-	// 	$desc = "R$ " . number_format($valorUnitario, 2, ",", ".");
-	// 	//valor promocional
-	// 	$valorUnitario = "R$ " . number_format($promocao, 2, ",", ".");
-	// }
+    if ( empty ( $promocao ) ) {
+		//1499.99 -> 1.499,99
+		$valorUnitario = "R$ " . number_format($valorUnitario, 2, ",", ".");
+		$desc = "";
+	} else {
+		//valor normal
+		$desc = "R$ " . number_format($valorUnitario, 2, ",", ".");
+		//valor promocional
+		$valorUnitario = "R$ " . number_format($promocao, 2, ",", ".");
+	}
 ?>
 <!--product details start-->
 <div class="product_details mt-60 mb-60">
@@ -64,7 +63,7 @@
 	        <div class="col-lg-6 col-md-6">
 	            <div class="product_d_right">
 	                <form name="formProduto" method="post" action="pages/adicionar">
-					<input hidden name="id" value="<?=$id?>">
+						<input hidden name="id" value="<?=$id?>">
 	                    <h1><?=$dados->nome_produto?></h1>
 	                    <div class=" product_ratting">
 	                        <ul>
@@ -77,7 +76,7 @@
 	                        </ul>
 	                    </div>
 	                    <div class="price_box">
-	                        <span class="current_price">R$ <?=$dados->valorUnitario;?></span>
+	                        <span class="current_price"><?=$valorUnitario;?></span>
 	                    </div>
 	                    <div class="product_desc">
 	                        <ul>
@@ -113,15 +112,12 @@
                 <div class="product_d_inner">   
                     <div class="product_info_button">    
                         <ul class="nav" role="tablist">
-                            <li >
+                            <li>
                                 <a class="active" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">Descrição</a>
                             </li>
                             <li>
                                  <a data-toggle="tab" href="#sheet" role="tab" aria-controls="sheet" aria-selected="false">Especificação</a>
                             </li>
-                            <!-- <li>
-                               <a data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews (1)</a>
-                            </li> -->
                         </ul>
                     </div>
                     <div class="tab-content">
@@ -135,64 +131,6 @@
 							<p><?=$dados->espec_tecnica;?></p>
                             </div>    
                         </div>
-                        <!-- <div class="tab-pane fade" id="reviews" role="tabpanel" >
-                            <div class="reviews_wrapper">
-                                <h2>1 review for Donec eu furniture</h2>
-                                <div class="reviews_comment_box">
-                                    <div class="comment_thmb">
-                                        <img src="assets/img/blog/comment2.jpg" alt="">
-                                    </div>
-                                    <div class="comment_text">
-                                        <div class="reviews_meta">
-                                            <div class="star_rating">
-                                                <ul>
-                                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-                                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-                                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-                                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-                                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-                                                </ul>   
-                                            </div>
-                                            <p><strong>admin </strong>- September 12, 2018</p>
-                                            <span>roadthemes</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="comment_title">
-                                    <h2>Add a review </h2>
-                                    <p>Your email address will not be published.  Required fields are marked </p>
-                                </div>
-                                <div class="product_ratting mb-10">
-                                   <h3>Your rating</h3>
-                                    <ul>
-                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product_review_form">
-                                    <form action="#">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <label for="review_comment">Your review </label>
-                                                <textarea name="comment" id="review_comment" ></textarea>
-                                            </div> 
-                                            <div class="col-lg-6 col-md-6">
-                                                <label for="author">Name</label>
-                                                <input id="author"  type="text">
-                                            </div> 
-                                            <div class="col-lg-6 col-md-6">
-                                                <label for="email">Email </label>
-                                                <input id="email"  type="text">
-                                            </div>  
-                                        </div>
-                                        <button type="submit">Submit</button>
-                                     </form>   
-                                </div> 
-                            </div>     
-                        </div> -->
                     </div>
                 </div>     
             </div>
@@ -200,10 +138,5 @@
     </div>    
 </div>  
 <!--product info end-->
-
-<!-- Plugins JS -->
 <script src="pages/carrossel/plugins.js"></script>
-
-<!-- Main JS -->
 <script src="pages/carrossel/main.js"></script>
-

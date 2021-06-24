@@ -198,9 +198,9 @@
 </head>
 <body>
 	<!-- Botao de Subir a Pagina -->
-		<a id="subirTopo">
-			<i class="fas fa-rocket"></i><br>Subir
-		</a>
+	<a id="subirTopo">
+		<i class="fas fa-rocket"></i><br>Subir
+	</a>
 	<!-- ***** -->
 
 	<!-- ***** Preloader Start ***** -->
@@ -253,8 +253,7 @@
 						</script>
 						<!----//search-scripts---->
 						<ul class="icon1 sub-icon1 profile_img">
-							<li class="li"><a class="a1" href="#">Conta</a>
-							<br>
+							<li class="li"><a class="a1" href="#">Conta</a><br>
 								<ul class="sub-icon1 list mt-4">
 									<?php
 										if(!isset($_SESSION["quanticshop"]["id"])){
@@ -279,7 +278,6 @@
 														<hr class="my-0" />
 														<p class="mt-2 mb-2">Olá '.$dados->primeiro_nome.', Seja Bem Vindo(a)!</p>
 														<div class="check_button"><a href="login/perfil">Perfil</a></div>
-														<div class="check_button"><a href="login/configuracaoConta">Configurações de Conta</a></div>
 														<div class="check_button"><a href="login/sair">Sair</a></div>
 														<div class="clear"></div>
 													</div>';

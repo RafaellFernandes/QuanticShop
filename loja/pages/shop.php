@@ -34,19 +34,30 @@
 				$consulta->execute();
 
 				while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
-					$pid 	            = $dados->id;
-					$nome_produto       = $dados->nome_produto;
+					$pid 	             = $dados->pid;
+					$nome_produto        = $dados->nome_produto;
 					$valorUnitario       = $dados->valorUnitario;
 					$foto                = $dados->foto;
 					$imagem              = explode(",", $foto);
-					$valorUnitario       = number_format($valorUnitario, 2, ",", ".");
+
+					//se a promo esta vazio - valor = valor do produto
+					if ( empty ( $promocao ) ) {
+                        //1499.99 -> 1.499,99
+                        $valorUnitario = "R$ " . number_format($valorUnitario, 2, ",", ".");
+                        $desc = "";
+                    } else {
+                        //valor normal
+                        $desc = "R$ " . number_format($valorUnitario, 2, ",", ".");
+                        //valor promocional
+                        $valorUnitario = "R$ " . number_format($promocao, 2, ",", ".");
+                    }
 			?>
             <div class='col-md-4'>
                 <div class='product-item'>
                     <a href='pages/produto/<?=$pid?>'><img align='right' src='../fotos/produtos/<?=$imagem[0]?>' class='img' alt='<?=$nome_produto?>' title='Produto: <?=$nome_produto?>'></a>
                     <div class='down-content'>
                         <a href='pages/produto/<?=$pid?>'><h4><?=$nome_produto?></h4></a>
-                        <h6>R$ <?=$valorUnitario?></h6>
+                        <h6><?=$valorUnitario?></h6>
                         <a href='pages/produto/<?=$pid?>' class='btn btn-primary'>Detalhes</a><br>           
                     </div>
                 </div>
@@ -58,55 +69,6 @@
     </div>
 </div>
 <!-- Fim: Produtos em Destaque  -->
-
-<!-- 										
-<div class="content-top">
-	<h2>Produtos em Destaque</h2>
-	<div class="close_but"><i class="close1"></i></div>
-	<div class="container-fluid">
-		
-		<div class="card-group">
-			
-		
-						<?php /*
-							//selecionar 1 produto aleatorios
-							$sql = "SELECT * FROM produto WHERE ativo = 1 ORDER BY rand() LIMIT 30";
-							$consulta = $pdo->prepare($sql);
-							$consulta->execute();
-
-							while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
-
-								//recuperar as variaveis
-								$id 	            = $dados->id;
-								$nome_produto       = $dados->nome_produto;
-								$valorUnitario       = $dados->valorUnitario;
-								$foto                = $dados->foto;
-								$imagem              = explode(",", $foto);
-								//formatar o valor
-								$valorUnitario = number_format($valorUnitario, 2, ",", ".");
-								//var,casas decimais,sep decimal,sep milhares
-							*/
-								?>
-								<div class='col-sm-2 text-center m-3'>
-										<div class='card'>
-											<img src='../fotos/produtos/<?//=$imagem[0]?>' class='card-img-top' width='40' height='auto' alt='<?//=$nome_produto?>'>
-											<div class='card-body'>
-												<p class='card-title'><?//=$nome_produto?></p>
-												<p class='card-text' style='color: green;'>R$ <?//=$valorUnitario?> </p>
-												<a href='pages/produto/<?//=$id?>' class='btn btn-primary'>Detalhes</a><br>
-											</div>
-										</div>
-									</div>
-								<?php /*
-							}
-						*/?>	
-			
-					</div>
-				</div>
-			</div>			
-		</div>
-	</div> -->
-
 <style>
 	.dropdown-item {
 		color: white;

@@ -17,8 +17,8 @@
 
 		//selecionar os dados do banco id, nome_produto, venda_unitaria, promocao 
 		$sql = "SELECT *
-			FROM produto 
-			WHERE id = :id limit 1";
+				FROM produto 
+				WHERE id = :id limit 1";
 
 		$consulta = $pdo->prepare($sql);
 		$consulta->bindParam(':id', $id);
@@ -26,11 +26,11 @@
 		$dados = $consulta->fetch(PDO::FETCH_OBJ);
 
 		//separar os dados
-		$id = $dados->id;
-		$nome_produto = $dados->nome_produto;
-		$valorUnitario = $dados->valorUnitario;
-		$promocao = $dados->promocao;
-		$foto = $dados->foto;
+		$id             = $dados->id;
+		$nome_produto   = $dados->nome_produto;
+		$valorUnitario  = $dados->valorUnitario;
+		$promocao       = $dados->promocao;
+		$foto           = $dados->foto;
 
 		//o valorProduto sempre será o valor do produto
 		$valorProduto = $valorUnitario;
@@ -48,15 +48,11 @@
 										"quantidadeCarrinho"=>$quantidadeCarrinho,
 										"foto"=>$foto,
 										"total"=>$total);
-		//print_r ( $_SESSION['carrinho'] );
 
 		//redirecionar para o carrinho
 		echo "<script>location.href='pages/carrinho';</script>";
-
 		exit;
-
 	}
-
 	//mensagem de erro - não esta inserindo nada
 ?>
 <script type="text/javascript">

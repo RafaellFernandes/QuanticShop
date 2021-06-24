@@ -8,8 +8,8 @@
 				   		<p>Telefone SAC: +55 (44) 3652-2226</p>
 				 	 	<p>Email: <span>sac@quanticshop.com</span></p>
 				   		<p>Siga-nos: <span>Instagram</span>, <span>Twitter</span></p>
-				   </div>
-				   <h5 class="m_8 mt-5">Ou Nos Envie um Email por aqui</h5>
+					</div>
+					<h5 class="m_8 mt-5">Ou Nos Envie um Email por aqui</h5>
 				</div>
 			</div>
 			<div class="row">
@@ -21,7 +21,7 @@
 						<div class="to">
 							<!-- Replace with accesKey sent to your email -->
 							<input type="hidden" name="accessKey" value="6eb1def2-aec9-447d-b97d-e93da2871136">
-
+							
 							<input type="text" name="name" placeholder="Nome">
 							<input type="text" name="subject" placeholder="Assunto"> 
 							<input type="text" name="email" placeholder="Email" > 

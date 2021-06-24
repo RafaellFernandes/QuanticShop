@@ -7,7 +7,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="vendor/images/saturno.png">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
         <link href="login/styleLogin.css" rel="stylesheet">
         <title>Quantic Shop - Redefinir Senha</title>
     </head>
@@ -75,38 +75,34 @@
                                     <p class="text-small mt-5">Todos os direitos reservados</p>
                                 </div>
                             </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <?php
-            }   
-        ?>
-        <?php
-            }else{
-                echo    '<div class="wrapper mt-5">
-                            <div class="container d-flex flex-column  mb-5 ">
-                                <div class="container mt-5">
-                                    <div class="card">
-                                        <div class="card-header text-center">
-                                            <b>Quantic Shop</b>
-                                        </div>
-                                        <div class="card-body text-center">
-                                            <h3 class="text-danger">É Necessário um Token Para redefinir a Senha</h3>
-                                        </div>
+    </div>
+    <?php
+        }   
+    ?>
+    <?php
+        }else{
+            echo    '<div class="wrapper mt-5">
+                        <div class="container d-flex flex-column  mb-5 ">
+                            <div class="container mt-5">
+                                <div class="card">
+                                    <div class="card-header text-center">
+                                        <b>Quantic Shop</b>
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <h3 class="text-danger">É Necessário um Token Para redefinir a Senha</h3>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                ';
-            }   
-        ?>
-        </div>
-    </div>
-    </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+                    </div>
+            ';
+        }   
+    ?>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

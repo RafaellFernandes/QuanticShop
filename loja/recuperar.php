@@ -4,7 +4,7 @@
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
           <link rel="shortcut icon" href="vendor/images/saturno.png">
-          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
+          <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
           <link href="login/styleLogin.css" rel="stylesheet">
           <title>Quantic Shop - Redefinir Senha</title>
      </head>
@@ -60,7 +60,6 @@
                                              $data['erro'] = true;
                                         }
                                         die('As orientações para criar uma Nova Senha foram enviadas ao seu Email. :)');
-                                   
                                         
                                    }else{
                                         die('Não encontramos esse <b>Email</b> em nossa base de dados.');
@@ -71,6 +70,6 @@
                     </div>
                </div>
           </div>
-          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+          <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
      </body>
 </html>
