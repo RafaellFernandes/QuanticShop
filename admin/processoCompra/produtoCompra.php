@@ -19,12 +19,13 @@ include "validacao/functions.php";
 
     //se nao existe o id
     if ( !isset ( $id ) ) $id = "";
-
+    $edicao = 0;       
     //iniciar as variaveis
     $produto_id = $nome_produto = $lote = $fornecedor_id = $razaoSocial = $data_cadastro = $ativo = $qtdprodutoComprado = $venda_unitaria = $custo_unitario = $porcentagem_lucro = "";
 
     //verificar se existe um id
     if ( !empty ( $id ) ) {
+       $edicao = 1; 
         //selecionar os dados do banco para poder editar
         $sql="SELECT ic.id id, ic.*, f.id fid, f.ativo fativo , f.*, p.id pid, p.ativo pativo, p.* 
                 FROM item_compra ic 
@@ -50,11 +51,13 @@ include "validacao/functions.php";
             $data_cadastro            = $dados->data_cadastro;
             $lote                     = $dados->lote;
             $ativo                    = $dados->ativo;
-            //$qtdprodutoComprado       = $dados->qtdprodutoComprado;
+            $qtdprodutoComprado       = $dados->qtdProdutoComprado;
             $venda_unitaria           = $dados->venda_unitaria;
             $custo_unitario           = $dados->custo_unitario;
             $porcentagem_lucro        = $dados->porcentagem_lucro;
             // $pativo                   = $dados->pativo;
+            $venda_unitaria           = number_format($venda_unitaria, 2, ",", ".");
+            $custo_unitario           = number_format($custo_unitario, 2, ",", ".");
         }
     }
 
@@ -83,8 +86,8 @@ include "validacao/functions.php";
                             <select name="produto_id" id="produto_id" class="form-control" required data-parsley-required-message="Selecione um Produto">
                                 <option>Selecione o Produto</option>
                                     <?php
-                                        $sql = "SELECT * FROM produto WHERE ativo = 0 
-                                        ORDER BY nome_produto  ";
+                                        $sql = "SELECT * FROM produto WHERE ativo = $edicao 
+                                        ORDER BY nome_produto ";
                                         $consulta = $pdo->prepare($sql);
                                         $consulta->execute();
 
@@ -92,8 +95,11 @@ include "validacao/functions.php";
                                         //separar os dados
                                             $id            = $d->id;
                                             $nome_produto  = $d->nome_produto;
-                                            echo '<option value="'.$id.'">'.$nome_produto.'</option>';
-                                        }
+                                      
+                                    ?>										
+                                            <option value="<?=$id?>"<?= $id == $produto_id ? "selected" : "" ?>><?=$nome_produto?></option>
+											<?php
+                                        }                    
                                     ?>
                             </select>
                         </div>
@@ -115,7 +121,10 @@ include "validacao/functions.php";
                                             $id        = $f->id;
                                             $razaoSocial  = $f->razaoSocial;
                                             echo '<option value="'.$id.'">'.$razaoSocial.'</option>';
-                                        }
+                                            ?>
+                                            <option value="<?=$id?>"<?= $id == $fornecedor_id ? "selected" : "" ?>><?=$razaoSocial?></option>
+											<?php
+                                        }                    
                                     ?>
                             </select>
                         </div>
@@ -123,7 +132,7 @@ include "validacao/functions.php";
                         <label >Valor de Custo</label>
                         <input type="text" id="custo_unitario" onblur="valorVenda()" name="custo_unitario" class="form-control number_format" 
                             required data-parsley-required-message="Preencha este campo" 
-                             value="<?=$custo_unitario;?>" placeholder="R$ 0,00">
+                             value="<?=$custo_unitario?>" placeholder="R$ 0,00">
                         </div>         
                       
                         <div type="text" class="col-12 col-md-4 mt-2">

@@ -29,7 +29,7 @@ $primeiro_nome = $sobrenome = $cpf = $data_nascimento = $email = $senha = $cep =
 
 if (!empty($id)) {
 	//selecionar os dados do cliente
-	$sql =  "SELECT c.*, date_format(c.data_nascimento, '%d/%m/%Y') data_nascimento,
+	$sql =  "SELECT c.*, date_format(c.data_nascimento, '%d/%m/%Y'),
 			ci.cidade, ci.estado FROM cliente c 
 	  INNER JOIN cidade ci ON ( ci.id = c.cidade_id ) WHERE c.id = :id LIMIT 1";
 	$consulta = $pdo->prepare($sql);
@@ -110,21 +110,23 @@ if (!empty($id)) {
 						</div>
 						<div class="mb-3 col-12 col-md-4">
 							<label class="form-label" for="genero_id">Gênero:</label>
-							<select name="genero_id" id="genero_id" class="form-control" required data-parsley-required-message="selecione uma opção" value="<?php if (!empty($genero_id)) echo "$genero_id"; ?>">
-								<option value="<?= $genero_id; ?>">Selecione seu Gênero</option>
-								<?php
-								$sql = "SELECT * FROM genero ORDER BY id";
-								$consulta = $pdo->prepare($sql);
-								$consulta->execute();
+							<select name="genero_id" id="genero_id" class="form-control" required data-parsley-required-message="selecione uma opção">
+                                <option>Selecione o Gênero</option>
+                                    <?php
+                                        $sql = "SELECT * FROM genero ORDER BY id";
+                                        $consulta = $pdo->prepare($sql);
+                                        $consulta->execute();
 
-								while ($d = $consulta->fetch(PDO::FETCH_OBJ)) {
-									//separar os dados
-									$id   = $d->id;
-									$genero = $d->genero;
-									echo '<option value="' . $id . '">' . $genero . '</option>';
-								}
-								?>
-							</select>
+                                        while ($d = $consulta->fetch(PDO::FETCH_OBJ) ) {
+                                        //separar os dados
+                                            $id   = $d->id;
+                                            $genero = $d->genero;
+											?>
+                                            <option value="<?=$id?>"<?= $id == $genero_id ? "selected" : "" ?>><?=$genero?></option>
+											<?php
+                                        }                    
+                                    ?>
+                            </select>
 						</div>
 						<div class="mb-3 col-12 col-md-4 mt-2">
 							<label for="data_nascimento">Data de Nascimento:</label>

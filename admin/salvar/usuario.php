@@ -131,8 +131,8 @@ if ( $_POST ) {
         $consulta->bindParam(":genero_id", $genero_id);
  
       } else if ( empty ( $foto ) ) {
-        $senha = password_hash($senha, PASSWORD_BCRYPT);
-        $sql = "UPDATE usuario SET primeiro_nome = :primeiro_nome, sobrenome = :sobrenome, email = :email, login = :login, senha = :senha,
+        //$senha = password_hash($senha, PASSWORD_BCRYPT);
+        $sql = "UPDATE usuario SET primeiro_nome = :primeiro_nome, sobrenome = :sobrenome, email = :email, login = :login,
         cidade_id = :cidade_id, cidade = :cidade, estado = :estado, cep = :cep, complemento = :complemento, bairro = :bairro, 
         numero_resid = :numero_resid, endereco = :endereco, ativo = :ativo, dataNascimento = :dataNascimento, cpf = :cpf, celular = :celular, genero_id = :genero_id WHERE id = :id ";
         $consulta = $pdo->prepare($sql);
@@ -140,7 +140,7 @@ if ( $_POST ) {
         $consulta->bindParam(":sobrenome", $sobrenome);
         $consulta->bindParam(":login", $login);
         $consulta->bindParam(":email", $email);
-        $consulta->bindParam(":senha", $senha);
+        //$consulta->bindParam(":senha", $senha);
         $consulta->bindParam(":cidade_id", $cidade_id);
         $consulta->bindParam(":cidade", $cidade);
         $consulta->bindParam(":estado", $estado);
@@ -170,7 +170,7 @@ if ( $_POST ) {
         $consulta->bindParam(":sobrenome", $sobrenome);
         $consulta->bindParam(":login", $login);
         $consulta->bindParam(":email", $email);
-        $consulta->bindParam(":senha", $senha);
+        //$consulta->bindParam(":senha", $senha);
         $consulta->bindParam(":cidade_id", $cidade_id);
         $consulta->bindParam(":foto", $foto);
         $consulta->bindParam(":cidade", $cidade);

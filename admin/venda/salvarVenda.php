@@ -40,7 +40,6 @@ exit;
           //iniciar uma transacao
         
         $pdo->beginTransaction();
-        
           
         if ( empty ( $id ) ) {
           //inserir os dados no banco
@@ -64,6 +63,7 @@ exit;
          //executar e verificar se deu certo
          if ( $consulta->execute() ) {
           //gravar no banco 
+          if ( empty ( $id ) ) $id = $pdo->lastInsertId();
           $pdo->commit();
           $sql = "select iv.quantidade, iv.produto_id, v.status from item_venda iv inner join venda v on (v.id = iv.venda_id)";
           $consulta = $pdo->prepare($sql);
@@ -76,7 +76,8 @@ exit;
             }
           }
 
-          echo "<script>alert('Salvo com Sucesso!');location.href='venda/vendaProduto';</script>";
+          echo "<script>alert('Salvo com Sucesso!');location.href='venda/vendaProduto/{$id}';</script>";
+
           
         }
   

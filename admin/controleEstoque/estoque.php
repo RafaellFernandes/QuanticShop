@@ -87,9 +87,7 @@ $produto_id = $qtd_estoque = $produto = NULL;
                             $consulta->execute();
 
                             while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ){
-
-                                echo "<option value='{$dados->id} - {$dados->nome_produto} - M:{$dados->marca_id} - D:{$dados->departamento_id} - E:{$dados->qtdProdutoComprado}'>";
-
+                                echo "<option value='{$dados->id} - {$dados->nome_produto} - M:{$dados->marca_id} - D:{$dados->departamento_id}'>";
                             }
                         ?>
                     </datalist>

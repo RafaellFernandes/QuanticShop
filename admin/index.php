@@ -215,6 +215,7 @@
 						</a>
 						<ul id="ui2" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
 						<li class="sidebar-item"><a class="sidebar-link" href="venda/vendaProduto">Venda</a></li>
+						<li class="sidebar-item"><a class="sidebar-link" href="venda/listar">Lista Vendas</a></li>
 						
 						</ul>
 					</li>

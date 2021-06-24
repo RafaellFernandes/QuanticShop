@@ -52,7 +52,7 @@ exit;
     $cliente_id = $dados->cliente_id;
    
     //formatar o nome do cliente
-    $cliente = "{$cliente_id} - {$cliente} - {$celular}";
+    $cliente = "{$cliente_id} - {$primeiro_nome} {$sobrenome} {$razaoSocial} - {$celular}";
 }
 ?>
 
@@ -133,9 +133,7 @@ exit;
                 </div> 
             </div> 
             <br>
-            <button type="submit" class="btn btn-success float-right">
-                Salvar/Alterar
-            </button>
+            <button type="submit" class="btn btn-info">Salvar/Alterar</button>
         </form> 
     </div> 
 </div> 
@@ -191,11 +189,7 @@ exit;
 
                             <datalist id="listProdutos"> 
                             <?php
-                            $sql = "SELECT p.id pid, p.*, e.id eid, e.* 
-                            FROM produto p
-                            INNER JOIN estoque e ON (p.id = e.produto_id)
-                            WHERE ativo = 1  AND qtd_estoque > 10
-                            ORDER BY rand()";
+                             $sql = "SELECT id, nome_produto, valorUnitario FROM produto WHERE ativo = 1";
                             $consulta = $pdo->prepare($sql);
                             $consulta->execute();
 
@@ -238,7 +232,7 @@ exit;
                     p = produto.split(" - ");
                     //console.log(p);
                     produto = p[0];
-                    valor = p[2];
+                    valor = p[3];
                     
                     $("#produto_id").val(produto);
                     $("#valor").val(valor);
