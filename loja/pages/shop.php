@@ -28,7 +28,7 @@
 				$sql = "SELECT p.id pid, p.*, e.id eid, e.* 
 						FROM produto p
 						INNER JOIN estoque e ON (p.id = e.produto_id)
-						WHERE ativo = 1  AND qtd_estoque > 10
+						WHERE ativo = 1 AND qtd_estoque > 10
 						ORDER BY rand() LIMIT 30";
 				$consulta = $pdo->prepare($sql);
 				$consulta->execute();

@@ -55,7 +55,7 @@ exit;
     $cliente = "{$cliente_id} - {$primeiro_nome} {$sobrenome} {$razaoSocial} - {$celular}";
 }
 ?>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>   
 <div class="container-fluid p-0">
 	<div class="row">
 		<div class="col-12 col-xl-12">
@@ -169,11 +169,8 @@ exit;
 		<div class="col-12 col-xl-12">
 			<div class="card">
 				<div class="card-header">
-					<div class="float-end">	
-           
-                    </div>
-                <h4>Selecione um Produto</h4>
-				<h6 class="card-subtitle text-muted"></h6>
+                    <h4>Selecione um Produto</h4>
+                    <h6 class="card-subtitle text-muted"></h6>
                 </div>
                 <div class="card-body">
                 <form name="formItens" id="formItens" method="post" action="itens.php" target="itens" data-parsley-validate="">
@@ -201,7 +198,7 @@ exit;
                         </div>
                         <div class="col-12 col-md-2">
                             <input type="text" name="valor" id="valor" class="form-control" required 
-                            data-parsley-required-message="Preencha o valor" 
+                            data-parsley-required-message="Preencha o valor"  readonly
                             <?=$disabled?>>
                         </div>
                         <div class="col-12 col-md-2">
@@ -214,7 +211,6 @@ exit;
                         </div>
                     </div> <!-- row -->
                 </form>
-
                 <iframe src="itens.php?venda_id=<?=$id?>" width="100%"
                 height="400px" name="itens"></iframe>
             </div>
@@ -236,18 +232,6 @@ exit;
                     
                     $("#produto_id").val(produto);
                     $("#valor").val(valor);
-                    //realizar a busca de valor no buscaValor.php 
-                    // $.get("buscaValor.php",
-                    //     {produto:produto},
-                    //     function(dados){
-                    //         if ( dados == "erro" ) {
-                    //             console.log("Deu erro");
-                    //             //sweet alert
-                    //         } else {
-                    //             console.log("Entrou aqui");
-                    //             $("#valor").val(dados);
-                    //         }
-                    // })
 
                 }
             })
@@ -256,3 +240,6 @@ exit;
         <?php
     }
 ?>
+<script>
+    // $("#valor").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+</script>
