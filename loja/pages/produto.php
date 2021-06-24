@@ -72,7 +72,7 @@
 	                            <li><a href="#"><i class="fa fa-star"></i></a></li>
 	                            <li><a href="#"><i class="fa fa-star"></i></a></li>
 	                            <li><a href="#"><i class="fa fa-star"></i></a></li>
-	                            <li class="review"><a href="#"> (250 reviews) </a></li>
+	                            <li class="review"><a href="#"> </a></li>
 	                        </ul>
 	                    </div>
 	                    <div class="price_box">
@@ -85,7 +85,7 @@
 	                        <p>Código do Produto: <?=$dados->codigo?></p>
 	                    </div>
 						<div class="product_timing">
-	                        <div data-countdown="2021/06/24"></div>
+	                        <div data-countdown="2021/06/25"></div>
 	                    </div>
 	                    <div class="product_variant quantity">
 							<label>Quantidade</label>
