@@ -108,18 +108,15 @@ exit;
           $consulta->bindParam(":siteClienteJuridico", $siteClienteJuridico);
           $consulta->bindParam(":complemento", $complemento);
           $consulta->bindParam(":genero_id", $genero_id);
-          
-          
-          
-      } else {
-          //update se o id estiver preenchido
-                    
+           
+      } else if(empty($foto)) {
+        $senha = password_hash($senha, PASSWORD_BCRYPT);
+        //update se o id estiver preenchido                 
           $sql = "UPDATE cliente SET email = :email, senha = :senha, cep = :cep, endereco = :endereco, complemento = :complemento,
          bairro = :bairro, cidade_id = :cidade_id, telefone = :telefone, celular = :celular, 
-            numero_resid = :numero_resid, pessoaFJ = :pessoaFJ, cidade = :cidade, estado = :estado, nomeFantasia = :nomeFantasia,
-            razaoSocial = :razaoSocial, cnpj = :cnpj, inscricao_estadual = :inscricao_estadual, ativo = :ativo,
-             siteClienteJuridico = :siteClienteJuridico, complemento = :complemento, genero_id = :genero_id WHERE id = :id";
-
+         numero_resid = :numero_resid, pessoaFJ = :pessoaFJ, cidade = :cidade, estado = :estado, nomeFantasia = :nomeFantasia,
+         razaoSocial = :razaoSocial, cnpj = :cnpj, inscricao_estadual = :inscricao_estadual, ativo = :ativo,
+         siteClienteJuridico = :siteClienteJuridico, complemento = :complemento, genero_id = :genero_id WHERE id = :id";
           $consulta = $pdo->prepare($sql);
           $consulta->bindParam(":email", $email);
           $consulta->bindParam(":senha", $senha);
@@ -143,6 +140,37 @@ exit;
           $consulta->bindParam(":genero_id", $genero_id);
           $consulta->bindParam(":id", $id);
           
+      } else {
+         //update sem senha
+        //update se o id estiver preenchido
+        $sql = "UPDATE cliente SET email = :email, cep = :cep, endereco = :endereco, complemento = :complemento,
+        bairro = :bairro, cidade_id = :cidade_id, telefone = :telefone, celular = :celular, 
+        numero_resid = :numero_resid, pessoaFJ = :pessoaFJ, cidade = :cidade, estado = :estado, nomeFantasia = :nomeFantasia,
+        razaoSocial = :razaoSocial, cnpj = :cnpj, inscricao_estadual = :inscricao_estadual, ativo = :ativo,
+        siteClienteJuridico = :siteClienteJuridico, complemento = :complemento, genero_id = :genero_id WHERE id = :id";
+         $consulta = $pdo->prepare($sql);
+        $consulta = $pdo->prepare($sql);
+        $consulta->bindParam(":primeiro_nome", $primeiro_nome);
+        $consulta->bindParam(":sobrenome", $sobrenome);
+        $consulta->bindParam(":cpf", $cpf);
+        $consulta->bindParam(":data_nascimento", $data_nascimento);
+        $consulta->bindParam(":email", $email);
+        // $consulta->bindParam(":senha", $senha);
+        $consulta->bindParam(":cep", $cep);
+        $consulta->bindParam(":endereco", $endereco);
+        $consulta->bindParam(":complemento", $complemento);
+        $consulta->bindParam(":bairro", $bairro);
+        $consulta->bindParam(":cidade_id", $cidade_id);
+        $consulta->bindParam(":foto", $foto);
+        $consulta->bindParam(":telefone", $telefone);
+        $consulta->bindParam(":celular", $celular);
+        $consulta->bindParam(":numero_resid", $numero_resid);
+        $consulta->bindParam(":pessoaFJ", $pessoaFJ);
+        $consulta->bindParam(":cidade", $cidade);
+        $consulta->bindParam(":estado", $estado);
+        $consulta->bindParam(":ativo", $ativo);
+        $consulta->bindParam(":genero_id", $genero_id);
+        $consulta->bindParam(":id", $id);
       }
       //executar e verificar se deu certo
         if ( $consulta->execute() ) {
@@ -152,8 +180,10 @@ exit;
           $titulo = "Sucesso";
           $mensagem = "Cliente Salvo!";
           $icone = "success";
-          mensagem($titulo, $mensagem, $icone);
+          // mensagem($titulo, $mensagem, $icone);
+          echo "<script>window.alert('Cliente Salvo!')</script>";
           echo "<script>location.href='listagem/cliente';</script>";
+          exit;
          
         }
 

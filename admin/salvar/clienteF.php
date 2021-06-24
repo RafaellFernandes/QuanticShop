@@ -52,6 +52,8 @@ if ($_POST) {
         echo "<script>alert('Preencha o Celular!');history.back();</script>";
     } else if (empty($numero_resid)) {
         echo "<script>alert('Digite o Numero da Residencia!');history.back();</script>";
+    } else if (empty($senha)) {
+        echo "<script>alert('Digite uma senha!');history.back();</script>";
     }
 
 
@@ -202,7 +204,8 @@ if ($_POST) {
         $titulo = "Sucesso";
         $mensagem = "Cliente Salvo/Alterado!";
         $icone = "success";
-        mensagem($titulo, $mensagem, $icone);
+        // mensagem($titulo, $mensagem, $icone);
+        echo "<script>window.alert('Cliente Salvo/Alterado!')</script>";
         echo "<script>location.href='listagem/cliente';</script>";
         exit;
     } else {
