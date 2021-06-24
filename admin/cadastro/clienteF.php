@@ -67,7 +67,7 @@ if (!empty($id)) {
 	}
 }
 ?>
-<script src="assets/mask/jquery.mask.js"></script>
+<script src="vendor/jqueryMask/src/jquery.mask.js"></script>
 <div class="container-fluid p-0">
 	<div class="col-md-12">
 		<div class="card">

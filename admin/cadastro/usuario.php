@@ -65,6 +65,7 @@ if(!empty($id)){
 	$celular                = $dados->celular;
 }
 ?>
+<script src="vendor/jqueryMask/src/jquery.mask.js"></script>
 <div class="container-fluid p-0">
     <div class="col-md-12">
         <div class="card">
@@ -285,8 +286,6 @@ if(!empty($id)){
 		$('#cpf').mask('000.000.000-00');
 		$("#dataNascimento").mask("00/00/0000");
 		$("#celular").mask("(00) 00000-0000");  
-		//$("#genero_id").val(<?=$genero_id?>);  
- 
 	});
 
     function confirmarEmailUser(email){
