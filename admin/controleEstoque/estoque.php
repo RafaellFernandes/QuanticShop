@@ -1,16 +1,16 @@
 <?php
-if (!isset($_SESSION["quanticshop"]["id"])) {
-    $titulo = "Erro";
-    $mensagem = "Usuário Não Logado";
-    $icone = "error";
-    mensagem($titulo, $mensagem, $icone);
-exit;
-}
+    if (!isset($_SESSION["quanticshop"]["id"])) {
+        $titulo = "Erro";
+        $mensagem = "Usuário Não Logado";
+        $icone = "error";
+        mensagem($titulo, $mensagem, $icone);
+        exit;
+    }
 
-if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-    echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
-exit;
-}
+    if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+        echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
+        exit;
+    }
 
     //mostrar erros
 	ini_set('display_errors',1);
@@ -18,40 +18,41 @@ exit;
     error_reporting(E_ALL);
     
 
-//se nao existe o id
-if ( !isset ( $id ) ) $id = "";
-//iniciar as variaveis
-$produto_id = $qtd_estoque = $produto = $produto_desc = NULL;
+    //se nao existe o id
+    if ( !isset ( $id ) ) $id = "";
+    //iniciar as variaveis
+    $produto_id = $qtd_estoque = $produto = $produto_desc = NULL;
 
-  //verificar se existe um id
-  if ( !empty ( $id ) ) {
-    $produto_id = $id;
-    include "validacao/functions.php";
-   
-  	//selecionar os dados do banco para poder editar
-      $sql = "SELECT 
-        e.*,
-        p.* 
-     FROM estoque e
-     left join produto p on (p.id = e.produto_id)
-     WHERE  e.id = :id LIMIT 1";
-      $consulta = $pdo->prepare($sql);
-      $consulta->bindParam(":id", $id);
-      $consulta->execute();
-      
-  	$dados  = $consulta->fetch(PDO::FETCH_OBJ);
+    //verificar se existe um id
+    if ( !empty ( $id ) ) {
+        $produto_id = $id;
+        include "validacao/functions.php";
+    
+        //selecionar os dados do banco para poder editar
+        $sql = "SELECT 
+            e.*,
+            p.* 
+        FROM estoque e
+        left join produto p on (p.id = e.produto_id)
+        WHERE  e.id = :id LIMIT 1";
+        $consulta = $pdo->prepare($sql);
+        $consulta->bindParam(":id", $id);
+        $consulta->execute();
+        
+        $dados  = $consulta->fetch(PDO::FETCH_OBJ);
 
-  	//separar os dados
-    $id         	  = $dados->id;
-    $qtd_estoque 	  = $dados->qtd_estoque; 
-    $produto_id       = $dados->produto_id;
-    $produto          = $dados->produto_id;
-  
-    $produto_desc     = $dados->id.' - '.$dados->nome_produto.' - M:'.$dados->marca_id.' - D:'.$dados->departamento_id;      
-  }
+        //separar os dados
+        $id         	  = $dados->id;
+        $qtd_estoque 	  = $dados->qtd_estoque; 
+        $produto_id       = $dados->produto_id;
+        $produto          = $dados->produto_id;
+    
+        $produto_desc     = $dados->id.' - '.$dados->nome_produto.' - M:'.$dados->marca_id.' - D:'.$dados->departamento_id;      
+    }
 
 ?>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>                      
+<script src="vendor/js/jquery.maskMoney.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>                       -->
 <div class="container-fluid p-0">
 	<div class="col-md-12">
 		<div class="card">
@@ -67,15 +68,14 @@ $produto_id = $qtd_estoque = $produto = $produto_desc = NULL;
                             <label for="id">ID</label>
                             <input type="text" name="id" id="id" readonly class="form-control" value="<?=$id;?>">
                         </div>
-                       
                         <div class="col-2">
-                    <label for="produto_id">Id Produto</label>
-                    <input type="text" name="produto_id" id="produto_id"
-                    class="form-control" required 
-                    data-parsley-required-message="Selecione o produto" readonly
-                    value="<?=$produto_id?>">
-                </div>
-                <div class="col-10">
+                            <label for="produto_id">Id Produto</label>
+                            <input type="text" name="produto_id" id="produto_id"
+                            class="form-control" required 
+                            data-parsley-required-message="Selecione o produto" readonly
+                            value="<?=$produto_id?>">
+                        </div>
+                        <div class="col-10">
 							<span>Produto<label class="form-label" for="genero_id"></label></span>
 							<select name="produto" id="produto" class="form-control" required data-parsley-required-message="selecione uma opção">
 								<option value="<?=$produto;?>"><?= $produto_desc ?></option>
@@ -93,29 +93,28 @@ $produto_id = $qtd_estoque = $produto = $produto_desc = NULL;
 								?>
 							</select>
 						</div>
-            
-                </div> 
-                        <div class="col-12 col-md-4">
-                            <label for="qtd_estoque">Quantidade em Estoque</label>
-                            <input type="number" name="qtd_estoque" id="qtd_estoque" required data-parsley-required-message="Preencha este campo" class="form-control" value="<?=$qtd_estoque;?>">
+                    </div> 
+                    <div class="col-12 col-md-4">
+                        <label for="qtd_estoque">Quantidade em Estoque</label>
+                        <input type="number" name="qtd_estoque" id="qtd_estoque" required data-parsley-required-message="Preencha este campo" class="form-control" value="<?=$qtd_estoque;?>">
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-sm-4 mt-4">
+                            <button type="submit" class="btn btn-success margin">
+                                    Salvar / Alterar
+                            </button>
                         </div>
-                        <div class="row g-2">
-                            <div class="col-sm-4 mt-4">
-                                <button type="submit" class="btn btn-success margin">
-                                        Salvar / Alterar
-                                </button>
-                            </div>
-                            <div class="col-sm-4 mt-4">
-                                <div class="float-center text-center">
-                                    <a href="venda/vendaProduto" class="btn btn-danger">Item Venda</a> 
-                                </div> 
-                            </div>
-                            <div class="col-sm-4 mt-4">
-                                <div class="float-end">
-                                    <a href="controleEstoque/listaEstoque" class="btn btn-primary">Listar Registros</a> 
-                                </div> 
-                            </div>
+                        <div class="col-sm-4 mt-4">
+                            <div class="float-center text-center">
+                                <a href="venda/vendaProduto" class="btn btn-danger">Item Venda</a> 
+                            </div> 
                         </div>
+                        <div class="col-sm-4 mt-4">
+                            <div class="float-end">
+                                <a href="controleEstoque/listaEstoque" class="btn btn-primary">Listar Registros</a> 
+                            </div> 
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -137,12 +136,15 @@ $produto_id = $qtd_estoque = $produto = $produto_desc = NULL;
 </script>
 
 <script>$("#valor_bruto").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});</script>
+
 <script type="text/javascript">
     $(document).ready(function() {
         $("#qtd_estoque").mask("999999");
     });
 </script>
+
 <script src='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.min.js'></script>
+
 <script>
  $('.input-group.date').datepicker({format: "dd/mm/yyyy"});
 </script>

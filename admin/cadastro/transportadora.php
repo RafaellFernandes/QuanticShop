@@ -1,16 +1,16 @@
 <?php
-if (!isset($_SESSION["quanticshop"]["id"])) {
-	$titulo = "Erro";
-	$mensagem = "Usuário Não Logado";
-	$icone = "error";
-	mensagem($titulo, $mensagem, $icone);
-exit;
-}
+	if (!isset($_SESSION["quanticshop"]["id"])) {
+		$titulo = "Erro";
+		$mensagem = "Usuário Não Logado";
+		$icone = "error";
+		mensagem($titulo, $mensagem, $icone);
+	exit;
+	}
 
-if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-	echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
-exit;
-}
+	if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+		echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
+	exit;
+	}
 
 	include "validacao/functions.php";
 
@@ -18,54 +18,54 @@ exit;
 	if ( !isset ( $id ) ) $id = "";
 
   	//iniciar as variaveis
-	  $nomeFantasia = $razaoSocial = $cnpj = $cep = $endereco = $cidade_id = $telefone = $cidade = $estado = $email = $inscricaoEstadual = 
-	  $celular = $bairro = $numero_resid = $ativo = $complemento = $siteTransp = "";
+	$nomeFantasia = $razaoSocial = $cnpj = $cep = $endereco = $cidade_id = $telefone = $cidade = $estado = $email = $inscricaoEstadual = 
+	$celular = $bairro = $numero_resid = $ativo = $complemento = $siteTransp = "";
   
 	//verificar se existe um id
 	if( !empty ( $id ) ) {
-    //selecionar dados do banco
-    $sql = "SELECT t.*, c.cidade, c.estado FROM transportadora t
-	INNER JOIN cidade c ON(c.id = t.cidade_id) 
-	WHERE t.id = :id limit 1";
-	
-    $consulta = $pdo->prepare($sql);
-    $consulta->bindParam(":id", $id);
-    $consulta->execute();
+		//selecionar dados do banco
+		$sql = "SELECT t.*, c.cidade, c.estado 
+				FROM transportadora t
+				INNER JOIN cidade c ON(c.id = t.cidade_id) 
+				WHERE t.id = :id 
+				LIMIT 1";
+		
+		$consulta = $pdo->prepare($sql);
+		$consulta->bindParam(":id", $id);
+		$consulta->execute();
 
-    $dados = $consulta->fetch(PDO::FETCH_OBJ);
+		$dados = $consulta->fetch(PDO::FETCH_OBJ);
 
-	// separar os dados
-    $id                  = $dados->id;
-	$nomeFantasia        = $dados->nomeFantasia;
-	$razaoSocial         = $dados->razaoSocial;
-    $cnpj                = $dados->cnpj;
-	$endereco            = $dados->endereco;
-    $inscricaoEstadual   = $dados->inscricaoEstadual;
-    $cep                 = $dados->cep;
-    $telefone            = $dados->telefone;
-	$celular             = $dados->celular;
-	$cidade_id           = $dados->cidade_id;
-	$email               = $dados->email;
-	$cidade              = $dados->cidade;
-	$estado         	 = $dados->estado;
-	$bairro         	 = $dados->bairro;
-	$numero_resid        = $dados->numero_resid;
-	$ativo           	 = $dados->ativo;
-	$complemento         = $dados->complemento;
-	$siteTransp          = $dados->siteTransp;
+		// separar os dados
+		$id                  = $dados->id;
+		$nomeFantasia        = $dados->nomeFantasia;
+		$razaoSocial         = $dados->razaoSocial;
+		$cnpj                = $dados->cnpj;
+		$endereco            = $dados->endereco;
+		$inscricaoEstadual   = $dados->inscricaoEstadual;
+		$cep                 = $dados->cep;
+		$telefone            = $dados->telefone;
+		$celular             = $dados->celular;
+		$cidade_id           = $dados->cidade_id;
+		$email               = $dados->email;
+		$cidade              = $dados->cidade;
+		$estado         	 = $dados->estado;
+		$bairro         	 = $dados->bairro;
+		$numero_resid        = $dados->numero_resid;
+		$ativo           	 = $dados->ativo;
+		$complemento         = $dados->complemento;
+		$siteTransp          = $dados->siteTransp;
 
-	if( empty ( $dados->id ) ) {
-		$titulo = "Erro";
-		$mensagem = "Transportadora Não Existente";
-		$icone = "error";
-		mensagem($titulo, $mensagem, $icone);
-	    // echo "<p class='alert alert-danger'> A Transportadora não existe! </p>";
-        exit;
-    }
-}
+		if( empty ( $dados->id ) ) {
+			$titulo = "Erro";
+			$mensagem = "Transportadora Não Existente";
+			$icone = "error";
+			mensagem($titulo, $mensagem, $icone);
+			exit;
+		}
+	}
 ?>
 <script src="vendor/jqueryMask/src/jquery.mask.js"></script>
-<!-- <script src="assets/mask/jquery.mask.js"></script> -->
 <div class="container-fluid p-0">
     <div class="col-md-12">
         <div class="card">
@@ -75,7 +75,7 @@ exit;
             </div>
             <div class="card-body">
 				<form name="formCadastro" method="POST" action="salvar/transportadora" data-parsley-validate enctype="multipart/form-data">
-				<p> Todos os Campos São Obrigatórios. </p>
+					<p> Todos os Campos São Obrigatórios. </p>
 					<div class="row">
 						<div class="col-12 col-md-2" style="display: none;">
 							<label for="id">ID:</label>
@@ -131,7 +131,6 @@ exit;
 							<input type="text" name="celular" id="celular" class="form-control" placeholder="Celular com DDD"
 							value="<?=$celular;?>">
 						</div>
-						
 						<div class="col-12 col-md-3 mt-2">
 							<label for="cep">CEP:</label>
 							<input type="text" name="cep" id="cep" class="form-control" required data-parsley-required-message="Preencha o CEP" 
@@ -142,7 +141,6 @@ exit;
 							<input type="text" name="cidade_id" id="cidade_id" class="form-control" required data-parsley-required-message="Preencha a Cidade" 
 							readonly value="<?=$cidade_id;?>">		
 						</div> 
-				
 						<div class="col-12 col-md-3 mt-2">
 							<label for="cidade">Cidade:</label>
 							<input type="text" name="cidade" id="cidade" class="form-control" value="<?=$cidade;?>" placeholder="Nome da Cidade">
@@ -176,9 +174,9 @@ exit;
                         </div>
 						<div class="col-sm-2 mt-4">
                             <div class="float-center ">
-                            <button type="reset" class="btn btn-danger margin">
-                                    Apagar tudo
-							</button>
+								<button type="reset" class="btn btn-danger margin">
+										Apagar tudo
+								</button>
                             </div> 
                         </div>
                         <div class="col-sm">
@@ -192,66 +190,64 @@ exit;
 		</div>
 	</div>
 </div>
+<?php
+	//verificar se o id é vazio
+	if ( empty ( $id ) ) $id = 0;
+?>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#cnpj").mask("00.000.000/0000-00");
+		$("#telefone").mask("(00) 0000-0000");
+		$("#celular").mask("(00) 00000-0000");
+		$("#cep").mask("00000-000");       
+	});
 
-	<?php
-		//verificar se o id é vazio
-		if ( empty ( $id ) ) $id = 0;
-	?>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$("#cnpj").mask("00.000.000/0000-00");
-			$("#telefone").mask("(00) 0000-0000");
-			$("#celular").mask("(00) 00000-0000");
-			$("#cep").mask("00000-000");       
-		});
-
-        function validaCNPJ() {
-			let cnpj = document.getElementById('cnpj').value;
-			cnpj = cnpj.replace('/','').replace('-','').replace('.','').replace('.','');
-			$.get("validacao/validaCnpj.php", {cnpj:cnpj, id:<?=$id;?>}, function(dados){
-				if(dados != "1"){
-					//mostrar erro retornado
-					alert(dados);
-					//zerar Cnpj
-					$("#cnpj").val("");
-				}
-			})
-        }
+    function validaCNPJ() {
+		let cnpj = document.getElementById('cnpj').value;
+		cnpj = cnpj.replace('/','').replace('-','').replace('.','').replace('.','');
+		$.get("validacao/validaCnpj.php", {cnpj:cnpj, id:<?=$id;?>}, function(dados){
+			if(dados != "1"){
+				//mostrar erro retornado
+				alert(dados);
+				//zerar Cnpj
+				$("#cnpj").val("");
+			}
+		})
+    }
                 
-        function confirmarEmailTransport(email){
-			$.get("validacao/verificaEmailTransp.php", {email:email,id:<?=$id;?>}, function(dados){
-			   if(dados != ""){
-				   alert(dados);
-				   $("#email").val("");
-			   }
-		   }) 
-        }
+    function confirmarEmailTransport(email){
+		$.get("validacao/verificaEmailTransp.php", {email:email,id:<?=$id;?>}, function(dados){
+		   if(dados != ""){
+			   alert(dados);
+			   $("#email").val("");
+		   }
+	   }) 
+    }
                   
-		 $("#cep").blur(function(){
-                cep = $("#cep").val();
-                cep = cep.replace(/\D/g, '');
-                //alert(cep);
-                if(cep == ""){
-                    alert("Preencha o cep");
-                } else{
-                    //consultar o cep no viacep.com.br
-                     $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados){
-                        $("#endereco").val(dados.logradouro);
-						$("#cidade").val(dados.localidade);
-						$("#estado").val(dados.uf);
-						$("#bairro").val(dados.bairro)
-                         //buscar id da cidade
-                         
-                         $.get("buscarCidade.php", {cidade: dados.localidade, estado: dados.uf}, function(dados){
-                             if(dados != "Erro")
-                                 $("#cidade_id").val(dados);
-                             else
-                                alert(dados);
-                         })
-                         //focar no complemento
-                         $("#endereco").focus();
-                     })
-                }
+	$("#cep").blur(function(){
+        cep = $("#cep").val();
+        cep = cep.replace(/\D/g, '');
+        //alert(cep);
+        if(cep == ""){
+            alert("Preencha o cep");
+        } else{
+            //consultar o cep no viacep.com.br
+            $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados){
+                $("#endereco").val(dados.logradouro);
+				$("#cidade").val(dados.localidade);
+				$("#estado").val(dados.uf);
+				$("#bairro").val(dados.bairro)
+                 //buscar id da cidade
+                 
+                 $.get("buscarCidade.php", {cidade: dados.localidade, estado: dados.uf}, function(dados){
+                     if(dados != "Erro")
+                         $("#cidade_id").val(dados);
+                     else
+                        alert(dados);
+                 })
+                 //focar no complemento
+                 $("#endereco").focus();
             })
-        
-	</script>
+        }
+    })    
+</script>

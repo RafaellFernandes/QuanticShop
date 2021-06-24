@@ -1,69 +1,68 @@
 <?php
-if (!isset($_SESSION["quanticshop"]["id"])) {
-	$titulo = "Erro";
-	$mensagem = "Usuário Não Logado";
-	$icone = "error";
-	mensagem($titulo, $mensagem, $icone);
-	exit;
-}
-
-if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-	echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
-	exit;
-}
-
-include "validacao/functions.php";
-
-//mostrar erros
-ini_set('display_errors', 1);
-ini_set('display_startup_erros', 1);
-error_reporting(E_ALL);
-
-if (!isset($id)) $id = "";
-
-$email = $senha = $cep = $telefone = $celular = $pessoaFJ = $nomeFantasia = $razaoSocial = $cnpj = $inscricao_estadual = $siteClienteJuridico =
-	$estado = $cidade = $endereco = $bairro = $numero_resid = $cidade_id = $ativo = $siteJ = $complemento =  $genero_id = "";
-
-if (!empty($id)) {
-	//selecionar os dados do cliente
-	$sql =  "SELECT c.*, ci.cidade, ci.estado FROM cliente c 
-	  INNER JOIN cidade ci ON ( ci.id = c.cidade_id ) WHERE c.id = :id LIMIT 1";
-	$consulta = $pdo->prepare($sql);
-	$consulta->bindParam(":id", $id);
-	$consulta->execute();
-
-	$dados = $consulta->fetch(PDO::FETCH_OBJ);
-
-	if (empty($dados->id)) {
+	if (!isset($_SESSION["quanticshop"]["id"])) {
 		$titulo = "Erro";
-		$mensagem = "Cliente Não Existente";
+		$mensagem = "Usuário Não Logado";
 		$icone = "error";
 		mensagem($titulo, $mensagem, $icone);
+		exit;
 	}
 
-	$id                      = $dados->id;
-	$email                   = $dados->email;
-	$senha                   = $dados->senha;
-	$telefone                = $dados->telefone;
-	$celular                 = $dados->celular;
-	$pessoaFJ                = $dados->pessoaFJ;
-	$nomeFantasia            = $dados->nomeFantasia;
-	$razaoSocial             = $dados->razaoSocial;
-	$cnpj                    = $dados->cnpj;
-	$inscricao_estadual      = $dados->inscricao_estadual;
-	$cep                     = $dados->cep;
-	$estado                  = $dados->estado;
-	$cidade                  = $dados->cidade;
-	$endereco                = $dados->endereco;
-	$bairro                  = $dados->bairro;
-	$complemento             = $dados->complemento;
-	$numero_resid            = $dados->numero_resid;
-	$cidade_id               = $dados->cidade_id;
-	$siteClienteJuridico     = $dados->siteClienteJuridico;
-	$ativo                   = $dados->ativo;
-	$genero_id               = $dados->genero_id;
-	// $senha = NULL;
-}
+	if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+		echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
+		exit;
+	}
+
+	include "validacao/functions.php";
+
+	//mostrar erros
+	ini_set('display_errors', 1);
+	ini_set('display_startup_erros', 1);
+	error_reporting(E_ALL);
+
+	if (!isset($id)) $id = "";
+
+	$email = $senha = $cep = $telefone = $celular = $pessoaFJ = $nomeFantasia = $razaoSocial = $cnpj = $inscricao_estadual = $siteClienteJuridico =
+		$estado = $cidade = $endereco = $bairro = $numero_resid = $cidade_id = $ativo = $siteJ = $complemento =  $genero_id = "";
+
+	if (!empty($id)) {
+		//selecionar os dados do cliente
+		$sql =  "SELECT c.*, ci.cidade, ci.estado FROM cliente c 
+				INNER JOIN cidade ci ON ( ci.id = c.cidade_id ) WHERE c.id = :id LIMIT 1";
+		$consulta = $pdo->prepare($sql);
+		$consulta->bindParam(":id", $id);
+		$consulta->execute();
+
+		$dados = $consulta->fetch(PDO::FETCH_OBJ);
+
+		if (empty($dados->id)) {
+			$titulo = "Erro";
+			$mensagem = "Cliente Não Existente";
+			$icone = "error";
+			mensagem($titulo, $mensagem, $icone);
+		}
+
+		$id                      = $dados->id;
+		$email                   = $dados->email;
+		$senha                   = $dados->senha;
+		$telefone                = $dados->telefone;
+		$celular                 = $dados->celular;
+		$pessoaFJ                = $dados->pessoaFJ;
+		$nomeFantasia            = $dados->nomeFantasia;
+		$razaoSocial             = $dados->razaoSocial;
+		$cnpj                    = $dados->cnpj;
+		$inscricao_estadual      = $dados->inscricao_estadual;
+		$cep                     = $dados->cep;
+		$estado                  = $dados->estado;
+		$cidade                  = $dados->cidade;
+		$endereco                = $dados->endereco;
+		$bairro                  = $dados->bairro;
+		$complemento             = $dados->complemento;
+		$numero_resid            = $dados->numero_resid;
+		$cidade_id               = $dados->cidade_id;
+		$siteClienteJuridico     = $dados->siteClienteJuridico;
+		$ativo                   = $dados->ativo;
+		$genero_id               = $dados->genero_id;
+	}
 ?>
 <script src="vendor/jqueryMask/src/jquery.mask.js"></script>
 <div class="container-fluid p-0">
@@ -85,14 +84,10 @@ if (!empty($id)) {
 							<input type="text" name="id" id="id" class="form-control" readonly value="<?= $id; ?>" placeholder="Automatico">
 						</div>
 						<div class="mb-3 col-12 col-md-2 mt-2" style="display: none;">
-							<label for="pessoaFJ">Pessoa F/J: ocultar</label>
+							<label for="pessoaFJ">Pessoa F/J:</label>
 							<select name="pessoaFJ" id="pessoaFJ" class="form-control" required data-parsley-required-message="Selecione uma opção">
-								<!-- <option value="">...</option> -->
-								<!-- <option value="F" <? //= $pessoaFJ == 'F' ? "selected" : "" 
-														?>>Fisica</option>  style="display: none;" -->
 								<option value="J" <?= $pessoaFJ == 'J' ? "selected" : "" ?>>Juridica</option>
 							</select>
-
 						</div>
 						<div class="mb-3 col-12 col-md-6">
 							<label for="razaoSocial">Razão Social: </label>
@@ -102,26 +97,24 @@ if (!empty($id)) {
 							<label for="nomeFantasia">Nome Fantasia: </label>
 							<input type="text" class="form-control" id="nomeFantasia" required name="nomeFantasia" value="<?= $nomeFantasia; ?>">
 						</div>
-
 						<div class="mb-3 col-12 col-md-4" style="display: none;">
 							<label class="form-label" for="genero_id">Gênero:</label>
 							<select name="genero_id" id="genero_id" class="form-control" required data-parsley-required-message="selecione uma opção">
 								<option value="<?= $genero_id; ?>"></option>
 								<?php
-								$sql = "SELECT * FROM genero WHERE id = 9";
-								$consulta = $pdo->prepare($sql);
-								$consulta->execute();
+									$sql = "SELECT * FROM genero WHERE id = 9";
+									$consulta = $pdo->prepare($sql);
+									$consulta->execute();
 
-								while ($d = $consulta->fetch(PDO::FETCH_OBJ)) {
-									//separar os dados
-									$id   = $d->id;
-									$genero = $d->genero;
-									echo '<option value="' . $id . '" selected="" >' . $genero . '</option>';
-								}
+									while ($d = $consulta->fetch(PDO::FETCH_OBJ)) {
+										//separar os dados
+										$id   = $d->id;
+										$genero = $d->genero;
+										echo '<option value="' . $id . '" selected="" >' . $genero . '</option>';
+									}
 								?>
 							</select>
 						</div>
-
 						<div class="mb-3 col-12 col-md-4 mt-2">
 							<label for="cnpj">CNPJ:</label>
 							<input type="text" name="cnpj" id="cnpj" class="form-control" value="<?= $cnpj; ?>" required data-parsley-required-message="Preencha o Cnpj" onblur="validaCNPJ()" placeholder="CNPJ da Empresa">
@@ -207,9 +200,6 @@ if (!empty($id)) {
 							</div>
 						</div>
 					</div>
-					<!-- <button type="button" id="teste" class="btn btn-info margin">
-							<i class="fas fa-check"></i> teste style="display: none;"
-					</button>  						 -->
 				</form>
 				<br>
 				<div class="clearfix"></div>
@@ -217,8 +207,8 @@ if (!empty($id)) {
 		</div>
 	</div>
 	<?php
-	//verificar se o id é vazio
-	if (empty($id)) $id = 0;
+		//verificar se o id é vazio
+		if (empty($id)) $id = 0;
 	?>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -226,11 +216,6 @@ if (!empty($id)) {
 			$("#telefone").mask("(00) 0000-0000");
 			$("#celular").mask("(00) 00000-0000");
 			$("#cnpj").mask("00.000.000/0000-00");
-
-			//mostra se o jquery esta funcionando ou nao
-			//  $('#teste').click(function(){
-			// 	 console.log("Funcionando o Jquery");
-			// })
 		});
 
 		function validaCNPJ() {
@@ -247,9 +232,7 @@ if (!empty($id)) {
 					$("#cnpj").val("");
 				}
 			})
-
 		}
-
 
 		function confirmarEmailClienteJ(email) {
 			$.get("validacao/verificaEmailCliente.php", {

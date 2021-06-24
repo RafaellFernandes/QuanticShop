@@ -1,69 +1,72 @@
 <?php
-if (!isset($_SESSION["quanticshop"]["id"])) {
-	$titulo = "Erro";
-	$mensagem = "Usuário Não Logado";
-	$icone = "error";
-	mensagem($titulo, $mensagem, $icone);
-exit;
-}
-
-if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-	echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
-exit;
-}
-
-  include "validacao/functions.php";
-
-  if ( !isset ( $id ) ) $id = "";
-
-  $nomeFantasia = $razaoSocial = $cnpj = $cep = $endereco = $cidade_id = $telefone = $cidade = $estado = $email = $inscricaoEstadual = 
-  $celular = $bairro = $numero_resid = $ativo = $complemento = $siteFornecedor = "";
-
-if(!empty($id)){
-    //selecionar dados
-    $sql = "SELECT f.*, c.cidade, c.estado FROM fornecedor f
-            INNER JOIN cidade c ON(c.id = f.cidade_id) 
-            WHERE f.id = :id limit 1";
-    $consulta = $pdo->prepare($sql);
-    $consulta->bindParam(":id",$id);
-    $consulta->execute();
-    
-    $dados = $consulta->fetch(PDO::FETCH_OBJ);
-    
-    $id                  = $dados->id;
-    $nomeFantasia        = $dados->nomeFantasia;
-	$razaoSocial         = $dados->razaoSocial;
-    $cnpj                = $dados->cnpj;
-	$endereco            = $dados->endereco;
-    $inscricaoEstadual   = $dados->inscricaoEstadual;
-    $cep                 = $dados->cep;
-    $telefone            = $dados->telefone;
-	$celular             = $dados->celular;
-	$cidade_id           = $dados->cidade_id;
-	$email               = $dados->email;
-	$cidade              = $dados->cidade;
-	$estado         	 = $dados->estado;
-	$bairro         	 = $dados->bairro;
-	$numero_resid        = $dados->numero_resid;
-	$ativo           	 = $dados->ativo;
-	$complemento         = $dados->complemento;
-	$siteFornecedor      = $dados->siteFornecedor;
-   
-	if(empty($dados->id)){
+	if (!isset($_SESSION["quanticshop"]["id"])) {
 		$titulo = "Erro";
-		$mensagem = "Fornecedor Não Existente";
+		$mensagem = "Usuário Não Logado";
 		$icone = "error";
 		mensagem($titulo, $mensagem, $icone);
-        exit;
-    }
-}
+		exit;
+	}
+
+	if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+		echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
+		exit;
+	}
+
+	include "validacao/functions.php";
+
+	if ( !isset ( $id ) ) $id = "";
+
+	$nomeFantasia = $razaoSocial = $cnpj = $cep = $endereco = $cidade_id = $telefone = $cidade = $estado = $email = $inscricaoEstadual = 
+	$celular = $bairro = $numero_resid = $ativo = $complemento = $siteFornecedor = "";
+
+	if(!empty($id)){
+		//selecionar dados
+		$sql = "SELECT f.*, c.cidade, c.estado 
+				FROM fornecedor f
+				INNER JOIN cidade c ON(c.id = f.cidade_id) 
+				WHERE f.id = :id 
+				LIMIT 1";
+				
+		$consulta = $pdo->prepare($sql);
+		$consulta->bindParam(":id",$id);
+		$consulta->execute();
+		
+		$dados = $consulta->fetch(PDO::FETCH_OBJ);
+		
+		$id                  = $dados->id;
+		$nomeFantasia        = $dados->nomeFantasia;
+		$razaoSocial         = $dados->razaoSocial;
+		$cnpj                = $dados->cnpj;
+		$endereco            = $dados->endereco;
+		$inscricaoEstadual   = $dados->inscricaoEstadual;
+		$cep                 = $dados->cep;
+		$telefone            = $dados->telefone;
+		$celular             = $dados->celular;
+		$cidade_id           = $dados->cidade_id;
+		$email               = $dados->email;
+		$cidade              = $dados->cidade;
+		$estado         	 = $dados->estado;
+		$bairro         	 = $dados->bairro;
+		$numero_resid        = $dados->numero_resid;
+		$ativo           	 = $dados->ativo;
+		$complemento         = $dados->complemento;
+		$siteFornecedor      = $dados->siteFornecedor;
+	
+		if(empty($dados->id)){
+			$titulo = "Erro";
+			$mensagem = "Fornecedor Não Existente";
+			$icone = "error";
+			mensagem($titulo, $mensagem, $icone);
+			exit;
+		}
+	}
 ?>
 <script src="vendor/jqueryMask/src/jquery.mask.js"></script>
 <div class="container-fluid p-0">
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-header">
-			<h4>CADASTRO</h4>
+				<h4>CADASTRO</h4>
 				<h6 style="color: blue;"><b>Forcedor</b></h6>
 			</div>
 			<div class="card-body">
@@ -98,19 +101,16 @@ if(!empty($id)){
 							<input type="text" name="cnpj" id="cnpj" class="form-control" required data-parsley-required-message="Preencha o CNPJ" 
 							value="<?=$cnpj;?>" onblur="validaCNPJ(this.value)" placeholder="CNPJ da Empresa">
 						</div>
-						
 						<div class="col-12 col-md-6 mt-2">
 							<label for="email">E-mail:</label>
 							<input type="email" name="email" id="email" class="form-control" required data-parsley-required-message="Preencha o E-mail"  placeholder="email@exemplo.com.br"
 							 value="<?=$email;?>" onblur="confirmarEmailForn(this.value)">
 						</div>
-						
 						<div class="col-12 col-md-6 mt-2">
 							<label for="siteFornecedor">Site:</label>
 							<input type="text" name="siteFornecedor" id="siteFornecedor" class="form-control" required data-parsley-required-message="Preencha o site" 
 							 placeholder="www.exemplo.com" value="<?=$siteFornecedor;?>">
 						</div>
-						
 						<div class="col-12 col-md-4 mt-2">
 							<label for="inscricaoEstadual">Inscrição Estadual:</label>
 							<input type="text" name="inscricaoEstadual" id="inscricaoEstadual" class="form-control" required data-parsley-required-message="Preencha o Numero de Inscrição Estadual" 
@@ -126,13 +126,11 @@ if(!empty($id)){
 							<input type="text" name="celular" id="celular" class="form-control" placeholder="Celular com DDD" 
 							value="<?=$celular;?>">
 						</div>
-						
 						<div class="col-12 col-md-4 mt-2">
 							<label for="cep">CEP:</label>
 							<input type="text" name="cep" id="cep" class="form-control" required data-parsley-required-message="Preencha o CEP" 
 							value="<?=$cep;?>" placeholder="Digite o CEP">
 						</div>
-						<!--  -->
 						<div class="col-12 col-md-2 mt-2" style="display: none;" >
 							<label for="cidade_id">ID Cidade</label>
 							<input type="text" name="cidade_id" id="cidade_id" class="form-control" required data-parsley-required-message="Preencha a Cidade" 
@@ -162,7 +160,6 @@ if(!empty($id)){
 							<label for="numero_resid">Numero:</label>
 							<input type="text" name="numero_resid" id="numero_resid" class="form-control" value="<?=$numero_resid;?>" placeholder="Número">
 						</div>
-						
 					</div><br>
 					<div class="row g-2">
                         <div class="col-sm-4 mt-4">
@@ -188,65 +185,64 @@ if(!empty($id)){
 		</div>
 	</div>
 </div> 
-	<?php
-		//verificar se o id é vazio
-		if ( empty ( $id ) ) $id = 0;
-	?>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$("#cnpj").mask("00.000.000/0000-00");
-			$("#telefone").mask("(00) 0000-0000");
-			$("#celular").mask("(00) 00000-0000");
-			$("#cep").mask("00000-000");       
-		});
+<?php
+	//verificar se o id é vazio
+	if ( empty ( $id ) ) $id = 0;
+?>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#cnpj").mask("00.000.000/0000-00");
+		$("#telefone").mask("(00) 0000-0000");
+		$("#celular").mask("(00) 00000-0000");
+		$("#cep").mask("00000-000");       
+	});
 
-		function validaCNPJ() {
-			let cnpj = document.getElementById('cnpj').value;
-			cnpj = cnpj.replace('/','').replace('-','').replace('.','').replace('.','');
-			$.get("validacao/validaCnpj.php", {cnpj:cnpj, id:<?=$id;?>}, function(dados){
-				if(dados != "1"){
-					//mostrar erro retornado
-					alert(dados);
-					//zerar Cnpj
-					$("#cnpj").val("");
-				}
-			})
-        }
+	function validaCNPJ() {
+		let cnpj = document.getElementById('cnpj').value;
+		cnpj = cnpj.replace('/','').replace('-','').replace('.','').replace('.','');
+		$.get("validacao/validaCnpj.php", {cnpj:cnpj, id:<?=$id;?>}, function(dados){
+			if(dados != "1"){
+				//mostrar erro retornado
+				alert(dados);
+				//zerar Cnpj
+				$("#cnpj").val("");
+			}
+		})
+    }
                 
-        function confirmarEmailForn(email){
-               $.get("validacao/verificaEmailForn.php", {email:email,id:<?=$id;?>}, function(dados){
-                   if(dados != ""){
-                       alert(dados);
-                       $("#email").val("");
-                   }
-               }) 
-            }
-                  
-		 $("#cep").blur(function(){
-                cep = $("#cep").val();
-                cep = cep.replace(/\D/g, '');
-                //alert(cep);
-                if(cep == ""){
-                    alert("Preencha o cep");
-                } else{
-                    //consultar o cep no viacep.com.br
-                     $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados){
-                        $("#endereco").val(dados.logradouro);
-						$("#cidade").val(dados.localidade);
-						$("#estado").val(dados.uf);
-						$("#bairro").val(dados.bairro)
-                         //buscar id da cidade
-                         
-                         $.get("buscarCidade.php", {cidade: dados.localidade, estado: dados.uf}, function(dados){
-                             if(dados != "Erro")
-                                 $("#cidade_id").val(dados);
-                             else
-                                alert(dados);
-                         })
-                         //focar no complemento
-                         $("#endereco").focus();
-                     })
-                }
+    function confirmarEmailForn(email){
+           $.get("validacao/verificaEmailForn.php", {email:email,id:<?=$id;?>}, function(dados){
+               if(dados != ""){
+                   alert(dados);
+                   $("#email").val("");
+               }
+           }) 
+        }
+              
+	$("#cep").blur(function(){
+        cep = $("#cep").val();
+        cep = cep.replace(/\D/g, '');
+        //alert(cep);
+        if(cep == ""){
+            alert("Preencha o cep");
+        } else{
+            //consultar o cep no viacep.com.br
+            $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados){
+				$("#endereco").val(dados.logradouro);
+				$("#cidade").val(dados.localidade);
+				$("#estado").val(dados.uf);
+				$("#bairro").val(dados.bairro)
+				//buscar id da cidade
+				
+				$.get("buscarCidade.php", {cidade: dados.localidade, estado: dados.uf}, function(dados){
+					if(dados != "Erro")
+						$("#cidade_id").val(dados);
+					else
+						alert(dados);
+				})
+				//focar no complemento
+				$("#endereco").focus();
             })
-        
-	</script>
+        }
+    })
+</script>

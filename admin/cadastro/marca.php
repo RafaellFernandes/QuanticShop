@@ -1,50 +1,49 @@
 <?php
-if (!isset($_SESSION["quanticshop"]["id"])) {
-	$titulo = "Erro";
-	$mensagem = "Usuário Não Logado";
-	$icone = "error";
-	mensagem($titulo, $mensagem, $icone);
-exit;
-}
-
-if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-	echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
-exit;
-}
-
-  include "validacao/functions.php";
-
-  //iniciar as variaveis 
-  $nome_marca = $ativo ="";
-
-  //se nao existe o id
-  if ( !isset ( $id ) ) $id = "";
-
-  //verificar se existe um id
-  if ( !empty ( $id ) ) {
-  	//selecionar os dados do banco
-  	$sql = "SELECT * FROM marca 
-  		WHERE id = ? LIMIT 1";
-  	$consulta = $pdo->prepare($sql);
-  	$consulta->bindParam(1, $id); 
-  	$consulta->execute();
-
-  	$dados  = $consulta->fetch(PDO::FETCH_OBJ);
-
-	if ( empty ( $dados->id ) ) {
+	if (!isset($_SESSION["quanticshop"]["id"])) {
 		$titulo = "Erro";
-		$mensagem = "Marca Não Existente";
+		$mensagem = "Usuário Não Logado";
 		$icone = "error";
 		mensagem($titulo, $mensagem, $icone);
-		
+		exit;
 	}
 
-  	//separar os dados
-  	$id 		   = $dados->id;
-	$nome_marca    = $dados->nome_marca;
-	$ativo 		   = $dados->ativo;
+	if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+		echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
+		exit;
+	}
 
-  } 
+	include "validacao/functions.php";
+
+	//iniciar as variaveis 
+	$nome_marca = $ativo ="";
+
+	//se nao existe o id
+	if ( !isset ( $id ) ) $id = "";
+
+	//verificar se existe um id
+	if ( !empty ( $id ) ) {
+		//selecionar os dados do banco
+		$sql = "SELECT * 
+				FROM marca 
+				WHERE id = ? 
+				LIMIT 1";
+		$consulta = $pdo->prepare($sql);
+		$consulta->bindParam(1, $id); 
+		$consulta->execute();
+
+		$dados  = $consulta->fetch(PDO::FETCH_OBJ);
+
+		if ( empty ( $dados->id ) ) {
+			$titulo = "Erro";
+			$mensagem = "Marca Não Existente";
+			$icone = "error";
+			mensagem($titulo, $mensagem, $icone);
+		}
+		//separar os dados
+		$id 		   = $dados->id;
+		$nome_marca    = $dados->nome_marca;
+		$ativo 		   = $dados->ativo;
+  	} 
 ?>
 <div class="container-fluid p-0">
 	<div class="col-md-12">

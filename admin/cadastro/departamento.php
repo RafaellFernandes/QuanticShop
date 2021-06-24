@@ -1,17 +1,16 @@
 <?php
-if (!isset($_SESSION["quanticshop"]["id"])) {
-    $titulo = "Erro";
-    $mensagem = "Usuário Não Logado";
-    $icone = "error";
-    mensagem($titulo, $mensagem, $icone);
-exit;
-}
+    if (!isset($_SESSION["quanticshop"]["id"])) {
+        $titulo = "Erro";
+        $mensagem = "Usuário Não Logado";
+        $icone = "error";
+        mensagem($titulo, $mensagem, $icone);
+        exit;
+    }
 
-if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-    echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
-exit;
-}
-
+    if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+        echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
+    exit;
+    }
 
     include "validacao/functions.php";
 
@@ -37,14 +36,12 @@ exit;
             $mensagem = "Departamento Não Existente";
             $icone = "error";
 		    mensagem($titulo, $mensagem, $icone);
-         
         }
   
         //separar os dados
         $id 	        = $dados->id;
         $nome_dept  	= $dados->nome_dept ;
         $ativo 		    = $dados->ativo;
-	  
   }
   
 ?>
@@ -58,7 +55,6 @@ exit;
 				</div>
 				<h4>CADASTRO</h4>
 				<h6 style="color: blue;"><b>Departamento</b></h6>
-				
 			</div>
 			<div class="card-body">
 				<form name="formCadastro" method="post" action="salvar/departamento" data-parsley-validate enctype="multipart/form-data">

@@ -1,32 +1,31 @@
 <?php
-if (!isset($_SESSION["quanticshop"]["id"])) {
-    $titulo = "Erro";
-    $mensagem = "Usuário Não Logado";
-    $icone = "error";
-    mensagem($titulo, $mensagem, $icone);
-exit;
-}
+    if (!isset($_SESSION["quanticshop"]["id"])) {
+        $titulo = "Erro";
+        $mensagem = "Usuário Não Logado";
+        $icone = "error";
+        mensagem($titulo, $mensagem, $icone);
+        exit;
+    }
 
-if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-    echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
-exit;
-}
-  //mostrar erros
-  ini_set('display_errors',1);
-  ini_set('display_startup_erros',1);
-  error_reporting(E_ALL);
-    
-include "validacao/functions.php";
+    if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+        echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
+        exit;
+    }
 
-//se nao existe o id
-if ( !isset ( $id ) ) $id = "";
+    //mostrar erros
+    ini_set('display_errors',1);
+    ini_set('display_startup_erros',1);
+    error_reporting(E_ALL);
+        
+    include "validacao/functions.php";
 
 //iniciar as variaveis
 $nome_produto = $codigo = $descricao = $espec_tecnica = $foto = $promocao =  $valorUnitario = 
 $ativo = $departamento_id = $marca_id = "";
 
-  //verificar se existe um id
-  if (!empty ( $id ) ) {
+    //iniciar as variaveis
+    $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto = $promocao =  $valorUnitario = 
+    $ativo = $departamento_id = $marca_id =  $estoque_id = "";
 
   	//selecionar os dados do banco para poder editar
       $sql = "SELECT p.*,d.*,m.* FROM produto p 
@@ -39,13 +38,13 @@ $ativo = $departamento_id = $marca_id = "";
       
   	$dados  = $consulta->fetch(PDO::FETCH_OBJ);
 
-    if ( empty ( $dados->id ) ) {
-        $titulo = "Erro";
-        $mensagem = "Produto Não Existente";
-        $icone = "error";
-        mensagem($titulo, $mensagem, $icone);
-        // echo "<p class='alert alert-danger'>Produto Não Existente</p>";
-    }
+        //selecionar os dados do banco para poder editar
+        $sql = "SELECT p.*,d.*,m.* 
+                FROM produto p
+                INNER JOIN departamento d on (d.id = p.departamento_id)
+                INNER JOIN marca m on(m.id = p.marca_id)
+                WHERE p.id = :id 
+                LIMIT 1";
 
   	//separar os dados
     $id         	          = $dados->id;
@@ -63,14 +62,39 @@ $ativo = $departamento_id = $marca_id = "";
     $ativo 		              = $dados->ativo;
   }
 
-?>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
+        if ( empty ( $dados->id ) ) {
+            $titulo = "Erro";
+            $mensagem = "Produto Não Existente";
+            $icone = "error";
+            mensagem($titulo, $mensagem, $icone);
+        }
 
+        //separar os dados
+        $id         	          = $dados->id;
+        $nome_produto 	          = $dados->nome_produto; 
+        $valorUnitario            = $dados->valorUnitario;
+        $valorUnitario            = number_format($valorUnitario,2,",",".");
+        $descricao                = $dados->descricao;
+        $codigo                   = $dados->codigo;
+        $departamento_id          = $dados->departamento_id;
+        $promocao                 = $dados->promocao;
+        $nome_dept                = $dados->nome_dept;
+        $marca_id                 = $dados->marca_id;
+        $nome_marca               = $dados->nome_marca;
+        $foto                     = $dados->foto;
+        $ativo 		              = $dados->ativo;
+    }
+?>
+<script src="vendor/js/jquery-3.5.1.min.js"></script>
+<script src="vendor/popper/popper.min.js"></script>
+<script src="vendor/popper/popper.min.js"></script>
+<script src="vendor/js/jquery.maskMoney.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script> -->
                         
 <div class="container-fluid p-0">
 	<div class="col-md-12">
@@ -82,7 +106,6 @@ $ativo = $departamento_id = $marca_id = "";
 				</div>
 				<h4>CADASTRO</h4>
 				<h6 style="color: blue;"><b>Produto</b></h6>
-				
 			</div>
 			<div class="card-body">
                 <form method="post" name="formCadastro"  action="salvar/produto" data_parsley_validate enctype="multipart/form-data">
@@ -137,27 +160,22 @@ $ativo = $departamento_id = $marca_id = "";
                                     ?>
                             </select>
                         </div>
-
                         <div type="text" class="col-12 col-md-4 mt-2">
                             <label >Valor de Venda</label>
                             <input type="number" id="valorUnitario" name="valorUnitario" class="form-control" required data-parsley-required-message="Preencha este campo" 
                             class="form-control" readonly value="<?=$valorUnitario;?>" placeholder="R$ 0,00">         
                         </div>
-                       
                         <div class="col-12 col-md-4 mt-2">
                             <label for="promocao">Valor Promocional:</label>
                             <input type="text" name="promocao" id="promocao" class="form-control valor" 
                             inputmode="numeric" value="<?=$promocao?>">
                         </div>
-
                         <div class="col-12 col-md-2 mt-2">
 							<label for="ativo">Status</label>
 							<select name="ativo" id="ativo" class="form-control" required data-parsley-required-message="Selecione uma opção">
-								<!-- <option value="S" <?//= $ativo == 'S' ? "selected" : "" ?>>Ativo</option> -->
 								<option value="0" <?= $ativo == '0' ? "selected" : "" ?>>Inativo</option>
 							</select>
                         </div>
-
                         <div class="col-12 col-md-4 mt-2">
                             <?php
                                 $required = ' required data-parsley-required-message="Selecione um arquivo" ';
@@ -167,16 +185,14 @@ $ativo = $departamento_id = $marca_id = "";
                                     //caminho para a imagem
                                     $img = "../fotos/{$foto}";
                                     //criar um link para abrir a imagem
-                                    $link = "<a href='{$img}' data-lightbox='foto' class='badge badge-success'>Abrir imagem</a>";
+                                    $link = "<a href='{$img}' data-lightbox='foto' class='badge badge-success' style='Color: blue;'>Abrir imagem</a>";
                                     $required = NULL;
                                 }
                             ?>
                             <label for="foto">Imagens (JPG)* <?=$link?>:</label>
-                            <input type="file" name="foto[]" 
-                            id="foto" class="form-control" 
+                            <input type="file" name="foto[]" id="foto" class="form-control" 
                             <?=$required?> accept="image/jpeg" multiple="multiple">
                         </div>
-
                         <div class="col-12 col-md-12 mt-2">
                             <label for="descricao">Descrição</label>
                             <textarea name="descricao" id="summernote" required data-parsley-required-message="Preencha este campo" 
@@ -191,7 +207,7 @@ $ativo = $departamento_id = $marca_id = "";
                     <div class="row g-2">
                         <div class="col-sm-4 mt-4">
 							<button type="submit" class="btn btn-success margin">
-                                    Salvar / Alterar
+                                Salvar / Alterar
 							</button>
                         </div>
                         <div class="col-sm-4 mt-4">
@@ -202,7 +218,7 @@ $ativo = $departamento_id = $marca_id = "";
                         <div class="col-sm-2 mt-4">
                             <div class="float-end ">
                             <button type="reset" class="btn btn-danger margin">
-                                    Apagar tudo
+                                Apagar tudo
 							</button>
                             </div> 
                         </div>
@@ -211,8 +227,6 @@ $ativo = $departamento_id = $marca_id = "";
                                 <a href="listagem/produto" class="btn btn-primary">Listar Registros</a> 
                             </div> 
                         </div>
-                        
-                        
                     </div>
                 </form>
             </div>
@@ -253,12 +267,9 @@ $ativo = $departamento_id = $marca_id = "";
         ]
     });
 </script>
-
 <script type="text/javascript">
-$(document).ready(function(){ 
-	
-    $("#marca_id").val(<?=$marca_id?>);
-    $("#departamento_id").val(<?=$departamento_id?>);
-	});
-
+    $(document).ready(function(){ 
+        $("#marca_id").val(<?=$marca_id?>);
+        $("#departamento_id").val(<?=$departamento_id?>);
+    });
 </script>
