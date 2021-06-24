@@ -25,25 +25,23 @@
     //iniciar as variaveis
     $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto = $promocao =  $valorUnitario = 
     $ativo = $departamento_id = $marca_id =  $estoque_id = "";
-
-  	//selecionar os dados do banco para poder editar
-      $sql = "SELECT p.*,d.*,m.* FROM produto p 
-      inner join departamento d on (d.id = p.departamento_id) 
-      inner join marca m on(m.id = p.marca_id)
-                WHERE p.id = :id LIMIT 1";
-      $consulta = $pdo->prepare($sql);
-      $consulta->bindParam(":id", $id);
-      $consulta->execute();
       
-  	$dados  = $consulta->fetch(PDO::FETCH_OBJ);
+    //verificar se existe um id
+	if( !empty ( $id ) ) {
 
-        //selecionar os dados do banco para poder editar
-        $sql = "SELECT p.*,d.*,m.* 
-                FROM produto p
-                INNER JOIN departamento d on (d.id = p.departamento_id)
-                INNER JOIN marca m on(m.id = p.marca_id)
-                WHERE p.id = :id 
-                LIMIT 1";
+    //selecionar os dados do banco para poder editar
+    $sql = "SELECT p.*,d.*,m.* 
+            FROM produto p
+            INNER JOIN departamento d on (d.id = p.departamento_id)
+            INNER JOIN marca m on(m.id = p.marca_id)
+            WHERE p.id = :id 
+            LIMIT 1";
+
+    $consulta = $pdo->prepare($sql);
+	$consulta->bindParam(":id", $id);
+	$consulta->execute();
+
+	$dados  = $consulta->fetch(PDO::FETCH_OBJ);
 
   	//separar os dados
     $id         	          = $dados->id;
@@ -60,7 +58,7 @@
     $foto                     = $dados->foto;
     $ativo 		              = $dados->ativo;
   
-
+    }
 ?>
 <script src="vendor/js/jquery-3.5.1.min.js"></script>
 <script src="vendor/popper/popper.min.js"></script>
@@ -130,7 +128,7 @@
 
                                         while ($d = $consulta->fetch(PDO::FETCH_OBJ) ) {
                                         //separar os dados
-                                            $id        = $d->id;
+                                            $id         = $d->id;
                                             $nome_dept  = $d->nome_dept;
                                             echo '<option value="'.$id.'">'.$nome_dept.'</option>';
                                         }
@@ -211,8 +209,10 @@
     </div>
 </div>
 
-<script>$("#promocao").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
- $("#valorUnitario").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});</script>
+<script>
+    $("#promocao").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+    $("#valorUnitario").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+</script>
 
 <script>
     $('#summernote').summernote({
