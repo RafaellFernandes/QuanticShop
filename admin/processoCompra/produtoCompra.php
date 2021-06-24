@@ -80,7 +80,7 @@ include "validacao/functions.php";
                 <form method="post" name="formCadastro"  action="processoCompra/salvarProdutoCompra" data_parsley_validate enctype="multipart/form-data">
                     <p> Todos os campos são obrigatórios </p>
                     <div class="row">
-                    
+                    <input type="text" hidden name="id" id="id" value="<?=$id?>">
                     <div class="col-12 col-md-4 mt-2">
                             <label for="produto_id">Produto</label>
                             <select name="produto_id" id="produto_id" class="form-control" required data-parsley-required-message="Selecione um Produto">

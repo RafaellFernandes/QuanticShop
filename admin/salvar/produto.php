@@ -156,16 +156,6 @@ exit;
         
     } else {
 
-        //verifica se já existe o mesmo codigo de produto cadastrado
-		$sql = "SELECT codigo from produto";
-		$consulta = $pdo->prepare($sql);
-		$consulta->execute();	
-		while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ){
-			if($codigo == $dados->codigo) {
-				mensagem("Erro", "Já existe esse código de produto cadastrado", "error");
-				exit;
-			}
-		}
         $sql= "UPDATE produto SET nome_produto = :nome_produto, codigo = :codigo, promocao = :promocao, valorUnitario = :valorUnitario,
         descricao = :descricao, espec_tecnica = :espec_tecnica, ativo = :ativo, departamento_id = :departamento_id,
         marca_id = :marca_id, foto =:foto WHERE id = :id";

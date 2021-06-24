@@ -57,7 +57,14 @@
     $nome_marca               = $dados->nome_marca;
     $foto                     = $dados->foto;
     $ativo 		              = $dados->ativo;
-  
+    if( empty ( $dados->id ) ) {
+        $titulo = "Erro";
+        $mensagem = "Produto Não Existente";
+        $icone = "error";
+        mensagem($titulo, $mensagem, $icone);
+        exit;
+    }
+
     }
 ?>
 <script src="vendor/js/jquery-3.5.1.min.js"></script>
@@ -137,8 +144,8 @@
                         </div>
                         <div type="text" class="col-12 col-md-4 mt-2">
                             <label >Valor de Venda</label>
-                            <input type="number" id="valorUnitario" name="valorUnitario" class="form-control" required data-parsley-required-message="Preencha este campo" 
-                            class="form-control" readonly value="<?=$valorUnitario;?>" placeholder="R$ 0,00">         
+                            <input type="text" id="valorUnitario" name="valorUnitario" class="form-control" required data-parsley-required-message="Preencha este campo" 
+                            class="form-control" readonly value="<?=$valorUnitario?>">         
                         </div>
                         <div class="col-12 col-md-4 mt-2">
                             <label for="promocao">Valor Promocional:</label>
@@ -164,7 +171,7 @@
                                     $required = NULL;
                                 }
                             ?>
-                            <label for="foto">Imagens (JPG)* <?=$link?>:</label>
+                            <label for="foto">Imagens (JPG)* <?=$link?></label>
                             <input type="file" name="foto[]" id="foto" class="form-control" 
                             <?=$required?> accept="image/jpeg" multiple="multiple">
                         </div>
@@ -211,7 +218,7 @@
 
 <script>
     $("#promocao").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
-    $("#valorUnitario").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+    // $("#valorUnitario").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
 </script>
 
 <script>

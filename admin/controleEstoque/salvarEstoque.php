@@ -58,17 +58,7 @@ if ( $_POST ) {
         $consulta->bindParam(":qtd_estoque", $qtd_estoque);
 
   	} else {
-		//verifica se produto já esta cadastrado no estoque 
-		$sql = "SELECT produto_id from estoque";
-		$consulta = $pdo->prepare($sql);
-		$consulta->execute();	
-		while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ){
-			if($produto_id == $dados->produto_id) {
-				mensagem("Erro", "Já existe esse produto cadastrado em um estoque", "error");
-				// echo "<script>window.alert('Já existe esse produto cadastrado em um estoque');window.history.back();</script>";
-				exit;
-			}
-		}	
+
   		//atualizar os dados  	
   		$sql = "UPDATE estoque SET produto_id = :produto_id, qtd_estoque = :qtd_estoque WHERE id = :id";	
   		$consulta = $pdo->prepare($sql);

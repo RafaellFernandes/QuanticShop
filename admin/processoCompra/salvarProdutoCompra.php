@@ -24,7 +24,7 @@ if ( $_POST ) {
     include "config/conexao.php";
 
     //recuperar dados do formulario
-    $id = $produto_id = $nome_produto = $lote = $fornecedor_id = $razaoSocial = $data_cadastro = $ativo = $qtdprodutoComprado = $venda_unitaria = $custo_unitario = $porcentagem_lucro = "";
+    $produto_id = $nome_produto = $lote = $fornecedor_id = $razaoSocial = $data_cadastro = $ativo = $qtdprodutoComprado = $venda_unitaria = $custo_unitario = $porcentagem_lucro = "";
 
     foreach ($_POST as $key => $value) {
         $$key = trim ( $value );
@@ -69,9 +69,7 @@ if ( $_POST ) {
             $sqlProduto = "UPDATE produto set ativo = 1, valorUnitario = $venda_unitaria WHERE id = $produto_id";
             $ativaProduto = $pdo->prepare($sqlProduto);
             $ativaProduto->execute();
-
         }
-
     } else { 
     
         $sql = "UPDATE item_compra SET data_cadastro = :data_cadastro, lote = :lote, 
