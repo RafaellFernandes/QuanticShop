@@ -22,16 +22,16 @@ include "validacao/functions.php";
 if ( !isset ( $id ) ) $id = "";
 
 //iniciar as variaveis
-$nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto = $promocao =  $valorUnitario = 
-$ativo = $departamento_id = $marca_id =  $estoque_id = "";
+$nome_produto = $codigo = $descricao = $espec_tecnica = $foto = $promocao =  $valorUnitario = 
+$ativo = $departamento_id = $marca_id = "";
 
   //verificar se existe um id
   if (!empty ( $id ) ) {
 
   	//selecionar os dados do banco para poder editar
-      $sql = "SELECT p.*,d.*,m.* FROM produto p
-                left join departamento d on (d.id = p.departamento_id)
-                left join marca m on(m.id = p.marca_id)
+      $sql = "SELECT p.*,d.*,m.* FROM produto p 
+      inner join departamento d on (d.id = p.departamento_id) 
+      inner join marca m on(m.id = p.marca_id)
                 WHERE p.id = :id LIMIT 1";
       $consulta = $pdo->prepare($sql);
       $consulta->bindParam(":id", $id);
@@ -54,8 +54,7 @@ $ativo = $departamento_id = $marca_id =  $estoque_id = "";
     $valorUnitario            = number_format($valorUnitario,2,",",".");
     $descricao                = $dados->descricao;
     $codigo                   = $dados->codigo;
-    $departamento_id          = $dados->departamento_id;
-   
+    $departamento_id          = $dados->departamento_id; 
     $promocao                 = $dados->promocao;
     $nome_dept                = $dados->nome_dept;
     $marca_id                 = $dados->marca_id;
@@ -141,7 +140,7 @@ $ativo = $departamento_id = $marca_id =  $estoque_id = "";
 
                         <div type="text" class="col-12 col-md-4 mt-2">
                             <label >Valor de Venda</label>
-                            <input type="number" id="valorUnitario" name="vendaUnitaria" class="form-control" required data-parsley-required-message="Preencha este campo" 
+                            <input type="number" id="valorUnitario" name="valorUnitario" class="form-control" required data-parsley-required-message="Preencha este campo" 
                             class="form-control" readonly value="<?=$valorUnitario;?>" placeholder="R$ 0,00">         
                         </div>
                        
@@ -221,9 +220,8 @@ $ativo = $departamento_id = $marca_id =  $estoque_id = "";
     </div>
 </div>
 
-<!-- <script>$("#venda_unitaria").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});</script>
-<script>$("#promocao").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});</script>
-<script>$("#custo_unitario").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});</script> -->
+<script>$("#promocao").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+ $("#valorUnitario").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});</script>
 
 <script>
     $('#summernote').summernote({

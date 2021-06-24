@@ -72,7 +72,6 @@ if ( $_POST ) {
 
         }
 
-  
     } else { 
     
         $sql = "UPDATE item_compra SET data_cadastro = :data_cadastro, lote = :lote, 

@@ -186,7 +186,10 @@ exit;
 
                             <datalist id="listProdutos"> 
                             <?php
-                             $sql = "SELECT id, nome_produto, valorUnitario FROM produto WHERE ativo = 1";
+                             $sql = "SELECT p.produto_id pproduto_id, p.nome_produto, p.valorUnitario, e.* 
+                             FROM produto p
+                             INNER JOIN estoque e ON (p.id = e.produto_id)
+                             WHERE ativo = 1";
                             $consulta = $pdo->prepare($sql);
                             $consulta->execute();
 
@@ -200,7 +203,7 @@ exit;
                         <div class="col-12 col-md-2">
                             <input type="text" name="valor" id="valor" class="form-control" required 
                             data-parsley-required-message="Preencha o valor"  readonly
-                            <?=$disabled?>>
+                            <?=$disabled?> placeholder="R$ 0,00"> 
                         </div>
                         <div class="col-12 col-md-2">
                             <input type="number" name="quantidade" id="quantidade"

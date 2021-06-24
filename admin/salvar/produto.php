@@ -24,7 +24,7 @@ exit;
     // include "validacao/imagem.php";
 
     //recuperar variaveis
-    $id = $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto = $ativo = $departamento_id = $marca_id = "";
+    $id = $nome_produto = $codigo = $valorUnitario = $descricao = $espec_tecnica = $foto = $ativo = $departamento_id = $marca_id = "";
 
     foreach ($_POST as $key => $value) {
         //guardar as variaveis
@@ -126,7 +126,7 @@ exit;
         $consulta->bindParam(':departamento_id',$departamento_id);
         $consulta->bindParam(':marca_id',$marca_id); 
        
-    } else if (empty($foto)){
+    } else if (empty($id)){
         //verifica se já existe o mesmo codigo de produto cadastrado
 		$sql = "SELECT codigo from produto";
 		$consulta = $pdo->prepare($sql);

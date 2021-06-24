@@ -39,7 +39,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>QuanticShop - Relatórios de Venda</title>
-		<link rel="shortcut icon" href="static/img/icons/icon-48x48.png" />
+		<link rel="shortcut icon" href="img/saturno1.png" />
 
 		<script src="assets/mask/jquery.mask.js"></script>
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -63,7 +63,16 @@
 					<div class="card-header">
 						<h4>RELATÓRIO</h4>
 						<h6 style="color: blue;"><strong>Vendas</strong></h6>
+						<div class="float-end">
+					    <a href="javascript:window.print()" class="btn btn-success">
+		                  <i class="fas fa-print"></i>
+		                    Imprimir
+	                </a> 
+					</div> 
 					</div>
+					
+					
+					
 					<table class="table table-bordered table-hover table-striped">
 						<thead>
 							<th width="5%">ID</th>
