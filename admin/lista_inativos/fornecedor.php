@@ -1,16 +1,16 @@
 <?php
-if (!isset($_SESSION["quanticshop"]["id"])) {
-    $titulo = "Erro";
-    $mensagem = "Usuário Não Logado";
-    $icone = "error";
-    mensagem($titulo, $mensagem, $icone);
-exit;
-}
+    if (!isset($_SESSION["quanticshop"]["id"])) {
+        $titulo = "Erro";
+        $mensagem = "Usuário Não Logado";
+        $icone = "error";
+        mensagem($titulo, $mensagem, $icone);
+        exit;
+    }
 
-if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-    echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
-exit;
-}
+    if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+        echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
+        exit;
+    }
 
     //mostrar erros
 	ini_set('display_errors',1);
@@ -42,7 +42,10 @@ exit;
                     </thead>
                     <tbody>
                         <?php
-                            $sql = "SELECT id, razaoSocial, cnpj, telefone, cidade, estado, siteFornecedor, email, ativo FROM fornecedor";
+                            $sql = "SELECT id, razaoSocial, cnpj, telefone, cidade, estado, siteFornecedor, email, ativo 
+                                    FROM fornecedor
+                                    WHERE ativo = 0 ";
+
                             $consulta = $pdo->prepare($sql);
                             $consulta->execute();
 
@@ -59,21 +62,18 @@ exit;
                                 $email                    = $dados->email;
                                                 
                                 //mostrar na tela
-                                if ( $ativo == "0" ) {
-                                    echo '<tr>
-                                            <td>'.$razaoSocial.'</td>
-                                            <td>'.$cnpj.'</td>
-                                            <td>'.$telefone.'</td>
-                                            <td>'.$siteFornecedor.'<br>'.$email.'</td>
-                                            <td>'.$cidade.' - '.$estado.'</td>
-                                            <td class="table-action text-center">
-                                                <a href="cadastro/fornecedor/'.$id.'" alt="Editar" title="Editar">
-                                                    <i class="align-middle"  data-feather="edit-2"></i>
-                                                </a>
-                                            </td>
-                                        </tr>';
-                                    
-                                    }
+                                echo '<tr>
+                                        <td>'.$razaoSocial.'</td>
+                                        <td>'.$cnpj.'</td>
+                                        <td>'.$telefone.'</td>
+                                        <td>'.$siteFornecedor.'<br>'.$email.'</td>
+                                        <td>'.$cidade.' - '.$estado.'</td>
+                                        <td class="table-action text-center">
+                                            <a href="cadastro/fornecedor/'.$id.'" alt="Editar" title="Editar">
+                                                <i class="align-middle"  data-feather="edit-2"></i>
+                                            </a>
+                                        </td>
+                                    </tr>';
                             }
                         ?>
                     </tbody>

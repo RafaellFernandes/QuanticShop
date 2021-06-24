@@ -154,7 +154,7 @@
 						</div>
 						 <div class="mb-3 col-12 col-md-3 mt-2">
 							<label for="complemento">Complemento</label>
-							<input type="text" name="complemento" id="complemento" class="form-control" value="<?=$complemento;?>" placeholder="Complemento">
+							<input type="text" name="complemento" id="complemento" class="form-control" value="<?=$complemento;?>" placeholder="Barracão, Salão...">
 						</div>
 						<div class="mb-3 col-12 col-md-6 mt-2">
 							<label for="numero_resid">Numero:</label>

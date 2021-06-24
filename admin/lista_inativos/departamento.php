@@ -1,16 +1,16 @@
 <?php
-if (!isset($_SESSION["quanticshop"]["id"])) {
-	$titulo = "Erro";
-	$mensagem = "Usuário Não Logado";
-	$icone = "error";
-	mensagem($titulo, $mensagem, $icone);
-exit;
-}
+	if (!isset($_SESSION["quanticshop"]["id"])) {
+		$titulo = "Erro";
+		$mensagem = "Usuário Não Logado";
+		$icone = "error";
+		mensagem($titulo, $mensagem, $icone);
+		exit;
+	}
 
-if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-	echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
-exit;
-}
+	if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+		echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
+		exit;
+	}
 ?>
 <div class="container-fluid p-0">
 	<div class="row">
@@ -33,7 +33,10 @@ exit;
 					<tbody>
 						<?php
 							//buscar id de Departamento alfabeticamente
-							$sql = "SELECT * from departamento ORDER BY nome_dept";
+							$sql = "SELECT * 
+									FROM departamento 
+									WHERE ativo = 0
+									ORDER BY nome_dept";
 							$consulta = $pdo->prepare($sql);
 							$consulta->execute();
 
@@ -44,16 +47,14 @@ exit;
                                 $ativo      = $dados->ativo;
 													
 								//mostrar na tela
-                                if ($ativo == "0"){ 
-                                    echo '<tr>
-                                            <td>'.$nome_dept.'</td>
-                                            <td class="table-action text-center">
-                                                <a href="cadastro/departamento/'.$id.'" alt="Editar" title="Editar">
-                                                    <i class="align-middle"  data-feather="edit-2"></i>
-                                                </a>
-                                            </td>
-                                        </tr>';
-                                }
+                                echo '<tr>
+                                        <td>'.$nome_dept.'</td>
+                                        <td class="table-action text-center">
+                                            <a href="cadastro/departamento/'.$id.'" alt="Editar" title="Editar">
+                                                <i class="align-middle"  data-feather="edit-2"></i>
+                                            </a>
+                                        </td>
+                                    </tr>';
 							}
 						?>
 					</tbody>
@@ -63,7 +64,6 @@ exit;
 	</div>
 </div>
 <script>
-
 	//adicionar o dataTable 
 	$(document).ready(function(){
 		$('#tabela').DataTable({

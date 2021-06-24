@@ -1,6 +1,6 @@
 .bodylogin{
     font-family: "Open Sans", sans-serif;
-    background-image: url("../img/background/gradiente.png");
+    background: url("../img/background/gradient-blue.svg");
     background-attachment: fixed;
     background-position: top right, center;
     background-size: 100%;
@@ -27,7 +27,3 @@
     color: indigo;
     text-decoration: none;
 }
-
-/* .card {
-    box-shadow: 0 0 1em black;
-} */

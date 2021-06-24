@@ -1,16 +1,16 @@
 <?php
-if (!isset($_SESSION["quanticshop"]["id"])) {
-    $titulo = "Erro";
-    $mensagem = "Usuário Não Logado";
-    $icone = "error";
-    mensagem($titulo, $mensagem, $icone);
-exit;
-}
+    if (!isset($_SESSION["quanticshop"]["id"])) {
+        $titulo = "Erro";
+        $mensagem = "Usuário Não Logado";
+        $icone = "error";
+        mensagem($titulo, $mensagem, $icone);
+        exit;
+    }
 
-if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-    echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
-exit;
-}
+    if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+        echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
+        exit;
+    }
 
     //mostrar erros
 	ini_set('display_errors',1);
@@ -42,7 +42,10 @@ exit;
                     </thead>
                     <tbody>
                         <?php
-                            $sql = "SELECT id, razaoSocial, cnpj, telefone, siteFornecedor, ativo, email, cidade, estado FROM fornecedor";
+                            $sql = "SELECT id, razaoSocial, cnpj, telefone, siteFornecedor, ativo, email, cidade, estado 
+                                    FROM fornecedor
+                                    WHERE ativo = 1";
+
                             $consulta = $pdo->prepare($sql);
                             $consulta->execute();
 
@@ -59,21 +62,19 @@ exit;
                                 $ativo                    = $dados->ativo;
                                               
                                 //mostrar na tela
-                                if ( $ativo == "1" ) {
-                                    echo '<tr>
-                                            <td>'.$razaoSocial.'</td>
-                                            <td>'.$cnpj.'</td>
-                                            <td>'.$telefone.'</td>
-                                            <td>'.$siteFornecedor.'<br>'.$email.'</td>
-                                            <td>'.$cidade.' - '.$estado.'</td>
-                                            <td class="table-action text-center">
-                                                <a href="cadastro/fornecedor/'.$id.'" alt="Editar" title="Editar">
-                                                    <i class="align-middle"  data-feather="edit-2"></i>
-                                                </a>
-                                                
-                                            </td>
-                                        </tr>';
-                                }
+                                echo '<tr>
+                                        <td>'.$razaoSocial.'</td>
+                                        <td>'.$cnpj.'</td>
+                                        <td>'.$telefone.'</td>
+                                        <td>'.$siteFornecedor.'<br>'.$email.'</td>
+                                        <td>'.$cidade.' - '.$estado.'</td>
+                                        <td class="table-action text-center">
+                                            <a href="cadastro/fornecedor/'.$id.'" alt="Editar" title="Editar">
+                                                <i class="align-middle"  data-feather="edit-2"></i>
+                                            </a>
+                                            
+                                        </td>
+                                    </tr>';
                             }
                         ?>
                     </tbody>
@@ -83,12 +84,13 @@ exit;
     </div>
 </div>
 <script>
-    function excluir(id){
-        if (confirm("Deseja mesmo excluir? ")) {
-            //ir para exclusao
-            location.href="excluir/fornecedor/"+id;
-        }
-    }
+
+    // function excluir(id){
+    //     if (confirm("Deseja mesmo excluir? ")) {
+    //         //ir para exclusao
+    //         location.href="excluir/fornecedor/"+id;
+    //     }
+    // }
 
     $(document).ready( function () {
         $('#tabela').DataTable({

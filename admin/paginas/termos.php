@@ -43,11 +43,6 @@
                                 <a href="termos/termosCondicoes" class="btn btn-primary" type="button">Termos e Condições</a>
                             </td>
                         </tr>
-                        <tr>
-                            <td class="text-center">
-                                <a href="paginas/recibo" class="btn btn-primary" type="button" disabled>Recibo Exemplo</a>
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
             </div>

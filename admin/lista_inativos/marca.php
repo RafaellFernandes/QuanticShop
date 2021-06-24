@@ -1,18 +1,17 @@
 <?php
-if (!isset($_SESSION["quanticshop"]["id"])) {
-	$titulo = "Erro";
-	$mensagem = "Usuário Não Logado";
-	$icone = "error";
-	mensagem($titulo, $mensagem, $icone);
-exit;
-}
+	if (!isset($_SESSION["quanticshop"]["id"])) {
+		$titulo = "Erro";
+		$mensagem = "Usuário Não Logado";
+		$icone = "error";
+		mensagem($titulo, $mensagem, $icone);
+		exit;
+	}
 
-if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-	echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
-exit;
-}
+	if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+		echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
+		exit;
+	}
 ?>
- 
 <div class="container-fluid p-0">
 	<div class="row">
 		<div class="col-12 col-xl-12">
@@ -33,7 +32,11 @@ exit;
 					</thead>
 					<tbody>
 						<?php
-							$sql = "SELECT * FROM marca ORDER BY nome_marca";
+							$sql = "SELECT * 
+									FROM marca 
+									WHERE ativo = 0
+									ORDER BY nome_marca";
+
 							$consulta = $pdo->prepare($sql);
 							$consulta->execute();
 
@@ -44,16 +47,14 @@ exit;
                                 $ativo          = $dados->ativo;
 
 								//mostrar na tela
-                                if ( $ativo == "0" ) {
-									echo '<tr>
-											<td>'.$nome_marca.'</td>
-											<td class="table-action text-center">
-												<a href="cadastro/marca/'.$id.'" alt="Editar" title="Editar">
-													<i class="align-middle"  data-feather="edit-2"></i>
-												</a>
-											</td>
-										</tr>';
-								}
+								echo '<tr>
+										<td>'.$nome_marca.'</td>
+										<td class="table-action text-center">
+											<a href="cadastro/marca/'.$id.'" alt="Editar" title="Editar">
+												<i class="align-middle"  data-feather="edit-2"></i>
+											</a>
+										</td>
+									</tr>';
                         	}
 						?>
 					</tbody>

@@ -1,16 +1,16 @@
 <?php
-if (!isset($_SESSION["quanticshop"]["id"])) {
-	$titulo = "Erro";
-	$mensagem = "Usuário Não Logado";
-	$icone = "error";
-	mensagem($titulo, $mensagem, $icone);
-exit;
-}
+	if (!isset($_SESSION["quanticshop"]["id"])) {
+		$titulo = "Erro";
+		$mensagem = "Usuário Não Logado";
+		$icone = "error";
+		mensagem($titulo, $mensagem, $icone);
+		exit;
+	}
 
-if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-	echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
-exit;
-}
+	if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+		echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
+		exit;
+	}
 
 	//mostrar erros
 	ini_set('display_errors',1);
@@ -44,8 +44,8 @@ exit;
 						<?php
 							$sql = "SELECT p.ativo pativo, p.*, m.*, d.*, p.id idProduto 
 									FROM produto p 
-							 		LEFT JOIN departamento d ON (d.id = p.departamento_id)
-                					LEFT JOIN marca m ON(m.id = p.marca_id) 
+							 		INNER JOIN departamento d ON (d.id = p.departamento_id)
+                					INNER JOIN marca m ON(m.id = p.marca_id) 
 									WHERE p.ativo = 0
 									ORDER BY p.id";
 
@@ -63,22 +63,21 @@ exit;
 								$nome_dept                      = $dados->nome_dept;
 								$valorUnitario                  = $dados->valorUnitario;
 								$valorUnitario                  = number_format($valorUnitario,2, '.' , ',');	
-								$imagem                    		 = explode(",", $foto);
+								$imagem                    		= explode(",", $foto);
                               
 								//mostrar na tela
-                              
-									echo '<tr>	
-											<td><img src="../fotos/produtos/'.$imagem[0].'" alt="'.$nome_produto.'"  width="70" height="70" class="mr-2"></td>
-											<td>'.$nome_produto.'</td>
-											<td>R$ '.$valorUnitario.'</td>
-											<td>'.$nome_marca.'</td>
-											<td>'.$nome_dept.'</td>
-											<td class="table-action text-center">
-												<a href="cadastro/produto/'.$id.'" alt="Editar" title="Editar">
-													<i class="align-middle"  data-feather="edit-2"></i>				
-												</a>
-											</td>
-										</tr>';
+								echo '<tr>	
+										<td><img src="../fotos/produtos/'.$imagem[0].'" alt="'.$nome_produto.'"  width="70" height="70" class="mr-2"></td>
+										<td>'.$nome_produto.'</td>
+										<td>R$ '.$valorUnitario.'</td>
+										<td>'.$nome_marca.'</td>
+										<td>'.$nome_dept.'</td>
+										<td class="table-action text-center">
+											<a href="cadastro/produto/'.$id.'" alt="Editar" title="Editar">
+												<i class="align-middle"  data-feather="edit-2"></i>				
+											</a>
+										</td>
+									</tr>';
                                 }
 							
 						?>

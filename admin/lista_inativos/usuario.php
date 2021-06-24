@@ -1,16 +1,16 @@
 <?php
-if (!isset($_SESSION["quanticshop"]["id"])) {
-    $titulo = "Erro";
-    $mensagem = "Usuário Não Logado";
-    $icone = "error";
-    mensagem($titulo, $mensagem, $icone);
-exit;
-}
+    if (!isset($_SESSION["quanticshop"]["id"])) {
+        $titulo = "Erro";
+        $mensagem = "Usuário Não Logado";
+        $icone = "error";
+        mensagem($titulo, $mensagem, $icone);
+        exit;
+    }
 
-if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-    echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
-exit;
-}
+    if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+        echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
+        exit;
+    }
 ?>
 <div class="container-fluid p-0">
 	<div class="row">
@@ -37,7 +37,9 @@ exit;
                     <tbody>
                         <?php
                             //buscar os usuarios
-                            $sql = "SELECT * FROM usuario";
+                            $sql = "SELECT * 
+                                    FROM usuario
+                                    WHERE ativo = 0";
                             $consulta = $pdo->prepare($sql);
                             $consulta->execute();
 
@@ -55,20 +57,18 @@ exit;
                                 $ativo                  = $dados->ativo;
 
                                 //mostrar na tela
-                                if ( $ativo == "0" ) {
-                                    echo '<tr>
-                                            <td><img src="'.$imagem.'" alt="'.$primeiro_nome.'" width="48" height="48" class="rounded-circle mr-2"></td>
-                                            <td>'.$primeiro_nome.' '.$sobrenome.'</td>
-                                            <td>'.$email.'</td>
-                                            <td>'.$login.'</td>
-                                            <td>'.$cidade.' - '.$estado.'</td>
-                                            <td class="table-action text-center">
-                                                <a href="cadastro/usuario/'.$id.'" alt="Editar" title="Editar">
-                                                    <i class="align-middle"  data-feather="edit-2"></i>
-                                                </a>
-                                            </td>
-                                        </tr>';
-                                }
+                                echo '<tr>
+                                        <td><img src="'.$imagem.'" alt="'.$primeiro_nome.'" width="48" height="48" class="rounded-circle mr-2"></td>
+                                        <td>'.$primeiro_nome.' '.$sobrenome.'</td>
+                                        <td>'.$email.'</td>
+                                        <td>'.$login.'</td>
+                                        <td>'.$cidade.' - '.$estado.'</td>
+                                        <td class="table-action text-center">
+                                            <a href="cadastro/usuario/'.$id.'" alt="Editar" title="Editar">
+                                                <i class="align-middle"  data-feather="edit-2"></i>
+                                            </a>
+                                        </td>
+                                    </tr>';
                             }
                         ?>
                     </tbody>

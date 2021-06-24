@@ -1,16 +1,16 @@
 <?php
-if (!isset($_SESSION["quanticshop"]["id"])) {
-    $titulo = "Erro";
-    $mensagem = "Usuário Não Logado";
-    $icone = "error";
-    mensagem($titulo, $mensagem, $icone);
-exit;
-}
+    if (!isset($_SESSION["quanticshop"]["id"])) {
+        $titulo = "Erro";
+        $mensagem = "Usuário Não Logado";
+        $icone = "error";
+        mensagem($titulo, $mensagem, $icone);
+        exit;
+    }
 
-if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-    echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
-exit;
-}
+    if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+        echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
+        exit;
+    }
 ?>
 <div class="container-fluid p-0">
 	<div class="row">
@@ -39,7 +39,6 @@ exit;
                         </div>
                     </div>
                 </fieldset>
-
                 <!-- Listagem de Pessoa Fisica -->
                 <div id="fisica" style="display:none;">
                     <table class="table table-bordered table-hover table-striped" id="tabela">
@@ -56,8 +55,11 @@ exit;
                         </thead>
                         <tbody>
                             <?php
-                                $sql = "SELECT id, primeiro_nome, sobrenome, cpf, date_format(data_nascimento, '%d/%m/%Y') data_nascimento, ativo, pessoaFJ, email, cidade, estado, foto, celular FROM cliente
-                                ORDER BY primeiro_nome";
+                                $sql = "SELECT id, primeiro_nome, sobrenome, cpf, date_format(data_nascimento, '%d/%m/%Y') data_nascimento, ativo, pessoaFJ, email, cidade, estado, foto, celular 
+                                        FROM cliente
+                                        WHERE pessoaFJ = 'F' AND ativo = 0
+                                        ORDER BY primeiro_nome";
+
                                 $consulta = $pdo->prepare($sql);
                                 $consulta->execute();
                                 while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
@@ -74,7 +76,6 @@ exit;
                                     $estado             = $dados->estado;
                                     $ativo              = $dados->ativo;
 
-                                    if ($pessoaFJ == "F" and $ativo == "0") {
                                         echo '<tr>
                                             <td><img src="../fotos/'.$foto.'p.jpg" alt="'.$primeiro_nome.'" width="48" height="48" class="rounded-circle mr-2"></td>
                                             <td>'.$primeiro_nome.' '.$sobrenome.'</td>
@@ -86,12 +87,9 @@ exit;
                                                 <a href="cadastro/clienteF/'.$id.'" alt="Editar" title="Editar">
                                                     <i class="align-middle"  data-feather="edit-2"></i>
                                                 </a>
-                                                <a href="javascript:excluir('.$id.')" alt="Excluir" title="Excluir">
-                                                    <i class="align-middle" data-feather="trash"></i>
-                                                </a>
+                                               
                                             </td>
                                         </tr> ';
-                                    };
                                     
                                 }
                             ?>
@@ -108,52 +106,46 @@ exit;
                                 <th>Razão Social</th>
                                 <th>CNPJ</th>
                                 <th>Cidade</th>
-                                <th>Email</th>
-                                <!-- <th>Site</th> -->
+                                <th>Email<br>Site</th>
                                 <th>Telefone</th>
                                 <th>Ações</th> 
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                                $sql = "SELECT id, razaoSocial, cnpj, email, cidade, estado, pessoaFJ, telefone, ativo  FROM cliente
-                                ORDER BY id";
+                                $sql = "SELECT id, razaoSocial, cnpj, email, cidade, estado, pessoaFJ, telefone, siteClienteJuridico, ativo  
+                                        FROM cliente
+                                        WHERE pessoaFJ = 'J' AND ativo = 0
+                                        ORDER BY id";
                                 $consulta = $pdo->prepare($sql);
                                 $consulta->execute();
 
                                 while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
                                     //separar os dados
-                                    $id 	            = $dados->id;
-                                    $pessoaFJ           = $dados->pessoaFJ;
-                                    $razaoSocial 	    = $dados->razaoSocial;
-                                    $cnpj           	= $dados->cnpj;
-                                    $email 	            = $dados->email;
-                                    $telefone 	        = $dados->telefone;
-                                    $cidade 	        = $dados->cidade;
-                                    $estado             = $dados->estado;
-                                    $ativo              = $dados->ativo;
-                                    // $siteJ              = $dados->siteJ;
+                                    $id 	                = $dados->id;
+                                    $pessoaFJ               = $dados->pessoaFJ;
+                                    $razaoSocial 	        = $dados->razaoSocial;
+                                    $cnpj           	    = $dados->cnpj;
+                                    $email 	                = $dados->email;
+                                    $telefone 	            = $dados->telefone;
+                                    $cidade 	            = $dados->cidade;
+                                    $estado                 = $dados->estado;
+                                    $ativo                  = $dados->ativo;
+                                    $siteClienteJuridico    = $dados->siteClienteJuridico;
 
-                                    if ($pessoaFJ == "J" and $ativo == "0" ) { 
-
-                                        echo '<tr>
-                                               
-                                                <td>'.$razaoSocial.'</td>
-                                                <td>'.$cnpj.'</td>
-                                                <td>'.$cidade.' - '.$estado.'</td>
-                                                <td>'.$email.'</td>
-                                                
-                                                <td>'.$telefone.'</td>
-                                                <td class="table-action text-center">
-                                                    <a href="cadastro/clienteJ/'.$id.'" alt="Editar" title="Editar">
-                                                        <i class="align-middle"  data-feather="edit-2"></i>
-                                                    </a>
-                                                    <a href="javascript:excluir('.$id.')" alt="Excluir" title="Excluir">
-                                                        <i class="align-middle" data-feather="trash"></i>
-                                                    </a>
-                                                </td>
-                                            </tr> ';
-                                    };
+                                    echo '<tr>
+                                            <td>'.$razaoSocial.'</td>
+                                            <td>'.$cnpj.'</td>
+                                            <td>'.$cidade.' - '.$estado.'</td>
+                                            <td>'.$email.'<br>'.$siteClienteJuridico.'</td>
+                                            <td>'.$telefone.'</td>
+                                            <td class="table-action text-center">
+                                                <a href="cadastro/clienteJ/'.$id.'" alt="Editar" title="Editar">
+                                                    <i class="align-middle"  data-feather="edit-2"></i>
+                                                </a>
+                                            </td>
+                                        </tr> ';
+                                    
                                 }
                             ?>
                         </tbody>
@@ -224,3 +216,16 @@ exit;
       	}
     }
 </script>
+
+<?php
+ /* <a href="javascript:excluir('.$id.')" alt="Excluir" title="Excluir">
+     <i class="align-middle" data-feather="trash"></i>
+    </a>
+    
+    <a href="javascript:excluir('.$id.')" alt="Excluir" title="Excluir">
+        <i class="align-middle" data-feather="trash"></i>
+    </a>
+    
+    
+    */
+?>

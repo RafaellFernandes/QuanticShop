@@ -1,5 +1,4 @@
 <?php
-
 	//criar uma conexao com um banco - PDO
 	//constante
 	define('SERVER', 'localhost');
@@ -17,3 +16,4 @@
 		//mostrar a mensagem de erro da conexao
 		echo $erro->getMessage();
 	}
+?>

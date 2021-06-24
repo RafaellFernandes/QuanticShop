@@ -1,16 +1,16 @@
 <?php
-if (!isset($_SESSION["quanticshop"]["id"])) {
-	$titulo = "Erro";
-	$mensagem = "Usuário Não Logado";
-	$icone = "error";
-	mensagem($titulo, $mensagem, $icone);
-exit;
-}
+	if (!isset($_SESSION["quanticshop"]["id"])) {
+		$titulo = "Erro";
+		$mensagem = "Usuário Não Logado";
+		$icone = "error";
+		mensagem($titulo, $mensagem, $icone);
+		exit;
+	}
 
-if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-	echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
-exit;
-}
+	if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+		echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
+		exit;
+	}
 ?>
 <div class="container-fluid p-0">
 	<div class="row">
@@ -32,7 +32,11 @@ exit;
 					</thead>
 					<tbody>
 						<?php
-							$sql = "SELECT * FROM marca ORDER BY nome_marca";
+							$sql = "SELECT * 
+									FROM marca 
+									WHERE ativo = 1
+									ORDER BY nome_marca";
+
 							$consulta = $pdo->prepare($sql);
 							$consulta->execute();
 
@@ -42,18 +46,15 @@ exit;
 								$nome_marca 	= $dados->nome_marca;
 								$ativo  		= $dados->ativo;
 
-									//mostrar na tela
-								if ($ativo == "1"){
-									echo '<tr>
-											<td>'.$nome_marca.'</td>
-											<td class="table-action text-center">
-												<a href="cadastro/marca/'.$id.'" alt="Editar" title="Editar">
-													<i class="align-middle"  data-feather="edit-2"></i>
-												</a>
-												
-											</td>
-										</tr>';
-								}
+								//mostrar na tela
+								echo '<tr>
+										<td>'.$nome_marca.'</td>
+										<td class="table-action text-center">
+											<a href="cadastro/marca/'.$id.'" alt="Editar" title="Editar">
+												<i class="align-middle"  data-feather="edit-2"></i>
+											</a>
+										</td>
+									</tr>';
 							}
 						?>
 					</tbody>
@@ -63,13 +64,13 @@ exit;
 	</div>
 </div>
 <script>
-	function excluir(id){
 
-		if (confirm("Deseja mesmo excluir? ")) {
-			//ir para exclusao
-			location.href="excluir/inativarMarca/"+id;
-		}
-	}
+	// function excluir(id){
+	// 	if (confirm("Deseja mesmo excluir? ")) {
+	// 		//ir para exclusao
+	// 		location.href="excluir/inativarMarca/"+id;
+	// 	}
+	// }
 	
 	$(document).ready( function () {
 		$('#tabela').DataTable({

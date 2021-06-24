@@ -1,16 +1,16 @@
 <?php
-  if (!isset($_SESSION["quanticshop"]["id"])) {
-    $titulo = "Erro";
-    $mensagem = "Usuário Não Logado";
-    $icone = "error";
-    mensagem($titulo, $mensagem, $icone);
-exit;
-}
+    if (!isset($_SESSION["quanticshop"]["id"])) {
+        $titulo = "Erro";
+        $mensagem = "Usuário Não Logado";
+        $icone = "error";
+        mensagem($titulo, $mensagem, $icone);
+        exit;
+    }
 
-if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-    echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
-exit;
-}
+    if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+        echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
+        exit;
+    }
 ?>
 <div class="container-fluid p-0">
 	<div class="row">
@@ -57,8 +57,11 @@ exit;
                         </thead>
                         <tbody>
                             <?php
-                                $sql = "SELECT id, primeiro_nome, sobrenome, cpf, date_format(data_nascimento, '%d/%m/%Y') data_nascimento, pessoaFJ, email, cidade, estado, foto, celular, ativo FROM cliente
-                                ORDER BY primeiro_nome";
+                                $sql = "SELECT id, primeiro_nome, sobrenome, cpf, date_format(data_nascimento, '%d/%m/%Y') data_nascimento, pessoaFJ, email, cidade, estado, foto, celular, ativo 
+                                        FROM cliente
+                                        WHERE pessoaFJ = 'F' AND ativo = 1
+                                        ORDER BY primeiro_nome";
+
                                 $consulta = $pdo->prepare($sql);
                                 $consulta->execute();
                                 while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
@@ -67,8 +70,6 @@ exit;
                                     $ativo     = $dados->ativo;
                                     $foto      = "../fotos/{$dados->foto}p.jpg"; 
                                     $fotog     = "../fotos/{$dados->foto}g.jpg"; 
-
-                                    if ($pessoaFJ == "F" and $ativo == "1") {
                             ?>
                                 <tr>
                                     <td>
@@ -87,9 +88,8 @@ exit;
                                         </a>
                                     </td>
                                 </tr>
-                            <?php
-                                };   
-                            }
+                            <?php  
+                                }
                             ?>
                         </tbody>
                     </table>
@@ -111,8 +111,11 @@ exit;
                         </thead>
                         <tbody>
                             <?php
-                                $sql = "SELECT id, razaoSocial, cnpj, email, cidade, estado, pessoaFJ, telefone, siteClienteJuridico, ativo FROM cliente
-                                ORDER BY id";
+                                $sql = "SELECT id, razaoSocial, cnpj, email, cidade, estado, pessoaFJ, telefone, siteClienteJuridico, ativo 
+                                        FROM cliente
+                                        WHERE pessoaFJ = 'J' AND ativo = 1
+                                        ORDER BY id";
+
                                 $consulta = $pdo->prepare($sql);
                                 $consulta->execute();
 
@@ -129,22 +132,18 @@ exit;
                                     $siteClienteJuridico    = $dados->siteClienteJuridico;
                                     $ativo                  = $dados->ativo;
 
-                                    if ($pessoaFJ == "J" and $ativo == "1") { 
-
-                                        echo '<tr>
-                                                <td>'.$razaoSocial.'</td>
-                                                <td>'.$cnpj.'</td>
-                                                <td>'.$cidade.' - '.$estado.'</td>
-                                                <td>'.$email.'<br>'.$siteClienteJuridico.'</td>
-                                                <td>'.$telefone.'</td>
-                                                <td class="table-action text-center">
-                                                    <a href="cadastro/clienteJ/'.$id.'" alt="Editar" title="Editar">
-                                                        <i class="align-middle"  data-feather="edit-2"></i>
-                                                    </a>
-                                                   
-                                                </td>
-                                            </tr> ';
-                                    };
+                                    echo '<tr>
+                                            <td>'.$razaoSocial.'</td>
+                                            <td>'.$cnpj.'</td>
+                                            <td>'.$cidade.' - '.$estado.'</td>
+                                            <td>'.$email.'<br>'.$siteClienteJuridico.'</td>
+                                            <td>'.$telefone.'</td>
+                                            <td class="table-action text-center">
+                                                <a href="cadastro/clienteJ/'.$id.'" alt="Editar" title="Editar">
+                                                    <i class="align-middle"  data-feather="edit-2"></i>
+                                                </a>
+                                            </td>
+                                        </tr> ';
                                 }
                             ?>
                         </tbody>
@@ -156,11 +155,11 @@ exit;
     </div>
 </div>
 <script type="text/javascript">
-    function excluir(id){
-        if ( confirm("deseja realmente excluir este registro?") ){
-            location.href='excluir/cliente/'+id;
-        }
-    }
+    // function excluir(id){
+    //     if ( confirm("deseja realmente excluir este registro?") ){
+    //         location.href='excluir/cliente/'+id;
+    //     }
+    // }
 
     //adicionar o dataTable1 Para a Lista de Pessoa Fisica 
     $(document).ready(function(){

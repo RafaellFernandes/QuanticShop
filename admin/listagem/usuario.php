@@ -1,16 +1,16 @@
 <?php
-if (!isset($_SESSION["quanticshop"]["id"])) {
-    $titulo = "Erro";
-    $mensagem = "Usuário Não Logado";
-    $icone = "error";
-    mensagem($titulo, $mensagem, $icone);
-exit;
-}
+    if (!isset($_SESSION["quanticshop"]["id"])) {
+        $titulo = "Erro";
+        $mensagem = "Usuário Não Logado";
+        $icone = "error";
+        mensagem($titulo, $mensagem, $icone);
+        exit;
+    }
 
-if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-    echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
-exit;
-}
+    if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+        echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
+        exit;
+    }
 ?>
 <div class="container-fluid p-0">
 	<div class="row">
@@ -37,37 +37,38 @@ exit;
                     <tbody>
                         <?php
                             //buscar os usuarios
-                            $sql = "SELECT * FROM usuario";
+                            $sql = "SELECT * 
+                                    FROM usuario
+                                    WHERE ativo = 1";
+
                             $consulta = $pdo->prepare($sql);
                             $consulta->execute();
 
                             while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
                                 //separar os dados
-                                $foto       = "../fotos/{$dados->foto}p.jpg";
+                                $foto         = "../fotos/{$dados->foto}p.jpg";
                                 $fotog        = "../fotos/{$dados->foto}g.jpg"; 
                                 $ativo        = $dados->ativo;
 
                                 //mostrar na tela
-                                if ($ativo == "1"){
                                     ?>
-                                        <tr>
-                                            <td>
-                                                <a href="<?=$fotog?>" data-lightbox="foto" title="<?=$dados->primeiro_nome?>">
-                                                    <img src="<?=$foto?>" alt="<?=$dados->primeiro_nome?>" width="70px">
-                                                </a>
-                                            </td>    
-                                            <td><?=$dados->primeiro_nome?> <?=$dados->sobrenome?></td>              
-                                            <td><?=$dados->email?></td>
-                                            <td><?=$dados->login?></td>
-                                            <td><?=$dados->cidade?>-<?=$dados->estado?></td>
-                                            <td class="table-action text-center">
-                                                <a href="cadastro/usuario/<?=$dados->id?>" alt="Editar" title="Editar">
-                                                    <i class="align-middle"  data-feather="edit-2"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    <?php
-                                }
+                                    <tr>
+                                        <td>
+                                            <a href="<?=$fotog?>" data-lightbox="foto" title="<?=$dados->primeiro_nome?>">
+                                                <img src="<?=$foto?>" alt="<?=$dados->primeiro_nome?>" width="70px">
+                                            </a>
+                                        </td>    
+                                        <td><?=$dados->primeiro_nome?> <?=$dados->sobrenome?></td>              
+                                        <td><?=$dados->email?></td>
+                                        <td><?=$dados->login?></td>
+                                        <td><?=$dados->cidade?>-<?=$dados->estado?></td>
+                                        <td class="table-action text-center">
+                                            <a href="cadastro/usuario/<?=$dados->id?>" alt="Editar" title="Editar">
+                                                <i class="align-middle"  data-feather="edit-2"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php
                             }
                         ?>
                     </tbody>

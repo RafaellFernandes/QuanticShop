@@ -1,16 +1,16 @@
 <?php
-if (!isset($_SESSION["quanticshop"]["id"])) {
-	$titulo = "Erro";
-	$mensagem = "Usuário Não Logado";
-	$icone = "error";
-	mensagem($titulo, $mensagem, $icone);
-exit;
-}
+	if (!isset($_SESSION["quanticshop"]["id"])) {
+		$titulo = "Erro";
+		$mensagem = "Usuário Não Logado";
+		$icone = "error";
+		mensagem($titulo, $mensagem, $icone);
+		exit;
+	}
 
-if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-	echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
-exit;
-}
+	if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+		echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
+		exit;
+	}
 ?>						
 <div class="container-fluid p-0">
 	<div class="row">
@@ -34,7 +34,10 @@ exit;
 					<tbody><br>
 						<?php
 							//buscar as cidades alfabeticamente
-							$sql = "SELECT * FROM cidade ORDER BY cidade";
+							$sql = "SELECT * 
+									FROM cidade 
+									ORDER BY cidade";
+									
 							$consulta = $pdo->prepare($sql);
 							$consulta->execute();
 

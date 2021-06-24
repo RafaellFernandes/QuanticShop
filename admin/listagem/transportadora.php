@@ -1,16 +1,16 @@
 <?php
-if (!isset($_SESSION["quanticshop"]["id"])) {
-	$titulo = "Erro";
-	$mensagem = "Usuário Não Logado";
-	$icone = "error";
-	mensagem($titulo, $mensagem, $icone);
-exit;
-}
+	if (!isset($_SESSION["quanticshop"]["id"])) {
+		$titulo = "Erro";
+		$mensagem = "Usuário Não Logado";
+		$icone = "error";
+		mensagem($titulo, $mensagem, $icone);
+		exit;
+	}
 
-if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-	echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
-exit;
-}
+	if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+		echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
+		exit;
+	}
 ?>
 <div class="container-fluid p-0">
 	<div class="row">
@@ -36,7 +36,11 @@ exit;
 					</thead>
 					<tbody>
 						<?php
-							$sql = "SELECT * FROM transportadora ORDER BY razaoSocial";
+							$sql = "SELECT * 
+									FROM transportadora 
+									WHERE ativo = 1
+									ORDER BY razaoSocial";
+									
 							$consulta = $pdo->prepare($sql);
 							$consulta->execute();
 
@@ -51,24 +55,21 @@ exit;
 								$cidade 	         = $dados->cidade;
 								$ativo 				 = $dados->ativo;
 								$siteTransp 		 = $dados->siteTransp;
-								
-
+							
 								//mostrar na tela
-								if ($ativo == "1") {
-									echo '<tr>
-											<td>'.$razaoSocial.'</td>
-											<td>'.$cnpj.'</td>
-											<td>'.$telefone.'</td>
-											<td>'.$email.'<br>'.$siteTransp.'</td>
-											<td>'.$cidade.' - '.$estado.'</td>
-											<td class="table-action text-center">
-												<a href="cadastro/transportadora/'.$id.'" alt="Editar" title="Editar">
-													<i class="align-middle"  data-feather="edit-2"></i>		
-												</a>
-												
-											</td>
-										</tr>';
-								}
+								echo '<tr>
+										<td>'.$razaoSocial.'</td>
+										<td>'.$cnpj.'</td>
+										<td>'.$telefone.'</td>
+										<td>'.$email.'<br>'.$siteTransp.'</td>
+										<td>'.$cidade.' - '.$estado.'</td>
+										<td class="table-action text-center">
+											<a href="cadastro/transportadora/'.$id.'" alt="Editar" title="Editar">
+												<i class="align-middle"  data-feather="edit-2"></i>		
+											</a>
+											
+										</td>
+									</tr>';
 							}
 						?>
 					</tbody>
@@ -78,12 +79,12 @@ exit;
 	</div>
 </div>
 <script>
-	function excluir(id){
-		if (confirm("Deseja mesmo excluir? ")) {
-			//ir para exclusao
-			location.href="excluir/transportadora/"+id;
-		}
-	}
+	// function excluir(id){
+	// 	if (confirm("Deseja mesmo excluir? ")) {
+	// 		//ir para exclusao
+	// 		location.href="excluir/transportadora/"+id;
+	// 	}
+	// }
 
 	$(document).ready( function () {
 		$('#tabela').DataTable({

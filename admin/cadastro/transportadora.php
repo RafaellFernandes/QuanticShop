@@ -163,7 +163,7 @@
 						</div>
 						<div class="mb-3 col-12 col-md-2 mt-2">
 							<label for="complemento">Complemento</label>
-							<input type="text" name="complemento" id="complemento" class="form-control" value="<?=$complemento;?>" placeholder="Casa ou Apto.">
+							<input type="text" name="complemento" id="complemento" class="form-control" value="<?=$complemento;?>" placeholder="Barracão, Salão...">
 						</div>
 					</div><br>
 					<div class="row g-3">
