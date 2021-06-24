@@ -19,8 +19,6 @@ exit;
 
   //verificar se existem dados no POST
   if ( $_POST ) {
-    include "validacao/functions.php";
-    include "config/conexao.php";
 
   	//recuperar os dados do formulario
     $id = $email = $senha = $cep = $telefone = $celular = $pessoaFJ = $nomeFantasia = $razaoSocial =
@@ -35,6 +33,8 @@ exit;
     $$key = trim ( $value );
   		
     }
+    include "validacao/functions.php";
+    include "config/conexao.php";
 
     if( empty($nomeFantasia) ){
         echo "<script>alert('Digite o Nome Fantasia da Empresa!');history.back();</script>";
@@ -76,10 +76,7 @@ exit;
       
     //iniciar uma transacao
     $pdo->beginTransaction();
-
    
-   
-         
       if(empty($id)){
           
           //$Senha = password_hash($Senha, PASSWORD_DEFAULT);
