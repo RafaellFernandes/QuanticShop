@@ -1,5 +1,4 @@
 <?php
-// session_start();
 	//arquivo para criar uma conexão com o banco de dados mysql
 	$servidor = "localhost";
 	//em 99% dos casos é localhost
@@ -16,14 +15,7 @@
 			charset=utf8",
 			$usuario,
 			$senha);
-
 	} catch (PDOException $erro) {
-		//mensagem de erro
-		// $msg = $erro->getMessage();
 		echo "<script>location.href='http://localhost//QuanticShop/erros/500.php'</script>";
-		// echo "<p>Erro ao conectar no banco de dados: $msg </p>";
-
     }
-
-	
 ?>

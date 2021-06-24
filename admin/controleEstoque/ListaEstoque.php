@@ -1,16 +1,16 @@
 <?php
-if (!isset($_SESSION["quanticshop"]["id"])) {
-	$titulo = "Erro";
-	$mensagem = "Usuário Não Logado";
-	$icone = "error";
-	mensagem($titulo, $mensagem, $icone);
-exit;
-}
+	if (!isset($_SESSION["quanticshop"]["id"])) {
+		$titulo = "Erro";
+		$mensagem = "Usuário Não Logado";
+		$icone = "error";
+		mensagem($titulo, $mensagem, $icone);
+	exit;
+	}
 
-if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-    echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
-exit;
-}
+	if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+		echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
+	exit;
+	}
 ?>
 <div class="container-fluid p-0">
 	<div class="row">
@@ -34,11 +34,9 @@ exit;
 					</thead>
 					<tbody>
 						<?php
-                            // $sql = "SELECT id, produto_id, qtd_estoque FROM estoque";
 							$sql = "SELECT e.*, p.nome_produto
-							FROM estoque e
-							INNER JOIN produto p ON (p.id = e.produto_id)
-							";
+									FROM estoque e
+									INNER JOIN produto p ON (p.id = e.produto_id)";
                             $consulta = $pdo->prepare($sql);
                             $consulta->execute();
 
@@ -69,12 +67,11 @@ exit;
 		</div>
 	</div>
 </div>
-<!-- <a href="javascript:excluir('.$id.')" alt="Excluir" title="Excluir">
-												<i class="align-middle" data-feather="trash"></i>				
-											</a> -->
+<!--<a href="javascript:excluir('.$id.')" alt="Excluir" title="Excluir">
+		<i class="align-middle" data-feather="trash"></i>				
+	</a> -->
 <script>
 	function excluir(id){
-
 		if (confirm("Deseja mesmo excluir? ")) {
 			//ir para exclusao
 			location.href="excluir/marca/"+id;

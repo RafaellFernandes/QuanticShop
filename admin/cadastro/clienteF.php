@@ -24,9 +24,6 @@ if (!isset($id)) $id = "";
 $primeiro_nome = $sobrenome = $cpf = $data_nascimento = $email = $senha = $cep = $telefone = $celular = $foto =
 	$pessoaFJ =  $estado = $cidade = $endereco = $bairro = $complemento = $numero_resid = $cidade_id = $ativo = $genero_id = "";
 
-//validação do require da senha
-//$senha = "required data-parsley-required-message='Digite uma senha' ";
-
 if (!empty($id)) {
 	//selecionar os dados do cliente
 	$sql =  "SELECT c.*, date_format(c.data_nascimento, '%d/%m/%Y') data_nascimento,
@@ -38,10 +35,7 @@ if (!empty($id)) {
 
 	$dados = $consulta->fetch(PDO::FETCH_OBJ);
 
-	// $id = "";
-
 	if (!empty($dados->id)) {
-
 		$id                      = $dados->id;
 		$primeiro_nome           = $dados->primeiro_nome;
 		$sobrenome               = $dados->sobrenome;
@@ -63,8 +57,6 @@ if (!empty($id)) {
 		$cidade_id               = $dados->cidade_id;
 		$ativo                   = $dados->ativo;
 		$genero_id               = $dados->genero_id;
-		//retirar a validação da senha
-		// $senha = NULL;
 	}
 }
 ?>
@@ -84,18 +76,14 @@ if (!empty($id)) {
 					<p class="card-subtitle text-muted">Todos os Campos são Obrigatórios</p><br>
 					<div class="row">
 						<div class="mb-3 col-12 col-md-2 mt-2" style="display: none;">
-							<label for="pessoaFJ">Pessoa F/J: ocultar</label>
+							<label for="pessoaFJ">Pessoa F/J:</label>
 							<select name="pessoaFJ" id="pessoaFJ" class="form-control" required data-parsley-required-message="Selecione uma opção">
-								<!-- <option value="">...</option> -->
 								<option value="F" <?= $pessoaFJ == 'F' ? "selected" : "" ?>>Fisica</option>
-								<!-- <option value="J"  <? //= $pessoaFJ == 'J' ? "selected" : "" 
-														?>>Juridica</option> -->
 							</select>
-
 						</div>
 						<div class="mb-3 col-12 col-md-2" style="display: none;">
 							<label for="id">ID:</label>
-							<input type="text" name="id" id="id" class="form-control" readonly value="<?= $id; ?>" placeholder="Automatico">
+							<input type="text" name="id" id="id" class="form-control" readonly value="<?= $id; ?>">
 						</div>
 						<div class="mb-3 col-12 col-md-6 mt-2">
 							<label for="primeiro_nome">Primeiro Nome:</label>
@@ -119,7 +107,7 @@ if (!empty($id)) {
                                         $consulta->execute();
 
                                         while ($d = $consulta->fetch(PDO::FETCH_OBJ) ) {
-                                        //separar os dados
+                                        	//separar os dados
                                             $id   = $d->id;
                                             $genero = $d->genero;
 											?>
@@ -135,16 +123,16 @@ if (!empty($id)) {
 						</div>
 						<div class="col-12 col-md-4 mt-2">
 							<?php
-							$required = ' required data-parsley-required-message="Selecione um arquivo" ';
-							$link = NULL;
-							//verificar se a imagem não esta em branco
-							if (!empty($foto)) {
-								//caminho para a imagem
-								$img = "../fotos/{$foto}m.jpg";
-								//criar um link para abrir a imagem
-								$link = "<a href='{$img}' data-lightbox='foto' class='badge badge-success' style='Color: blue;'>Abrir imagem</a>";
-								$required = NULL;
-							}
+								$required = ' required data-parsley-required-message="Selecione um arquivo" ';
+								$link = NULL;
+								//verificar se a imagem não esta em branco
+								if (!empty($foto)) {
+									//caminho para a imagem
+									$img = "../fotos/{$foto}m.jpg";
+									//criar um link para abrir a imagem
+									$link = "<a href='{$img}' data-lightbox='foto' class='badge badge-success' style='Color: blue;'>Abrir imagem</a>";
+									$required = NULL;
+								}
 							?>
 							<label for="foto">Imagem (JPG)* <?= $link ?></label>
 							<input type="file" name="foto" id="foto" class="form-control" <?= $required ?> accept="image/jpeg">
@@ -174,7 +162,7 @@ if (!empty($id)) {
 							<input type="text" name="cep" id="cep" class="form-control" required data-parsley-required-message="Preencha o CEP" value="<?= $cep; ?>" placeholder="Digite o CEP da Sua Cidade">
 						</div>
 						<div class="mb-3 col-12 col-md-2 mt-2" style="display: none;">
-							<label for="cidade_id">ID Cidade: ocultar</label>
+							<label for="cidade_id">ID Cidade:</label>
 							<input type="text" name="cidade_id" id="cidade_id" class="form-control" required data-parsley-required-message="Preencha a Cidade" readonly value="<?= $cidade_id; ?>">
 						</div>
 						<div class="mb-3 col-12 col-md-3 mt-2">
@@ -217,7 +205,6 @@ if (!empty($id)) {
 								Salvar/Alterar Dados
 							</button>
 						</div>
-
 						<div class="col-sm-2 mt-4">
 							<div class="float-end ">
 								<button type="reset" class="btn btn-danger margin">
