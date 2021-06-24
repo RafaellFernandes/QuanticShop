@@ -64,8 +64,11 @@ exit;
          if ( $consulta->execute() ) {
           //gravar no banco 
           if ( empty ( $id ) ) $id = $pdo->lastInsertId();
+          
           $pdo->commit();
-          $sql = "select iv.quantidade, iv.produto_id, v.status from item_venda iv inner join venda v on (v.id = iv.venda_id)";
+          // var_dump($id);exit;
+          // $sql = "select iv.quantidade, iv.produto_id, v.status from item_venda iv inner join venda v on (v.id = iv.venda_id)";
+          $sql = "select iv.quantidade, iv.produto_id, v.status from item_venda iv inner join venda v on (v.id = iv.venda_id) where v.id = $id";
           $consulta = $pdo->prepare($sql);
           $consulta->execute();
           while ($dados = $consulta->fetch(PDO::FETCH_OBJ) ){	

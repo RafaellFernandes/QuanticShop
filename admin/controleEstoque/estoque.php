@@ -21,7 +21,7 @@ exit;
 //se nao existe o id
 if ( !isset ( $id ) ) $id = "";
 //iniciar as variaveis
-$produto_id = $qtd_estoque = $produto = NULL;
+$produto_id = $qtd_estoque = $produto = $produto_desc = NULL;
 
   //verificar se existe um id
   if ( !empty ( $id ) ) {
@@ -29,7 +29,12 @@ $produto_id = $qtd_estoque = $produto = NULL;
     include "validacao/functions.php";
    
   	//selecionar os dados do banco para poder editar
-      $sql = "SELECT * FROM estoque WHERE  id = :id LIMIT 1";
+      $sql = "SELECT 
+        e.*,
+        p.* 
+     FROM estoque e
+     left join produto p on (p.id = e.produto_id)
+     WHERE  e.id = :id LIMIT 1";
       $consulta = $pdo->prepare($sql);
       $consulta->bindParam(":id", $id);
       $consulta->execute();
@@ -40,6 +45,9 @@ $produto_id = $qtd_estoque = $produto = NULL;
     $id         	  = $dados->id;
     $qtd_estoque 	  = $dados->qtd_estoque; 
     $produto_id       = $dados->produto_id;
+    $produto          = $dados->produto_id;
+  
+    $produto_desc     = $dados->id.' - '.$dados->nome_produto.' - M:'.$dados->marca_id.' - D:'.$dados->departamento_id;      
   }
 
 ?>
@@ -68,29 +76,24 @@ $produto_id = $qtd_estoque = $produto = NULL;
                     value="<?=$produto_id?>">
                 </div>
                 <div class="col-10">
-                    <label for="produto">Selecione o Produto:</label>
-                    <input type="text" name="produto"
-                    id="produto" required
-                    data-parsley-required-message="Selecione um produto"
-                    list="produtos"
-                    class="form-control"
-                    value="<?=$produto?>">
-
-                    <datalist id="produtos">
-                        <?php
-                            $sql = "SELECT p.id, p.nome_produto, p.marca_id, p.departamento_id, c.qtdProdutoComprado 
-                                    FROM produto p 
-                                    INNER  JOIN item_compra c ON (c.produto_id = p.id) 
-                                    WHERE p.ativo = 1 AND c.ativo = 1
-                                    ORDER BY nome_produto";
-                            $consulta = $pdo->prepare($sql);
-                            $consulta->execute();
-
-                            while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ){
-                                echo "<option value='{$dados->id} - {$dados->nome_produto} - M:{$dados->marca_id} - D:{$dados->departamento_id}'>";
-                            }
-                        ?>
-                    </datalist>
+							<span>Produto<label class="form-label" for="genero_id"></label></span>
+							<select name="produto" id="produto" class="form-control" required data-parsley-required-message="selecione uma opção">
+								<option value="<?=$produto;?>"><?= $produto_desc ?></option>
+								<?php
+									 $sql = "SELECT p.id, p.nome_produto, p.marca_id, p.departamento_id, c.qtdProdutoComprado 
+                                     FROM produto p 
+                                     INNER  JOIN item_compra c ON (c.produto_id = p.id) 
+                                     WHERE p.ativo = 1 AND c.ativo = 1
+                                     ORDER BY nome_produto";
+									$consulta = $pdo->prepare($sql);
+									$consulta->execute();
+									while ($d = $consulta->fetch(PDO::FETCH_OBJ) ) {
+										echo "<option value={$d->id}>{$d->id} - {$d->nome_produto} - M:{$d->marca_id} - D:{$d->departamento_id}</option>";
+									}                    
+								?>
+							</select>
+						</div>
+            
                 </div> 
                         <div class="col-12 col-md-4">
                             <label for="qtd_estoque">Quantidade em Estoque</label>

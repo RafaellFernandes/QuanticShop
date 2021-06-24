@@ -191,7 +191,8 @@ exit;
                             $consulta->execute();
 
                             while ( $d = $consulta->fetch(PDO::FETCH_OBJ) ){
-                                echo "<option value='{$d->id} - {$d->nome_produto} - {$d->valorUnitario}'>";
+                                $valorUnitario = number_format($d->valorUnitario, 2, ",", ".");
+                                echo "<option value='{$d->id} - {$d->nome_produto} - {$valorUnitario}'>";
                             }
                             ?>
                             </datalist>
@@ -241,5 +242,5 @@ exit;
     }
 ?>
 <script>
-    // $("#valor").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+     $("#valor").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
 </script>
