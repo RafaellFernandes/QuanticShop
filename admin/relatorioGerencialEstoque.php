@@ -26,7 +26,7 @@ $html = "
                     <th>ID<br>ETQ</th>
                     <th>QTDE<br>ESTOQUE</th>
                     <th>LOTE</th>
-                    <th>DATA CADASTRO</th>
+                    <th class='numero'>DATA CADASTRO</th>
                     <th>QTDE<br>COMPRA</th>
                     <th>CUSTO<br>UNITARIO</th>
                    
@@ -43,8 +43,8 @@ $html = "
                         <td>{$estoque["qtd_estoque"]}</td>
                         <td>{$estoque["lote"]}</td>
                         <td>{$estoque["dataCadastro"]}</td>
-                        <td>R$ ".($estoque["qtdProdutoComprado"])."</td>
-                        <td>".($estoque["custo_unitario"])."</td>
+                        <td>".($estoque["qtdProdutoComprado"])."</td>
+                        <td>R$ ".($estoque["custo_unitario"])."</td>
                         
                     </tr>";
                 }
