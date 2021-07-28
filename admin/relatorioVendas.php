@@ -157,17 +157,6 @@ function getTotal($pdo, $venda_id) {
 	return number_format($total,2,",",".");
 } 
 
-
-
-
-
-
-
-
-
-
-
-
 ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 
