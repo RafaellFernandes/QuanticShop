@@ -62,15 +62,15 @@ exit;
 			<div class="card">
 				<div class="card-header">
 					<div class="float-end">	
-            <a href="venda/vendaProduto" class="btn btn-primary">Cadastrar Novo</a>
-            <a href="venda/listar" class="btn btn-primary">Listar</a>
+                    <a href="venda/vendaProduto" class="btn btn-primary">Cadastrar Novo</a>
+                    <a href="venda/listar" class="btn btn-primary">Listar</a>
                     </div>
-                <h4>Saida</h4>
-				<h6 class="card-subtitle text-muted">Venda</h6>
-    </div>
-    <div class="card-body">
-        <form name="formCadastro" method="post" action="venda/salvarVenda" data-parsley-validate="">
-            <div class="row">
+                    <h4>Saida</h4>
+				    <h6 class="card-subtitle text-muted">Venda</h6>
+                </div>
+                <div class="card-body">
+                <form name="formCadastro" method="post" action="venda/salvarVenda" data-parsley-validate="">
+                <div class="row">
                 <div class="col-12 col-md-2">
                     <label for="id">ID</label>
                     <input type="text" name="id" id="id" class="form-control" readonly value="<?=$id?>">
@@ -119,14 +119,11 @@ exit;
 
                     <datalist id="clientes">
                         <?php
-                            $sql = "SELECT id, primeiro_nome, sobrenome, razaoSocial, celular FROM cliente
-                                ORDER BY primeiro_nome";
+                            $sql = "SELECT id, primeiro_nome, sobrenome, razaoSocial, celular FROM cliente ORDER BY primeiro_nome";
                             $consulta = $pdo->prepare($sql);
                             $consulta->execute();
                             while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ){
-
-                                echo "<option value='{$dados->id} - {$dados->primeiro_nome} {$dados->sobrenome}  {$dados->razaoSocial} - {$dados->celular}'>";
-
+                            echo "<option value='{$dados->id} - {$dados->primeiro_nome} {$dados->sobrenome}  {$dados->razaoSocial} - {$dados->celular}'>";
                             }
                         ?>
                     </datalist>
@@ -173,32 +170,32 @@ exit;
                     <h6 class="card-subtitle text-muted"></h6>
                 </div>
                 <div class="card-body">
-                <form name="formItens" id="formItens" method="post" action="itens.php" target="itens" data-parsley-validate="">
-                    <input type="hidden" name="venda_id" value="<?=$id?>">
-                    <div class="row">
+                    <form name="formItens" id="formItens" method="post" action="itens.php" target="itens" data-parsley-validate="">
+                        <input type="hidden" name="venda_id" value="<?=$id?>">
+                        <div class="row">
                         <div class="col-12 col-md-2">
                             <input type="text" name="produto_id" id="produto_id" class="form-control" required data-parsley-required-message="Selecione o produto" readonly 
                             <?=$disabled?>>
                         </div>
                         <div class="col-12 col-md-4">
-                            <input type="text" name="produto" id="produto"
-                            class="form-control" required data-parsley-required-message="Selecione um produto" list="listProdutos" <?=$disabled?> >
+                        <input type="text" name="produto" id="produto"
+                        class="form-control" required data-parsley-required-message="Selecione um produto" list="listProdutos" <?=$disabled?> >
 
-                            <datalist id="listProdutos"> 
-                            <?php
-                             $sql = "SELECT p.id pid, p.nome_produto, p.valorUnitario, e.* 
-                             FROM produto p
-                             INNER JOIN estoque e ON (p.id = e.produto_id)
-                             WHERE ativo = 1";
-                            $consulta = $pdo->prepare($sql);
-                            $consulta->execute();
+                        <datalist id="listProdutos"> 
+                        <?php
+                        $sql = "SELECT p.id pid, p.nome_produto, p.valorUnitario, e.* 
+                        FROM produto p
+                        INNER JOIN estoque e ON (p.id = e.produto_id)
+                        WHERE ativo = 1";
+                        $consulta = $pdo->prepare($sql);
+                        $consulta->execute();
 
-                            while ( $d = $consulta->fetch(PDO::FETCH_OBJ) ){
+                        while ( $d = $consulta->fetch(PDO::FETCH_OBJ) ){
                                 $valorUnitario = number_format($d->valorUnitario, 2, ",", ".");
                                 echo "<option value='{$d->pid} - {$d->nome_produto} - {$valorUnitario}'>";
-                            }
-                            ?>
-                            </datalist>
+                        }
+                        ?>
+                        </datalist>
                         </div>
                         <div class="col-12 col-md-2">
                             <input type="text" name="valor" id="valor" class="form-control" required 
@@ -213,7 +210,7 @@ exit;
                         <div class="col-12 col-md-2">
                             <button type="submit" class="btn btn-info" <?=$disabled?>>Inserir</button>
                         </div>
-                    </div> <!-- row -->
+                    </div> 
                 </form>
                 <iframe src="itens.php?venda_id=<?=$id?>" width="100%"
                 height="400px" name="itens"></iframe>
@@ -236,11 +233,9 @@ exit;
                     
                     $("#produto_id").val(produto);
                     $("#valor").val(valor);
-
                 }
             })
         </script>
-
         <?php
     }
 ?>

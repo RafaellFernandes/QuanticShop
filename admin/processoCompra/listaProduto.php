@@ -55,18 +55,18 @@ exit;
 								$icativo             = $dados->icativo;
                          
 								//mostrar na tela
-								echo 	'<tr>
-											<td>'.$fornecedor_id.'<br>'.$razaoSocial.'</td>
-											<td>'.$produto_id.'<br>'.$nome_produto.'</td>
-											<td>'.$datacadastro.'</td>
-											<td>'.$icativo.'</td>
-											<td class="table-action text-center">
-												<a href="processoCompra/produtoCompra/'.$id.'" alt="Editar" title="Editar">
-													<i class="align-middle"  data-feather="edit-2"></i>
-												</a>
-											</td>
+								echo '<tr>
+										<td>'.$fornecedor_id.'<br>'.$razaoSocial.'</td>
+										<td>'.$produto_id.'<br>'.$nome_produto.'</td>
+										<td>'.$datacadastro.'</td>
+										<td>'.$icativo.'</td>
+										<td class="table-action text-center">
+											<a href="processoCompra/produtoCompra/'.$id.'" alt="Editar" title="Editar">
+											  <i class="align-middle"  data-feather="edit-2"></i>
+											</a>
+										</td>
 										</tr>';
-				}
+				            }
 						?>
 					</tbody>
 				</table>
@@ -91,9 +91,9 @@ exit;
 					"last":       "Último",
 					"next":       "Próximo",
 					"previous":   "Anterior"
-		}
-			}
-		} );
+		            }
+			    }
+		});
 	})
 </script>
 
