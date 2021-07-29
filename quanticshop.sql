@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 21-Jun-2021 às 20:43
--- Versão do servidor: 10.4.14-MariaDB
--- versão do PHP: 7.4.11
+-- Tempo de geração: 29-Jul-2021 às 02:26
+-- Versão do servidor: 10.4.20-MariaDB
+-- versão do PHP: 8.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -6298,8 +6298,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `primeiro_nome`, `sobrenome`, `email`, `login`, `senha`, `foto`, `cep`, `cidade`, `estado`, `endereco`, `bairro`, `complemento`, `numero_resid`, `ativo`, `celular`, `cpf`, `dataNascimento`, `nivelAcesso`, `cidade_id`, `genero_id`) VALUES
-(45, 'Rafael', 'Fernandes', 'rafaeldf_fernandes@hotmail.com', 'rafaelfernandes', '$2y$10$GAaDuM5djXarN0MGwfEZP.FNgnOd39XlOxlk8Z6b5P9171siHPNeO', 'usuario_1621889291_41', '87508-225', 'Umuarama', 'PR', 'Rua Tupã', 'Parque Tarumã', 'casa', '1939', 1, '(44) 99863-1057', '930.978.760-06', '2000-01-05', 'admin', 3172, 2),
-(46, 'Juliana', 'Salton', 'julianasalton89@gmail.com', 'juhsalton', '$2y$10$.MlMnbI5fEcDjp/WYet69.uNgYtlRtwrlxHcaElMZTPc6W.9FOc8a', 'usuario_1621892644_45', '87485-000', 'Douradina', 'PR', 'Sitio Cantinho do Céu', 'Area Rural', 'sitio', '000', 1, '(44) 99906-0726', '379.426.730-30', '2001-06-02', 'admin', 2884, 1);
+(46, 'admin', 'admin', 'admin@gmail.com', 'admin', '$2y$10$GAaDuM5djXarN0MGwfEZP.FNgnOd39XlOxlk8Z6b5P9171siHPNeO', 'usuario_1621892644_45', '36060-640', 'Juiz de Fora', 'MG', 'Rua Professor Aguiar Júnior', 'Linhares', 'sitio', '000', 1, '(32) 99423-5482', '379.426.730-30', '2020-08-20', 'admin', 1983, 9);
 
 -- --------------------------------------------------------
 

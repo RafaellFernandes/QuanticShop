@@ -1,16 +1,16 @@
 <?php
-if (!isset($_SESSION["quanticshop"]["id"])) {
-    $titulo = "Erro";
-    $mensagem = "Usuário Não Logado";
-    $icone = "error";
-    mensagem($titulo, $mensagem, $icone);
-exit;
-}
+	if (!isset($_SESSION["quanticshop"]["id"])) {
+		$titulo = "Erro";
+		$mensagem = "Usuário Não Logado";
+		$icone = "error";
+		mensagem($titulo, $mensagem, $icone);
+	exit;
+	}
 
-if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-    echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
-exit;
-}
+	if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+		echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
+	exit;
+	}
 
 ?>						
 <div class="container-fluid p-0">
@@ -38,14 +38,14 @@ exit;
 					</thead>
 					<tbody>
 						<?php
-                           $sql = "SELECT p.id pid, p.ativo pativo, p.*, m.id mid, m.*, d.id did, d.*,v.id vid, v.vezesVendido, c.venda_unitaria  
-						   FROM produto p 
-						   INNER JOIN departamento d ON (d.id = p.departamento_id)
-						   INNER JOIN marca m ON (m.id = p.marca_id) 
-						   INNER JOIN item_venda v ON (v.produto_id = p.id) 
-						   INNER JOIN item_compra c ON (c.produto_id = p.id)
-						   WHERE p.ativo = 1
-						   ORDER BY v.vezesVendido ASC";
+							$sql = "SELECT p.id pid, p.ativo pativo, p.*, m.id mid, m.*, d.id did, d.*,v.id vid, v.vezesVendido, c.venda_unitaria  
+							FROM produto p 
+							INNER JOIN departamento d ON (d.id = p.departamento_id)
+							INNER JOIN marca m ON (m.id = p.marca_id) 
+							INNER JOIN item_venda v ON (v.produto_id = p.id) 
+							INNER JOIN item_compra c ON (c.produto_id = p.id)
+							WHERE p.ativo = 1
+							ORDER BY v.vezesVendido ASC";
 
 							$consulta = $pdo->prepare($sql);
 							$consulta->execute();                            

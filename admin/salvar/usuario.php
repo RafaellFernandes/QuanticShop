@@ -1,26 +1,24 @@
 <?php
-if (!isset($_SESSION["quanticshop"]["id"])) {
-    $titulo = "Erro";
-    $mensagem = "Usuário Não Logado";
-    $icone = "error";
-    mensagem($titulo, $mensagem, $icone);
-exit;
-}
+    if (!isset($_SESSION["quanticshop"]["id"])) {
+        $titulo = "Erro";
+        $mensagem = "Usuário Não Logado";
+        $icone = "error";
+        mensagem($titulo, $mensagem, $icone);
+    exit;
+    }
 
-if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-    echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
-exit;
-}
+    if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+        echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
+    exit;
+    }
 
-//mostrar erros
-ini_set('display_errors',1);
-ini_set('display_startup_erros',1);
-error_reporting(E_ALL);
-//print_r($_POST);
-//print_r($_FILES);      
+    //mostrar erros
+    ini_set('display_errors',1);
+    ini_set('display_startup_erros',1);
+    error_reporting(E_ALL);     
 
-//verificar se existem dados no POST
-if ( $_POST ) {
+    //verificar se existem dados no POST
+    if ( $_POST ) {
 
   	//recuperar os dados do formulario
   	$id = $primeiro_nome = $sobrenome = $email = $login = $senha = $cidade_id = $foto = $cep = $cidade = $estado = $bairro = 
@@ -97,13 +95,8 @@ if ( $_POST ) {
                 $foto, 
                 $pastaFotos);
     } //fim da verificação da foto
-
-    //iniciar uma transacao
-    // $pdo->beginTransaction();
     
     if(empty($id)){
-        //$senha = crypt($senha);
-        //$senha = password_hash($senha, PASSWORD_DEFAULT);
         $senha = password_hash($senha, PASSWORD_BCRYPT);
 
         //inserir se o id estiver em branco
@@ -131,7 +124,6 @@ if ( $_POST ) {
         $consulta->bindParam(":genero_id", $genero_id);
  
       } else if ( empty ( $foto ) ) {
-        //$senha = password_hash($senha, PASSWORD_BCRYPT);
         $sql = "UPDATE usuario SET primeiro_nome = :primeiro_nome, sobrenome = :sobrenome, email = :email, login = :login,
         cidade_id = :cidade_id, cidade = :cidade, estado = :estado, cep = :cep, complemento = :complemento, bairro = :bairro, 
         numero_resid = :numero_resid, endereco = :endereco, ativo = :ativo, dataNascimento = :dataNascimento, cpf = :cpf, celular = :celular, genero_id = :genero_id WHERE id = :id ";
@@ -140,7 +132,6 @@ if ( $_POST ) {
         $consulta->bindParam(":sobrenome", $sobrenome);
         $consulta->bindParam(":login", $login);
         $consulta->bindParam(":email", $email);
-        //$consulta->bindParam(":senha", $senha);
         $consulta->bindParam(":cidade_id", $cidade_id);
         $consulta->bindParam(":cidade", $cidade);
         $consulta->bindParam(":estado", $estado);
@@ -170,7 +161,6 @@ if ( $_POST ) {
         $consulta->bindParam(":sobrenome", $sobrenome);
         $consulta->bindParam(":login", $login);
         $consulta->bindParam(":email", $email);
-        //$consulta->bindParam(":senha", $senha);
         $consulta->bindParam(":cidade_id", $cidade_id);
         $consulta->bindParam(":foto", $foto);
         $consulta->bindParam(":cidade", $cidade);
@@ -185,8 +175,7 @@ if ( $_POST ) {
         $consulta->bindParam(":dataNascimento", $dataNascimento);
         $consulta->bindParam(":celular", $celular);
         $consulta->bindParam(":genero_id", $genero_id);
-        $consulta->bindParam(":id", $id);
-          
+        $consulta->bindParam(":id", $id); 
     }
 
     if ( $consulta->execute() ) {
@@ -196,11 +185,9 @@ if ( $_POST ) {
 		mensagem($titulo, $mensagem, $icone);
     } else {
         echo $erro = $consulta->errorInfo()[2];
-
         $titulo = "Erro";
 		$mensagem = "Erro ao Salvar/Alterar!";
 		$icone = "error";
 		mensagem($titulo, $mensagem, $icone);
     }
-
 }

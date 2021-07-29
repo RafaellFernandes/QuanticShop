@@ -1,19 +1,20 @@
 <?php
- if (!isset($_SESSION["quanticshop"]["id"])) {
-    $titulo = "Erro";
-    $mensagem = "Usuário Não Logado";
-    $icone = "error";
-    mensagem($titulo, $mensagem, $icone);
-exit;
-}
+	if (!isset($_SESSION["quanticshop"]["id"])) {
+		$titulo = "Erro";
+		$mensagem = "Usuário Não Logado";
+		$icone = "error";
+		mensagem($titulo, $mensagem, $icone);
+	exit;
+	}
 
-if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-    echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
-exit;
-}
-  include "validacao/functions.php";
-  //verificar se existem dados no POST
-  if ( $_POST ) {
+	if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+		echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
+	exit;
+	}
+
+	include "validacao/functions.php";
+	//verificar se existem dados no POST
+	if ( $_POST ) {
 
   	//recuperar os dados do formulario
   	$id = $nome_dept = $ativo ="";
@@ -30,10 +31,12 @@ exit;
   		exit;
   	}
 
-
   	//verificar se existe um cadastro com este tipo
-  	$sql = "SELECT id FROM departamento
-  		WHERE nome_dept = ? AND id <> ? LIMIT 1";
+  	$sql = "SELECT id 
+	  		FROM departamento
+  			WHERE nome_dept = ? AND id <> ? 
+			LIMIT 1";
+			
   	//usar o pdo / prepare para executar o sql
   	$consulta = $pdo->prepare($sql);
   	//passando o parametro

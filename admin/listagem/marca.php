@@ -6,7 +6,6 @@
 		mensagem($titulo, $mensagem, $icone);
 		exit;
 	}
-
 	if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
 		echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
 		exit;
@@ -64,14 +63,6 @@
 	</div>
 </div>
 <script>
-
-	// function excluir(id){
-	// 	if (confirm("Deseja mesmo excluir? ")) {
-	// 		//ir para exclusao
-	// 		location.href="excluir/inativarMarca/"+id;
-	// 	}
-	// }
-	
 	$(document).ready( function () {
 		$('#tabela').DataTable({
 			language: {

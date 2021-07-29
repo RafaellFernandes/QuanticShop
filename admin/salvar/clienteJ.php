@@ -1,16 +1,16 @@
 <?php
- if (!isset($_SESSION["quanticshop"]["id"])) {
-  $titulo = "Erro";
-  $mensagem = "Usuário Não Logado";
-  $icone = "error";
-  mensagem($titulo, $mensagem, $icone);
-exit;
-}
+  if (!isset($_SESSION["quanticshop"]["id"])) {
+    $titulo = "Erro";
+    $mensagem = "Usuário Não Logado";
+    $icone = "error";
+    mensagem($titulo, $mensagem, $icone);
+    exit;
+  }
 
-if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-  echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
-exit;
-}
+  if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+    echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
+    exit;
+  }
 
   //mostrar erros
   ini_set('display_errors',1);
@@ -24,15 +24,11 @@ exit;
     $id = $email = $senha = $cep = $telefone = $celular = $pessoaFJ = $nomeFantasia = $razaoSocial =
     $cnpj = $inscricao_estadual = $estado = $cidade = $endereco = $bairro = $numero_resid = $cidade_id = $ativo = $siteClienteJuridico = $complemento = $genero_id = "";
       
-    // var_dump($_POST);
-    // print_r($_POST);
-    // print_r($_FILES);
-      
   	foreach ($_POST as $key => $value) {
-  	//guardar as variaveis
-    $$key = trim ( $value );
-  		
+      //guardar as variaveis
+      $$key = trim ( $value );
     }
+    
     include "validacao/functions.php";
     include "config/conexao.php";
 

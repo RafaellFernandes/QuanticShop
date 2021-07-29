@@ -79,12 +79,6 @@
 	</div>
 </div>
 <script>
-	// function excluir(id){
-	// 	if (confirm("Deseja mesmo excluir? ")) {
-	// 		//ir para exclusao
-	// 		location.href="excluir/transportadora/"+id;
-	// 	}
-	// }
 
 	$(document).ready( function () {
 		$('#tabela').DataTable({

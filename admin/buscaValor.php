@@ -18,7 +18,6 @@
 
 	if ( !empty ( $produto ) ) {
 
-		
 		include "config/conexao.php";
 
 		$sql = "select venda_unitaria from produto where id = :produto limit 1"; 

@@ -28,7 +28,6 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -55,16 +54,6 @@
 	<script src="vendor/js/summernote.min.js"></script>
 	<script src="vendor/js/jquery.dataTables.js"></script>  
 	<script src="vendor/js/sweetalert2@11.js"></script> 
-
-	<!-- <link rel="preconnect" href="https://fonts.gstatic.com"> -->
-	<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-	<!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
-	<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css"> -->
-  	<!-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script> -->
-	<!-- <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script> -->
-	<!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> -->
-	<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
-	<!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet"> -->
 
 	<style>
 		a{
@@ -93,7 +82,6 @@
 				<a class="sidebar-brand" href="paginas/home" style="text-decoration: none;">
 					<span class="align-middle"><img src="img/saturno1.png" width="60" height="60"> Quantic Shop</span>
 				</a>
-
 				<ul class="sidebar-nav">
 					<li class="sidebar-header">
 						Pages

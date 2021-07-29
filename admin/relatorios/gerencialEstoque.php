@@ -1,15 +1,16 @@
-<?php if (!isset($_SESSION["quanticshop"]["id"])) {
-    $titulo = "Erro";
-    $mensagem = "Usuário Não Logado";
-    $icone = "error";
-    mensagem($titulo, $mensagem, $icone);
-exit;
-}
+<?php 
+    if (!isset($_SESSION["quanticshop"]["id"])) {
+        $titulo = "Erro";
+        $mensagem = "Usuário Não Logado";
+        $icone = "error";
+        mensagem($titulo, $mensagem, $icone);
+    exit;
+    }
 
-if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-    echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
-exit;
-}
+    if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+        echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
+    exit;
+    }
 ?>						
 <div class="container-fluid p-0">
 	<div class="row">
@@ -38,14 +39,6 @@ exit;
 					</thead>
 					<tbody>
 						<?php
-                            // $sql = "SELECT p.id pid, p.ativo pativo, p.*,e.id eid, e.*, c.id cid, c.ativo cativo, date_format(c.data_cadastro, '%d/%m/%Y') dataCadastro, c.*, v.vezesVendido 
-                            //         FROM produto p 
-                            //         INNER JOIN estoque e ON (p.id = e.produto_id) 
-                            //         INNER JOIN item_compra c ON (p.id = c.produto_id) 
-                            //         INNER JOIN item_venda v ON (v.produto_id = p.id) 
-                            //         WHERE c.ativo = 1
-                            //         ORDER BY c.id";
-
                             $sql = "SELECT e.id eid, e.*,p.id pid, p.*, date_format(c.data_cadastro, '%d/%m/%Y') dataCadastro,c.*
                                     FROM estoque e
                                     INNER JOIN produto p ON (p.id = e.produto_id)
@@ -58,7 +51,6 @@ exit;
               
 							while ( $dados = $consulta->fetch(PDO::FETCH_OBJ)){ 
 								//separar os dados
-                                // $custo_unitario     = $dados->custo_unitario;
                                 $custo_unitario     = number_format($dados->custo_unitario,2, '.' , ',');
                                 
 								echo "<tr>
@@ -71,7 +63,6 @@ exit;
                                         <td>$dados->dataCadastro</td>
                                         <td>$dados->qtdProdutoComprado</td>
                                         <td>R$ $custo_unitario</td>
-                                      
 								    </tr>";
                             }
 						?>

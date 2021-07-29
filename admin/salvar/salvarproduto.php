@@ -1,30 +1,28 @@
 <?php
-if (!isset($_SESSION["quanticshop"]["id"])) {
-    $titulo = "Erro";
-    $mensagem = "Usuário Não Logado";
-    $icone = "error";
-    mensagem($titulo, $mensagem, $icone);
-exit;
-}
+    if (!isset($_SESSION["quanticshop"]["id"])) {
+        $titulo = "Erro";
+        $mensagem = "Usuário Não Logado";
+        $icone = "error";
+        mensagem($titulo, $mensagem, $icone);
+    exit;
+    }
 
-if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-    echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
-exit;
-}
-  //mostrar erros
+    if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+        echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
+    exit;
+    }
+
+    //mostrar erros
 	ini_set('display_errors',1);
 	ini_set('display_startup_erros',1);
     error_reporting(E_ALL);
 
- //verificar se existem dados no POST
- if ( $_POST ) {
+    //verificar se existem dados no POST
+    if ( $_POST ) {
 
     include "validacao/functions.php";
     include "config/conexao.php";
     include "validacao/imagem.php";
-
-    //recuperar variaveis
-    // $id = $nome_produto = $codigo = $valor_unitario = $descricao = $espec_tecnica = $foto = $ativo = $departamento_id = $marca_id = "";
 
     foreach ($_POST as $key => $value) {
         //guardar as variaveis
@@ -43,10 +41,6 @@ exit;
         echo "<>alert('Preencha a especificação tecnica');history.back();</>";
     } 
     
-//programação para copiar uma imagem
-//no insert envio da foto é obrigatório
-//no update só se for selecionada uma nova imagem
-//se o id estiver em branco e o imagem tbém - erro
 
     if ( ( empty ( $id ) ) and ( empty ( $_FILES['foto']['name'] ) ) ) {
         mensagem("Erro ao enviar imagem", 
@@ -88,13 +82,8 @@ exit;
                     $pastaFotos);
 
     } //fim da verificação da foto
-
-    //iniciar uma transacao
-    // $pdo->beginTransaction();
     
     $venda_unitaria = formatarValor($venda_unitaria);
-    
-    // $arquivo = time()."-".$_SESSION["quanticshop"]["id"];
     
     if(empty($id)){
         //inserir
@@ -152,9 +141,7 @@ exit;
     }
     
     if($consulta->execute()){
-           
             //gravar no banco 
-            // $pdo->commit();
             $titulo = "Sucesso";
             $mensagem = "Produto Salvo/Alterado!";
             $icone = "success";

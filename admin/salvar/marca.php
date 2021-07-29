@@ -1,19 +1,19 @@
 <?php
-if (!isset($_SESSION["quanticshop"]["id"])) {
-    $titulo = "Erro";
-    $mensagem = "Usuário Não Logado";
-    $icone = "error";
-    mensagem($titulo, $mensagem, $icone);
-exit;
-}
+	if (!isset($_SESSION["quanticshop"]["id"])) {
+		$titulo = "Erro";
+		$mensagem = "Usuário Não Logado";
+		$icone = "error";
+		mensagem($titulo, $mensagem, $icone);
+		exit;
+	}
 
-if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-	echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
-exit;
-}
+	if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+		echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
+		exit;
+	}
 
-  //verificar se existem dados no POST
-if ( $_POST ) {
+ 	//verificar se existem dados no POST
+	if ( $_POST ) {
 
 	include "validacao/functions.php";
     include "config/conexao.php";
@@ -50,7 +50,6 @@ if ( $_POST ) {
 
   	//verificar se esta vazio, se tem algo é pq existe um registro com o mesmo nome
   	if ( !empty ( $dados->id ) ) {
-  		// echo '<script>alert("Já existe uma marca com este nome registrada");history.back();</script>';
 		  $titulo = "Erro";
 		  $mensagem = "Já existe uma marca com este nome registrada";
 		  $icone = "error";
@@ -71,7 +70,6 @@ if ( $_POST ) {
 		$consulta->bindParam(":ativo", $ativo);
 
   	} else {
-		
   		//atualizar os dados  	
   		$sql = "UPDATE marca SET nome_marca = :nome_marca, ativo = :ativo WHERE id = :id";	
   		$consulta = $pdo->prepare($sql);
@@ -89,18 +87,19 @@ if ( $_POST ) {
 		mensagem($titulo, $mensagem, $icone);
 		echo "<script>location.href='listagem/marca';</script>";
 	}
-	//erro ao gravar
+		//erro ao gravar
 		$titulo = "Erro";
 		$mensagem = "Erro ao gravar no servidor";
 		$icone = "error";
 		mensagem($titulo, $mensagem, $icone);
-	echo "<script>history.back();</script>";
-	exit;
+		echo "<script>history.back();</script>";
+		exit;
+
 } else {
 		$titulo = "Erro";
 		$mensagem = "Erro ao Salvar";
 		$icone = "error";
 		mensagem($titulo, $mensagem, $icone);
-	echo '<script>history.back();</script>';
-	exit;
+		echo '<script>history.back();</script>';
+		exit;
 }

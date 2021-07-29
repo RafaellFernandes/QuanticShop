@@ -98,6 +98,7 @@
                                 <p class="lead fonte1"><b>Sistema Quantic - Seja Bem Vindo!</b></p>
                                 <img src="../loja/vendor/images/logo_200x200.png" alt="Entre" class="img-fluid "  />
                                 <?= $msg; ?>
+                                <p class="sm" style="color: black;">User: admin | Password: 123456</p>
                             </div>
                             <form class="user" name="login" method="post" data-parsley-validate>
                                 <div class="mb-3">

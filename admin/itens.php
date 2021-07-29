@@ -47,9 +47,7 @@
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-
 <?php
-
 	include "validacao/functions.php";
     include "config/conexao.php";
 
@@ -95,7 +93,6 @@
 			mensagem("Erro","Não existe essa quantidade de produto no estoque","error");
 			exit;
 		}
-
 		
 		//verificar se já existe no banco
 		$sql = "select produto_id from item_venda
@@ -114,11 +111,9 @@
 		if ( empty ( $dados->produto_id ) ){
 			//se não existir - inserir
 			$sql = "insert into item_venda (valor, quantidade, venda_id, produto_id) values (:valor, :quantidade, :venda_id, :produto_id)";
-
 		} else {
 			//se existir - atualizar
 			$sql = "update item_venda set valor = :valor, quantidade = :quantidade where venda_id = :venda_id AND produto_id = :produto_id limit 1";
-
 		}
 
 		$consulta = $pdo->prepare($sql);
@@ -131,7 +126,6 @@
 		if ( $consulta->execute() ) {
 			echo "<script>top.$('#formItens')[0].reset();</script>";
 		}
-		
 	}
 
 	//recuperar o venda_id
@@ -156,7 +150,6 @@
 	$consulta->bindParam(':venda_id', $venda_id);
 	$consulta->execute();
 ?>
-
 	<table class="table table-hover table-bordered table-striped">
 	<thead>
 		<th width="5%">ID</th>
@@ -166,7 +159,6 @@
 		<th width="15%">Total</th>
 		<th width="10%">Excluir</th>
 	</thead>
-	
 	<tbody>
 		<?php
 			$geral = 0;

@@ -1,24 +1,24 @@
 <?php
-if (!isset($_SESSION["quanticshop"]["id"])) {
-    $titulo = "Erro";
-    $mensagem = "Usuário Não Logado";
-    $icone = "error";
-    mensagem($titulo, $mensagem, $icone);
-exit;
-}
+    if (!isset($_SESSION["quanticshop"]["id"])) {
+        $titulo = "Erro";
+        $mensagem = "Usuário Não Logado";
+        $icone = "error";
+        mensagem($titulo, $mensagem, $icone);
+        exit;
+    }
 
-if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-    echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
-exit;
-}
+    if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
+        echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
+        exit;
+    }
 
    //mostrar erros
    ini_set('display_errors',1);
    ini_set('display_startup_erros',1);
    error_reporting(E_ALL);
 
-  //verificar se existem dados no POST
-  if ( $_POST ) {
+    //verificar se existem dados no POST
+    if ( $_POST ) {
 
     include "validacao/functions.php";
     include "config/conexao.php";
@@ -27,14 +27,11 @@ exit;
   	$id = $nomeFantasia = $razaoSocial = $cnpj = $cep = $endereco = $cidade_id = $telefone = $cidade = $estado = $email = $inscricaoEstadual = 
       $celular = $bairro = $numero_resid = $ativo = $complemento = $siteFornecedor = "";
       
-      //print_r($_POST);
-      //print_r($_FILES);
-      
   	foreach ($_POST as $key => $value) {
   		//guardar as variaveis
   		$$key = trim ( $value );
-  		
   	}
+
     if( empty($nomeFantasia) ){
         echo "<script>alert('Preencha o Nome Fantasia!');history.back();</script>";
     } else if( empty($cnpj) ){
@@ -47,12 +44,11 @@ exit;
         echo "<script>alert('Preencha o Telefone!');history.back();</script>";
     } 
       
-      //iniciar uma transacao
+    //iniciar uma transacao
     
     $pdo->beginTransaction();
-    
       
-      if(empty($id)){
+    if(empty($id)){
           
           //inserir se o id estiver em branco
           $sql = "INSERT INTO fornecedor (nomeFantasia, razaoSocial, cnpj, inscricaoEstadual, telefone, celular, email, endereco, cep, cidade_id, cidade, estado, bairro, numero_resid, ativo, complemento, siteFornecedor) 

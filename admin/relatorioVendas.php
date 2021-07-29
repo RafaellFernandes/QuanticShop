@@ -1,20 +1,4 @@
 <?php
-// if (!isset($_SESSION["quanticshop"]["id"])) {
-//     $titulo = "Erro";
-//     $mensagem = "Usuário Não Logado";
-//     $icone = "error";
-//     mensagem($titulo, $mensagem, $icone);
-// exit;
-// }
-
-// if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
-//     $titulo = "Erro";
-//     $mensagem = "Erro na Requisição da Página";
-//     $icone = "error";
-//     mensagem($titulo, $mensagem, $icone);
-// exit;
-// }
-
 	//incluir conexao com o banco
 	include "validacao/functions.php";
     include "config/conexao.php";
@@ -55,122 +39,101 @@
 			}
 		</style>
   	</head>
-<body class="mb-5 ml-5 mr-5">
-	<div class="container-fluid p-0 mt-5">
-		<div class="row">
-			<div class="col-12 col-xl-12">
-				<div class="card">
-					<div class="card-header">
-						<h4>RELATÓRIO</h4>
-						<h6 style="color: blue;"><strong>Vendas</strong></h6>
-						<div class="float-end">
-					    <a href="javascript:window.print()" class="btn btn-success">
-		                  <i class="fas fa-print"></i>
-		                    Imprimir
-	                </a> 
-					</div> 
-					</div>
-					
-					
-					
-					<table class="table table-bordered table-hover table-striped">
-						<thead>
-							<th width="5%">ID</th>
-							<th width="45%">Nome do Cliente</th>
-							<th width="20%">Data</th>
-							<th width="15%">Status</th>
-							<th width="15%">Total</th>
-						</thead>
-						<tbody>
-							<?php
-								//sql para selecionar as vendas
-								//data maior que a dataInicial
-								//dataFinal seja menor que a data
-								$sql = "SELECT v.id, v.status, date_format(v.data, '%d/%m/%Y') datav, c.primeiro_nome, c.sobrenome, c.celular  
-								FROM venda v 
-								INNER JOIN cliente c ON (c.id = v.cliente_id)
-								where v.data >= :dataInicial AND v.data <= :dataFinal 
-								ORDER BY datav";
-								$consulta = $pdo->prepare($sql);
-								$consulta->bindParam(":dataInicial", $dataInicial);
-								$consulta->bindParam(":dataFinal", $dataFinal);
-								$consulta->execute();
-
-								while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
-
-									//status
-									if ( $dados->status == "P" ) {
-										$status = '<span class="span badge badge-success">Pago</span>';
-
-									} else if ( $dados->status == "C" ) {
-										$status = '<span class="span badge badge-warning">Cancelado</span>';
-
-									} else if ( $dados->status == "D" ) {
-										$status = '<span class="span badge badge-danger">Devolvido</span>';
-
-									} else if ( $dados->status == "E" ) {
-										$status = '<span class="span badge badge-info">Extraviado</span>';
-
-									} else if ( $dados->status == "A" ) {
-										$status = '<span class="span badge badge-primary">Aguardando Pagamento</span>';
-
-									} else if ( $dados->status == "T" ) {
-										$status = '<span class="span badge badge-andrey">Troca</span>';
-									} 
-
-								
-							?>
-								<tr>
-									<td><?=$dados->id?></td>
-									<td><?=$dados->primeiro_nome?> <?=$dados->sobrenome?> - <?=$dados->celular?></td>
-									<td><?=$dados->datav?></td>
-									<td><?=$status?></td>
-									<td class="text-center">R$ <?=getTotal($pdo,$dados->id)?></td>
-								</tr>
+	<body class="mb-5 ml-5 mr-5">
+		<div class="container-fluid p-0 mt-5">
+			<div class="row">
+				<div class="col-12 col-xl-12">
+					<div class="card">
+						<div class="card-header">
+							<h4>RELATÓRIO</h4>
+							<h6 style="color: blue;"><strong>Vendas</strong></h6>
+							<div class="float-end">
+								<a href="javascript:window.print()" class="btn btn-success">
+								<i class="fas fa-print"></i>
+									Imprimir
+								</a> 
+							</div> 
+						</div>
+						<table class="table table-bordered table-hover table-striped">
+							<thead>
+								<th width="5%">ID</th>
+								<th width="45%">Nome do Cliente</th>
+								<th width="20%">Data</th>
+								<th width="15%">Status</th>
+								<th width="15%">Total</th>
+							</thead>
+							<tbody>
 								<?php
+									//sql para selecionar as vendas
+									//data maior que a dataInicial
+									//dataFinal seja menor que a data
+									$sql = "SELECT v.id, v.status, date_format(v.data, '%d/%m/%Y') datav, c.primeiro_nome, c.sobrenome, c.celular  
+											FROM venda v 
+											INNER JOIN cliente c ON (c.id = v.cliente_id)
+											where v.data >= :dataInicial AND v.data <= :dataFinal 
+											ORDER BY datav";
+									$consulta = $pdo->prepare($sql);
+									$consulta->bindParam(":dataInicial", $dataInicial);
+									$consulta->bindParam(":dataFinal", $dataFinal);
+									$consulta->execute();
 
-								}
-							?>
-						</tbody>
-					</table>
+									while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
+
+										//status
+										if ( $dados->status == "P" ) {
+											$status = '<span class="span badge badge-success">Pago</span>';
+
+										} else if ( $dados->status == "C" ) {
+											$status = '<span class="span badge badge-warning">Cancelado</span>';
+
+										} else if ( $dados->status == "D" ) {
+											$status = '<span class="span badge badge-danger">Devolvido</span>';
+
+										} else if ( $dados->status == "E" ) {
+											$status = '<span class="span badge badge-info">Extraviado</span>';
+
+										} else if ( $dados->status == "A" ) {
+											$status = '<span class="span badge badge-primary">Aguardando Pagamento</span>';
+
+										} else if ( $dados->status == "T" ) {
+											$status = '<span class="span badge badge-andrey">Troca</span>';
+										} 
+								?>
+									<tr>
+										<td><?=$dados->id?></td>
+										<td><?=$dados->primeiro_nome?> <?=$dados->sobrenome?> - <?=$dados->celular?></td>
+										<td><?=$dados->datav?></td>
+										<td><?=$status?></td>
+										<td class="text-center">R$ <?=getTotal($pdo,$dados->id)?></td>
+									</tr>
+									<?php
+
+									}
+								?>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
-		</div>
-	</div>	
-</body>
-<?php
+		</div>	
+	</body>
+	<?php
+		function getTotal($pdo, $venda_id) {
 
-function getTotal($pdo, $venda_id) {
+			$sql = "SELECT sum(valor*quantidade) total 
+			FROM item_venda
+			WHERE venda_id = :venda_id LIMIT 1";
+			$consulta = $pdo->prepare($sql);
+			$consulta->bindParam(":venda_id", $venda_id);
+			$consulta->execute();
 
-	$sql = "SELECT sum(valor*quantidade) total 
-	FROM item_venda
-	WHERE venda_id = :venda_id LIMIT 1";
-	$consulta = $pdo->prepare($sql);
-	$consulta->bindParam(":venda_id", $venda_id);
-	$consulta->execute();
+			$total = $consulta->fetch(PDO::FETCH_OBJ)->total;
 
-	$total = $consulta->fetch(PDO::FETCH_OBJ)->total;
+			//$dados = $consulta->fetch(PDO::FETCH_OBJ);
+			//$total = $dados->total;
 
-	//$dados = $consulta->fetch(PDO::FETCH_OBJ);
-	//$total = $dados->total;
-
-	return number_format($total,2,",",".");
-} 
-
-
-
-
-
-
-
-
-
-
-
-
-?>
+			return number_format($total,2,",",".");
+		} 
+	?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
-
-
-
 </html>

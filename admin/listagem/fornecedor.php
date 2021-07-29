@@ -84,14 +84,6 @@
     </div>
 </div>
 <script>
-
-    // function excluir(id){
-    //     if (confirm("Deseja mesmo excluir? ")) {
-    //         //ir para exclusao
-    //         location.href="excluir/fornecedor/"+id;
-    //     }
-    // }
-
     $(document).ready( function () {
         $('#tabela').DataTable({
             language: {

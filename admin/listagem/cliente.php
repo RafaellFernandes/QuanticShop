@@ -6,7 +6,6 @@
         mensagem($titulo, $mensagem, $icone);
         exit;
     }
-
     if ($_SESSION["quanticshop"]["nivelAcesso"] != "admin") {
         echo "<script>location.href='http://localhost//QuanticShop/erros/401.php'</script>";
         exit;
@@ -155,12 +154,6 @@
     </div>
 </div>
 <script type="text/javascript">
-    // function excluir(id){
-    //     if ( confirm("deseja realmente excluir este registro?") ){
-    //         location.href='excluir/cliente/'+id;
-    //     }
-    // }
-
     //adicionar o dataTable1 Para a Lista de Pessoa Fisica 
     $(document).ready(function(){
         $('#tabela').DataTable({
