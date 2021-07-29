@@ -43,16 +43,15 @@ exit;
           
         if ( empty ( $id ) ) {
           //inserir os dados no banco
-          $sql = "INSERT INTO venda (data, status, cliente_id) VALUES (:data, :status, :cliente_id )";
-          $consulta = $pdo->prepare($sql);
+        $sql = "INSERT INTO venda (data, status, cliente_id) VALUES (:data, :status, :cliente_id )";
+        $consulta = $pdo->prepare($sql);
         $consulta->bindParam(":data", $data);
         $consulta->bindParam(":status", $status);
         $consulta->bindParam("cliente_id", $cliente_id);
         
     	} else {
         
-    		$sql = "UPDATE venda set data = :data, status = :status, cliente_id = :cliente_id
-    			WHERE id = :id LIMIT 1";
+    		$sql = "UPDATE venda set data = :data, status = :status, cliente_id = :cliente_id WHERE id = :id LIMIT 1";
     		$consulta = $pdo->prepare($sql);
     		$consulta->bindParam(":data", $data);
     		$consulta->bindParam(":status", $status);
@@ -73,31 +72,30 @@ exit;
           $consulta->execute();
           while ($dados = $consulta->fetch(PDO::FETCH_OBJ) ){	
           if($dados->status == "P"){
-            $sql = "UPDATE estoque SET qtd_estoque = qtd_estoque-$dados->quantidade WHERE produto_id = $dados->produto_id LIMIT 1";
-            $consulta = $pdo->prepare($sql);
-            $consulta->execute();
-            }
-          }
+          $sql = "UPDATE estoque SET qtd_estoque = qtd_estoque-$dados->quantidade WHERE produto_id = $dados->produto_id LIMIT 1";
+          $consulta = $pdo->prepare($sql);
+          $consulta->execute();
+        }
+      }
 
-          echo "<script>alert('Salvo com Sucesso!');location.href='venda/vendaProduto/{$id}';</script>";
+      echo "<script>alert('Salvo com Sucesso!');location.href='venda/vendaProduto/{$id}';</script>";
 
-          
         }
   
-        echo "<script>alert('Erro ao gravar no servidor');history.back();</script>";
-        exit;
+      echo "<script>alert('Erro ao gravar no servidor');history.back();</script>";
+      exit;
 
       } else {
         echo '<script>alert("Erro ao salvar");history.back();</script>';
         exit;
       }
 
-      	//pegar ultimo ID inserido
+      //pegar ultimo ID inserido
     	if ( empty ( $id ) ) $id = $pdo->lastInsertId();
 
-        //direcionar a página para a venda - para poder editar e adicionar produtos
-        echo "<script>location.href='venda/vendaProduto/{$id}';</script>";
-        exit;
+      //direcionar a página para a venda - para poder editar e adicionar produtos
+      echo "<script>location.href='venda/vendaProduto/{$id}';</script>";
+      exit;
     
   
       

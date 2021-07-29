@@ -15,7 +15,7 @@ exit;
 <style>
 	.span{
 		color: black;
-		
+
 	}
 </style>
 <div class="container-fluid p-0">
@@ -42,55 +42,54 @@ exit;
     			</tr>
     		</thead>
     		<tbody>
-    			<?php
-    				$sql = "SELECT v.id, c.primeiro_nome, c.sobrenome, c.celular, c.telefone, c.razaoSocial,
-    				date_format(v.data, '%d/%m/%Y') data, v.status
-    				from venda v 
-    				inner join cliente c on (c.id = v.cliente_id)
-    				order by v.data desc";
-    			    $consulta = $pdo->prepare($sql);
-    			    $consulta->execute();
+    		 <?php
+    			$sql = "SELECT v.id, c.primeiro_nome, c.sobrenome, c.celular, c.telefone, c.razaoSocial,
+    			date_format(v.data, '%d/%m/%Y') data, v.status
+    			from venda v 
+    			inner join cliente c on (c.id = v.cliente_id)
+    			order by v.data desc";
+    			$consulta = $pdo->prepare($sql);
+    			$consulta->execute();
 
-    			    while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
+    			while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
 
-    			    	$status = "<span class='span badge badge-success'>Pago</span>";
+    			    $status = "<span class='span badge badge-success'>Pago</span>";
 
-    			    	if ( $dados->status == "C" )
-    			    		$status = "<span class='span badge badge-danger'>Cancelado</span>";
-    			    	else if ($dados->status == "A")
-    			    		$status = "<span class='span badge badge-info'>Aguardando<br> Pagamento</span>";
-    			    	else if ($dados->status == "T")
-    			    		$status = "<span class='span badge badge-warning'>Troca</span>";
-    			    	else if ($dados->status == "E")
-    			    		$status = "<span class='span badge badge-warning'>Extraviado</span>";
-    			    	else if ($dados->status == "D")
-    			    		$status = "<span class='span badge badge-danger'>Devolvido</span>";
-
+    			         if ($dados->status == "C" )
+    			             $status = "<span class='span badge badge-danger'>Cancelado</span>";
+    			    else if ($dados->status == "A")
+    			    		 $status = "<span class='span badge badge-info'>Aguardando<br> Pagamento</span>";
+    			    else if ($dados->status == "T")
+    			    		 $status = "<span class='span badge badge-warning'>Troca</span>";
+    			    else if ($dados->status == "E")
+    			    		 $status = "<span class='span badge badge-warning'>Extraviado</span>";
+    			    else if ($dados->status == "D")
+    			    		 $status = "<span class='span badge badge-danger'>Devolvido</span>";
     			    	?>
-    			    	<tr>
-    			    		<td><?=$dados->id?></td>
-    			    		<td><?=$dados->razaoSocial?><?=$dados->primeiro_nome?> <?=$dados->sobrenome?> - <?=$dados->celular?> / <?=$dados->telefone?></td>
-    			    		<td><?=$dados->data?></td>
-    			    		<td><?=$status?></td>
-    			    		<td>Total</td>
-    			    		<td>
-    			    			<a href="venda/vendaProduto/<?=$dados->id?>" alt="Editar" title="Editar">
-                                <i class="align-middle"  data-feather="edit-2"></i>
-                                </a>
-    			    		</td>
-    			    	</tr>
-    			    	<?php
+    			    <tr>
+    			    <td><?=$dados->id?></td>
+    			    <td><?=$dados->razaoSocial?><?=$dados->primeiro_nome?> <?=$dados->sobrenome?> - <?=$dados->celular?> / <?=$dados->telefone?></td>
+    			    <td><?=$dados->data?></td>
+    			    <td><?=$status?></td>
+    			    <td>Total</td>
+    			    <td>
+    			        <a href="venda/vendaProduto/<?=$dados->id?>" alt="Editar" title="Editar">
+                        <i class="align-middle"  data-feather="edit-2"></i>
+                    </a>
+    			    </td>
+    			    </tr>
+    			    <?php
     			    }
     			?>
     		</tbody>
     	</table>
-    </div> <!-- card-body -->
-</div> <!-- card -->
+    </div> 
+</div> 
 <script>
 	//adicionar o dataTable 
 	$(document).ready(function(){
 		$('#tabela').DataTable({
-			"language": {
+			    "language": {
 				"lengthMenu": "Mostrando _MENU_ Registros por Pagina",
 				"zeroRecords": "Nenhum Registro Encontrado",
 				"info": "Mostrando Paginas de  _PAGE_ de _PAGES_",
@@ -98,12 +97,12 @@ exit;
 				"infoFiltered": "(filtered from _MAX_ total records)",
 				"search": "Procurar:",
 				"zeroRecords":  "Nenhum registro encontrado",
-		"paginate": {
+		        "paginate": {
 					"first":      "Primeiro",
 					"last":       "Último",
 					"next":       "Próximo",
 					"previous":   "Anterior"
-		}
+	        	}
 			}
 		} );
 	})

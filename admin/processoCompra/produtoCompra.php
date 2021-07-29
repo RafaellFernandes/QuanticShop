@@ -76,12 +76,12 @@ include "validacao/functions.php";
 				<h4>Cadastro</h4>
 				<h6 class="card-subtitle text-muted">Produto Entrada</h6>
 			</div>
-			<div class="card-body">
-                <form method="post" name="formCadastro"  action="processoCompra/salvarProdutoCompra" data_parsley_validate enctype="multipart/form-data">
-                    <p> Todos os campos são obrigatórios </p>
-                    <div class="row">
-                    <input type="text" hidden name="id" id="id" value="<?=$id?>">
-                    <div class="col-12 col-md-4 mt-2">
+                <div class="card-body">
+                    <form method="post" name="formCadastro"  action="processoCompra/salvarProdutoCompra" data_parsley_validate enctype="multipart/form-data">
+                        <p> Todos os campos são obrigatórios </p>
+                        <div class="row">
+                        <input type="text" hidden name="id" id="id" value="<?=$id?>">
+                        <div class="col-12 col-md-4 mt-2">
                             <label for="produto_id">Produto</label>
                             <select name="produto_id" id="produto_id" class="form-control" required data-parsley-required-message="Selecione um Produto">
                                 <option>Selecione o Produto</option>
@@ -93,12 +93,11 @@ include "validacao/functions.php";
 
                                         while ($d = $consulta->fetch(PDO::FETCH_OBJ) ) {
                                         //separar os dados
-                                            $id            = $d->id;
-                                            $nome_produto  = $d->nome_produto;
-                                      
-                                    ?>										
-                                            <option value="<?=$id?>"<?= $id == $produto_id ? "selected" : "" ?>><?=$nome_produto?></option>
-											<?php
+                                        $id            = $d->id;
+                                        $nome_produto  = $d->nome_produto;
+                                        ?>										
+                                        <option value="<?=$id?>"<?= $id == $produto_id ? "selected" : "" ?>><?=$nome_produto?></option>
+										<?php
                                         }                    
                                     ?>
                             </select>
@@ -118,12 +117,12 @@ include "validacao/functions.php";
 
                                         while ($f = $consulta->fetch(PDO::FETCH_OBJ) ) {
                                         //separar os dados
-                                            $id        = $f->id;
-                                            $razaoSocial  = $f->razaoSocial;
-                                            echo '<option value="'.$id.'">'.$razaoSocial.'</option>';
-                                            ?>
-                                            <option value="<?=$id?>"<?= $id == $fornecedor_id ? "selected" : "" ?>><?=$razaoSocial?></option>
-											<?php
+                                        $id        = $f->id;
+                                        $razaoSocial  = $f->razaoSocial;
+                                        echo '<option value="'.$id.'">'.$razaoSocial.'</option>';
+                                        ?>
+                                        <option value="<?=$id?>"<?= $id == $fornecedor_id ? "selected" : "" ?>><?=$razaoSocial?></option>
+										<?php
                                         }                    
                                     ?>
                             </select>
@@ -134,7 +133,6 @@ include "validacao/functions.php";
                             required data-parsley-required-message="Preencha este campo" 
                              value="<?=$custo_unitario?>" placeholder="R$ 0,00">
                         </div>         
-                      
                         <div type="text" class="col-12 col-md-4 mt-2">
                             <label >Margem(%)</label>
                             <input type="text" id="porcentagem_lucro" name="porcentagem_lucro" class="form-control"  
@@ -147,7 +145,6 @@ include "validacao/functions.php";
                             required data-parsley-required-message="Preencha este campo" 
                              readonly value="<?=$venda_unitaria;?>" placeholder="R$ 0,00">         
                         </div>
-                        
                         <div type="text" class="col-12 col-md-4 mt-2">
                             <label for="data_cadastro">Data</label>
                             <input type="date" name="data_cadastro" id="data_cadastro" class="form-control"

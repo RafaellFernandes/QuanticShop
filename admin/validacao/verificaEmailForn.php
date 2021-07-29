@@ -37,10 +37,5 @@ if ( !empty ( $dados->id ) ) {
 
 
 	echo "Já existe um Fornecedor cadastrado com este e-mail";
-	// $titulo = "Erro";
-    // $mensagem = "Já existe um Cliente cadastrado com este e-mail";
-    // $icone = "error";
-    //mensagem("Erro", "Já existe um Usuário cadastrado com este e-mail", "error");
-
 	exit;
 }
